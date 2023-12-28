@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 17:54:16 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:02:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_parse {
 }	t_parse;
 
 typedef struct s_data {
-	char			*prompt;
+	char			*user_input;
 	char			*curr_work_dir;
 	char			*printed_line;
 	t_env			*env_struct;

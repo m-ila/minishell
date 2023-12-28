@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 17:43:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:04:15 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	ft_first_init(t_data *ms, char **envp)
 		ft_env_free(ms->env_struct->node_);
 		return (false);
 	}
-	ms->prompt = 0;
+	ms->user_input = 0;
 	ms->printed_line = 0;
 	return (true);
 }
