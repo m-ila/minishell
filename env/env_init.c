@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 18:41:40 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/23 21:51:10 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:11:11 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_env	*ft_init_no_envi(void)
 		if (i == 0)
 			env_nodes = ft_create_node(NULL, "PWD", "");
 		if (i == 1)
-			ft_add_envi_node(&env_nodes, ft_create_node(NULL, "SHLVL", "2"));
+			ft_add_envi_node(&env_nodes, ft_create_node(NULL, "SHLVL", "1"));
 		if (i == 2)
 			ft_add_envi_node(&env_nodes, ft_create_node(NULL, "OLDPWD", ""));
 		if (i == 3)

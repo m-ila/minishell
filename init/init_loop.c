@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 18:50:55 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:10:19 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ bool	ft_first_init(t_data *ms, char **envp)
 {
 	if (!ft_env_struct_init(ms, envp))
 		return (false);
+	/* adding +1 to SHLVL */
 	if (!ft_malloc_curr_cwd(ms))
 	{
 		ft_env_free(ms->env_struct->node_);
@@ -58,7 +59,7 @@ bool	ft_get_cwd(t_data *ms, unsigned int i)
 		ms->prev_work_dir = ft_strdup(ms->curr_work_dir);
 	}
 	if (getcwd(ms->curr_work_dir, (size_t) SIZE_PATH_MAX))
-		ms->printed_line = ft_strjoin(ms->curr_work_dir, " > ");
+		ms->printed_line = ft_strjoin(ms->curr_work_dir, " > minishell : ");
 	else
 	{
 		ft_printf_fd(2, "Error getting cwd with getcwd\n");
