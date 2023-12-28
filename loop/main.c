@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 19:11:28 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 20:35:44 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	print_values(t_data *ms)
 	ms->curr_work_dir, ms->prev_work_dir);
 }
 
+/* how do deal with heredoc ? 
+how to deal with sigs ? */
 void	ft_loop(t_data *ms)
 {
 	unsigned int	i;
@@ -42,6 +44,9 @@ void	ft_loop(t_data *ms)
 		ms->user_input = readline(ms->printed_line);
 		print_values(ms);
 		add_history(ms->user_input);
+		/* parse ms->user_input (first layer) */
+		/* creates a t_parse struct from ms->user_input if parsing is OK */
+		/* init a t_parse->t_cmds struct */
 		if (!ft_strncmp(ms->user_input, "exit", ft_strlen(ms->user_input)))
 		{
 			ft_free_prompt(ms);
@@ -50,11 +55,8 @@ void	ft_loop(t_data *ms)
 		if (!ft_strncmp(ms->user_input, "env", ft_strlen(ms->user_input)))
 			ft_env_display(&ms->env_struct->node_);
 		ft_free_prompt(ms);
-		//premiere couche parsing
-		//init struct from user_input
 		//deuxieme couche parsing
 		//exec
-		//free_prompt (prep for the next one)
 	}
 }
 
