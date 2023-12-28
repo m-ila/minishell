@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 17:33:37 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:54:16 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,11 @@ typedef struct s_cmd {
 }	t_cmd;
 
 typedef struct s_parse {
-	int			token_nb;
-	int			start_w_val_tok;
-	char		**arr_token;
-	char		**arr_input;
-	t_env		*env_struct;
+	int					token_nb;
+	int					start_w_val_tok;
+	char				**arr_token;
+	char				**arr_input;
+	t_env				*env_struct;
 	struct s_data		*data_struct;
 }	t_parse;
 
