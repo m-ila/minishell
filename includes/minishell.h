@@ -6,12 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 13:34:10 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:09:03 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -21,7 +22,6 @@
 # include <stdbool.h>
 # include "../libft/libft.h"
 # include <sys/types.h>
-# include "../utils/ft_printf_fd/ft_printf_fd.h"
 
 # define BASE_QUOTES "\'\""
 # define S_QUOTE '\''
