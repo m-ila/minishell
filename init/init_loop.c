@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 18:47:43 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:50:55 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ bool	ft_malloc_curr_cwd(t_data *ms)
 	return (true);
 }
 
-/* data->curr_work_dir est un buffer */
+/* data->curr_work_dir est un buffer 
+Est-ce que si le path quand on CD est incorrect, actualise old_pwd ? */
 bool	ft_get_cwd(t_data *ms, unsigned int i)
 {
 	if (i == 0)
