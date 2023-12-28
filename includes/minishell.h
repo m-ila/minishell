@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 18:02:41 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:47:54 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct s_parse {
 typedef struct s_data {
 	char			*user_input;
 	char			*curr_work_dir;
+	char			*prev_work_dir;
 	char			*printed_line;
 	t_env			*env_struct;
 	t_parse			*parse_struct;
@@ -130,7 +131,7 @@ t_env		*ft_init_no_envi(void);
 /* init/init_loop.c */
 bool		ft_first_init(t_data *ms, char **envp);
 bool		ft_malloc_curr_cwd(t_data *ms);
-bool		ft_get_curr_cwd(t_data *data);
+bool		ft_get_cwd(t_data *ms, unsigned int i);
 /* init/init_env_struct.c */
 bool		ft_env_struct_init(t_data *ms, char **envp);
 

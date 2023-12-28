@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 18:04:15 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:47:43 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,35 @@ bool	ft_first_init(t_data *ms, char **envp)
 bool	ft_malloc_curr_cwd(t_data *ms)
 {
 	char	*curr_work_dir;
+	char	*prev_work_dir;
 
 	curr_work_dir = ft_calloc(2, (size_t) SIZE_PATH_MAX);
-	if (!curr_work_dir)
+	prev_work_dir = ft_calloc(2, (size_t) SIZE_PATH_MAX);
+	if (!curr_work_dir || !prev_work_dir)
 	{
 		ft_printf_fd(2, "malloc gen cwd failed\n");
 		return (false);
 	}
 	else
+	{
 		ms->curr_work_dir = curr_work_dir;
+		ms->prev_work_dir = prev_work_dir;
+	}
 	return (true);
 }
 
 /* data->curr_work_dir est un buffer */
-bool	ft_get_curr_cwd(t_data *data)
+bool	ft_get_cwd(t_data *ms, unsigned int i)
 {
-	if (getcwd(data->curr_work_dir, (size_t) SIZE_PATH_MAX))
-		data->printed_line = ft_strjoin(data->curr_work_dir, " > ");
+	if (i == 0)
+		ms->prev_work_dir = ft_strdup("");
+	if (i > 0)
+	{
+		free(ms->prev_work_dir);
+		ms->prev_work_dir = ft_strdup(ms->curr_work_dir);
+	}
+	if (getcwd(ms->curr_work_dir, (size_t) SIZE_PATH_MAX))
+		ms->printed_line = ft_strjoin(ms->curr_work_dir, " > ");
 	else
 	{
 		ft_printf_fd(2, "Error getting cwd with getcwd\n");
