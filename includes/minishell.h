@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 15:09:03 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:33:37 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@
 # include <stdlib.h>
 # include <limits.h>
 # include <stdbool.h>
-# include "../libft/libft.h"
 # include <sys/types.h>
+# include "../libft/libft.h"
 
+/* ========================== DEFINE BASE =================================== */
 # define BASE_QUOTES "\'\""
 # define S_QUOTE '\''
 # define D_QUOTE '\"'
@@ -30,12 +31,18 @@
 # define CHAR_END_INPUT "<>|& \t\n"
 # define BASE_TOKEN "<>|"
 # define BASE_WHITESP " \b\t\v\r\f"
-# define SYNTAX_ERR "minishell: syntax error near unexpected token '"
+# define SYNTAX_ERR " syntax error near unexpected token '"
 
+/* ========================== DEFINE RET VALUES ============================= */
 # define R_EX_OK 0
 # define R_ERR_GEN 1
 # define R_ERR_SH_B 2
 
+# ifndef SIZE_PATH_MAX
+#  define SIZE_PATH_MAX 4096
+# endif
+
+/* ============================ STRUCTURES ================================== */
 typedef struct s_env_node {
 	char				*n_tag;
 	char				*n_content;
@@ -47,30 +54,22 @@ typedef struct s_env {
 	t_env_node	*node_;
 }	t_env;
 
-typedef struct s_data
-{
-	char	*input;
-	char	*cwd;
-	char	*prompt;
-	t_env	*env_struct;
-	// int	pipes;
-}t_data;
-
 /* respectivement < > << >> | $ ? */
 typedef enum s_tokens
 {
-	redir_in = 1,
-	redir_out = 2,
-	redir_in_app = 3,
-	redir_out_app = 4,
-	pipe_ = 5,
-	dollar = 6,
-	question = 7
+	redir_in,
+	redir_out,
+	redir_in_app,
+	redir_out_app,
+	pipe_,
+	dollar,
+	question,
+	space,
+	end,
+	word
 }t_tokens;
 
-/* CMD_W_ARGS should be char** dsl */
 typedef struct s_cmd {
-	struct s_cmd	*previous;
 	struct s_cmd	*next;
 	char			*prev_token;
 	char			*next_token;
@@ -91,11 +90,20 @@ typedef struct s_parse {
 	int			token_nb;
 	int			start_w_val_tok;
 	char		**arr_token;
-	t_cmd		*cmds;
 	char		**arr_input;
 	t_env		*env_struct;
-	t_data		*data_struct;
+	struct s_data		*data_struct;
 }	t_parse;
+
+typedef struct s_data {
+	char			*prompt;
+	char			*curr_work_dir;
+	char			*printed_line;
+	t_env			*env_struct;
+	t_parse			*parse_struct;
+	t_cmd			*cmd_nodes;
+}	t_data;
+
 
 /*======================= ENV FOLDER =======================*/
 /* env_actual.c */
@@ -118,32 +126,16 @@ t_env_node	*ft_create_node(char *content_, char *tag_, char *cont);
 void		ft_add_envi_node(t_env_node **src, t_env_node *to_add);
 t_env		*ft_init_no_envi(void);
 
-/*======================= UTILS FOLDER =======================*/
-char		**ft_split_unbase(char const *s, char *base);
-char		**ft_split_base(char const *s, char *base);
-char		**ft_split_entry_exit(char *str);
-bool		ft_only_sep_base(char *str, char *base);
-bool		ft_only_sep_unbase(char *str, char *base);
-/* utils/ft_2d_array.c */
-int			ft_2d_lines(char **array);
-void		ft_free_2d_array(char **array);
-char		**ft_copy_2d_array(char **arr, int from, int len);
-int			ft_len_2d_array(char **arr);
-int			ft_2d_has_doubles(char **arr);
-/* utils/ft_str_utils.c */
-char		*ft_strdup_limiters(char *str, int from, int until);
-int			ft_strindex(char *str, char c);
-int			ft_strbase(char *str, const char *base);
-int			ft_char_in_base(char c, const char *base);
-/* utils/ft_str_utils_2.c */
-int			ft_strocc(char *str, char c);
-int			ft_strocc_base(char *str, char *base);
-/* utils/ft_epur.c */
-char		*ft_str_epur(char *str, char to_remove);
-void		ft_arr_epur(char **arr, char to_remove);
-/* utils/ft_strlen_misc.c */
-int			ft_strlen_from(char *str, int from);
-int			ft_strlen_base(char *str, char *base, int from);
+/*======================= INIT FOLDER ========================*/
+/* init/init_loop.c */
+bool		ft_first_init(t_data *ms, char **envp);
+bool		ft_malloc_curr_cwd(t_data *ms);
+bool		ft_get_curr_cwd(t_data *data);
+/* init/init_env_struct.c */
+bool		ft_env_struct_init(t_data *ms, char **envp);
+
+/*======================= LOOP FOLDER ========================*/
+void		ft_loop(t_data *ms);
 
 /*======================= PARSING FOLDER =======================*/
 /* parsing/parse_input.c */
