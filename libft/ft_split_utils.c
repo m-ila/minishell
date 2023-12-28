@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:19:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/25 21:37:38 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:11:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ bool	ft_only_sep_base(char *str, char *base)
 	return (true);
 }
 
+/* protects if !str, returns NULL, but if only sep, returns an empty array */
 char	**ft_split_entry_exit(char *str)
 {
 	char	**ret;

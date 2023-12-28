@@ -6,13 +6,12 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 02:03:30 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 13:43:54 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 15:11:45 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* split fun renvoie NULL si only sep */
 static void	*ft_free(char **s, size_t j)
 {
 	while (j > 0)
@@ -73,7 +72,6 @@ static char	*ft_wrd(char const *s, char c)
 	return (ret);
 }
 
-/* Marianne a changer ici */
 char	**ft_split(char const *s, char c)
 {
 	char		**ret;
@@ -81,7 +79,7 @@ char	**ft_split(char const *s, char c)
 
 	j = 0;
 	if (!s || ft_str_only_sep((char *) s, c))
-		return (NULL);
+		return (ft_split_entry_exit((char *) s));
 	ret = (char **)ft_calloc((ft_wrd_nb(s, c) + 1), sizeof(char *));
 	if (!ret)
 		return (NULL);
