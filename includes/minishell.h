@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 18:47:54 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 20:10:02 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef enum s_tokens
 }t_tokens;
 
 typedef struct s_cmd {
+	struct s_cmd	*prev;	
 	struct s_cmd	*next;
 	char			*prev_token;
 	char			*next_token;
@@ -87,12 +88,9 @@ typedef struct s_cmd {
 }	t_cmd;
 
 typedef struct s_parse {
-	int					token_nb;
-	int					start_w_val_tok;
-	char				**arr_token;
-	char				**arr_input;
-	t_env				*env_struct;
-	struct s_data		*data_struct;
+	int		token_nb;
+	bool	start_w_val_tok;
+	t_cmd	*struct_cmds;
 }	t_parse;
 
 typedef struct s_data {
@@ -100,9 +98,10 @@ typedef struct s_data {
 	char			*curr_work_dir;
 	char			*prev_work_dir;
 	char			*printed_line;
+	char			**arr_token;
+	char			**arr_input;
 	t_env			*env_struct;
 	t_parse			*parse_struct;
-	t_cmd			*cmd_nodes;
 }	t_data;
 
 
