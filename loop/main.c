@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 18:10:03 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:14:38 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_loop(t_data *ms)
 		if (!ft_get_curr_cwd(ms))
 			return ;
 		ms->user_input = readline(ms->printed_line);
-		ft_printf_fd(1, "ms->user_input = %s\nms->printed_line = %s\n", \
+		ft_printf_fd(1, "ms->user_input = %s\n\nms->printed_line = %s\n", \
 		ms->user_input, ms->printed_line);
 		add_history(ms->user_input);
 		if (!ft_strncmp(ms->user_input, "exit", ft_strlen(ms->user_input)))
