@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/29 15:15:26 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:59:18 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ typedef struct s_data {
 	bool			b_temoin;
 }	t_data;
 
-
 /*======================= ENV FOLDER =======================*/
 /* env_actual.c */
 bool		ft_exists_in_env(t_env_node *envi, char *tag_);
@@ -121,6 +120,7 @@ void		ft_env_del_elem(t_env_node **envi, char *tag_);
 /* env_display.c */
 void		ft_env_update(t_env_node *envi, char *tag_, char *cont);
 void		ft_env_display(t_env_node **envi);
+t_env_node	*ft_get_node(t_env_node *env_node, char *tag_);
 /* env_free.c */
 void		ft_free_node(t_env_node *curr);
 void		ft_env_free(t_env_node *envi);
@@ -138,6 +138,7 @@ bool		ft_get_cwd(t_data *ms, unsigned int i);
 bool		ft_malloc_s_parse(t_data *ms);
 /* init/init_env_struct.c */
 bool		ft_env_struct_init(t_data *ms, char **envp);
+void		ft_increment_shlvl(t_env_node *envi);
 
 /*======================= LOOP FOLDER ========================*/
 void		ft_loop(t_data *ms);
