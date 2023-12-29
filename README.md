@@ -11,3 +11,4 @@
 
 ## Case 3
 * OLDPWD will only be in the env when cd has been used since the launch of the terminal : needs to be changed once cd is created
+* Issue : readline quand chaine vide ferme le prog, alors que le terminal just new prompt

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/29 19:34:10 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/29 19:59:09 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_loop(t_data *ms)
 			return ;
 		if (!ft_malloc_s_parse(ms))
 			return ;
-		/* actualise cwd in env */
+		ms->user_input = NULL;
 		ms->user_input = readline(ms->printed_line);
 		add_history(ms->user_input);
 		if (ft_first_layer_parse(ms->user_input, ms) != R_EX_OK)
