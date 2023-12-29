@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/29 19:26:08 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/29 20:39:50 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 # ifndef SIZE_PATH_MAX
 #  define SIZE_PATH_MAX 4096
 # endif
+
+# define NO_INDEX_FOUND -1
 
 /* ============================ STRUCTURES ================================== */
 typedef struct s_env_node {
@@ -163,5 +165,9 @@ void		ft_free_cmds(t_cmd **cmds);
 void		ft_free_all(t_data *ms);
 /* parsing/cmd_arr_parse.c */
 bool		ft_is_valid_cmd(char *str);
+/* parsing/quoting.c */
+bool		ft_str_has_quotes(char *user_input);
+char		*ft_expand_quoted_substr(char **array, char quote, \
+int from, int until);
 
 #endif 
