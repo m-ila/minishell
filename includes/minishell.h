@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 20:10:02 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/29 15:06:43 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@
 # define CHAR_END_INPUT "<>|& \t\n"
 # define BASE_TOKEN "<>|"
 # define BASE_WHITESP " \b\t\v\r\f"
-# define SYNTAX_ERR " syntax error near unexpected token '"
+
+/* ========================== DEFINE MSG ==================================== */
+# define SYNTAX_ERR "syntax error near unexpected token '"
+# define PRINT_SEP_T "========================= DATA ========================="
+# define PRINT_SEP "======================================================="
 
 /* ========================== DEFINE RET VALUES ============================= */
 # define R_EX_OK 0
@@ -102,6 +106,7 @@ typedef struct s_data {
 	char			**arr_input;
 	t_env			*env_struct;
 	t_parse			*parse_struct;
+	bool			b_temoin;
 }	t_data;
 
 
@@ -131,6 +136,7 @@ t_env		*ft_init_no_envi(void);
 bool		ft_first_init(t_data *ms, char **envp);
 bool		ft_malloc_curr_cwd(t_data *ms);
 bool		ft_get_cwd(t_data *ms, unsigned int i);
+bool		ft_malloc_s_parse(t_data *ms);
 /* init/init_env_struct.c */
 bool		ft_env_struct_init(t_data *ms, char **envp);
 
@@ -139,6 +145,8 @@ void		ft_loop(t_data *ms);
 
 /*======================= PARSING FOLDER =======================*/
 /* parsing/parse_input.c */
+int			ft_first_layer_parse(char *user_input, t_data *ms);
+/* parsing/former_parse_input.c */
 int			ft_parse_input(char *str, t_parse *ms);
 t_cmd		*ft_go_to_last_cmd_node(t_cmd *cmd_node);
 t_cmd		*ft_fill_cmd_struct(t_parse *ms);
@@ -146,12 +154,12 @@ int			ft_assign_tokens_values(t_cmd *ret, t_parse *ms, int i);
 t_cmd		*ft_create_cmd_node(t_parse *ms, int i);
 /* parsing/token_parse.c */
 bool		ft_is_valid_token(char *str);
-int			ft_get_valid_token_nb(char **token_arr, char *str);
+int			ft_get_valid_token_nb(char **token_arr, t_data *ms);
 int			ft_starts_with_valid_token(char *str);
 /* parsing/print_error.c */
-void		ft_msg_end(char *str, char type, bool del_struct, t_parse *ms);
+void		ft_msg_end(char *str, char type, bool del_struct, t_data *ms);
 void		ft_free_cmds(t_cmd **cmds);
-void		ft_free_all(t_parse *ms);
+void		ft_free_all(t_data *ms);
 /* parsing/cmd_arr_parse.c */
 bool		ft_is_valid_cmd(char *str);
 

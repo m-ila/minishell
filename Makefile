@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2023/12/28 17:25:31 by mbruyant         ###   ########.fr        #
+#    Updated: 2023/12/29 13:57:47 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,10 @@ env/env_free.c \
 env/env_init.c \
 init/init_loop.c \
 init/init_env_struct.c \
-loop/main.c
+loop/main.c \
+parsing/parse_user_input.c \
+parsing/token_parse.c \
+parsing/print_error.c
 
 CFLAGS	= -Wextra -Wall -Werror -MMD -g3 -O2
 
