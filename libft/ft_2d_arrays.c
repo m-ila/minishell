@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:49:06 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/10/04 02:47:38 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/29 20:44:53 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_2d_lines(char **array)
 	int	i;
 
 	i = 0;
+	if (!array || !*array)
+		return (0);
 	while (array[i])
 		i++;
 	return (i);
