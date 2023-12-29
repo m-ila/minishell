@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/29 15:06:43 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/29 15:15:26 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 /* COMMENT : test with bash but not so sure about the space */
 # define CHAR_END_INPUT "<>|& \t\n"
 # define BASE_TOKEN "<>|"
-# define BASE_WHITESP " \b\t\v\r\f"
 
 /* ========================== DEFINE MSG ==================================== */
 # define SYNTAX_ERR "syntax error near unexpected token '"
