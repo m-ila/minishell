@@ -8,3 +8,6 @@
 
 ![note](img_readme/SHLVL.png)
 * When unset SHLVL, SHLVL is set as 0 but still in env
+
+## Case 3
+* OLDPWD will only be in the env when cd has been used since the launch of the terminal : needs to be changed once cd is created
