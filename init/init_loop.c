@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/29 17:59:45 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/29 19:28:40 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,25 @@ bool	ft_malloc_curr_cwd(t_data *ms)
 	return (true);
 }
 
-/*
+/* needs to be modified once cd builtin is set up */
 void	ft_update_env_cwd(t_data *ms)
 {
+	if (!ms)
+		return ;
+	if (!ms->env_struct)
+		return ;
 	if (ms->env_struct->node_)
 	{
-
+		ft_env_update(ms->env_struct->node_, "PWD", ms->curr_work_dir);
+		ft_env_update(ms->env_struct->node_, "OLDPWD", ms->prev_work_dir);
 	}
 }
-*/
 
-/* data->curr_work_dir est un buffer 
-Est-ce que si le path quand on CD est incorrect, actualise old_pwd ? */
+/*
+data->curr_work_dir est un buffer 
+Est-ce que si le path quand on CD est incorrect, actualise old_pwd ?
+needs to be modified once cd builtin is set up, see README
+*/
 bool	ft_get_cwd(t_data *ms, unsigned int i)
 {
 	if (i == 0)
@@ -86,7 +93,10 @@ bool	ft_get_cwd(t_data *ms, unsigned int i)
 		ms->prev_work_dir = ft_strdup(ms->curr_work_dir);
 	}
 	if (getcwd(ms->curr_work_dir, (size_t) SIZE_PATH_MAX))
+	{
 		ms->printed_line = ft_strjoin(ms->curr_work_dir, " > minishell : ");
+		ft_update_env_cwd(ms);
+	}
 	else
 	{
 		ft_printf_fd(2, "Error getting cwd with getcwd\n");

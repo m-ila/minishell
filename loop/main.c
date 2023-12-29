@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/29 17:53:58 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/29 19:34:10 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static void	print_values(t_data *ms)
 how to deal with sigs ? 
 if !ft_malloc_s_parse END EVERYTHING : changer les return ; au debut pour un free tt
 avec pour condition si existe -> implique que dans la fonction free, on free(var) puis
-var = NULL */
+var = NULL 
+cwd is actualise in ft_get_cwd */
 void	ft_loop(t_data *ms)
 {
 	unsigned int	i;
