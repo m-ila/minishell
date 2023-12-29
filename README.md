@@ -1,0 +1,1 @@
+![note](img_readme/env_variable.png)
