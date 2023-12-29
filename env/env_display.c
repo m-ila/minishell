@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 13:15:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/23 21:24:09 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:29:07 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,22 @@ void	ft_env_update(t_env_node *envi, char *tag_, char *cont)
 		}
 		envi = envi->next;
 	}
+}
+
+t_env_node	*ft_get_node(t_env_node *env_node, char *tag_)
+{
+	t_env_node	*ret;
+
+	if (!env_node)
+		return (NULL);
+	ret = env_node;
+	while (ret)
+	{
+		if (!ft_strncmp(ret->n_tag, tag_, ft_strlen(ret->n_tag)))
+			return (ret);
+		ret = ret->next;
+	}
+	return (NULL);
 }
 
 /* tested : OK 
