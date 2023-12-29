@@ -6,11 +6,28 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 19:10:19 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:58:08 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+bool	ft_malloc_s_parse(t_data *ms)
+{
+	t_parse	*parse_struct;
+
+	parse_struct = malloc(sizeof(t_parse));
+	if (!parse_struct)
+	{
+		ft_printf_fd(2, "malloc struct parse failed\n");
+		return (false);
+	}
+	parse_struct->token_nb = 0;
+	parse_struct->start_w_val_tok = false;
+	parse_struct->struct_cmds = NULL;
+	ms->parse_struct = parse_struct;
+	return (true);
+}
 
 bool	ft_first_init(t_data *ms, char **envp)
 {
