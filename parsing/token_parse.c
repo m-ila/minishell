@@ -6,12 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 17:15:41 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/26 23:18:20 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/29 15:04:57 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/* doesn't deal with || !!! */
 bool	ft_is_valid_token(char *str)
 {
 	size_t	len;
@@ -26,6 +27,7 @@ bool	ft_is_valid_token(char *str)
 	return (true);
 }
 
+/*
 static int	ft_case_by_case(char *buff)
 {
 	int	ret;
@@ -54,10 +56,11 @@ static int	ft_case_by_case(char *buff)
 	return (ret);
 }
 
-/* dans le parsing, si !ft_starts_w_valid_token, juste free the prompt struct
+dans le parsing, si !ft_starts_w_valid_token, juste free the prompt struct
 msg erreur deja dans la fonction 
 renvoie -1 si aucun token dans str
 if i == end, means it doesn't start by a token, returns -1 */
+/*
 int	ft_starts_with_valid_token(char *str)
 {
 	int		i;
@@ -79,18 +82,19 @@ int	ft_starts_with_valid_token(char *str)
 		return (0);
 	return (ft_case_by_case(buff));
 }
+*/
 
 /* if all are valids, return nb of it, if not returns 0
 Si aucun token, entree valide, renvoie -1
 NOTE : DOIT AFFICHER MESSAGE D'ERREUR ICI */
-int	ft_get_valid_token_nb(char **token_arr, char *str)
+int	ft_get_valid_token_nb(char **token_arr, t_data *ms)
 {
 	int	i;
 	int	nb;
 
-	if (!token_arr || !ft_starts_with_valid_token(str))
+	if (!token_arr)
 		return (0);
-	if (!ft_strlen(*token_arr))
+	if (!*token_arr)
 		return (-1);
 	i = 0;
 	nb = 0;
@@ -98,7 +102,7 @@ int	ft_get_valid_token_nb(char **token_arr, char *str)
 	{
 		if (!ft_is_valid_token(token_arr[i]))
 		{
-			ft_msg_end(token_arr[i], 's', false, NULL);
+			ft_msg_end(token_arr[i], 's', false, ms);
 			return (0);
 		}
 		if (ft_is_valid_token(token_arr[i]))
