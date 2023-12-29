@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/29 14:58:08 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:59:45 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	ft_first_init(t_data *ms, char **envp)
 {
 	if (!ft_env_struct_init(ms, envp))
 		return (false);
-	/* adding +1 to SHLVL */
+	ft_increment_shlvl(ms->env_struct->node_);
 	if (!ft_malloc_curr_cwd(ms))
 	{
 		ft_env_free(ms->env_struct->node_);
@@ -63,6 +63,16 @@ bool	ft_malloc_curr_cwd(t_data *ms)
 	}
 	return (true);
 }
+
+/*
+void	ft_update_env_cwd(t_data *ms)
+{
+	if (ms->env_struct->node_)
+	{
+
+	}
+}
+*/
 
 /* data->curr_work_dir est un buffer 
 Est-ce que si le path quand on CD est incorrect, actualise old_pwd ? */
