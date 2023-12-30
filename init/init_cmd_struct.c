@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/30 21:18:02 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/30 22:34:07 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ void	ft_cmd_display(t_cmd *cmds)
 	ft_printf_fd(1, "%s\n\n", PRINT_SEP_C);
 	while (cmds)
 	{
-		ft_printf_fd(1, "cmd[%d]->raw_cmd = %s\n", i, cmds->raw_str);
+		ft_printf_fd(1, "cmd[%d]->raw_cmd = '%s'\n", i, cmds->raw_str);
 		i++;
 		cmds = cmds->next;
 	}
-	ft_printf_fd(1, "%s\n\n", PRINT_SEP);
 }
 
-/* needs to make a function to free and to display */
 bool	ft_cmd_struct(t_data *ms, char *user_input)
 {
 	t_cmd	*cmd_struct;
