@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/29 20:01:51 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:42:54 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ static void	print_values(t_data *ms)
 	ft_printf_fd(1, "ms->curr_wd = %s\nms->prev_w_dir = %s\n\n", \
 	ms->curr_work_dir, ms->prev_work_dir);
 	ft_printf_fd(1, "parse_struct->token_nb = %d\n", ms->parse_struct->token_nb);
-	ft_printf_fd(1, "%s\n\n", PRINT_SEP);
+	ft_printf_fd(1, "ms->b_temoin = %d\n", (int) ms->b_temoin);
+	if (ms->parse_struct->struct_cmds)
+		ft_cmd_display(ms->parse_struct->struct_cmds);
 }
 
 /* how do deal with heredoc ? 
@@ -55,19 +57,25 @@ void	ft_loop(t_data *ms)
 		add_history(ms->user_input);
 		if (ft_first_layer_parse(ms->user_input, ms) != R_EX_OK)
 			ms->b_temoin = false;	
-		/* parse ms->user_input (first layer) */
-		/* creates a t_parse struct from ms->user_input if parsing is OK */
-		/* init a t_parse->t_cmds struct */
+		if (ms->b_temoin)
+		{
+			ft_cmd_struct(ms, ms->user_input);
+		}
 		print_values(ms);
 		if (ms->b_temoin && \
 		!ft_strncmp(ms->user_input, "exit", ft_strlen(ms->user_input)))
 		{
+			ft_free_cmds(ms->parse_struct->struct_cmds);
 			ft_free_prompt(ms);
 			return ;
 		}
 		if (ms->b_temoin && \
 		!ft_strncmp(ms->user_input, "env", ft_strlen(ms->user_input)))
 			ft_env_display(&ms->env_struct->node_);
+		if (ms->parse_struct->struct_cmds)
+		{
+			ft_free_cmds(ms->parse_struct->struct_cmds);
+		}
 		free(ms->parse_struct);
 		ft_free_prompt(ms);
 		//deuxieme couche parsing
