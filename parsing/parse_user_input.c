@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:45:08 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/29 14:42:40 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/30 18:11:16 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	ft_get_next_token_index(char *user_input, int from)
 		return (-1);
 	if (from >= (int) ft_strlen(user_input))
 		return (-1);
+	while (user_input[from] && ft_char_in_base(user_input[from], BASE_TOKEN))
+		from++;
 	while (user_input[from] && !ft_char_in_base(user_input[from], BASE_TOKEN))
 		from++;
 	return (from);
