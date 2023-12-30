@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/29 21:07:47 by mbruyant         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:32:02 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@
 /* ========================== DEFINE MSG ==================================== */
 # define SYNTAX_ERR "syntax error near unexpected token '"
 # define PRINT_SEP_T "========================= DATA ========================="
-# define PRINT_SEP "======================================================="
+# define PRINT_SEP_C "========================= CMDS ========================="
+# define PRINT_SEP "========================================================"
 
 /* ========================== DEFINE RET VALUES ============================= */
 # define R_EX_OK 0
@@ -84,6 +85,7 @@ typedef struct s_cmd {
 	int				fd_out;
 	bool			b_abs_path;
 	bool			b_builtin;
+	char			*raw_str;
 	char			**cmd_w_arg;
 	char			*cmd;
 	int				nb_s_quote;
@@ -132,6 +134,10 @@ t_env_node	*ft_create_node(char *content_, char *tag_, char *cont);
 void		ft_add_envi_node(t_env_node **src, t_env_node *to_add);
 t_env		*ft_init_no_envi(void);
 
+/*======================= FREE FOLDER =======================*/
+/* free/free_cmd_struct.c */
+void		ft_free_cmds(t_cmd *cmds);
+
 /*======================= INIT FOLDER ========================*/
 /* init/init_loop.c */
 bool		ft_first_init(t_data *ms, char **envp);
@@ -142,19 +148,20 @@ void		ft_update_env_cwd(t_data *ms);
 /* init/init_env_struct.c */
 bool		ft_env_struct_init(t_data *ms, char **envp);
 void		ft_increment_shlvl(t_env_node *envi);
+/* init/init_cms_struct.c */
+void		ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add);
+t_cmd		*ft_create_cmd_node(char *raw_cmd);
+t_cmd		*ft_go_to_last_cmd_node(t_cmd *cmd_node);
+bool		ft_cmd_struct(t_data *ms, char *user_input);
+void		ft_cmd_display(t_cmd *cmds);
 
 /*======================= LOOP FOLDER ========================*/
 void		ft_loop(t_data *ms);
 
 /*======================= PARSING FOLDER =======================*/
-/* parsing/parse_input.c */
+/* parsing/parse_user_input.c */
 int			ft_first_layer_parse(char *user_input, t_data *ms);
-/* parsing/former_parse_input.c */
-int			ft_parse_input(char *str, t_parse *ms);
-t_cmd		*ft_go_to_last_cmd_node(t_cmd *cmd_node);
-t_cmd		*ft_fill_cmd_struct(t_parse *ms);
-int			ft_assign_tokens_values(t_cmd *ret, t_parse *ms, int i);
-t_cmd		*ft_create_cmd_node(t_parse *ms, int i);
+int			ft_get_next_token_index(char *user_input, int from);
 /* parsing/token_parse.c */
 bool		ft_is_valid_token(char *str);
 int			ft_get_valid_token_nb(char **token_arr, t_data *ms);
