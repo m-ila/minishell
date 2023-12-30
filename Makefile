@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2023/12/30 21:51:40 by mbruyant         ###   ########.fr        #
+#    Updated: 2023/12/30 22:48:59 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ CFLAGS	= -Wextra -Wall -Werror -MMD -g3 -O2
 
 CC = cc
 
-INC = includes/
+INC = includes/minishell.h
 
 OBJ_DIR = ./objs/
 
@@ -47,7 +47,7 @@ DEP := $(OBJ:.o=.d)
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline -L $(INC)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline -include $(INC)
 
 $(LIBFT) :
 	make -C ./libft
