@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/30 22:57:29 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/01 15:01:11 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef enum s_tokens
 }t_tokens;
 
 typedef struct s_cmd {
-	struct s_cmd	*prev;	
+	struct s_cmd	*prev;
 	struct s_cmd	*next;
 	char			*prev_token;
 	char			*next_token;
@@ -166,12 +166,14 @@ void		ft_loop(t_data *ms);
 int			ft_first_layer_parse(char *user_input, t_data *ms);
 int			ft_get_next_token_index(char *user_input, int from);
 /* parsing/token_parse.c */
+bool		ft_starts_with_token(char *user_input);
 bool		ft_is_valid_token(char *str);
+bool		ft_is_valid_entry_token(char *str);
 int			ft_get_valid_token_nb(char **token_arr, t_data *ms);
-int			ft_starts_with_valid_token(char *str);
 /* parsing/print_error.c */
 void		ft_msg_end(char *str, char type, bool del_struct, t_data *ms);
 char		*ft_msg_ret_char(char *str);
+int			ft_print_msg(char *str, char type, int return_value, t_data *ms);
 /* parsing/cmd_arr_parse.c */
 bool		ft_is_valid_cmd(char *str);
 /* parsing/quoting.c */
