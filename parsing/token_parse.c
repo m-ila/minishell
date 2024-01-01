@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 17:15:41 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/01 15:06:10 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/01 15:14:56 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_get_valid_token_nb(char **token_arr, t_data *ms)
 	while (token_arr[i])
 	{
 		if (!ft_is_valid_token(token_arr[i]))
-			return (ft_print_msg(token_arr[0], 's', 0, ms));
+			return (ft_print_msg(token_arr[i], 's', 0, ms));
 		if (ft_is_valid_token(token_arr[i]))
 			nb++;
 		i++;
