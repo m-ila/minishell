@@ -34,7 +34,8 @@ ft_split_base.c \
 ft_split_unbase.c \
 ft_split_utils.c \
 ft_epur.c \
-ft_strlen_misc.c
+ft_strlen_misc.c \
+ft_str_occ.c
 
 OBJS = ${SRCS:.c=.o}
 

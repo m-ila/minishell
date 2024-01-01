@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 13:48:46 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/10/11 17:15:10 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/01 14:14:36 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,6 @@ int	ft_strindex(char *str, char c)
 		i++;
 	}
 	return (-1);
-}
-
-int	ft_strocc(char *str, char c)
-{
-	int	i;
-	int	occ;
-
-	i = 0;
-	occ = 0;
-	while ((size_t) i < ft_strlen(str))
-	{
-		if (str[i] == c)
-			occ++;
-		i++;
-	}
-	return (occ);
 }
 
 /* looks if all char of str are in a set base */
