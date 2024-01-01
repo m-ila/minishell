@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/30 22:34:07 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/01 15:35:37 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,28 @@ void	ft_cmd_display(t_cmd *cmds)
 	}
 }
 
+/* TO DO : if error, change glob val */
 bool	ft_cmd_struct(t_data *ms, char *user_input)
 {
 	t_cmd	*cmd_struct;
 	t_cmd	*buff;
-	char	**cmd_subarr;
 	int		i;
 
 	if (!user_input)
 		return (false);
 	cmd_struct = NULL;
-	cmd_subarr = ft_split_base(user_input, BASE_TOKEN);
-	if (!cmd_subarr)
+	if (!ms->arr_input)
 		return (false);
 	i = 0;
-	while (cmd_subarr[i])
+	while (ms->arr_input[i])
 	{
-		buff = ft_create_cmd_node(cmd_subarr[i]);
+		buff = ft_create_cmd_node(ms->arr_input[i]);
 		if (!cmd_struct)
 			cmd_struct = buff;
 		else
 			ft_add_node_to_cmds(&cmd_struct, buff);
 		i++;
 	}
-	ft_free_2d_array(cmd_subarr);
 	ms->parse_struct->struct_cmds = cmd_struct;
 	return (true);
 }
@@ -71,6 +69,7 @@ void	ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add)
 	to_add->prev = end;
 }
 
+/* TO DO : change val globale */
 t_cmd	*ft_create_cmd_node(char *raw_cmd)
 {
 	t_cmd	*new;
