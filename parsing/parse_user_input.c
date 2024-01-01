@@ -6,17 +6,11 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:45:08 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/30 18:11:16 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/01 15:01:59 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	ft_print_msg(char *str, int return_value)
-{
-	ft_printf_fd(2, "%s\n", str);
-	return (return_value);
-}
 
 /*
 if !nb_token : has invalids token(s), error printed in get_valid_token_nb
@@ -34,7 +28,7 @@ int	ft_first_layer_parse(char *user_input, t_data *ms)
 
 	arr_token = ft_split_unbase(user_input, BASE_TOKEN);
 	if (!arr_token)
-		return (ft_print_msg("malloc error gen arr token", R_ERR_GEN));
+		return (ft_print_msg("malloc error gen arr token", 'm', R_ERR_GEN, ms));	
 	nb_token = ft_get_valid_token_nb(arr_token, ms);
 	if (!nb_token)
 		ms->b_temoin = false;
@@ -58,26 +52,4 @@ int	ft_get_next_token_index(char *user_input, int from)
 	while (user_input[from] && !ft_char_in_base(user_input[from], BASE_TOKEN))
 		from++;
 	return (from);
-}
-
-/*
-NOT DONE
-strlen_unbase renvoie quoi si arrive a la fin de ligne ?
-*/
-int	ft_starts_with_valid_token(char *user_input)
-{
-	int	i;
-
-	i = 0;
-	while (user_input[i] && ft_iswhitespace(user_input[i]))
-		i++;
-	if (user_input[i] == '\0')
-		return (0);
-	if (ft_strlen_unbase(user_input, BASE_TOKEN, i) > 2)
-		return (-1);
-	if (!ft_char_in_base(user_input[i], BASE_TOKEN))
-		return (-1);
-	/* ft_strdup_limiters and look if proper token */
-	/* if is valid token*/
-	return (R_EX_OK);
 }
