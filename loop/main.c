@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/01 15:58:20 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/01 16:02:20 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	print_values(t_data *ms)
 	ft_printf_fd(1, "ms->b_temoin = %d\n", (int) ms->b_temoin);
 	if (ms->parse_struct->struct_cmds)
 		ft_cmd_display(ms->parse_struct->struct_cmds);
-	ft_printf_fd(1, "%s\n\n\n\n\n", PRINT_SEP);
+	ft_printf_fd(1, "%s\n\n\n", PRINT_SEP);
 }
 
 /* how do deal with heredoc ? 

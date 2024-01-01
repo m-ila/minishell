@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/01 15:52:17 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/01 16:26:34 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,18 @@ typedef enum s_tokens
 {
 	redir_in,
 	redir_out,
-	redir_in_app,
+	heredoc,
 	redir_out_app,
 	pipe_,
+	double_quote,
+	single_quote,
 	dollar,
 	question,
 	space,
-	end,
-	word
+	delimiter,
+	end_of_file,
+	str,
+	var
 }t_tokens;
 
 typedef struct s_cmd {
