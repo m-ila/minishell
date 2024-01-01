@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/01 15:01:11 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/01 15:52:17 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 
 /* ========================== DEFINE MSG ==================================== */
 # define SYNTAX_ERR "syntax error near unexpected token '"
+# define ERR_GEN_M_CMDS "malloc error gen arr cmds"
+# define ERR_GEN_M_TKS "malloc error gen arr tokens"
 # define PRINT_SEP_T "========================= DATA ========================="
 # define PRINT_SEP_C "========================= CMDS ========================="
 # define PRINT_SEP "========================================================"
@@ -157,13 +159,15 @@ t_cmd		*ft_create_cmd_node(char *raw_cmd);
 t_cmd		*ft_go_to_last_cmd_node(t_cmd *cmd_node);
 bool		ft_cmd_struct(t_data *ms, char *user_input);
 void		ft_cmd_display(t_cmd *cmds);
+/* init/init_u_i_related.c */
+int			ft_init_arr(t_data *ms, char *user_input);
 
 /*======================= LOOP FOLDER ========================*/
 void		ft_loop(t_data *ms);
 
 /*======================= PARSING FOLDER =======================*/
 /* parsing/parse_user_input.c */
-int			ft_first_layer_parse(char *user_input, t_data *ms);
+int			ft_first_layer_parse(t_data *ms);
 int			ft_get_next_token_index(char *user_input, int from);
 /* parsing/token_parse.c */
 bool		ft_starts_with_token(char *user_input);

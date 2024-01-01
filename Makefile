@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2023/12/30 22:48:59 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/01 15:51:44 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ free/free_cmd_struct.c \
 init/init_loop.c \
 init/init_env_struct.c \
 init/init_cmd_struct.c \
+init/init_u_i_related.c \
 loop/main.c \
 parsing/parse_user_input.c \
 parsing/token_parse.c \
