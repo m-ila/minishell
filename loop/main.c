@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/30 23:01:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/01 13:56:35 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ft_loop(t_data *ms)
 		ms->user_input = NULL;
 //		ft_putstr_fd(ms->printed_line, 1);
 		ms->user_input = readline(ms->printed_line);
+		//if heredoc, gnl jusqu'a delimiter dans la str recuperee
 		add_history(ms->user_input);
 		if (ft_first_layer_parse(ms->user_input, ms) != R_EX_OK)
 			ms->b_temoin = false;
