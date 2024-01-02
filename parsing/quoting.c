@@ -6,11 +6,86 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:26:08 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/29 21:08:27 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/02 17:39:27 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/*
+Basically returns the value of an "until" for a substr
+returns -1 in case of error
+*/
+int	get_next_token(char *str, int from)
+{
+	int		occ_rule;
+	char	quoting_rule;
+
+	if (from >= (int) ft_strlen(str) || from < 0 || !str)
+		return (-1);
+	quoting_rule = '.';
+	occ_rule = 0;
+	while (str[from])
+	{
+		if (ft_char_in_base(str[from], BASE_QUOTES))
+		{
+			if (quoting_rule == '.')
+				quoting_rule = str[from];
+			if (str[from] == quoting_rule)
+				occ_rule++;
+		}
+		if (ft_char_in_base(str[from], BASE_TOKEN) && occ_rule % 2 == 0)
+			return (from);
+		from++;
+	}
+	if (from == (int) ft_strlen(str))
+		return (from);
+	return (-1);
+}
+
+t_tokens	ft_what_token(char c, t_tokens quoting_rule, int i, int i_next_token)
+{
+	if ()
+}
+
+/* TO DO : send err msg */
+t_tokens	*ft_token_array(char *user_input)
+{
+	int			i;
+	int			i_next_token;
+	t_tokens	*array;
+	t_tokens	quoting_rule;
+
+	array = malloc((ft_strlen(user_input) + 1) * sizeof(*array));
+	if (!array)
+		return (NULL);
+	i = 0;
+	i_next_token = get_next_token(user_input, i);
+	while (i < (int) ft_strlen(user_input))
+	{
+		if (i == i_next_token)
+			i_next_token = get_next_token(user_input, i);
+		array[i] = ft_what_token(user_input[i], quoting_rule, i, i_next_token);
+		i++;
+	}
+	array[i] = end_of_file;
+	return (array);
+}
+
+t_tokens	ft_get_quoting_rule(char *user_input, int from, int until)
+{
+	if (from >= until || from < 0 || until < 0 || \
+	from >= ft_strlen(user_input) || until >= ft_strlen(user_input))
+		return (NULL);
+	while (user_input[from] && !ft_char_in_base(user_input[from], BASE_QUOTES) \
+	&& from <= until)
+		from++;
+	if (user_input[from] == S_QUOTE)
+		return (single_quote);
+	if (user_input[from] == D_QUOTE)
+		return (double_quote);
+	return (NULL);
+}
 
 bool	ft_str_has_quotes(char *user_input)
 {
