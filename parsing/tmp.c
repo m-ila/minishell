@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_get_next_token.c                              :+:      :+:    :+:   */
+/*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/02 17:31:51 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/03 21:04:58 by mbruyant         ###   ########.fr       */
+/*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
+/*   Updated: 2024/01/03 21:13:20 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	deal_with_token(char *str, char *tok_str, int from, t_data *ms)
 		return (0);
 	if (!ft_is_valid_token(tok_str))
 		ret = ft_print_msg(tok_str, 's', 0, ms);
-	if (ft_is_valid_token(tok_str))
+	else
 		ret = 1;
 	return (ret);
 }
@@ -95,11 +95,11 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 	tmp = get_cmd(user_input, *from);
 	if (!tmp)
 		return ((bool) ft_print_msg("get_cmd issue", 'm', 0, ms));
-	buff = ft_create_cmd_node(ft_strdup(tmp));
+	buff = ft_create_cmd_node(tmp);
 	if (ms->parse_struct->struct_cmds == NULL)
 		ms->parse_struct->struct_cmds = buff;
 	else
-		ft_add_node_to_cmds(ms->parse_struct->struct_cmds, buff);
+		ft_add_node_to_cmds(&ms->parse_struct->struct_cmds, buff);
 	ft_printf_fd(1, "cmd : '%s'\nfrom : %d\nuntil : %d\n", tmp, *from, *from + ft_strlen(tmp));
 	if (tmp)
 		(*from) += (int) ft_strlen(tmp);
@@ -118,7 +118,7 @@ bool	ft_parsing_token_process(char *user_input, int *from, t_data *ms)
 		return ((bool) ft_print_msg("get_token issue", 'm', 0, ms));
 	ft_printf_fd(1, "%s\nEntering ft_parsing_token_process\n\n", PRINT_SEP);
 	ft_printf_fd(1, "tok : '%s'\nfrom : %d\nuntil : %d\n", tmp_t, *from, *from + ft_strlen(tmp_t));
-	if (!deal_with_token(user_input, tmp_t, *from))
+	if (!deal_with_token(user_input, tmp_t, *from, ms))
 	{
 		free(tmp_t);
 		return (false);
@@ -170,11 +170,3 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 			temoin = ft_parsing_token_process(user_input, &index, ms);
 	}
 }
-/*
-int	main(int argc, char **argv)
-{
-	if (argc)
-		ft_raw_parsing_process(argv[1]);
-	return (0);
-}
-*/

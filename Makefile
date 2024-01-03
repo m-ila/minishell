@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/01 16:05:04 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/03 21:09:03 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ loop/main.c \
 parsing/parse_user_input.c \
 parsing/token_parse.c \
 parsing/print_error.c \
-parsing/quoting.c \
+parsing/tmp.c \
 signal/signal.c
 
 CFLAGS	= -Wextra -Wall -Werror -MMD -g3 -O2

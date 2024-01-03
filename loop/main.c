@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/01 16:02:20 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/03 21:12:10 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_loop(t_data *ms)
 		ms->user_input = readline(ms->printed_line);
 		//if heredoc, gnl jusqu'a delimiter dans la str recuperee
 		add_history(ms->user_input);
+/*
 		if (ft_init_arr(ms, ms->user_input) != R_EX_OK)
 		{
 			ms->b_temoin = false;
@@ -68,12 +69,14 @@ void	ft_loop(t_data *ms)
 		{
 			ft_cmd_struct(ms, ms->user_input);
 		}
+*/
+		ft_raw_parsing_process(ms->user_input, ms);
 		print_values(ms);
 		if (ms->b_temoin && \
 		!ft_strncmp(ms->user_input, "exit", ft_strlen(ms->user_input)))
 		{
-			ft_free_2d_array(ms->arr_input);
-			ft_free_2d_array(ms->arr_token);
+//			ft_free_2d_array(ms->arr_input);
+//			ft_free_2d_array(ms->arr_token);
 			ft_free_cmds(ms->parse_struct->struct_cmds);
 			ft_free_prompt(ms);
 			return ;
@@ -85,8 +88,8 @@ void	ft_loop(t_data *ms)
 		{
 			ft_free_cmds(ms->parse_struct->struct_cmds);
 		}
-		ft_free_2d_array(ms->arr_input);
-		ft_free_2d_array(ms->arr_token);
+//		ft_free_2d_array(ms->arr_input);
+//		ft_free_2d_array(ms->arr_token);
 		free(ms->parse_struct);
 		ft_free_prompt(ms);
 		//deuxieme couche parsing

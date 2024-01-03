@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/03 13:01:29 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/03 21:08:17 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct s_cmd {
 	struct s_cmd	*next;
 	char			*prev_token;
 	char			*next_token;
+	t_tokens		*tok_prev_token;
+	t_tokens		*tok_next_token;
 	bool			b_redir;
 	int				fd_in;
 	int				fd_out;
@@ -189,5 +191,7 @@ bool		ft_is_valid_cmd(char *str);
 bool		ft_str_has_quotes(char *user_input);
 char		*ft_expand_quoted_substr(char **array, char quote, \
 int from, int until);
+/* parsing/tmp.c */
+void		ft_raw_parsing_process(char *user_input, t_data *ms);
 
 #endif 
