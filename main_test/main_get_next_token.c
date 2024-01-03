@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 17:31:51 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/02 17:44:05 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/03 13:31:13 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,49 @@ int	get_next_token(char *str, int from)
 	return (-1);
 }
 
+int		b_deal_w_token(char *str, int from)
+{
+	char	*tmp;
+
+	if (from > (int) ft_strlen(str) || from < 0)
+		return (0);
+	if (from == (int) ft_strlen(str))
+		return (0);
+	tmp = ft_strdup_limiters(str, from, from + ft_strlen_unbase(str, BASE_TOKEN, from));
+	if (!tmp)
+		return (ft_print_msg("issue gen tmp val in b_deal_w_token", 'm', 0, NULL));
+	if (!ft_is_valid_token(tmp))
+	{	
+		ft_msg_end(tmp, 's', false, NULL);
+		free(tmp);
+		return (0);
+	}
+	return (1);
+}
+
+char	*deal_w_token(char *str, int from)
+{
+	char	*tmp;
+
+
+	tmp = ft_strdup_limiters(str, from, from + ft_strlen_unbase(str, BASE_TOKEN, from));
+	if (!tmp)
+		return (ft_char_print_msg("issue gen tmp val in deal_w_token", 'm', NULL, NULL));
+	if (!ft_is_valid_token(tmp))
+	{	
+		ft_msg_end(tmp, 's', false, NULL);
+		free(tmp);
+		return (NULL);
+	}
+	return (tmp);
+}
+
 int	main(int argc, char **argv)
 {
 	int		index;
 	int		until;
 	char	*tmp;
+	char	*tmp_t;
 
 	index = 0;
 	until = 0;
@@ -60,8 +98,15 @@ int	main(int argc, char **argv)
 			ft_printf_fd(1, "index : %d\nuntil : %d\nsubchar : %s\n", \
 			index, until, tmp);
 			index = until;
-			while (ft_char_in_base(argv[1][index], BASE_TOKEN))
-				index++;
+			tmp_t = ft_strdup_limiters(argv[1], index, index + ft_strlen_unbase(argv[1], BASE_TOKEN, index));
+			if (b_deal_w_token(argv[1], index))
+			{
+				ft_printf_fd(1, "substr t : %s\n", tmp_t);
+				index += (int) ft_strlen(tmp_t);
+				free(tmp_t);
+			}
+			if (!b_deal_w_token(argv[1], index))
+				return (ft_print_msg("invalid token", 'm', 0, NULL));
 			free(tmp);
 		}
 	}

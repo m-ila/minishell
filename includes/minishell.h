@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/01 16:26:34 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/03 13:01:29 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ int			ft_get_valid_token_nb(char **token_arr, t_data *ms);
 void		ft_msg_end(char *str, char type, bool del_struct, t_data *ms);
 char		*ft_msg_ret_char(char *str);
 int			ft_print_msg(char *str, char type, int return_value, t_data *ms);
+char		*ft_char_print_msg(char *str, char type, char *return_value, t_data *ms);
 /* parsing/cmd_arr_parse.c */
 bool		ft_is_valid_cmd(char *str);
 /* parsing/quoting.c */
