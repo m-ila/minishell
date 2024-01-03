@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 17:31:51 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/03 17:33:32 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/03 17:37:54 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	get_index_next_token(char *str, int from)
 	return (-1);
 }
 
+/* retourne la str correspondant a une cmd */
 char	*get_cmd(char *str, int from)
 {
 	int		until;
@@ -55,6 +56,7 @@ char	*get_cmd(char *str, int from)
 	return (ft_strdup_limiters(str, from, until));
 }
 
+/* retourne la str correspondant a une redirection */
 char	*get_token(char *str, int from)
 {
 	if (!str || from < 0 || from > (int) ft_strlen(str))
@@ -64,7 +66,10 @@ char	*get_token(char *str, int from)
 	return (ft_strdup_limiters(str, from, from + ft_strlen_unbase(str, BASE_TOKEN, from)));
 }
 
-/* to include t_data *ms so it can print the printed line */
+/*
+to include t_data *ms so it can print the printed line
+check la validite de la str de redirection
+*/
 int	deal_with_token(char *str, char *tok_str, int from)
 {
 	int		ret;
