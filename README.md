@@ -26,7 +26,7 @@
 ### Marianne
 * [ ] env
 * [ ] builtins
-* [ ] finish parsing
+* [ ] finish parsing quotes
 
 ## Case 1
 
