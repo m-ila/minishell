@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/04 11:39:13 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:32:16 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,9 @@ int	deal_with_token(char *str, char *tok_str, int from, t_data *ms)
 	return (ret);
 }
 
-/*to add t_data *ms to create node from here */
+/*
+to add : strdup protection !
+*/
 bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 {
 	char	*tmp;
@@ -114,7 +116,11 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 	return (true);
 }
 
-/*to add t_data *ms to create node from here */
+/*
+commentaire
+wouldn't be an int more interesting for those function ?
+in case of an error, would return proper return value, or else change var_g
+*/
 bool	ft_parsing_token_process(char *user_input, int *from, t_data *ms)
 {
 	char	*tmp_t;
@@ -141,6 +147,9 @@ bool	ft_parsing_token_process(char *user_input, int *from, t_data *ms)
 	return (true);
 }
 
+/*
+to do : add strdup protection
+*/
 bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 {
 	char	*tmp_t;
@@ -212,6 +221,10 @@ bool	ft_add_next_token_to_node(char *str, t_cmd *struct_cmd)
 	return (true);	
 }
 
+/*
+to do :
+Need to modify the functions starting by temoin = qqch to not start if temoin false
+*/
 void	ft_raw_parsing_process(char *user_input, t_data *ms)
 {
 	int		index;
@@ -231,6 +244,9 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 		if (temoin)
 			temoin = ft_parsing_token_process(user_input, &index, ms);
 	}
-	if (cmd_struct)
+	if (cmd_struct && temoin)
+	{
 		temoin = ft_add_prev_token_to_node(ms->parse_struct->struct_cmds, ms);
+		temoin = ft_add_token_val_to_struct(ms->parse_struct->struct_cmds);
+	}
 }
