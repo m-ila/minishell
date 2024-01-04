@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/04 09:17:37 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:26:03 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	ft_loop(t_data *ms)
 		{
 			ft_free_cmds(ms->parse_struct->struct_cmds);
 		}
+		free(ms->tmp_str);
 		free(ms->parse_struct);
 		ft_free_prompt(ms);
 		//deuxieme couche parsing
@@ -103,6 +104,7 @@ int	main(int argc, char **argv, char **envp)
 	ft_loop(ms);
 	ft_env_free(ms->env_struct->node_);
 	free(ms->env_struct);
+	free(ms->tmp_str);
 	free(ms->prev_work_dir);
 	free(ms->curr_work_dir);
 	free(ms->parse_struct);
