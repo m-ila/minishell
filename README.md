@@ -14,6 +14,7 @@
 * [ ] signaux
 * [ ] clean header and files
 * [ ] put everything to the norm
+* [ ] why cmd empty causes program to close
 
 ## Case 1
 
