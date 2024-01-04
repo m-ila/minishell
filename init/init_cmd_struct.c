@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/04 10:09:55 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:34:32 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	ft_cmd_display(t_cmd *cmds)
 	while (cmds)
 	{
 		ft_printf_fd(1, "cmd[%d]->raw_cmd = '%s'\n", i, cmds->raw_str);
-		ft_printf_fd(1, "prev token : %s\nnext token : %s\n", cmds->prev_token, cmds->next_token);
+		if (cmds->prev_token)
+			ft_printf_fd(1, "prev token : %s\n", cmds->prev_token);
+		if (cmds->next_token)
+			ft_printf_fd(1, "next token : %s\n", cmds->next_token);
 		i++;
 		cmds = cmds->next;
 	}
@@ -54,6 +57,7 @@ bool	ft_cmd_struct(t_data *ms, char *user_input)
 }
 */
 
+/* to do : add ft_strdup protection */
 void	ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add)
 {
 	t_cmd	*end;
@@ -69,6 +73,7 @@ void	ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add)
 	end = ft_go_to_last_cmd_node(*cmds);
 	end->next = to_add;
 	to_add->prev = end;
+	to_add->prev_token = ft_strdup(to_add->prev->next_token);
 }
 
 /* TO DO : change val globale */
@@ -92,6 +97,8 @@ t_cmd	*ft_create_cmd_node(char *raw_cmd)
 		return (NULL);
 	}
 	new->next = NULL;
+	new->prev_token = NULL;
+	new->next_token = NULL;
 	return (new);
 }
 
