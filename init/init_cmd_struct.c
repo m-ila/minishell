@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/01 15:35:37 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:09:55 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ void	ft_cmd_display(t_cmd *cmds)
 	while (cmds)
 	{
 		ft_printf_fd(1, "cmd[%d]->raw_cmd = '%s'\n", i, cmds->raw_str);
+		ft_printf_fd(1, "prev token : %s\nnext token : %s\n", cmds->prev_token, cmds->next_token);
 		i++;
 		cmds = cmds->next;
 	}
 }
 
-/* TO DO : if error, change glob val */
+/* TO DO : if error, change glob val
 bool	ft_cmd_struct(t_data *ms, char *user_input)
 {
 	t_cmd	*cmd_struct;
@@ -51,6 +52,7 @@ bool	ft_cmd_struct(t_data *ms, char *user_input)
 	ms->parse_struct->struct_cmds = cmd_struct;
 	return (true);
 }
+*/
 
 void	ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add)
 {

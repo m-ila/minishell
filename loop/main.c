@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/03 21:12:10 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/04 09:17:37 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void	ft_loop(t_data *ms)
 	{
 		i++;
 		ms->b_temoin = true;
+		/* init cwd and pws */
 		if (!ft_get_cwd(ms, i))
 			return ;
+		/* init parsing struct */
 		if (!ft_malloc_s_parse(ms))
 			return ;
 		ms->user_input = NULL;
@@ -58,29 +60,18 @@ void	ft_loop(t_data *ms)
 		ms->user_input = readline(ms->printed_line);
 		//if heredoc, gnl jusqu'a delimiter dans la str recuperee
 		add_history(ms->user_input);
-/*
-		if (ft_init_arr(ms, ms->user_input) != R_EX_OK)
-		{
-			ms->b_temoin = false;
-		}
-		if (ft_first_layer_parse(ms) != R_EX_OK)
-			ms->b_temoin = false;
-		if (ms->b_temoin)
-		{
-			ft_cmd_struct(ms, ms->user_input);
-		}
-*/
+		/* new first parsing lvl AND init cmd struct see parsing/tmp.c file */
 		ft_raw_parsing_process(ms->user_input, ms);
 		print_values(ms);
+		/* temp builtins to check leaks */
 		if (ms->b_temoin && \
 		!ft_strncmp(ms->user_input, "exit", ft_strlen(ms->user_input)))
 		{
-//			ft_free_2d_array(ms->arr_input);
-//			ft_free_2d_array(ms->arr_token);
 			ft_free_cmds(ms->parse_struct->struct_cmds);
 			ft_free_prompt(ms);
 			return ;
 		}
+		/* temp builtins to check leaks */
 		if (ms->b_temoin && \
 		!ft_strncmp(ms->user_input, "env", ft_strlen(ms->user_input)))
 			ft_env_display(&ms->env_struct->node_);
@@ -88,8 +79,6 @@ void	ft_loop(t_data *ms)
 		{
 			ft_free_cmds(ms->parse_struct->struct_cmds);
 		}
-//		ft_free_2d_array(ms->arr_input);
-//		ft_free_2d_array(ms->arr_token);
 		free(ms->parse_struct);
 		ft_free_prompt(ms);
 		//deuxieme couche parsing

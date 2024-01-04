@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/03 21:13:20 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:06:16 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,11 @@ bool	ft_parsing_token_process(char *user_input, int *from, t_data *ms)
 		free(tmp_t);
 		return (false);
 	}
+	if (!ft_add_next_token_to_node(tmp_t, ms->parse_struct->struct_cmds))
+	{
+		free(tmp_t);
+		return (false);
+	}
 	if (tmp_t)
 		(*from) += (int) ft_strlen(tmp_t);
 	free(tmp_t);
@@ -145,10 +150,58 @@ bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 		free(tmp_t);
 		return (false);
 	}
+	ms->tmp_str = ft_strdup(tmp_t);
 	(*from) += (int) ft_strlen(tmp_t);
 	free(tmp_t);
 	ft_printf_fd(1, "%s\nLeaving ft_parsing_start_token_process\n\n", PRINT_SEP);
 	return (true);
+}
+
+bool	ft_add_prev_token_to_node(t_cmd *struct_cmd, t_data *ms)
+{
+	t_cmd	*tmp;
+
+	if (!struct_cmd || !ms)
+		return (false);
+	if (!struct_cmd->next)
+	{
+		if (ms->tmp_str != NULL)
+			struct_cmd->prev_token = ms->tmp_str;
+		return (true);
+	}
+	if (!ft_add_first_prev_token_node(ms->tmp_str, struct_cmd))
+		return (false);
+	tmp = struct_cmd->next;
+	while (tmp)
+	{
+		tmp->prev_token = tmp->prev->next_token;
+		tmp = tmp->next;
+	}
+	return (true);
+}
+
+/* if not, starts by stdin */
+bool	ft_add_first_prev_token_node(char *str, t_cmd *struct_cmd)
+{
+	if (!struct_cmd)
+		return (false);
+	if (!str)
+		return (true);
+	struct_cmd->prev_token = ft_strdup(str);
+	free(str);
+	str = NULL;
+	return (true);
+}
+
+bool	ft_add_next_token_to_node(char *str, t_cmd *struct_cmd)
+{
+	t_cmd	*last;
+
+	if (!struct_cmd || !str)
+		return (false);
+	last = ft_go_to_last_cmd_node(struct_cmd);
+	last->next_token = str;
+	return (true);	
 }
 
 void	ft_raw_parsing_process(char *user_input, t_data *ms)
@@ -161,6 +214,7 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 	temoin = true;
 	cmd_struct = NULL;
 	ms->parse_struct->struct_cmds = cmd_struct;
+	ms->tmp_str = NULL;
 	if (ft_starts_with_token(user_input))
 		temoin = ft_parsing_start_token_process(user_input, &index, ms);
 	while (index < (int) ft_strlen(user_input) && temoin)
@@ -169,4 +223,6 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 		if (temoin)
 			temoin = ft_parsing_token_process(user_input, &index, ms);
 	}
+	if (cmd_struct)
+		temoin = ft_add_prev_token_to_node(ms->parse_struct->struct_cmds, ms);
 }

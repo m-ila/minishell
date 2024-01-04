@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/03 21:08:17 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:05:02 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,10 @@ typedef struct s_data {
 	char			*curr_work_dir;
 	char			*prev_work_dir;
 	char			*printed_line;
-	char			**arr_token;
-	char			**arr_input;
 	t_env			*env_struct;
 	t_parse			*parse_struct;
 	bool			b_temoin;
+	char			*tmp_str;
 }	t_data;
 
 /*======================= ENV FOLDER =======================*/
@@ -193,5 +192,16 @@ char		*ft_expand_quoted_substr(char **array, char quote, \
 int from, int until);
 /* parsing/tmp.c */
 void		ft_raw_parsing_process(char *user_input, t_data *ms);
+bool		ft_add_next_token_to_node(char *str, t_cmd *struct_cmd);
+bool		ft_add_first_prev_token_node(char *str, t_cmd *struct_cmd);
+bool		ft_add_prev_token_to_node(t_cmd *struct_cmd, t_data *ms);
+bool		ft_parsing_start_token_process(char *user_input, int *from, t_data *ms);
+bool		ft_parsing_token_process(char *user_input, int *from, t_data *ms);
+bool		ft_parsing_cmd_process(char *user_input, int *from, t_data *ms);
+int			deal_with_token(char *str, char *tok_str, int from, t_data *ms);
+char		*get_token(char *str, int from);
+char		*get_cmd(char *str, int from);
+int			get_index_next_token(char *str, int from);
+
 
 #endif 

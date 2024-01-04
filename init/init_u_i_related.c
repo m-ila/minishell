@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/01 15:25:07 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/01 16:11:21 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/04 10:01:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 split protec : if !user_input returns NULL,
 if !*user_input return char ** vide : verifier si cause leaks 
 TO DO : if error variable globale = erreur
-*/
+
 int    ft_init_arr(t_data *ms, char *user_input)
 {
     char    **cmd_subarr;
@@ -35,3 +35,4 @@ int    ft_init_arr(t_data *ms, char *user_input)
     ms->arr_token = token_subarr;
     return (R_EX_OK);
 }
+*/
