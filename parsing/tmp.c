@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/04 10:06:16 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/04 11:39:13 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*get_token(char *str, int from)
 }
 
 /*
-to include t_data *ms so it can print the printed line
+print syntax error if there's a false token and change ms->b_temoin to false
 check la validite de la str de redirection
 */
 int	deal_with_token(char *str, char *tok_str, int from, t_data *ms)
@@ -79,7 +79,10 @@ int	deal_with_token(char *str, char *tok_str, int from, t_data *ms)
 	if (!str || !tok_str || tok_str[0] == '\0' || from < 0 || from >= (int) ft_strlen(str))
 		return (0);
 	if (!ft_is_valid_token(tok_str))
+	{
 		ret = ft_print_msg(tok_str, 's', 0, ms);
+		ms->b_temoin = false;
+	}
 	else
 		ret = 1;
 	return (ret);
@@ -97,7 +100,10 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 		return ((bool) ft_print_msg("get_cmd issue", 'm', 0, ms));
 	buff = ft_create_cmd_node(tmp);
 	if (ms->parse_struct->struct_cmds == NULL)
+	{
 		ms->parse_struct->struct_cmds = buff;
+		buff->prev_token = ft_strdup(ms->tmp_str);
+	}
 	else
 		ft_add_node_to_cmds(&ms->parse_struct->struct_cmds, buff);
 	ft_printf_fd(1, "cmd : '%s'\nfrom : %d\nuntil : %d\n", tmp, *from, *from + ft_strlen(tmp));
@@ -146,10 +152,12 @@ bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 	ft_printf_fd(1, "tok : '%s'\nfrom : %d\nuntil : %d\n", tmp_t, *from, *from + ft_strlen(tmp_t));
 	if (!ft_is_valid_entry_token(tmp_t))
 	{
+		ms->b_temoin = false;
 		ft_print_msg(tmp_t, 's', 0, ms);
 		free(tmp_t);
 		return (false);
 	}
+	free(ms->tmp_str);
 	ms->tmp_str = ft_strdup(tmp_t);
 	(*from) += (int) ft_strlen(tmp_t);
 	free(tmp_t);
@@ -200,7 +208,7 @@ bool	ft_add_next_token_to_node(char *str, t_cmd *struct_cmd)
 	if (!struct_cmd || !str)
 		return (false);
 	last = ft_go_to_last_cmd_node(struct_cmd);
-	last->next_token = str;
+	last->next_token = ft_strdup(str);
 	return (true);	
 }
 
@@ -214,7 +222,7 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 	temoin = true;
 	cmd_struct = NULL;
 	ms->parse_struct->struct_cmds = cmd_struct;
-	ms->tmp_str = NULL;
+	ms->tmp_str = ft_strdup("");
 	if (ft_starts_with_token(user_input))
 		temoin = ft_parsing_start_token_process(user_input, &index, ms);
 	while (index < (int) ft_strlen(user_input) && temoin)
