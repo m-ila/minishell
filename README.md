@@ -2,18 +2,18 @@
 
 # To do
 
-[ ] parse si commande est valable
+* [ ] parse si commande est valable
 * n'est pas valable si ruling quotes pas pair
 * est valable si commande est "vide" (geree par exec, penser a bien mod la var de g_ret)
-[ ] creer variable ```$?``` et assign var globale dds, ou plutot si lancee juste afficher g_ret ?
-[ ] put builtins in the main program
-[ ] put env in the main program
-[ ] deal if env vide with the new env system (char * and not linked list)
-[ ] en fonction des quotes, "charger" var ou non
-[ ] reigning quotes in cmd_struct to epur properly
-[ ] signaux
-[ ] clean header and files
-[ ] put everything to the norm
+* [ ] creer variable ```$?``` et assign var globale dds, ou plutot si lancee juste afficher g_ret ?
+* [ ] put builtins in the main program
+* [ ] put env in the main program
+* [ ] deal if env vide with the new env system (char * and not linked list)
+* [ ] en fonction des quotes, "charger" var ou non
+* [ ] reigning quotes in cmd_struct to epur properly
+* [ ] signaux
+* [ ] clean header and files
+* [ ] put everything to the norm
 
 ## Case 1
 
