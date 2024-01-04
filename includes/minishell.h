@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/04 10:05:02 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:43:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ typedef enum s_tokens
 	delimiter,
 	end_of_file,
 	str,
-	var
+	var,
+	error
 }t_tokens;
 
 typedef struct s_cmd {
@@ -89,8 +90,8 @@ typedef struct s_cmd {
 	struct s_cmd	*next;
 	char			*prev_token;
 	char			*next_token;
-	t_tokens		*tok_prev_token;
-	t_tokens		*tok_next_token;
+	t_tokens		tok_prev_token;
+	t_tokens		tok_next_token;
 	bool			b_redir;
 	int				fd_in;
 	int				fd_out;
@@ -202,6 +203,8 @@ int			deal_with_token(char *str, char *tok_str, int from, t_data *ms);
 char		*get_token(char *str, int from);
 char		*get_cmd(char *str, int from);
 int			get_index_next_token(char *str, int from);
-
+/* parsing/tmp2.c */
+t_tokens    ft_which_redir_token(char *str, char which);
+bool		ft_add_token_val_to_struct(t_cmd *cmds);
 
 #endif 
