@@ -15,6 +15,18 @@
 * [ ] clean header and files
 * [ ] put everything to the norm
 * [ ] why cmd empty causes program to close
+* [ ] heredoc ne doit pas update l'history (sujet, parsing donc + Marianne)
+
+### Chourael
+* [ ] redirections
+* Chemin absolu ET relatif (sujet) -> si env -i, cwd va donner quoi ? donc relatif va donner quoi ??
+* [ ] heredoc
+* heredoc ne doit pas update l'history (sujet, parsing donc + Marianne)
+
+### Marianne
+* [ ] env
+* [ ] builtins
+* [ ] finish parsing
 
 ## Case 1
 
