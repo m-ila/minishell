@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/04 13:43:41 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/06 14:55:08 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,6 @@
 /*int	g_return_val;*/
 
 /* ============================ STRUCTURES ================================== */
-typedef struct s_env_node {
-	char				*n_tag;
-	char				*n_content;
-	struct s_env_node	*next;
-}	t_env_node;
-
-typedef struct s_env {
-	char		**env;
-	t_env_node	*node_;
-}	t_env;
 
 /* respectivement < > << >> | $ ? */
 typedef enum s_tokens
@@ -117,34 +107,18 @@ typedef struct s_data {
 	char			*curr_work_dir;
 	char			*prev_work_dir;
 	char			*printed_line;
-	t_env			*env_struct;
+	char			**envi;
 	t_parse			*parse_struct;
 	bool			b_temoin;
 	char			*tmp_str;
 }	t_data;
 
 /*======================= ENV FOLDER =======================*/
-/* env_actual.c */
-bool		ft_exists_in_env(t_env_node *envi, char *tag_);
-char		*ft_get_tag_or_cont(char *str, char t_or_c);
-void		ft_actualize_env(t_env_node *envi, char *str);
-/* env_del.c */
-t_env_node	*ft_find_node(t_env_node **envi, char *tag_);
-t_env_node	*ft_find_prev_node(t_env_node **envi, char *tag_);
-void		ft_env_del_elem(t_env_node **envi, char *tag_);
-/* env_display.c */
-void		ft_env_update(t_env_node *envi, char *tag_, char *cont);
-void		ft_env_display(t_env_node **envi);
-t_env_node	*ft_get_node(t_env_node *env_node, char *tag_);
-/* env_free.c */
-void		ft_free_node(t_env_node *curr);
-void		ft_env_free(t_env_node *envi);
-/* env_init.c */
-t_env		*ft_init_envi(char **envp);
-t_env_node	*ft_create_node(char *content_, char *tag_, char *cont);
-void		ft_add_envi_node(t_env_node **src, t_env_node *to_add);
-t_env		*ft_init_no_envi(void);
-
+/* env/env_tab.c */
+int			ft_env_init(char **envp, t_data *ms);
+int			ft_init_no_env(t_data *ms);
+bool		ft_tag_is_in_env(t_data *ms, char *tag);
+int			ft_actualise_env(t_data *ms, char *tag, char *val);
 /*======================= FREE FOLDER =======================*/
 /* free/free_cmd_struct.c */
 void		ft_free_cmds(t_cmd *cmds);

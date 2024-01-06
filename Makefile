@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/04 13:29:52 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/06 14:23:43 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,7 @@ NAME = Minishell
 LIBFT = libft/libft.a
 
 SRC = env/env_actual.c \
-env/env_del.c \
-env/env_display.c \
-env/env_free.c \
-env/env_init.c \
+env/env_tab.c \
 free/free_cmd_struct.c \
 init/fill_tokens.c \
 init/init_loop.c \

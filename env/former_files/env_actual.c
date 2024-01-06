@@ -6,13 +6,12 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 15:40:41 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/23 16:50:08 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/06 14:23:58 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/* NOT TESTED */
 bool	ft_exists_in_env(t_env_node *envi, char *tag_)
 {
 	if (!envi || !tag_)
@@ -26,7 +25,6 @@ bool	ft_exists_in_env(t_env_node *envi, char *tag_)
 	return (false);
 }
 
-/* NOT TESTED */
 char	*ft_get_tag_or_cont(char *str, char t_or_c)
 {
 	int	i;
