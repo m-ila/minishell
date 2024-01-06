@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 22:20:19 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/10/11 16:59:09 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:00:03 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ char	*ft_strdup_limiters(char *str, int from, int until)
 	int			len;
 	int			i;
 
-	if (until > (int) ft_strlen(str) || from >= until || from < 0 || until < 0)
+	if (until > (int) ft_strlen(str) || from > until || from < 0 || until < 0)
 	{
 		return (0);
 	}
+	if (from == until)
+		return (ft_strdup(""));
 	len = until - from;
 	i = 0;
 	dup = malloc((len + 1) * sizeof(char));

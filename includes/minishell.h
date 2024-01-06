@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/06 14:55:08 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:12:40 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ bool		ft_malloc_s_parse(t_data *ms);
 void		ft_update_env_cwd(t_data *ms);
 /* init/init_env_struct.c */
 bool		ft_env_struct_init(t_data *ms, char **envp);
-void		ft_increment_shlvl(t_env_node *envi);
+char		*ft_get_val_in_env(char **env, char *tag, t_data *ms);
 /* init/init_cms_struct.c */
 void		ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add);
 t_cmd		*ft_create_cmd_node(char *raw_cmd);

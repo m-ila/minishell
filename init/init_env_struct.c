@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/06 15:00:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:12:17 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,22 @@ bool	ft_env_struct_init(t_data *ms, char **envp)
 	return (true);
 }
 */
-/* IF DOESN'T FIND THE NODE (used right after init, 
-so in case of unset SHLVL before) SHOULD WE CREATE ONE ? */
-void	ft_increment_shlvl(char **env, t_data *ms)
+/*
+doesn't check if tag is in env, but returns null if not found in env
+*/
+char	*ft_get_val_in_env(char **env, char *tag, t_data *ms)
 {
-	int			shlvl_value;
-	int			i;
+	int	i;
 
-	while (ft_strncmp("SHLVL", env[i], ft_strlen_base(env[i], "=", 0)))
+	if (!env || !tag || !ms)
+		return (NULL);
+	i = 0;
+	while (env[i])
+	{
+		if (!ft_strncmp(tag, env[i], ft_strlen_base(env[i], "=", 0)))
+			return (ft_strdup_limiters(env[i], \
+			ft_strlen_base(env[i], "=", 0) + 1, ft_strlen(env[i])));
 		i++;
-	if (!env[i])
-		return (ft_msg_end("error updating SHLVL", 'm', false, ms));
-	shlvl_value = ft_atoi(shlvl_node->n_content);
-	shlvl_value++;
-	free(shlvl_node->n_content);
-	shlvl_node->n_content = ft_itoa(shlvl_value);
+	}
+	return (NULL);
 }
