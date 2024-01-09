@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/09 17:39:33 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:32:01 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ft_loop(t_data *ms)
 		print_values(ms);
 		/* temp builtins to check leaks */
 		if (ms->b_temoin && \
-		!ft_strncmp(ms->user_input, "exit", ft_strlen(ms->user_input)))
+		!ft_strncmp(ms->user_input, "exit", ft_strlen("exit")))
 		{
 			ft_free_cmds(ms->parse_struct->struct_cmds);
 			ft_free_prompt(ms);
@@ -73,7 +73,7 @@ void	ft_loop(t_data *ms)
 		}
 		/* temp builtins to check leaks */
 		if (ms->b_temoin && \
-		!ft_strncmp(ms->user_input, "env", ft_strlen(ms->user_input)))
+		!ft_strncmp(ms->user_input, "env", ft_strlen("env")))
 			ft_env_display(ms);
 		if (ms->parse_struct->struct_cmds)
 		{
