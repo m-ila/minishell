@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/09 20:32:01 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:42:36 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,7 @@ void	ft_loop(t_data *ms)
 			return ;
 		}
 		/* temp builtins to check leaks */
-		if (ms->b_temoin && \
-		!ft_strncmp(ms->user_input, "env", ft_strlen("env")))
+		if (ms->b_temoin && !ft_strncmp(ms->user_input, "env", ft_strlen("env")))
 			ft_env_display(ms);
 		if (ms->parse_struct->struct_cmds)
 		{
@@ -93,8 +92,8 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	(void)envp;
-	envp = NULL;
+//	(void)envp;
+//	envp = NULL;
 //	g_return_val = 0;
 	ms = malloc(sizeof(t_data));
 	if (!ms)

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:12:33 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/09 20:21:19 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:43:52 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,9 @@ char	*ft_join_tag_and_val(char *tag, char *val)
 		i++;
 	}
 	str[i] = '=';
-	i++;
 	while (val[j])
 	{
-		str[i + j] = val[j];
+		str[i + 1 + j] = val[j];
 		j++;
 	}
 	return (str);
@@ -114,7 +113,6 @@ int	ft_actualise_env(t_data *ms, char *tag, char *val)
 	while (ft_strncmp(tag, ms->envi[i], ft_strlen_base(ms->envi[i], "=", 0)))
 	{
 		env_ret[i] = ft_strdup(ms->envi[i]);
-		ft_printf_fd(1, "%s\n", env_ret[i]);
 		i++;
 	}
 	env_ret[i] = ft_join_tag_and_val(tag, val);
