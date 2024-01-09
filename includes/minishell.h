@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/06 18:12:40 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:21:08 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ int			ft_env_init(char **envp, t_data *ms);
 int			ft_init_no_env(t_data *ms);
 bool		ft_tag_is_in_env(t_data *ms, char *tag);
 int			ft_actualise_env(t_data *ms, char *tag, char *val);
+bool		ft_increment_shlvl(t_data *ms, char **envi);
+void		ft_env_display(t_data *ms);
 /*======================= FREE FOLDER =======================*/
 /* free/free_cmd_struct.c */
 void		ft_free_cmds(t_cmd *cmds);

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/04 11:26:03 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:39:33 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_loop(t_data *ms)
 		/* temp builtins to check leaks */
 		if (ms->b_temoin && \
 		!ft_strncmp(ms->user_input, "env", ft_strlen(ms->user_input)))
-			ft_env_display(&ms->env_struct->node_);
+			ft_env_display(ms);
 		if (ms->parse_struct->struct_cmds)
 		{
 			ft_free_cmds(ms->parse_struct->struct_cmds);
@@ -102,8 +102,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!ft_first_init(ms, envp))
 		return (R_ERR_GEN);
 	ft_loop(ms);
-	ft_env_free(ms->env_struct->node_);
-	free(ms->env_struct);
+	ft_free_2d_array(ms->envi);
 	free(ms->tmp_str);
 	free(ms->prev_work_dir);
 	free(ms->curr_work_dir);

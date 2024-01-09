@@ -6,11 +6,46 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:12:33 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/06 14:55:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:13:58 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_env_display(t_data *ms)
+{
+	int	i;
+
+	if (!ms || !ms->envi)
+		return ;
+	i = 0;
+	while (ms->envi[i])
+	{
+		ft_printf_fd(1, "%s\n", ms->envi[i]);
+		i++;
+	}
+}
+
+bool	ft_increment_shlvl(t_data *ms, char **envi)
+{
+	int		value;
+	char	*str;
+
+	if (!ms || !ms->envi)
+		return (false);
+	str = ft_get_val_in_env(envi, "SHLVL", ms);
+	if (!str)
+		return (false);
+	value = ft_atoi(str);
+	value++;
+	free(str);
+	str = ft_itoa(value);
+	if (!str)
+		return (false);
+	ft_actualise_env(ms, "SHLVL", str);
+	free(str);
+	return (true);
+}
 
 bool	ft_tag_is_in_env(t_data *ms, char *tag)
 {
@@ -29,6 +64,37 @@ bool	ft_tag_is_in_env(t_data *ms, char *tag)
 	return (false);	
 }
 
+char	*ft_join_tag_and_val(char *tag, char *val)
+{
+	char	*str;
+	int		str_len;
+	int		i;
+
+	if (!tag || !val)
+		return (NULL);
+	str_len = ft_strlen(tag) + ft_strlen(val) + 1;
+	str = ft_calloc(str_len + 1, sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (tag[i])
+	{
+		*str = tag[i];
+		str++;
+		i++;
+	}
+	*str = '=';
+	str++;
+	i = 0;
+	while (val[i])
+	{
+		*str = val[i];
+		str++;
+		i++;
+	}
+	return (str);
+}
+
 /*
 message d'erreur si variable pas dans env ?
 doit changer la variable globale ?
@@ -36,23 +102,33 @@ doit changer la variable globale ?
 int	ft_actualise_env(t_data *ms, char *tag, char *val)
 {
 	int		i;
-	char	*tmp;
+	char	**env_ret;
 
 	if (!ms || !ms->envi || !tag || !val)
 		return (0);
 	if (!ft_tag_is_in_env(ms, tag))
 		return (0);
+	env_ret = ft_calloc(ft_2d_lines(ms->envi) + 1, sizeof(char *));
+	if (!env_ret)
+		return (ft_print_msg("malloc error actualise env", 'm', 0, ms));
 	i = 0;
 	while (ft_strncmp(tag, ms->envi[i], ft_strlen_base(ms->envi[i], "=", 0)))
+	{
+		env_ret[i] = ft_strdup(ms->envi[i]);
+		ft_printf_fd(1, "%s\n", env_ret[i]);
 		i++;
-	tmp = ft_strjoin(tag, "=");
-	if (!tmp)
-		return (ft_print_msg("failed to strjoin in actu env", 'm', 0, ms));
-	tmp = ft_strjoin(tmp, val);
-	if (!tmp)
-		return (ft_print_msg("failed to strjoin in actu env", 'm', 0, ms));
-	free(ms->envi[i]);
-	ms->envi[i] = tmp;
+	}
+	env_ret[i] = ft_join_tag_and_val(tag, val);
+	if (!env_ret[i])
+		return (ft_print_msg("couldn't join tag and val", 'm', 0, ms));
+	i++;
+	while (ms->envi[i])
+	{
+		env_ret[i] = ft_strdup(ms->envi[i]);
+		i++;
+	}
+//	ft_free_2d_array(ms->envi);
+	ms->envi = env_ret;
 	return (1);
 }
 
@@ -87,7 +163,7 @@ int	ft_env_init(char **envp, t_data *ms)
 	char	**env_cpy;
 
 	if (!ms)
-		return ;
+		return (0);
 	if (!envp || !*envp)
 		return (ft_init_no_env(ms));
 	env_cpy = ft_copy_2d_array(envp, 0, ft_2d_lines(envp));

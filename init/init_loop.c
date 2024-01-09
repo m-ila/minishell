@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/29 19:28:40 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:03:37 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,16 @@ bool	ft_malloc_s_parse(t_data *ms)
 
 bool	ft_first_init(t_data *ms, char **envp)
 {
-	if (!ft_env_struct_init(ms, envp))
+	if (!ft_env_init(envp, ms))
 		return (false);
-	ft_increment_shlvl(ms->env_struct->node_);
+	if (!ft_increment_shlvl(ms, ms->envi))
+	{
+		ft_free_2d_array(ms->envi);
+		return (false);
+	}
 	if (!ft_malloc_curr_cwd(ms))
 	{
-		ft_env_free(ms->env_struct->node_);
+		ft_free_2d_array(ms->envi);
 		return (false);
 	}
 	ms->user_input = 0;
@@ -64,17 +68,19 @@ bool	ft_malloc_curr_cwd(t_data *ms)
 	return (true);
 }
 
-/* needs to be modified once cd builtin is set up */
+/*
+to do : needs to be modified once cd builtin is set up
+update oldpwd quand builtin cd is used
+*/
 void	ft_update_env_cwd(t_data *ms)
 {
 	if (!ms)
 		return ;
-	if (!ms->env_struct)
+	if (!ms->envi)
 		return ;
-	if (ms->env_struct->node_)
+	if (ms->envi)
 	{
-		ft_env_update(ms->env_struct->node_, "PWD", ms->curr_work_dir);
-		ft_env_update(ms->env_struct->node_, "OLDPWD", ms->prev_work_dir);
+		ft_actualise_env(ms, "PWD", ms->curr_work_dir);
 	}
 }
 
