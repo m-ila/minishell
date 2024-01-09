@@ -27,8 +27,8 @@
 * [ ] env
 * [ ] builtins
 * [ ] finish parsing quotes
-* [ ] find where the issue with empty cmd ends up closing
-* [ ] fix ft_strncmp comp in loop
+* [x] find where the issue with empty cmd ends up closing
+* [x] fix ft_strncmp comp in loop
 
 ## Case 1
 
