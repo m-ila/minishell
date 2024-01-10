@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 17:02:15 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:37:07 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_data {
 int			ft_builtin(t_cmd *cmds, t_data *ms);
 bool		ft_is_builtin(char *str);
 /* builtins/ft_cd.c */
+int			ft_cd(t_cmd *cmds, t_data *ms);
 /* builtins/ft_echo.c */
 int			ft_echo(t_cmd *cmds);
 /* builtins/ft_env.c */
