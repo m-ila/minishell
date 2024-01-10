@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:12:33 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 10:32:02 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:30:42 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ bool	ft_increment_shlvl(t_data *ms, char **envi)
 	if (!ms || !ms->envi)
 		return (false);
 	str = ft_get_val_in_env(envi, "SHLVL", ms);
-	if (!str)
+	if (!str || str[0] == '\0')
 		return (false);
 	value = ft_atoi(str);
 	value++;
