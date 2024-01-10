@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:12:33 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 15:10:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:10:51 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	ft_delete_in_env(t_data *ms, char *tag)
 	i++;
 	while (ms->envi[i])
 	{
-		env_ret[i] = ft_strdup(ms->envi[i]);
+		env_ret[i - 1] = ft_strdup(ms->envi[i]);
 		i++;
 	}
 	ft_free_2d_array(ms->envi);
