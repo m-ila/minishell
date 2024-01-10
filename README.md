@@ -25,7 +25,8 @@
 * heredoc ne doit pas update l'history (sujet, parsing donc + Marianne)
 
 ### Marianne
-* [ ] env
+* [x] env
+* [ ] make that envp = envi
 * [ ] builtins
 * [ ] finish parsing quotes
 * [x] find where the issue with empty cmd ends up closing
@@ -37,7 +38,7 @@
 * [ ] changer printfs et perror en ft_printf_fd
 * [ ] pour ft_cd :
 * [ ] pour ft_echo : gérer les quotes, les espaces et les variables d'env depuis raw_str
-* [ ] pour ft_unset : leak lorsqu'on unset le premier elem de l'env, somehow
+* [x] pour ft_unset : leak lorsqu'on unset le premier elem de l'env, somehow
 
 ## Case 1
 
