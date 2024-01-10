@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:19:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/28 15:11:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:47:22 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,11 @@ char	**ft_split_entry_exit(char *str)
 
 	if (!str)
 		return (NULL);
-	ret = (char **)ft_calloc(1, sizeof(char *));
+	ret = (char **)ft_calloc(2, sizeof(char *));
 	if (!ret)
+		return (NULL);
+	ret[0] = ft_strdup("");
+	if (!ret[0])
 		return (NULL);
 	return (ret);
 }
