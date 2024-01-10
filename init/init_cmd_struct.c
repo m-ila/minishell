@@ -6,11 +6,36 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/04 11:34:32 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:25:45 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/*
+to do : free the precedent if wrong ?
+or just turn temoin to false, so it would free at the end of the loop
+if first elem of cmd_w_arg is null, means cmds is only sep, so change val glob
+*/
+bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
+{
+	if (!cmds)
+		return (false);
+	while (cmds)
+	{
+		cmds->cmd_w_arg = ft_split(cmds->raw_str, ' ');
+		if (!cmds->cmd_w_arg)
+			return (false);
+		if (!cmds->cmd_w_arg[0])
+		{
+			ft_printf_fd(STDERR_FILENO, "cmds is only sep\n");
+			ms->b_temoin = false;
+			return (false);
+		}
+		cmds->cmd = ft_strdup(cmds->cmd_w_arg[0]);
+		cmds = cmds->next;
+	}
+}
 
 void	ft_cmd_display(t_cmd *cmds)
 {
@@ -25,37 +50,12 @@ void	ft_cmd_display(t_cmd *cmds)
 			ft_printf_fd(1, "prev token : %s\n", cmds->prev_token);
 		if (cmds->next_token)
 			ft_printf_fd(1, "next token : %s\n", cmds->next_token);
+		if (cmds->cmd)
+			ft_printf_fd(1, "cmd : %s\n", cmds->cmd);
 		i++;
 		cmds = cmds->next;
 	}
 }
-
-/* TO DO : if error, change glob val
-bool	ft_cmd_struct(t_data *ms, char *user_input)
-{
-	t_cmd	*cmd_struct;
-	t_cmd	*buff;
-	int		i;
-
-	if (!user_input)
-		return (false);
-	cmd_struct = NULL;
-	if (!ms->arr_input)
-		return (false);
-	i = 0;
-	while (ms->arr_input[i])
-	{
-		buff = ft_create_cmd_node(ms->arr_input[i]);
-		if (!cmd_struct)
-			cmd_struct = buff;
-		else
-			ft_add_node_to_cmds(&cmd_struct, buff);
-		i++;
-	}
-	ms->parse_struct->struct_cmds = cmd_struct;
-	return (true);
-}
-*/
 
 /* to do : add ft_strdup protection */
 void	ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add)
