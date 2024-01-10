@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 12:50:43 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:05:52 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,19 @@ void	ft_loop(t_data *ms)
 		ft_raw_parsing_process(ms->user_input, ms);
 		print_values(ms);
 		/* temp builtins to check leaks */
+		if (ms->b_temoin)
+		{
+			if (!ft_strncmp(ms->user_input, "exit", ft_strlen("exit")))
+			{
+				ft_free_cmds(ms->parse_struct->struct_cmds);
+				ft_free_prompt(ms);
+				return ;
+			}
+			if (ft_is_builtin(ms->parse_struct->struct_cmds->cmd))
+				if (ft_builtin(ms->parse_struct->struct_cmds, ms) != R_EX_OK)
+					ms->b_temoin = false;
+		}
+/*
 		if (ms->b_temoin && \
 		!ft_strncmp(ms->user_input, "exit", ft_strlen("exit")))
 		{
@@ -71,9 +84,9 @@ void	ft_loop(t_data *ms)
 			ft_free_prompt(ms);
 			return ;
 		}
-		/* temp builtins to check leaks */
 		if (ms->b_temoin && !ft_strncmp(ms->user_input, "env", ft_strlen("env")))
 			ft_env_display(ms);
+*/
 		if (ms->parse_struct->struct_cmds)
 		{
 			ft_free_cmds(ms->parse_struct->struct_cmds);
@@ -92,8 +105,8 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-//	(void)envp;
-//	envp = NULL;
+	(void)envp;
+	envp = NULL;
 //	g_return_val = 0;
 	ms = malloc(sizeof(t_data));
 	if (!ms)
