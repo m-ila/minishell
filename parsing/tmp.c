@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/04 13:32:16 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:31:31 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,4 +249,5 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 		temoin = ft_add_prev_token_to_node(ms->parse_struct->struct_cmds, ms);
 		temoin = ft_add_token_val_to_struct(ms->parse_struct->struct_cmds);
 	}
+	temoin = ft_parse_cmd(ms->parse_struct->struct_cmds, ms);
 }

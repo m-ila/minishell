@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 11:25:45 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 12:32:04 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 to do : free the precedent if wrong ?
 or just turn temoin to false, so it would free at the end of the loop
 if first elem of cmd_w_arg is null, means cmds is only sep, so change val glob
+val glob would be equal to 2 and print either a syntax err or return nothing
 */
 bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
 {
@@ -28,13 +29,20 @@ bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
 			return (false);
 		if (!cmds->cmd_w_arg[0])
 		{
-			ft_printf_fd(STDERR_FILENO, "cmds is only sep\n");
+			ft_msg_end(cmds->next_token, 's', false, ms);
 			ms->b_temoin = false;
 			return (false);
 		}
 		cmds->cmd = ft_strdup(cmds->cmd_w_arg[0]);
+		if (!cmds->cmd)
+		{
+			ft_msg_end("failed gen ms->cmd", 'm', false, ms);
+			ms->b_temoin = false;
+			return (false);
+		}		
 		cmds = cmds->next;
 	}
+	return (true);
 }
 
 void	ft_cmd_display(t_cmd *cmds)
