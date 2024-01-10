@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 12:50:28 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:47:50 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,20 @@ typedef struct s_data {
 	char			*tmp_str;
 }	t_data;
 
+/*===================== BUILTINS FOLDER ====================*/
+/* builtins/builtins.c */
+int			ft_builtin(t_cmd *cmds, t_data *ms);
+bool		ft_is_builtin(char *str);
+/* builtins/ft_cd.c */
+/* builtins/ft_echo.c */
+int			ft_echo(t_cmd *cmds);
+/* builtins/ft_env.c */
+int			ft_env(t_data *ms);
+/* builtins/ft_export.c */
+/* builtins/ft_pwd.c */
+int			ft_pwd(t_data *ms);
+/* builtins/ft_my_unset.c */
+int			ft_my_unset(t_cmd *cmds, t_data *ms);
 /*======================= ENV FOLDER =======================*/
 /* env/env_tab.c */
 int			ft_env_init(char **envp, t_data *ms);
@@ -145,7 +159,7 @@ bool		ft_parse_cmd(t_cmd *cmds, t_data *ms);
 /*======================= LOOP FOLDER ========================*/
 void		ft_loop(t_data *ms);
 
-/*======================= PARSING FOLDER =======================*/
+/*====================== PARSING FOLDER ======================*/
 /* parsing/parse_user_input.c */
 int			ft_first_layer_parse(t_data *ms);
 int			ft_get_next_token_index(char *user_input, int from);

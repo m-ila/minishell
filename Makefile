@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/10 11:21:54 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/10 15:00:16 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,13 @@ NAME = minishell
 
 LIBFT = libft/libft.a
 
-SRC = env/env_tab.c \
+SRC = builtins/builtins.c \
+builtins/ft_cd.c \
+builtins/ft_echo.c \
+builtins/ft_env.c \
+builtins/ft_my_unset.c \
+builtins/ft_pwd.c \
+env/env_tab.c \
 free/free_cmd_struct.c \
 init/fill_tokens.c \
 init/init_loop.c \
