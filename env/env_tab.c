@@ -6,11 +6,41 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:12:33 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 19:10:51 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 21:59:27 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	ft_add_in_env(t_data *ms, char *tag_, char *cont)
+{
+	char	**new_env;
+	int		i;
+
+	i = 0;
+	new_env = ft_calloc(ft_2d_lines(ms->envi) + 2, sizeof(char *));
+	if (!new_env)
+		return (ft_print_msg("malloc error add in env", 'm', 0, ms));
+	while (ms->envi[i])
+	{
+		new_env[i] = ft_strdup(ms->envi[i]);
+		if (!new_env[i])
+		{
+			ft_free_2d_array(new_env);
+			return (0);
+		}
+		i++;
+	}
+	new_env[i] = ft_join_tag_and_val(tag_, cont);
+	if (!new_env[i])
+	{
+		ft_free_2d_array(new_env);
+		return (0);
+	}
+	ft_free_2d_array(ms->envi);
+	ms->envi = new_env;
+	return (1);
+}
 
 void	ft_env_display(t_data *ms)
 {
