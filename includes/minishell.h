@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/09 17:21:08 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:25:10 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ bool		ft_tag_is_in_env(t_data *ms, char *tag);
 int			ft_actualise_env(t_data *ms, char *tag, char *val);
 bool		ft_increment_shlvl(t_data *ms, char **envi);
 void		ft_env_display(t_data *ms);
+int			ft_delete_in_env(t_data *ms, char *tag);
 /*======================= FREE FOLDER =======================*/
 /* free/free_cmd_struct.c */
 void		ft_free_cmds(t_cmd *cmds);
@@ -133,16 +134,12 @@ bool		ft_get_cwd(t_data *ms, unsigned int i);
 bool		ft_malloc_s_parse(t_data *ms);
 void		ft_update_env_cwd(t_data *ms);
 /* init/init_env_struct.c */
-bool		ft_env_struct_init(t_data *ms, char **envp);
 char		*ft_get_val_in_env(char **env, char *tag, t_data *ms);
 /* init/init_cms_struct.c */
 void		ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add);
 t_cmd		*ft_create_cmd_node(char *raw_cmd);
 t_cmd		*ft_go_to_last_cmd_node(t_cmd *cmd_node);
-bool		ft_cmd_struct(t_data *ms, char *user_input);
 void		ft_cmd_display(t_cmd *cmds);
-/* init/init_u_i_related.c */
-int			ft_init_arr(t_data *ms, char *user_input);
 
 /*======================= LOOP FOLDER ========================*/
 void		ft_loop(t_data *ms);
