@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 11:25:17 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/10 19:35:31 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 22:03:29 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ as well as the function
 
 currently in env/env_tab.c
 */
-
 char	*ft_deal_with_home(t_data *ms)
 {
 	if (!ft_tag_is_in_env(ms, "HOME"))
@@ -54,6 +53,10 @@ int	ft_cd(t_cmd *cmds, t_data *ms)
 		return (R_EX_OK);
 	if (ft_2d_lines(cmds->cmd_w_arg) > 2)
 		return (ft_print_msg("cd : too many arguments", 'm', R_EX_OK, ms));
+	if (!ft_tag_is_in_env(ms, "OLDPWD"))
+		ft_add_in_env(ms, "OLDPWD", ms->curr_work_dir);
+	if (ft_tag_is_in_env(ms, "OLDPWD"))
+		ft_actualise_env(ms, "OLDPWD", ms->curr_work_dir);
 	if (ft_2d_lines(cmds->cmd_w_arg) == 1 || \
 	!ft_strncmp(cmds->cmd_w_arg[1], "~", 1))
 	{
