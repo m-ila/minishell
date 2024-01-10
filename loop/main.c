@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 15:05:52 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:16:54 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	ft_loop(t_data *ms)
 		if (!ft_malloc_s_parse(ms))
 			return ;
 		ms->user_input = NULL;
-//		ft_putstr_fd(ms->printed_line, 1);
 		ms->user_input = readline(ms->printed_line);
 		//if heredoc, gnl jusqu'a delimiter dans la str recuperee
 		add_history(ms->user_input);
@@ -76,17 +75,6 @@ void	ft_loop(t_data *ms)
 				if (ft_builtin(ms->parse_struct->struct_cmds, ms) != R_EX_OK)
 					ms->b_temoin = false;
 		}
-/*
-		if (ms->b_temoin && \
-		!ft_strncmp(ms->user_input, "exit", ft_strlen("exit")))
-		{
-			ft_free_cmds(ms->parse_struct->struct_cmds);
-			ft_free_prompt(ms);
-			return ;
-		}
-		if (ms->b_temoin && !ft_strncmp(ms->user_input, "env", ft_strlen("env")))
-			ft_env_display(ms);
-*/
 		if (ms->parse_struct->struct_cmds)
 		{
 			ft_free_cmds(ms->parse_struct->struct_cmds);
@@ -94,8 +82,6 @@ void	ft_loop(t_data *ms)
 		free(ms->tmp_str);
 		free(ms->parse_struct);
 		ft_free_prompt(ms);
-		//deuxieme couche parsing
-		//exec
 	}
 }
 
