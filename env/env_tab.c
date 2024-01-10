@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:12:33 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 11:30:42 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:10:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ int	ft_init_no_env(t_data *ms)
 		if (i == 0)
 			env_tab[i] = ft_strdup("PWD=");
 		if (i == 1)
-			env_tab[i] = ft_strdup("SHLVL=1");
+			env_tab[i] = ft_strdup("SHLVL=0");
 		if (i == 2)
 			env_tab[i] = ft_strdup("_=");
 		if (!env_tab[i])
