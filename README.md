@@ -7,14 +7,14 @@
 * est valable si commande est "vide" (geree par exec, penser a bien mod la var de g_ret)
 * [ ] creer variable ```$?``` et assign var globale dds, ou plutot si lancee juste afficher g_ret ?
 * [ ] put builtins in the main program
-* [ ] put env in the main program
-* [ ] deal if env vide with the new env system (char * and not linked list)
+* [x] put env in the main program
+* [x] deal if env vide with the new env system (char * and not linked list)
 * [ ] en fonction des quotes, "charger" var ou non
 * [ ] reigning quotes in cmd_struct to epur properly
 * [ ] signaux
 * [ ] clean header and files
 * [ ] put everything to the norm
-* [ ] why cmd empty causes program to close
+* [x] why cmd empty causes program to close
 * [ ] heredoc ne doit pas update l'history (sujet, parsing donc + Marianne)
 
 ### Chourael
