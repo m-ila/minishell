@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 11:25:17 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/10 18:36:40 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:35:31 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ as well as the function
 currently in env/env_tab.c
 */
 
-char	*ft_deal_with_home(t_cmd *cmds, t_data *ms)
+char	*ft_deal_with_home(t_data *ms)
 {
 	if (!ft_tag_is_in_env(ms, "HOME"))
 	{
@@ -41,6 +41,9 @@ char	*ft_deal_with_home(t_cmd *cmds, t_data *ms)
 	return (ft_get_val_in_env(ms->envi, "HOME", ms));
 }
 
+/*
+to do : compare with bash behavior for the msgs
+*/
 int	ft_cd(t_cmd *cmds, t_data *ms)
 {
 	char	*home_path;
@@ -52,19 +55,28 @@ int	ft_cd(t_cmd *cmds, t_data *ms)
 	if (ft_2d_lines(cmds->cmd_w_arg) > 2)
 		return (ft_print_msg("cd : too many arguments", 'm', R_EX_OK, ms));
 	if (ft_2d_lines(cmds->cmd_w_arg) == 1 || \
-	!ft_strncmp(cmds->cmd_w_arg[1], "~", 2))
+	!ft_strncmp(cmds->cmd_w_arg[1], "~", 1))
 	{
-		home_path = ft_deal_with_home(cmds, ms);
-		if (chdir(getenv("HOME")) == -1)
+		home_path = ft_deal_with_home(ms);
+		if (home_path[0] == '\0')
 		{
-			perror("chdir 1");
-			return (-1);
+			free(home_path);
+			ms->b_temoin = false;
+			return (R_ERR_GEN);
 		}
+		if (chdir(home_path) == -1)
+		{
+			free(home_path);
+			ms->b_temoin = false;
+			return (ft_print_msg("cd : couldn't reach home_path", 'm', R_ERR_GEN, ms));
+		}
+		free(home_path);
+		return (R_EX_OK);
 	}
-	else if (chdir(str) == -1)
+	else if (chdir(cmds->cmd_w_arg[1]) == -1)
 	{
-		perror("chdir 0");
-		return (-1);
+		ms->b_temoin = false;
+		return (ft_print_msg("cd : couldn't reach path", 'm', R_ERR_GEN, ms));
 	}
 	return (R_EX_OK);
 }

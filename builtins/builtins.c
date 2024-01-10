@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:02:10 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 15:04:19 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/10 19:36:35 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_data *ms
 int		ft_builtin(t_cmd *cmds, t_data *ms)
 {
 	if (!ft_strncmp(cmds->cmd, "cd", ft_strlen("cd")))
-		return (R_EX_OK);
+		return (ft_cd(cmds, ms));
 	if (!ft_strncmp(cmds->cmd, "echo", ft_strlen("echo")))
 		return (ft_echo(cmds));
 	if (!ft_strncmp(cmds->cmd, "env", ft_strlen("env")))
