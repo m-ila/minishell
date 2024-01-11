@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 20:26:08 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/02 17:39:27 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:18:55 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,6 @@ int	get_next_token(char *str, int from)
 	if (from == (int) ft_strlen(str))
 		return (from);
 	return (-1);
-}
-
-t_tokens	ft_what_token(char c, t_tokens quoting_rule, int i, int i_next_token)
-{
-	if ()
 }
 
 /* TO DO : send err msg */
