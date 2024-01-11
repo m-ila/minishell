@@ -6,11 +6,21 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 12:19:37 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/11 13:32:13 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:56:49 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+bool	ft_cond(char *str, int i)
+{
+	if (ft_char_is_a_reigning_quote(str, i))
+		return (true);
+	if (ft_char_in_base(str[i], BASE_QUOTES) && \
+	!ft_elem_is_in_quotes(str, i))
+		return (true);
+	return (false);
+}
 
 int	main(void)
 {
@@ -24,16 +34,16 @@ int	main(void)
 	char    *str3 = "";
 	int     j = 0;
 	
-	tab = ft_split_fun(str, ft_char_is_a_reigning_quote);
+	tab = ft_split_fun(str, ft_cond);
 	if (!tab)
 		return (ft_printf_fd(2, "nope\n"));
-	tab1 = ft_split_fun(str1, ft_char_is_a_reigning_quote);
+	tab1 = ft_split_fun(str1, ft_cond);
 	if (!tab1)
 		return (ft_printf_fd(2, "nope\n"));
-	tab2 = ft_split_fun(str2, ft_char_is_a_reigning_quote);
+	tab2 = ft_split_fun(str2, ft_cond);
 	if (!tab2)
 		return (ft_printf_fd(2, "nope\n"));
-	tab3 = ft_split_fun(str3, ft_char_is_a_reigning_quote);
+	tab3 = ft_split_fun(str3, ft_cond);
 	if (!tab3)
 		return (ft_printf_fd(2, "nope\n"));
 	ft_printf_fd(1, "tab\n");
