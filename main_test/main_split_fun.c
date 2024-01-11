@@ -6,13 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 12:19:37 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/11 17:56:49 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/11 18:26:26 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-bool	ft_cond(char *str, int i)
+bool	ft_cond_cut(char *str, int i)
 {
 	if (ft_char_is_a_reigning_quote(str, i))
 		return (true);
@@ -31,46 +31,46 @@ int	main(void)
 	char    *str = "\'coucou\' les \"amis\"";
 	char    *str1 = "chaine de char classique";
 	char    *str2 = "\"c\'est la vie\" fin";
-	char    *str3 = "";
+	char    *str3 = "\"\"\'\'echo hola\"\"\'\'\'\' que\"\"\'\' tal\"\"\'\' a";
 	int     j = 0;
 	
-	tab = ft_split_fun(str, ft_cond);
+	tab = ft_split_fun(str, ft_cond_cut);
 	if (!tab)
 		return (ft_printf_fd(2, "nope\n"));
-	tab1 = ft_split_fun(str1, ft_cond);
+	tab1 = ft_split_fun(str1, ft_cond_cut);
 	if (!tab1)
 		return (ft_printf_fd(2, "nope\n"));
-	tab2 = ft_split_fun(str2, ft_cond);
+	tab2 = ft_split_fun(str2, ft_cond_cut);
 	if (!tab2)
 		return (ft_printf_fd(2, "nope\n"));
-	tab3 = ft_split_fun(str3, ft_cond);
+	tab3 = ft_split_fun(str3, ft_cond_cut);
 	if (!tab3)
 		return (ft_printf_fd(2, "nope\n"));
-	ft_printf_fd(1, "tab\n");
+	ft_printf_fd(1, "tab\nstr passee : %s\n", str);
 	while (tab[j])
 	{
-		ft_printf_fd(1, "elem n.%d = %s\n", j, tab[j]);
+		ft_printf_fd(1, "elem n.%d = (deb)%s(fin)\n", j, tab[j]);
 		j++;
 	}
 	j = 0;
-	ft_printf_fd(1, "\ntab1\n");
+	ft_printf_fd(1, "\ntab1\nstr passee : %s\n", str1);
 	while (tab1[j])
 	{
-		ft_printf_fd(1, "elem n.%d = %s\n", j, tab1[j]);
+		ft_printf_fd(1, "elem n.%d = (deb)%s(fin)\n", j, tab1[j]);
 		j++;
 	}
 	j = 0;
-	ft_printf_fd(1, "\ntab2\n");
+	ft_printf_fd(1, "\ntab2\nstr passee : %s\n", str2);
 	while (tab2[j])
 	{
-		ft_printf_fd(1, "elem n.%d = %s\n", j, tab2[j]);
+		ft_printf_fd(1, "elem n.%d = (deb)%s(fin)\n", j, tab2[j]);
 		j++;
 	}
 	j = 0;
-	ft_printf_fd(1, "\ntab3\n");
+	ft_printf_fd(1, "\ntab3\nstr passee : %s\n", str3);
 	while (tab3[j])
 	{
-		ft_printf_fd(1, "elem n.%d = %s\n", j, tab3[j]);
+		ft_printf_fd(1, "elem n.%d = (deb)%s(fin)\n", j, tab3[j]);
 		j++;
 	}
 	ft_free_2d_array(tab);
