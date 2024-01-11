@@ -27,8 +27,8 @@
 ### Marianne
 * [x] env
 * [ ] make that envp = envi
-* [ ] builtins
-* [ ] finish parsing quotes
+* [ ] builtins (85%)
+* [ ] finish parsing quotes (WIP)
 * [x] find where the issue with empty cmd ends up closing
 * [x] fix ft_strncmp comp in loop
 * [ ] parsing if syntax error on sep depending on the cmd
@@ -38,7 +38,7 @@
 * [ ] adapter les fonctions aux structs
 * [ ] changer printfs et perror en ft_printf_fd
 * [x] pour ft_cd :
-* [ ] pour ft_echo : gérer les quotes, les espaces et les variables d'env depuis raw_str
+* [WIP] pour ft_echo : gérer les quotes, les espaces et les variables d'env depuis raw_str
 * [x] pour ft_unset : leak lorsqu'on unset le premier elem de l'env, somehow
 
 ## Case 1
