@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 22:00:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:22:42 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@
 # endif
 
 # define NO_INDEX_FOUND -1
-
+# define NOT_QUOTED 0
+# define SINGLE_QUOTED 1
+# define DOUBLE_QUOTED 2
 /* =========================== GLOB VARIABLE ================================ */ 
 /*int	g_return_val;*/
 
@@ -121,6 +123,8 @@ bool		ft_is_builtin(char *str);
 int			ft_cd(t_cmd *cmds, t_data *ms);
 /* builtins/ft_echo.c */
 int			ft_echo(t_cmd *cmds);
+char		*ft_epured_str(char *str, t_cmd *cmds);
+char		*ft_triple_join(char *str1, char *str2, char *str3, t_data *ms);
 /* builtins/ft_env.c */
 int			ft_env(t_data *ms);
 /* builtins/ft_export.c */
@@ -178,10 +182,8 @@ int			ft_print_msg(char *str, char type, int return_value, t_data *ms);
 char		*ft_char_print_msg(char *str, char type, char *return_value, t_data *ms);
 /* parsing/cmd_arr_parse.c */
 bool		ft_is_valid_cmd(char *str);
-/* parsing/quoting.c */
-bool		ft_str_has_quotes(char *user_input);
-char		*ft_expand_quoted_substr(char **array, char quote, \
-int from, int until);
+/* parsing/quoting_rule.c */
+int			ft_elem_is_in_quotes(char *str, int i);
 /* parsing/tmp.c */
 void		ft_raw_parsing_process(char *user_input, t_data *ms);
 bool		ft_add_next_token_to_node(char *str, t_cmd *struct_cmd);
