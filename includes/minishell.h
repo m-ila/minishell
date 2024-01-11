@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/11 10:22:42 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:54:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,8 @@ char		*ft_char_print_msg(char *str, char type, char *return_value, t_data *ms);
 bool		ft_is_valid_cmd(char *str);
 /* parsing/quoting_rule.c */
 int			ft_elem_is_in_quotes(char *str, int i);
+bool		ft_char_is_a_reigning_quote(char *str, int i);
+int			ft_get_index_next_reign_quo(char *str, int from);
 /* parsing/tmp.c */
 void		ft_raw_parsing_process(char *user_input, t_data *ms);
 bool		ft_add_next_token_to_node(char *str, t_cmd *struct_cmd);
