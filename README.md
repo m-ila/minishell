@@ -31,12 +31,13 @@
 * [ ] finish parsing quotes
 * [x] find where the issue with empty cmd ends up closing
 * [x] fix ft_strncmp comp in loop
+* [ ] parsing if syntax error on sep depending on the cmd
 
 ### Builtins modifications
 * [ ] changer la valeur de retour de chaque fonction (doit pouvoir retourner un code erreur en fonction du soucis, par exemple cd et echo peuvent retourner des valeurs d'erreurs différentes)
 * [ ] adapter les fonctions aux structs
 * [ ] changer printfs et perror en ft_printf_fd
-* [ ] pour ft_cd :
+* [x] pour ft_cd :
 * [ ] pour ft_echo : gérer les quotes, les espaces et les variables d'env depuis raw_str
 * [x] pour ft_unset : leak lorsqu'on unset le premier elem de l'env, somehow
 
