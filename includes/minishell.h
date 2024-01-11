@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/11 10:54:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:06:29 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct s_cmd {
 	bool			b_abs_path;
 	bool			b_builtin;
 	char			*raw_str;
+	char			*epured_model;
+	char			*epured_str;
 	char			**cmd_w_arg;
 	char			*cmd;
 	int				nb_s_quote;
@@ -156,7 +158,7 @@ bool		ft_malloc_s_parse(t_data *ms);
 void		ft_update_env_cwd(t_data *ms);
 /* init/init_env_struct.c */
 char		*ft_get_val_in_env(char **env, char *tag, t_data *ms);
-/* init/init_cms_struct.c */
+/* init/init_cmd_struct.c */
 void		ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add);
 t_cmd		*ft_create_cmd_node(char *raw_cmd);
 t_cmd		*ft_go_to_last_cmd_node(t_cmd *cmd_node);
@@ -186,6 +188,8 @@ bool		ft_is_valid_cmd(char *str);
 int			ft_elem_is_in_quotes(char *str, int i);
 bool		ft_char_is_a_reigning_quote(char *str, int i);
 int			ft_get_index_next_reign_quo(char *str, int from);
+bool		ft_cond_cut(char *str, int i);
+char		*ft_epured_model(char *s);
 /* parsing/tmp.c */
 void		ft_raw_parsing_process(char *user_input, t_data *ms);
 bool		ft_add_next_token_to_node(char *str, t_cmd *struct_cmd);
