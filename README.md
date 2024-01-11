@@ -38,6 +38,7 @@
 * [ ] adapter les fonctions aux structs
 * [ ] changer printfs et perror en ft_printf_fd
 * [x] pour ft_cd :
+* [ ] ft_cd : renvoyer bon message d'erreur si fichier et si pas existant
 * [WIP] pour ft_echo : gérer les quotes, les espaces et les variables d'env depuis raw_str
 * [x] pour ft_unset : leak lorsqu'on unset le premier elem de l'env, somehow
 
