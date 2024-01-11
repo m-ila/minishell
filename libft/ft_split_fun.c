@@ -6,12 +6,15 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 02:03:30 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/11 17:54:49 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:13:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+	still need to norm it and finalize the safety check at the beg of split
+*/
 static void	*ft_free(char **s, size_t j)
 {
 	while (j > 0)
@@ -23,7 +26,7 @@ static void	*ft_free(char **s, size_t j)
 	return (NULL);
 }
 
-static size_t	ft_wrd_len(char *s, bool (*fun)(char*, int), int *from)
+static size_t	ft_wrd_len(char *s, bool (*fun)(char*, char, int), int *from)
 {
 	int	len;
 
@@ -33,7 +36,7 @@ static size_t	ft_wrd_len(char *s, bool (*fun)(char*, int), int *from)
 	return (len);
 }
 
-static int	ft_wrd_nb(char *s, bool (*fun)(char*, int))
+static int	ft_wrd_nb(char *s, bool (*fun)(char*, char, int))
 {
 	int	nb;
 	int	i;
@@ -52,7 +55,7 @@ static int	ft_wrd_nb(char *s, bool (*fun)(char*, int))
 	return (nb);
 }
 
-static char	*ft_wrd(char *s, bool (*fun)(char*, int), int *from)
+static char	*ft_wrd(char *s, bool (*fun)(char*, char, int), int *from)
 {
 	char	*ret;
 	int		index;
@@ -72,7 +75,7 @@ static char	*ft_wrd(char *s, bool (*fun)(char*, int), int *from)
 	return (ret);
 }
 
-char	**ft_split_fun(char *s, bool (*fun)(char*, int))
+char	**ft_split_fun(char *s, bool (*fun)(char*, char, int))
 {
 	char		**ret;
 	int			j;
