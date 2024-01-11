@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 00:25:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/01 14:19:30 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/11 12:41:14 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@ int		ft_strlen_base(char *str, char *base, int from);
 int		ft_strlen_unbase(char *str, char *base, int from);
 int		ft_strocc_base(char *str, char *base);
 int		ft_strocc_unbase(char *str, char *base);
+char	**ft_split_fun(char *s, bool (*fun)(char*, int));
 
 #endif
