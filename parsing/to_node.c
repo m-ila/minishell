@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:45:43 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 15:51:19 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:00:52 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ bool	ft_add_next_token_to_node(char *str, t_cmd *struct_cmd)
 		return (false);
 	last = ft_go_to_last_cmd_node(struct_cmd);
 	last->next_token = ft_strdup(str);
-	return (true);	
+	return (true);
 }
