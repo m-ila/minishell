@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:51:09 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 17:02:15 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 15:59:37 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 type == s : syntax error
 type == m : print message
+should free ? or just set ms->b_temoin as 0
 */
 void	ft_msg(char *str, char type, bool del_struct, t_data *ms)
 {
@@ -24,7 +25,6 @@ void	ft_msg(char *str, char type, bool del_struct, t_data *ms)
 		ft_printf_fd(2, "minishell: error: %s\n", str);
 	if (del_struct || ms)
 		return ;
-		/* ft_free_all(ms);*/
 }
 
 char	*ft_msg_ret_char(char *str)
@@ -32,6 +32,7 @@ char	*ft_msg_ret_char(char *str)
 	ft_printf_fd(2, "%s\n", str);
 	return (NULL);
 }
+
 char	*ft_char_print_msg(char *str, char type, char *return_value, t_data *ms)
 {
 	if (type == 's')
