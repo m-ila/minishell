@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 12:49:06 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/04 13:43:29 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 10:32:03 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,13 @@ t_tokens    ft_which_redir_token(char *str, char which)
             return (end_of_file);
     }
     return (error);
+}
+
+void    ft_add_epured_to_cmd(t_cmd *cmds)
+{
+    while (cmds)
+    {
+        cmds->epured_model = ft_epured_model(cmds->raw_str);
+        cmds = cmds->next;
+    }
 }
