@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:02:10 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 19:36:35 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:06:16 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ redirects one cmd to it's proper function
 is able to change the value of the glob variable, and print err msg, so needs
 t_data *ms
 */
-int		ft_builtin(t_cmd *cmds, t_data *ms)
+int	ft_builtin(t_cmd *cmds, t_data *ms)
 {
 	if (!ft_strncmp(cmds->cmd, "cd", ft_strlen("cd")))
 		return (ft_cd(cmds, ms));
