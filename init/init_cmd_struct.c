@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 17:02:15 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 11:20:12 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
 			ft_msg("failed gen ms->cmd", 'm', false, ms);
 			ms->b_temoin = false;
 			return (false);
-		}		
+		}
+		cmds->epured_model = ft_epured_model(cmds->raw_str);
 		cmds = cmds->next;
 	}
 	return (true);
@@ -60,6 +61,8 @@ void	ft_cmd_display(t_cmd *cmds)
 			ft_printf_fd(1, "next token : %s\n", cmds->next_token);
 		if (cmds->cmd)
 			ft_printf_fd(1, "cmd : %s\n", cmds->cmd);
+		if (cmds->epured_model)
+			ft_printf_fd(1, "epured_model : %s\n", cmds->epured_model);
 		i++;
 		cmds = cmds->next;
 	}
@@ -107,6 +110,7 @@ t_cmd	*ft_create_cmd_node(char *raw_cmd)
 	new->next = NULL;
 	new->prev_token = NULL;
 	new->next_token = NULL;
+	new->epured_model = NULL;
 	return (new);
 }
 
