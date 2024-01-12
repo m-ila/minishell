@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/11 19:06:29 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 10:32:42 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,5 +205,6 @@ int			get_index_next_token(char *str, int from);
 /* parsing/tmp2.c */
 t_tokens    ft_which_redir_token(char *str, char which);
 bool		ft_add_token_val_to_struct(t_cmd *cmds);
+void		ft_add_epured_to_cmd(t_cmd *cmds);
 
 #endif 
