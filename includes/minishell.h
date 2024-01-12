@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 11:38:05 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 15:51:01 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ bool		ft_is_builtin(char *str);
 int			ft_cd(t_cmd *cmds, t_data *ms);
 /* builtins/ft_echo.c */
 int			ft_echo(t_cmd *cmds);
-char		*ft_epured_str(char *str, t_cmd *cmds);
 char		*ft_triple_join(char *str1, char *str2, char *str3, t_data *ms);
 /* builtins/ft_env.c */
 int			ft_env(t_data *ms);
@@ -173,12 +172,22 @@ void		ft_loop(t_data *ms);
 char		*ft_epured_model(char *s);
 bool		ft_cond_cut(char *str, int i);
 /*void		ft_add_epured_to_cmd(t_cmd *cmds);*/
-/* parsing/parse_user_input.c */
-int			ft_get_next_token_index(char *user_input, int from);
+/* parsing/parse_get.c */
+char		*get_token(char *str, int from);
+char		*get_cmd(char *str, int from);
+int			get_index_next_token(char *str, int from);
+/* parsing/parsing_processes.c */
+void		ft_raw_parsing_process(char *user_input, t_data *ms);
+bool		ft_parsing_start_token_process(char *user_input, int *from, t_data *ms);
+bool		ft_parsing_token_process(char *user_input, int *from, t_data *ms);
+bool		ft_parsing_cmd_process(char *user_input, int *from, t_data *ms);
+int			deal_with_token(char *str, char *tok_str, int from, t_data *ms);
 /* parsing/token_parse.c */
 bool		ft_starts_with_token(char *user_input);
 bool		ft_is_valid_token(char *str);
 bool		ft_is_valid_entry_token(char *str);
+t_tokens    ft_which_redir_token(char *str, char which);
+bool		ft_add_token_val_to_struct(t_cmd *cmds);
 /* parsing/print_error.c */
 void		ft_msg(char *str, char type, bool del_struct, t_data *ms);
 char		*ft_msg_ret_char(char *str);
@@ -188,20 +197,11 @@ char		*ft_char_print_msg(char *str, char type, char *return_value, t_data *ms);
 int			ft_elem_is_in_quotes(char *str, int i);
 bool		ft_char_is_a_reigning_quote(char *str, int i);
 int			ft_get_index_next_reign_quo(char *str, int from);
-/* parsing/tmp.c */
-void		ft_raw_parsing_process(char *user_input, t_data *ms);
+/* parsing/to_node.c */
 bool		ft_add_next_token_to_node(char *str, t_cmd *struct_cmd);
 bool		ft_add_first_prev_token_node(char *str, t_cmd *struct_cmd);
 bool		ft_add_prev_token_to_node(t_cmd *struct_cmd, t_data *ms);
-bool		ft_parsing_start_token_process(char *user_input, int *from, t_data *ms);
-bool		ft_parsing_token_process(char *user_input, int *from, t_data *ms);
-bool		ft_parsing_cmd_process(char *user_input, int *from, t_data *ms);
-int			deal_with_token(char *str, char *tok_str, int from, t_data *ms);
-char		*get_token(char *str, int from);
-char		*get_cmd(char *str, int from);
-int			get_index_next_token(char *str, int from);
-/* parsing/tmp2.c */
-t_tokens    ft_which_redir_token(char *str, char which);
-bool		ft_add_token_val_to_struct(t_cmd *cmds);
+/* parsing/tmp.c */
+
 
 #endif 

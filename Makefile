@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/12 11:38:45 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/12 15:52:19 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,12 @@ init/init_env_struct.c \
 init/init_cmd_struct.c \
 loop/main.c \
 parsing/epur.c \
-parsing/parse_user_input.c \
+parsing/parse_get.c \
+parsing/parsing_processes.c \
 parsing/print_error.c \
 parsing/quoting_rule.c \
 parsing/tmp.c \
-parsing/tmp2.c \
+parsing/to_node.c \
 parsing/token_parse.c \
 signal/signal.c
 

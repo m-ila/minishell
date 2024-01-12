@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:45:08 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/04 10:01:26 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 15:42:34 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	ft_first_layer_parse(t_data *ms)
 */
 
 /* returns the index of the next token or end of line */
+/*
 int	ft_get_next_token_index(char *user_input, int from)
 {
 	if (!user_input)
@@ -51,3 +52,4 @@ int	ft_get_next_token_index(char *user_input, int from)
 		from++;
 	return (from);
 }
+*/
