@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:33:21 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 11:39:00 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:10:12 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static void	ft_assign_char(char *s, int i, char *model)
 {
-	if (s[i] == '$' && ft_elem_is_in_quotes(s, i) == SINGLE_QUOTED)
+	if (s[i] == '$' && (ft_elem_is_in_quotes(s, i) == SINGLE_QUOTED || \
+	ft_elem_is_in_quotes(s, i) == NOT_QUOTED))
 		model[i] = 'e';
 	else if (ft_iswhitespace(s[i]))
 		model[i] = 's';
@@ -22,6 +23,35 @@ static void	ft_assign_char(char *s, int i, char *model)
 		model[i] = 'q';
 	else
 		model[i] = '1';
+}
+
+char	*ft_epured_str(char *str, char *model)
+{
+	char	*epured;
+	int		len;
+	int		i;
+	int		j;
+
+	if (!str || !model)
+		return (ft_strdup(""));
+	len = (int) ft_strlen(str) - ft_strocc(model, '0');
+	if (len <= 0)
+		return (ft_strdup(""));
+	epured = ft_calloc((size_t) len + 1, sizeof(char));
+	if (!epured)
+		return (ft_strdup(""));
+	i = 0;
+	j = 0;
+	while (str[i] && model[i])
+	{
+		if (model[i] != '0')
+		{
+			epured[j] = str[i];
+			j++;
+		}
+		i++;
+	}
+	return (epured);
 }
 
 char	*ft_epured_model(char *s)
