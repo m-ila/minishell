@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 15:49:15 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:05:01 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	deal_with_token(char *str, char *tok_str, int from, t_data *ms)
 
 	if (from + (int) ft_strlen(tok_str) == (int) ft_strlen(str))
 		return (1);
-	if (!str || !tok_str || tok_str[0] == '\0' || from < 0 || from >= (int) ft_strlen(str))
+	if (!str || !tok_str || tok_str[0] == '\0' || from < 0 || \
+	from >= (int) ft_strlen(str))
 		return (0);
 	if (!ft_is_valid_token(tok_str))
 	{
@@ -54,7 +55,8 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 	}
 	else
 		ft_add_node_to_cmds(&ms->parse_struct->struct_cmds, buff);
-	ft_printf_fd(1, "cmd : '%s'\nfrom : %d\nuntil : %d\n", tmp, *from, *from + ft_strlen(tmp));
+	ft_printf_fd(1, "cmd : '%s'\nfrom : %d\nuntil : %d\n", tmp, \
+	*from, *from + ft_strlen(tmp));
 	if (tmp)
 		(*from) += (int) ft_strlen(tmp);
 	free(tmp);
@@ -75,7 +77,8 @@ bool	ft_parsing_token_process(char *user_input, int *from, t_data *ms)
 	if (!tmp_t)
 		return ((bool) ft_print_msg("get_token issue", 'm', 0, ms));
 	ft_printf_fd(1, "%s\nEntering ft_parsing_token_process\n\n", PRINT_SEP);
-	ft_printf_fd(1, "tok : '%s'\nfrom : %d\nuntil : %d\n", tmp_t, *from, *from + ft_strlen(tmp_t));
+	ft_printf_fd(1, "tok : '%s'\nfrom : %d\nuntil : %d\n", tmp_t, \
+	*from, *from + ft_strlen(tmp_t));
 	if (!deal_with_token(user_input, tmp_t, *from, ms))
 	{
 		free(tmp_t);
@@ -104,7 +107,8 @@ bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 		(*from)++;
 	tmp_t = get_token(user_input, *from);
 	ft_printf_fd(1, "%s\nEntering ft_parsing_start_token_process\n\n", PRINT_SEP);
-	ft_printf_fd(1, "tok : '%s'\nfrom : %d\nuntil : %d\n", tmp_t, *from, *from + ft_strlen(tmp_t));
+	ft_printf_fd(1, "tok : '%s'\nfrom : %d\nuntil : %d\n", tmp_t, \
+	*from, *from + ft_strlen(tmp_t));
 	if (!ft_is_valid_entry_token(tmp_t))
 	{
 		ms->b_temoin = false;
@@ -116,13 +120,16 @@ bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 	ms->tmp_str = ft_strdup(tmp_t);
 	(*from) += (int) ft_strlen(tmp_t);
 	free(tmp_t);
-	ft_printf_fd(1, "%s\nLeaving ft_parsing_start_token_process\n\n", PRINT_SEP);
+	ft_printf_fd(1, "%s\nLeaving ft_parsing_start_token_process\n\n", \
+	PRINT_SEP);
 	return (true);
 }
 
 /*
 to do :
-Need to modify the functions starting by temoin = qqch to not start if temoin false
+Need to modify the functions starting by 
+temoin = qqch 
+to not start if temoin false
 */
 void	ft_raw_parsing_process(char *user_input, t_data *ms)
 {
