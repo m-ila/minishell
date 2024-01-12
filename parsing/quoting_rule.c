@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 10:20:10 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 11:34:21 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 15:56:56 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ int	ft_elem_is_in_quotes(char *str, int i)
 	return (ft_return_qu_val(reigning_quote, nb_quotes));
 }
 
-bool    ft_char_is_a_reigning_quote(char *str, int i)
+bool	ft_char_is_a_reigning_quote(char *str, int i)
 {
-    char	reigning_quote;
+	char	reigning_quote;
 	int		nb_quotes;
 	int		start;
 
 	if (!str || i >= (int) ft_strlen(str) || \
-    !ft_char_in_base(str[i], BASE_QUOTES))
+	!ft_char_in_base(str[i], BASE_QUOTES))
 		return (false);
 	reigning_quote = '.';
 	nb_quotes = 0;
@@ -77,24 +77,24 @@ bool    ft_char_is_a_reigning_quote(char *str, int i)
 			nb_quotes++;
 		start++;
 	}
-    if (str[i] == reigning_quote && nb_quotes % 2 != 0)
-        return (true);
-    return (false);
+	if (str[i] == reigning_quote && nb_quotes % 2 != 0)
+		return (true);
+	return (false);
 }
 
 /*
 commentaire : shouldn't it be from >= ft_strlen - 1 since
-                                        until = from + 1 ?
+										until = from + 1 ?
 to be tested later
 */
-int ft_get_index_next_reign_quo(char *str, int from)
+int	ft_get_index_next_reign_quo(char *str, int from)
 {
-    int until;
+	int	until;
 
-    if (!str || from >= (int) ft_strlen(str))
-        return (NO_INDEX_FOUND);
-    until = from + 1;
-    while (str[until] && !ft_char_is_a_reigning_quote(str, until))
-        until++;
-    return (until);
+	if (!str || from >= (int) ft_strlen(str))
+		return (NO_INDEX_FOUND);
+	until = from + 1;
+	while (str[until] && !ft_char_is_a_reigning_quote(str, until))
+		until++;
+	return (until);
 }
