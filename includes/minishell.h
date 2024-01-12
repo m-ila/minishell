@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 10:32:42 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 11:38:05 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,27 +169,25 @@ bool		ft_parse_cmd(t_cmd *cmds, t_data *ms);
 void		ft_loop(t_data *ms);
 
 /*====================== PARSING FOLDER ======================*/
+/* parsing/epur.c */
+char		*ft_epured_model(char *s);
+bool		ft_cond_cut(char *str, int i);
+/*void		ft_add_epured_to_cmd(t_cmd *cmds);*/
 /* parsing/parse_user_input.c */
-int			ft_first_layer_parse(t_data *ms);
 int			ft_get_next_token_index(char *user_input, int from);
 /* parsing/token_parse.c */
 bool		ft_starts_with_token(char *user_input);
 bool		ft_is_valid_token(char *str);
 bool		ft_is_valid_entry_token(char *str);
-int			ft_get_valid_token_nb(char **token_arr, t_data *ms);
 /* parsing/print_error.c */
 void		ft_msg(char *str, char type, bool del_struct, t_data *ms);
 char		*ft_msg_ret_char(char *str);
 int			ft_print_msg(char *str, char type, int return_value, t_data *ms);
 char		*ft_char_print_msg(char *str, char type, char *return_value, t_data *ms);
-/* parsing/cmd_arr_parse.c */
-bool		ft_is_valid_cmd(char *str);
 /* parsing/quoting_rule.c */
 int			ft_elem_is_in_quotes(char *str, int i);
 bool		ft_char_is_a_reigning_quote(char *str, int i);
 int			ft_get_index_next_reign_quo(char *str, int from);
-bool		ft_cond_cut(char *str, int i);
-char		*ft_epured_model(char *s);
 /* parsing/tmp.c */
 void		ft_raw_parsing_process(char *user_input, t_data *ms);
 bool		ft_add_next_token_to_node(char *str, t_cmd *struct_cmd);
@@ -205,6 +203,5 @@ int			get_index_next_token(char *str, int from);
 /* parsing/tmp2.c */
 t_tokens    ft_which_redir_token(char *str, char which);
 bool		ft_add_token_val_to_struct(t_cmd *cmds);
-void		ft_add_epured_to_cmd(t_cmd *cmds);
 
 #endif 

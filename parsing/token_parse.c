@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 17:15:41 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/01 15:14:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 11:31:38 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,33 +39,6 @@ bool	ft_is_valid_entry_token(char *str)
 	if (str[0] != str[1] || ft_strocc_unbase(str, "<>"))
 		return (false);
 	return (true);
-}
-
-/* if all are valids, return nb of it, if not returns 0
-Si aucun token, entree valide, renvoie -1
-NOTE : DOIT AFFICHER MESSAGE D'ERREUR ICI */
-int	ft_get_valid_token_nb(char **token_arr, t_data *ms)
-{
-	int	i;
-	int	nb;
-
-	if (!token_arr)
-		return (0);
-	if (!*token_arr)
-		return (-1);
-	i = 0;
-	nb = 0;
-	if (ft_starts_with_token(ms->user_input) && !ft_is_valid_entry_token(token_arr[0]))
-			return (ft_print_msg(token_arr[0], 's', 0, ms));
-	while (token_arr[i])
-	{
-		if (!ft_is_valid_token(token_arr[i]))
-			return (ft_print_msg(token_arr[i], 's', 0, ms));
-		if (ft_is_valid_token(token_arr[i]))
-			nb++;
-		i++;
-	}
-	return (nb);
 }
 
 bool	ft_starts_with_token(char *user_input)
