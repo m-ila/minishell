@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:39:50 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 15:41:22 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:01:47 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ char	*get_token(char *str, int from)
 		return (NULL);
 	if (from == (int) ft_strlen(str))
 		return (ft_strdup(""));
-	return (ft_strdup_limiters(str, from, from + ft_strlen_unbase(str, BASE_TOKEN, from)));
+	return (ft_strdup_limiters(str, from, \
+	from + ft_strlen_unbase(str, BASE_TOKEN, from)));
 }
