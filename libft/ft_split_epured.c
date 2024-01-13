@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 02:03:30 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 19:42:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/13 09:01:15 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static void	*ft_free(char **s, size_t j)
 	return (NULL);
 }
 
-static size_t	ft_wrd_len(char *s, char *m, char c)
+static size_t	ft_wrd_len(char *s, char *m, char c, int *i)
 {
 	int	len;
 
 	len = 0;
-	while (s[len] != '\0' && m[len] != c)
+	while (s[*i + len] != '\0' && m[*i + len] != c)
 		len++;
 	return (len);
 }
@@ -41,7 +41,7 @@ static int	ft_wrd_nb(char *s, char *m, char c)
 	nb = 0;
 	i = 0;
 	while (s[i] != '\0')
-	{	
+	{
 		while (m[i] == c && s[i] != '\0')
 			i++;
 		if (s[i] != '\0')
@@ -52,23 +52,22 @@ static int	ft_wrd_nb(char *s, char *m, char c)
 	return (nb);
 }
 
-static char	*ft_wrd(char *s, char *m, char c)
+static char	*ft_wrd(char *s, char *m, char c, int *i)
 {
 	char	*ret;
 	int		index;
 
 	if (!s)
 		return (NULL);
-	ret = (char *) malloc((ft_wrd_len(s, m, c) + 1) * sizeof(char));
+	ret = ft_calloc((ft_wrd_len(s, m, c, i) + 1), sizeof(char));
 	if (!ret)
 		return (NULL);
 	index = 0;
-	while (m[index] != c && index < (int) ft_strlen(s))
+	while (m[index + *i] != c && (index + *i) < (int) ft_strlen(s))
 	{
-		ret[index] = s[index];
+		ret[index] = s[index + *i];
 		index++;
 	}
-	ret[index] = '\0';
 	return (ret);
 }
 
@@ -81,7 +80,7 @@ char	**ft_split_epured(char *s, char *m, char c)
 	j = 0;
 	i = 0;
 	if (!s || ft_str_only_sep(m, c))
-		return (ft_split_entry_exit( m));
+		return (ft_split_entry_exit(m));
 	ret = (char **)ft_calloc((ft_wrd_nb(s, m, c) + 1), sizeof(char *));
 	if (!ret)
 		return (NULL);
@@ -91,7 +90,7 @@ char	**ft_split_epured(char *s, char *m, char c)
 			i++;
 		if (s[i] != '\0')
 		{
-			ret[j] = ft_wrd(s, m, c);
+			ret[j] = ft_wrd(s, m, c, &i);
 			if (!ret[j])
 				return (ft_free(ret, j));
 			j++;
