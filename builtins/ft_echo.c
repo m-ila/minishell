@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:40:41 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/12 14:54:02 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/14 16:57:05 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,27 @@ int	ft_echo(t_cmd *cmds)
 {
 	int	i;
 	int	n;
+	int	len;
 
 	if (!cmds)
 		return (R_ERR_GEN);
 	i = 1;
 	n = 0;
-	if (!ft_strncmp(cmds->cmd_w_arg[1], "-n", ft_strlen("-n")))
-		n = 1;
-	while (cmds->cmd_w_arg[i + n])
+	len = ft_2d_lines(cmds->cmd_w_arg);
+	if (len > 1)
 	{
-		ft_printf_fd(1, "%s", cmds->cmd_w_arg[i + n]);
-		i++;
+		if (!ft_strncmp(cmds->cmd_w_arg[1], "-n", ft_strlen("-n")))
+			n = 1;
+		while (cmds->cmd_w_arg[i + n])
+		{
+			ft_printf_fd(1, "%s", cmds->cmd_w_arg[i + n]);
+			if (i + n < len - 1)
+				ft_printf_fd(1, " ");
+			i++;
+		}
+		if (n == 0)
+			ft_printf_fd(1, "\n");
 	}
-	if (n == 0)
-		ft_printf_fd(1, "\n");
 	return (R_EX_OK);
 }
 
