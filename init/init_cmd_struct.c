@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/14 12:41:00 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/14 16:45:23 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,24 @@ bool	ft_cut_here(char *str, char *model, int i)
 	return (false);
 }
 */
+
+bool	ft_empty_cmd(t_cmd *cmds, t_data *ms)
+{
+	if (cmds->tok_next_token == end_of_file)
+	{
+		ft_msg("newline", 's', false, ms);
+		ms->b_temoin = false;
+		return (false);
+	}
+	else if (cmds->tok_next_token != end_of_file)
+	{
+		ft_msg(cmds->next_token, 's', false, ms);
+		ms->b_temoin = false;
+		return (false);
+	}
+	return (true);
+}
+
 /*
 to do : free the precedent if wrong ?
 or just turn temoin to false, so it would free at the end of the loop
