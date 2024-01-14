@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/14 18:59:10 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/14 19:08:18 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,31 +61,19 @@ void	ft_loop(t_data *ms)
 			ms->b_temoin = false;
 		//if heredoc, gnl jusqu'a delimiter dans la str recuperee
 		add_history(ms->user_input);
-		/* new first parsing lvl AND init cmd struct see parsing/tmp.c file */
 		ft_raw_parsing_process(ms->user_input, ms);
 		print_values(ms);
-		/* temp builtins to check leaks */
-		if (ms->b_temoin)
+		if (ms->b_temoin && !ms->parse_struct->struct_cmds->cmd)
+			ms->b_temoin = false;
+		if (ms->b_temoin && !ft_strncmp(ms->parse_struct->struct_cmds->cmd, "exit", ft_strlen("exit")))
 		{
-			if (!ms->parse_struct->struct_cmds->cmd)
-			{
-				free(ms->tmp_str);
-				ft_free_cmds(ms->parse_struct->struct_cmds);
-				free(ms->parse_struct);
-				ft_free_prompt(ms);
-				ms->b_temoin = false;
-				continue ;
-			}
-			if (!ft_strncmp(ms->parse_struct->struct_cmds->cmd, "exit", ft_strlen("exit")))
-			{
-				ft_free_cmds(ms->parse_struct->struct_cmds);
-				ft_free_prompt(ms);
-				return ;
-			}
-			if (ft_is_builtin(ms->parse_struct->struct_cmds->cmd))
-				if (ft_builtin(ms->parse_struct->struct_cmds, ms) != R_EX_OK)
-					ms->b_temoin = false;
+			ft_free_cmds(ms->parse_struct->struct_cmds);
+			ft_free_prompt(ms);
+			return ;
 		}
+		if (ms->b_temoin && ft_is_builtin(ms->parse_struct->struct_cmds->cmd))
+			if (ft_builtin(ms->parse_struct->struct_cmds, ms) != R_EX_OK)
+				ms->b_temoin = false;
 		if (ms->parse_struct->struct_cmds)
 		{
 			ft_free_cmds(ms->parse_struct->struct_cmds);
