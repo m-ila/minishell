@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/14 16:45:23 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:12:49 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ bool	ft_cut_here(char *str, char *model, int i)
 
 bool	ft_empty_cmd(t_cmd *cmds, t_data *ms)
 {
+	if (cmds->tok_next_token == error)
+	{
+		ft_msg("ft_empty_cmd err", 'm', false, ms);
+		return (false);
+	}
 	if (cmds->tok_next_token == end_of_file)
 	{
 		ft_msg("newline", 's', false, ms);
@@ -56,6 +61,8 @@ bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
 		cmds->epured_str = ft_epured_str(cmds->raw_str, cmds->epured_model);
 		cmds->cmd_w_arg = \
 		ft_split_epured(cmds->raw_str, cmds->epured_model, '0');
+		if (ft_str_only_sep(cmds->epured_model, '0'))
+			return (ft_empty_cmd(cmds, ms));
 		if (!cmds->cmd_w_arg)
 			return (false);
 		if (!cmds->cmd_w_arg[0])
@@ -68,12 +75,6 @@ bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
 		if (!cmds->cmd)
 		{
 			ft_msg("failed gen ms->cmd", 'm', false, ms);
-			ms->b_temoin = false;
-			return (false);
-		}
-		if (ft_str_only_sep(cmds->epured_model, '0'))
-		{
-			ft_msg(cmds->next_token, 's', false, ms);
 			ms->b_temoin = false;
 			return (false);
 		}
@@ -152,6 +153,8 @@ t_cmd	*ft_create_cmd_node(char *raw_cmd)
 	new->epured_str = NULL;
 	new->cmd_w_arg = NULL;
 	new->cmd = NULL;
+	new->tok_next_token = error;
+	new->tok_prev_token = error;
 	return (new);
 }
 

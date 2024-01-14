@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/14 11:21:14 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:38:55 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,11 @@ bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 	ms->tmp_str = ft_strdup(tmp_t);
 	(*from) += (int) ft_strlen(tmp_t);
 	free(tmp_t);
+	if (*from >= (int) ft_strlen(user_input) - 1)
+	{
+		ms->b_temoin = false;
+		return (false);
+	}
 	ft_printf_fd(1, "%s\nLeaving ft_parsing_start_token_process\n\n", \
 	PRINT_SEP);
 	return (true);
