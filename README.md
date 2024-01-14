@@ -3,14 +3,15 @@
 # To do
 
 * [ ] parse si commande est valable
-* n'est pas valable si ruling quotes pas pair
-* est valable si commande est "vide" (geree par exec, penser a bien mod la var de g_ret)
+* [x] n'est pas valable si ruling quotes pas pair
+* [x] est valable si commande est "vide" (geree par exec, penser a bien mod la var de g_ret)
+* [ ] est-ce que check paths uniquement quand exec ou avant ?
 * [ ] creer variable ```$?``` et assign var globale dds, ou plutot si lancee juste afficher g_ret ?
 * [ ] put builtins in the main program
 * [x] put env in the main program
 * [x] deal if env vide with the new env system (char * and not linked list)
 * [ ] en fonction des quotes, "charger" var ou non
-* [ ] reigning quotes in cmd_struct to epur properly
+* [x] reigning quotes in cmd_struct to epur properly
 * [ ] signaux
 * [ ] clean header and files
 * [ ] put everything to the norm
@@ -28,10 +29,12 @@
 * [x] env
 * [ ] make that envp = envi
 * [ ] builtins (85%)
-* [ ] finish parsing quotes (WIP)
+* [x] finish parsing quotes
 * [x] find where the issue with empty cmd ends up closing
 * [x] fix ft_strncmp comp in loop
 * [ ] parsing if syntax error on sep depending on the cmd
+![note](img_readme/1.png)
+![note](img_readme/2.png)
 
 ### Builtins modifications
 * [ ] changer la valeur de retour de chaque fonction (doit pouvoir retourner un code erreur en fonction du soucis, par exemple cd et echo peuvent retourner des valeurs d'erreurs différentes)
