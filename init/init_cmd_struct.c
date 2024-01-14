@@ -6,12 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/13 09:01:14 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/14 12:41:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/*	Not using the ft_split_fun anymore for this one
 bool	ft_cut_here(char *str, char *model, int i)
 {
 	if (!str || !model || i >= (int) ft_strlen(model) || i >= (int) ft_strlen(str))
@@ -20,7 +21,7 @@ bool	ft_cut_here(char *str, char *model, int i)
 		return (true);
 	return (false);
 }
-
+*/
 /*
 to do : free the precedent if wrong ?
 or just turn temoin to false, so it would free at the end of the loop
@@ -31,12 +32,12 @@ bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
 {
 	if (!cmds)
 		return (false);
-	while (cmds)
+	while (cmds && ms->b_temoin)
 	{
-		int	i = 0;
 		cmds->epured_model = ft_epured_model(cmds->raw_str);
 		cmds->epured_str = ft_epured_str(cmds->raw_str, cmds->epured_model);
-		cmds->cmd_w_arg = ft_split_epured(cmds->raw_str, cmds->epured_model, '0');
+		cmds->cmd_w_arg = \
+		ft_split_epured(cmds->raw_str, cmds->epured_model, '0');
 		if (!cmds->cmd_w_arg)
 			return (false);
 		if (!cmds->cmd_w_arg[0])
@@ -49,6 +50,12 @@ bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
 		if (!cmds->cmd)
 		{
 			ft_msg("failed gen ms->cmd", 'm', false, ms);
+			ms->b_temoin = false;
+			return (false);
+		}
+		if (ft_str_only_sep(cmds->epured_model, '0'))
+		{
+			ft_msg(cmds->next_token, 's', false, ms);
 			ms->b_temoin = false;
 			return (false);
 		}
@@ -65,17 +72,17 @@ void	ft_cmd_display(t_cmd *cmds)
 	ft_printf_fd(1, "%s\n\n", PRINT_SEP_C);
 	while (cmds)
 	{
-		ft_printf_fd(1, "cmd[%d]->raw_cmd = '%s'\n", i, cmds->raw_str);
+		ft_printf_fd(1, "cmd[%d]->raw_cmd = (d)%s(f)\n", i, cmds->raw_str);
 		if (cmds->prev_token)
-			ft_printf_fd(1, "prev token : %s\n", cmds->prev_token);
+			ft_printf_fd(1, "prev token : (d)%s(f)\n", cmds->prev_token);
 		if (cmds->next_token)
-			ft_printf_fd(1, "next token : %s\n", cmds->next_token);
+			ft_printf_fd(1, "next token : (d)%s(f)\n", cmds->next_token);
 		if (cmds->cmd)
 			ft_printf_fd(1, "cmd : (d)%s(f)\n", cmds->cmd);
 		if (cmds->epured_model)
-			ft_printf_fd(1, "epured_model : %s\n", cmds->epured_model);
+			ft_printf_fd(1, "epured_model : (d)%s(f)\n", cmds->epured_model);
 		if (cmds->epured_str)
-			ft_printf_fd(1, "epured_str : %s\n", cmds->epured_str);
+			ft_printf_fd(1, "epured_str : (d)%s(f)\n", cmds->epured_str);
 		i++;
 		cmds = cmds->next;
 	}
@@ -125,6 +132,8 @@ t_cmd	*ft_create_cmd_node(char *raw_cmd)
 	new->next_token = NULL;
 	new->epured_model = NULL;
 	new->epured_str = NULL;
+	new->cmd_w_arg = NULL;
+	new->cmd = NULL;
 	return (new);
 }
 
