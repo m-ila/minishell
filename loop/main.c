@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/14 19:08:18 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/14 20:35:08 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	print_values(t_data *ms)
 	ms->user_input, ms->printed_line);
 	ft_printf_fd(1, "ms->curr_wd = %s\nms->prev_w_dir = %s\n\n", \
 	ms->curr_work_dir, ms->prev_work_dir);
-	ft_printf_fd(1, "parse_struct->token_nb = %d\n", ms->parse_struct->token_nb);
 	ft_printf_fd(1, "ms->b_temoin = %d\n", (int) ms->b_temoin);
 	if (ms->parse_struct->struct_cmds)
 		ft_cmd_display(ms->parse_struct->struct_cmds);
@@ -61,6 +60,13 @@ void	ft_loop(t_data *ms)
 			ms->b_temoin = false;
 		//if heredoc, gnl jusqu'a delimiter dans la str recuperee
 		add_history(ms->user_input);
+		if (ms->b_temoin)
+			ft_count_reigning_quotes(ms->user_input, ms->parse_struct);
+		if (ms->b_temoin && ms->parse_struct->nb_reigning_quotes % 2 != 0)
+		{
+			ft_msg("", 'q', false, ms);
+			ms->b_temoin = false;
+		}
 		ft_raw_parsing_process(ms->user_input, ms);
 		print_values(ms);
 		if (ms->b_temoin && !ms->parse_struct->struct_cmds->cmd)

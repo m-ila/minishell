@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/09 20:23:10 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/14 20:15:59 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ bool	ft_malloc_s_parse(t_data *ms)
 		ft_printf_fd(2, "malloc struct parse failed\n");
 		return (false);
 	}
-	parse_struct->token_nb = 0;
 	parse_struct->start_w_val_tok = false;
 	parse_struct->struct_cmds = NULL;
+	parse_struct->nb_reigning_quotes = 0;
+	parse_struct->l_reign_q = '.';
 	ms->parse_struct = parse_struct;
 	return (true);
 }
@@ -79,9 +80,7 @@ void	ft_update_env_cwd(t_data *ms)
 	if (!ms->envi)
 		return ;
 	if (ms->envi)
-	{
 		ft_actualise_env(ms, "PWD", ms->curr_work_dir);
-	}
 }
 
 /*

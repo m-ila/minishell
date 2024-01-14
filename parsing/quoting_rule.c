@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 10:20:10 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 15:56:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/14 20:37:12 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,31 @@ int	ft_elem_is_in_quotes(char *str, int i)
 		start++;
 	}
 	return (ft_return_qu_val(reigning_quote, nb_quotes));
+}
+
+bool	ft_count_reigning_quotes(char *str, t_parse *parse_struct)
+{
+	char	reigning_quote;
+	int		nb_quotes;
+	int		start;
+
+	if (!str || ft_strlen(str) == 0)
+		return (false);
+	reigning_quote = '.';
+	nb_quotes = 0;
+	start = 0;
+	while (str[start])
+	{
+		if (ft_char_in_base(str[start], BASE_QUOTES) && \
+		nb_quotes % 2 == 0)
+			reigning_quote = str[start];
+		if (str[start] == reigning_quote)
+			nb_quotes++;
+		start++;
+	}
+	parse_struct->nb_reigning_quotes = nb_quotes;
+	parse_struct->l_reign_q = reigning_quote;
+	return (true);
 }
 
 bool	ft_char_is_a_reigning_quote(char *str, int i)
