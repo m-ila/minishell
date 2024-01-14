@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 17:03:47 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/14 20:38:34 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 
 /* ========================== DEFINE MSG ==================================== */
 # define SYNTAX_ERR "syntax error near unexpected token '"
+# define SYNTAX_ERR_Q "syntax error - unclosed quotes '"
 # define ERR_GEN_M_CMDS "malloc error gen arr cmds"
 # define ERR_GEN_M_TKS "malloc error gen arr tokens"
 # define PRINT_SEP_T "========================= DATA ========================="
@@ -94,15 +95,12 @@ typedef struct s_cmd {
 	char			*epured_str;
 	char			**cmd_w_arg;
 	char			*cmd;
-	int				nb_s_quote;
-	int				nb_d_quote;
-	bool			b_has_quote;
-	char			quote_used;
 }	t_cmd;
 
 typedef struct s_parse {
-	int		token_nb;
 	bool	start_w_val_tok;
+	int		nb_reigning_quotes;
+	char	l_reign_q;
 	t_cmd	*struct_cmds;
 }	t_parse;
 
@@ -196,6 +194,7 @@ int			ft_print_msg(char *str, char type, int return_value, t_data *ms);
 char		*ft_char_print_msg(char *str, char type, char *return_value, t_data *ms);
 /* parsing/quoting_rule.c */
 int			ft_elem_is_in_quotes(char *str, int i);
+bool		ft_count_reigning_quotes(char *str, t_parse *parse_struct);
 bool		ft_char_is_a_reigning_quote(char *str, int i);
 int			ft_get_index_next_reign_quo(char *str, int from);
 /* parsing/to_node.c */
