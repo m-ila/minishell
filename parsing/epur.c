@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:33:21 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 18:21:16 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/14 16:52:48 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ bool	ft_cond_cut(char *str, int i)
 	if (ft_char_is_a_reigning_quote(str, i))
 		return (true);
 	if (ft_char_in_base(str[i], BASE_QUOTES) && \
-	!ft_elem_is_in_quotes(str, i))
+	ft_elem_is_in_quotes(str, i) == NOT_QUOTED)
+		return (true);
+	if (ft_char_in_base(str[i], " ") && \
+	ft_elem_is_in_quotes(str, i) == NOT_QUOTED)
 		return (true);
 	return (false);
 }
