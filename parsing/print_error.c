@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:51:09 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/14 20:38:48 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 21:44:35 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_msg(char *str, char type, bool del_struct, t_data *ms)
 		ft_printf_fd(2, "minishell: error: %s\n", str);
 	if (type == 'q')
 		ft_printf_fd(2, "%s%s%c'\n", ms->printed_line, SYNTAX_ERR_Q, \
-		ms->parse_struct->l_reign_q);	
+		ms->parse_struct->l_reign_q);
 	if (del_struct || ms)
 		return ;
 }

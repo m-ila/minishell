@@ -6,9 +6,8 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:51:00 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/12/30 21:51:14 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 21:45:38 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-

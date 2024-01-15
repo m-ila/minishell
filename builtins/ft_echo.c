@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:40:41 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/15 20:50:24 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 21:42:58 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ to do : should b->temoin = false if fail ?
 char	*ft_triple_join(char *str1, char *str2, char *str3, t_data *ms)
 {
 	char	*buff1;
-	char 	*finale;
+	char	*finale;
 
 	if (!str1 || !str2 || !str3 || !ms)
 		return (ft_strdup(""));
