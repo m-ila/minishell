@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:12:33 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 21:59:27 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 19:03:26 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,41 +42,6 @@ int	ft_add_in_env(t_data *ms, char *tag_, char *cont)
 	return (1);
 }
 
-void	ft_env_display(t_data *ms)
-{
-	int	i;
-
-	if (!ms || !ms->envi)
-		return ;
-	i = 0;
-	while (ms->envi[i])
-	{
-		ft_printf_fd(1, "%s\n", ms->envi[i]);
-		i++;
-	}
-}
-
-bool	ft_increment_shlvl(t_data *ms, char **envi)
-{
-	int		value;
-	char	*str;
-
-	if (!ms || !ms->envi)
-		return (false);
-	str = ft_get_val_in_env(envi, "SHLVL", ms);
-	if (!str || str[0] == '\0')
-		return (false);
-	value = ft_atoi(str);
-	value++;
-	free(str);
-	str = ft_itoa(value);
-	if (!str)
-		return (false);
-	ft_actualise_env(ms, "SHLVL", str);
-	free(str);
-	return (true);
-}
-
 bool	ft_tag_is_in_env(t_data *ms, char *tag)
 {
 	int	i;
@@ -91,36 +56,7 @@ bool	ft_tag_is_in_env(t_data *ms, char *tag)
 			return (true);
 		i++;
 	}
-	return (false);	
-}
-
-char	*ft_join_tag_and_val(char *tag, char *val)
-{
-	char	*str;
-	int		str_len;
-	int		i;
-	int		j;
-
-	if (!tag || !val)
-		return (NULL);
-	str_len = ft_strlen(tag) + ft_strlen(val) + 1;
-	str = ft_calloc(str_len + 1, sizeof(char));
-	if (!str)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (tag[i])
-	{
-		str[i] = tag[i];
-		i++;
-	}
-	str[i] = '=';
-	while (val[j])
-	{
-		str[i + 1 + j] = val[j];
-		j++;
-	}
-	return (str);
+	return (false);
 }
 
 int	ft_delete_in_env(t_data *ms, char *tag)
@@ -185,46 +121,5 @@ int	ft_actualise_env(t_data *ms, char *tag, char *val)
 	}
 	ft_free_2d_array(ms->envi);
 	ms->envi = env_ret;
-	return (1);
-}
-
-int	ft_init_no_env(t_data *ms)
-{
-	int		i;
-	char	**env_tab;
-
-	env_tab = ft_calloc(4, sizeof(char *));
-	i = 0;
-	while (i < 3)
-	{
-		if (i == 0)
-			env_tab[i] = ft_strdup("PWD=");
-		if (i == 1)
-			env_tab[i] = ft_strdup("SHLVL=0");
-		if (i == 2)
-			env_tab[i] = ft_strdup("_=");
-		if (!env_tab[i])
-		{
-			ft_free_2d_array(env_tab);
-			return (ft_print_msg("gen of envp arr", 'm', 0, ms));
-		}
-		i++;
-	}
-	ms->envi = env_tab;
-	return (1);
-}
-
-int	ft_env_init(char **envp, t_data *ms)
-{
-	char	**env_cpy;
-
-	if (!ms)
-		return (0);
-	if (!envp || !*envp)
-		return (ft_init_no_env(ms));
-	env_cpy = ft_copy_2d_array(envp, 0, ft_2d_lines(envp));
-	if (!env_cpy)
-		return (ft_print_msg("gen copy of envp", 'm', 0, ms));
-	ms->envi = env_cpy;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 15:47:50 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 19:01:30 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,9 @@ typedef struct s_parse {
 	char	l_reign_q;
 	char	*tmp_tag;
 	char	*tmp_val;
+	char	*str1;
+	char	*str2;
+	char	*str3;
 	t_cmd	*struct_cmds;
 }	t_parse;
 
@@ -134,29 +137,31 @@ int			ft_pwd(t_data *ms);
 /* builtins/ft_my_unset.c */
 int			ft_my_unset(t_cmd *cmds, t_data *ms);
 /*======================= ENV FOLDER =======================*/
-/* env/env_tab.c */
+/* env/env_expand.c */
+bool		ft_join_values(t_data *ms, t_cmd *cmds, int *i);
+bool		ft_var_env(t_data *ms, t_cmd *cmds);
+bool		ft_do_in_env(t_data *ms, t_cmd *cmds, t_parse *ps, int *i);
+/* env/env_init.c */
 int			ft_env_init(char **envp, t_data *ms);
 int			ft_init_no_env(t_data *ms);
-bool		ft_tag_is_in_env(t_data *ms, char *tag);
-int			ft_actualise_env(t_data *ms, char *tag, char *val);
+/* env/env_misc.c */
 bool		ft_increment_shlvl(t_data *ms, char **envi);
 void		ft_env_display(t_data *ms);
-int			ft_delete_in_env(t_data *ms, char *tag);
-int			ft_add_in_env(t_data *ms, char *tag_, char *cont);
-char		*ft_join_tag_and_val(char *tag, char *val);
-/* env/env_expand.c */
+/* env/env_str_manip.c */
 char		*ft_get_val_to_search_in_env(t_data *ms, t_cmd *cmds, int from);
-bool		ft_check_valid_env_var(t_data *ms, t_cmd *cmds, char *str);
-bool		ft_join_values(t_data *ms, t_cmd *cmds, int *i);
-bool		ft_update_epur(t_data *ms, t_cmd *cmds, int *i);
-bool		ft_var_env(t_data *ms, t_cmd *cmds);
+char		*ft_join_tag_and_val(char *tag, char *val);
 void		ft_set_char_to_null(char **str1, char **str2, char **str3);
 void		ft_multiple_free(char **str1, char **str2, char **str3);
-bool		ft_do_in_env(t_data *ms, t_cmd *cmds, t_parse *ps, int *i);
+/* env/env_tab.c */
+bool		ft_tag_is_in_env(t_data *ms, char *tag);
+int			ft_actualise_env(t_data *ms, char *tag, char *val);
+int			ft_delete_in_env(t_data *ms, char *tag);
+int			ft_add_in_env(t_data *ms, char *tag_, char *cont);
+/* env/env_upd_epur.c */
+bool		ft_update_epur(t_data *ms, t_cmd *cmds, int *i);
 /*======================= FREE FOLDER =======================*/
 /* free/free_cmd_struct.c */
 void		ft_free_cmds(t_cmd *cmds);
-
 /*======================= INIT FOLDER ========================*/
 /* init/init_loop.c */
 bool		ft_first_init(t_data *ms, char **envp);
