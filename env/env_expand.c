@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:31:38 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 14:58:51 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:35:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ char	*ft_get_val_to_search_in_env(t_data *ms, t_cmd *cmds, int from)
 		return (ft_strdup(""));
 	until = ft_strlen_unbase(cmds->epured_model, "1", from);
 	printf("\n\n\n\ncoucou\nfrom = %d\nuntil = %d\n", from, from + until);
-//	if (until == from)
-//		return(ft_strdup(""));
 	return (ft_strdup_limiters(cmds->raw_str, from, from + until));
 }
 
@@ -111,6 +109,8 @@ bool	ft_update_epur(t_data *ms, t_cmd *cmds, int *i)
 	}
 	if (ms->parse_struct->tmp_val)
 		str2 = ft_calloc(ft_strlen(ms->parse_struct->tmp_val) + 1, sizeof(char));
+	if (!ms->parse_struct->tmp_val)
+		str2 = ft_strdup("");
 	if (!str2)
 	{
 		free(str1);
@@ -138,6 +138,23 @@ bool	ft_update_epur(t_data *ms, t_cmd *cmds, int *i)
 	return (true);
 }
 
+bool	ft_do_in_env(t_data *ms, t_cmd *cmds, t_parse *ps, int *i)
+{
+	if (ft_tag_is_in_env(ms, ps->tmp_tag))
+		ps->tmp_val = ft_get_val_in_env(ms->envi, ps->tmp_tag, ms);
+	if (!ft_tag_is_in_env(ms, ps->tmp_tag))
+		ps->tmp_val = ft_strdup("");
+	if (!ps->tmp_val)
+		return (ft_print_msg("strdup env val", 'm', false, ms));
+	if (!ft_join_values(ms, cmds, i))
+		return (false);
+	if (!ft_update_epur(ms, cmds, i))
+		return (false);
+	(*i) = (*i) + ft_strlen(ps->tmp_val) - 1;
+	free(ps->tmp_val);
+	return (true);
+}
+
 bool	ft_var_env(t_data *ms, t_cmd *cmds)
 {
 	int		i;
@@ -157,18 +174,8 @@ bool	ft_var_env(t_data *ms, t_cmd *cmds)
 			ps->tmp_tag = ft_get_val_to_search_in_env(ms, cmds, i + 1);
 			if (!ps->tmp_tag)
 				return (ft_print_msg("strdup env tag", 'm', false, ms));
-			if (ft_check_valid_env_var(ms, cmds, ps->tmp_tag))
-			{
-				ps->tmp_val = ft_get_val_in_env(ms->envi, ps->tmp_tag, ms);
-				if (!ps->tmp_val)
-					return (ft_print_msg("strdup env val", 'm', false, ms));
-				if (!ft_join_values(ms, cmds, &i))
-					return (false);
-				if (!ft_update_epur(ms, cmds, &i))
-					return (false);
-				i += ft_strlen(ps->tmp_tag);
-				free(ps->tmp_val);
-			}
+			if (!ft_do_in_env(ms, cmds, ps, &i))
+				return (false);
 			free(ps->tmp_tag);
 		}
 		i++;
