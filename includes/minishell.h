@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/14 20:38:34 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:59:35 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ typedef struct s_parse {
 	bool	start_w_val_tok;
 	int		nb_reigning_quotes;
 	char	l_reign_q;
+	char	*tmp_tag;
+	char	*tmp_val;
 	t_cmd	*struct_cmds;
 }	t_parse;
 
@@ -142,6 +144,14 @@ void		ft_env_display(t_data *ms);
 int			ft_delete_in_env(t_data *ms, char *tag);
 int			ft_add_in_env(t_data *ms, char *tag_, char *cont);
 char		*ft_join_tag_and_val(char *tag, char *val);
+/* env/env_expand.c */
+char		*ft_get_val_to_search_in_env(t_data *ms, t_cmd *cmds, int from);
+bool		ft_check_valid_env_var(t_data *ms, t_cmd *cmds, char *str);
+bool		ft_join_values(t_data *ms, t_cmd *cmds, int *i);
+bool		ft_update_epur(t_data *ms, t_cmd *cmds, int *i);
+bool		ft_var_env(t_data *ms, t_cmd *cmds);
+void		ft_set_char_to_null(char **str1, char **str2, char **str3);
+void		ft_multiple_free(char **str1, char **str2, char **str3);
 /*======================= FREE FOLDER =======================*/
 /* free/free_cmd_struct.c */
 void		ft_free_cmds(t_cmd *cmds);

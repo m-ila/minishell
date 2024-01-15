@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/12 15:52:19 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/15 14:38:08 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ builtins/ft_env.c \
 builtins/ft_my_unset.c \
 builtins/ft_pwd.c \
 env/env_tab.c \
+env/env_expand.c \
 free/free_cmd_struct.c \
 init/fill_tokens.c \
 init/init_loop.c \
