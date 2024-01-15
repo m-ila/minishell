@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:58:02 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 18:58:43 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 19:14:25 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,21 @@ bool	ft_increment_shlvl(t_data *ms, char **envi)
 	ft_actualise_env(ms, "SHLVL", str);
 	free(str);
 	return (true);
+}
+
+bool	ft_tag_is_in_env(t_data *ms, char *tag)
+{
+	int	i;
+
+	if (!ms || !ms->envi || !tag || !*tag)
+		return (false);
+	i = 0;
+	while (ms->envi[i])
+	{
+		if (!ft_strncmp(tag, ms->envi[i], \
+		ft_strlen_base(ms->envi[i], "=", 0)))
+			return (true);
+		i++;
+	}
+	return (false);
 }
