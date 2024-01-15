@@ -37,7 +37,7 @@
 * [x] parsing if syntax error on sep depending on the cmd
 ![dealt with](img_readme/1.png)
 ![dealt with](img_readme/2.png)
-* [ ] expand str in case of ENV variable
+* [x] expand str in case of ENV variable
 
 ### Builtins modifications
 * [ ] changer la valeur de retour de chaque fonction (doit pouvoir retourner un code erreur en fonction du soucis, par exemple cd et echo peuvent retourner des valeurs d'erreurs différentes)
