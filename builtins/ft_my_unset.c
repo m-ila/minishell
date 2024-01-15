@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:33:08 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/10 15:00:45 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 20:53:34 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,13 @@ int	ft_my_unset(t_cmd *cmds, t_data *ms)
 	i = 1;
 	while (cmds->cmd_w_arg[i])
 	{
-		if (!ft_strncmp(cmds->cmd_w_arg[i], "SHLVL", ft_strlen("SHLVL")))
+		if (!ft_strncmp(cmds->cmd_w_arg[i], "SHLVL", ft_strlen("SHLVL ")))
 			ft_actualise_env(ms, "SHLVL", "0");
+		else if (!ft_strncmp(cmds->cmd_w_arg[i], "?", ft_strlen("? ")))
+		{
+			i++;
+			continue ;
+		}
 		else
 			ft_delete_in_env(ms, cmds->cmd_w_arg[i]);
 		i++;

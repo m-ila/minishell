@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:21:47 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 17:05:41 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 21:03:06 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void	ft_free_cmd_node(t_cmd *curr)
 		free(curr->cmd);
 	if (curr->cmd_w_arg)
 		ft_free_2d_array(curr->cmd_w_arg);
+	if (curr->ep_cmd_w_arg)
+		ft_free_2d_array(curr->ep_cmd_w_arg);
 	if (curr->raw_str)
 		free(curr->raw_str);
 	if (curr->epured_model)

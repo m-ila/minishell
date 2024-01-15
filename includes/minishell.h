@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 19:01:30 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 21:03:16 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_cmd {
 	char			*epured_model;
 	char			*epured_str;
 	char			**cmd_w_arg;
+	char			**ep_cmd_w_arg;
 	char			*cmd;
 }	t_cmd;
 

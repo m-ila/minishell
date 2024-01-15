@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:40:41 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/15 18:49:55 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 20:50:24 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int	ft_echo(t_cmd *cmds)
 		return (R_ERR_GEN);
 	i = 1;
 	n = 0;
-	len = ft_2d_lines(cmds->cmd_w_arg);
+	len = ft_2d_lines(cmds->ep_cmd_w_arg);
 	if (len > 1)
 	{
-		if (!ft_strncmp(cmds->cmd_w_arg[1], "-n", ft_strlen("-n ")))
+		if (!ft_strncmp(cmds->ep_cmd_w_arg[1], "-n", ft_strlen("-n ")))
 			n = 1;
-		while (cmds->cmd_w_arg[i + n])
+		while (cmds->ep_cmd_w_arg[i + n])
 		{
-			ft_printf_fd(1, "%s", cmds->cmd_w_arg[i + n]);
+			ft_printf_fd(1, "%s", cmds->ep_cmd_w_arg[i + n]);
 			if (i + n < len - 1)
 				ft_printf_fd(1, " ");
 			i++;

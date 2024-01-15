@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 15:18:47 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 20:49:14 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool	ft_empty_cmd(t_cmd *cmds, t_data *ms)
 /*
 to do : free the precedent if wrong ?
 or just turn temoin to false, so it would free at the end of the loop
-if first elem of cmd_w_arg is null, means cmds is only sep, so change val glob
+if first elem of ep_cmd_w_arg is null, means cmds is only sep, so change val glob
 val glob would be equal to 2 and print either a syntax err or return nothing
 */
 bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
@@ -58,25 +58,26 @@ bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
 	while (cmds && ms->b_temoin)
 	{
 		cmds->epured_model = ft_epured_model(cmds->raw_str);
+		cmds->cmd_w_arg = ft_split_epured(cmds->raw_str, cmds->epured_model, '0');
 		if (!ft_var_env(ms, ms->parse_struct->struct_cmds))
 		{
 			ms->b_temoin = false;
 			return (false);
 		}
 		cmds->epured_str = ft_epured_str(cmds->raw_str, cmds->epured_model);
-		cmds->cmd_w_arg = \
+		cmds->ep_cmd_w_arg = \
 		ft_split_epured(cmds->raw_str, cmds->epured_model, '0');
 		if (ft_str_only_sep(cmds->epured_model, '0'))
 			return (ft_empty_cmd(cmds, ms));
-		if (!cmds->cmd_w_arg)
+		if (!cmds->ep_cmd_w_arg)
 			return (false);
-		if (!cmds->cmd_w_arg[0])
+		if (!cmds->ep_cmd_w_arg[0])
 		{
 			ft_msg(cmds->next_token, 's', false, ms);
 			ms->b_temoin = false;
 			return (false);
 		}
-		cmds->cmd = ft_strdup(cmds->cmd_w_arg[0]);
+		cmds->cmd = ft_strdup(cmds->ep_cmd_w_arg[0]);
 		if (!cmds->cmd)
 		{
 			ft_msg("failed gen ms->cmd", 'm', false, ms);
@@ -156,9 +157,10 @@ t_cmd	*ft_create_cmd_node(char *raw_cmd)
 	new->next_token = NULL;
 	new->epured_model = NULL;
 	new->epured_str = NULL;
+	new->ep_cmd_w_arg = NULL;
 	new->cmd_w_arg = NULL;
 	new->cmd = NULL;
-	new->tok_next_token = error;
+	new->tok_next_token = end_of_file;
 	new->tok_prev_token = error;
 	return (new);
 }
