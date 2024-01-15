@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:40:41 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/14 16:57:05 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:49:55 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_echo(t_cmd *cmds)
 	len = ft_2d_lines(cmds->cmd_w_arg);
 	if (len > 1)
 	{
-		if (!ft_strncmp(cmds->cmd_w_arg[1], "-n", ft_strlen("-n")))
+		if (!ft_strncmp(cmds->cmd_w_arg[1], "-n", ft_strlen("-n ")))
 			n = 1;
 		while (cmds->cmd_w_arg[i + n])
 		{
