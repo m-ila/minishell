@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 14:59:35 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 15:47:50 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ bool		ft_update_epur(t_data *ms, t_cmd *cmds, int *i);
 bool		ft_var_env(t_data *ms, t_cmd *cmds);
 void		ft_set_char_to_null(char **str1, char **str2, char **str3);
 void		ft_multiple_free(char **str1, char **str2, char **str3);
+bool		ft_do_in_env(t_data *ms, t_cmd *cmds, t_parse *ps, int *i);
 /*======================= FREE FOLDER =======================*/
 /* free/free_cmd_struct.c */
 void		ft_free_cmds(t_cmd *cmds);
