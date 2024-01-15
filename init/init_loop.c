@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 12:15:27 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:28:28 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ bool	ft_malloc_s_parse(t_data *ms)
 	parse_struct->l_reign_q = '.';
 	parse_struct->tmp_tag = NULL;
 	parse_struct->tmp_val = NULL;
+	parse_struct->str1 = NULL;
+	parse_struct->str2 = NULL;
+	parse_struct->str3 = NULL;
 	ms->parse_struct = parse_struct;
 	return (true);
 }
