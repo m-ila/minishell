@@ -38,7 +38,7 @@
 ![dealt with](img_readme/1.png)
 ![dealt with](img_readme/2.png)
 * [x] expand str in case of ENV variable
-* [ ] if unset don't translate var env !!!
+* [x] if unset don't translate var env !!!
 * [ ] vérifier que ft_free_and_ret ne leaks pas quand on export sera fait
 
 ### Builtins modifications
@@ -62,3 +62,7 @@
 ## Case 3
 * OLDPWD will only be in the env when cd has been used since the launch of the terminal : needs to be changed once cd is created
 * Issue : readline quand chaine vide ferme le prog, alors que le terminal just new prompt
+
+## Env variable syntax
+* [Env variable syntax 1](https://stackoverflow.com/questions/2821043/allowed-characters-in-linux-environment-variable-names)
+* [Env variable syntax 2](https://pubs.opengroup.org/onlinepubs/000095399/basedefs/xbd_chap08.html)
