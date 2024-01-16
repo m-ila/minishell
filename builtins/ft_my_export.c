@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:27:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/16 15:31:07 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:39:35 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,20 @@
 /*
 si somehow pas une bonne syntaxe dans tag, return une error sur sa value
 */
-char	ft_get_tag(char *str, int from)
+bool	ft_exp_get_tag(char *str, int from, t_parse *p)
 {
-	char	*ret_tag;
 	int		len;
 
-	if (!str || from >= (int) ft_strlen(str))
-		return (NULL);
-	ret_tag = NULL;
+	if (!str || from >= (int) ft_strlen(str) || !p)
+		return (false);
+	p->tmp_tag = NULL;
 	len = ft_strlen_base(str, "=", from);
 	if (!len)
-		return (NULL);
-	ret_tag = ft_strdup_limiters(str, from, from + len);
-	return (ret_tag);
+		return (false);
+	p->tmp_tag = ft_strdup_limiters(str, from, from + len);
+	if (!p->tmp_tag)
+		return (false);
+	return (true);
 }
 
 int		ft_get_index_end_of_value(char *user_input, int from)
@@ -59,45 +60,76 @@ int		ft_get_index_end_of_value(char *user_input, int from)
 	return (until);
 }
 
-bool	ft_do_expand(t_data *ms, char *a_value)
+bool	ft_do_expand(t_data *ms, t_parse *p, char *a_value)
 {
-	char	*model;
-
 	if (!ms->b_temoin || !a_value)
 		return (false);
-	model = ft_epured_model(a_value);
-	if (!model)
+	p->tmp_model = ft_epured_model(a_value);
+	if (!p->tmp_model)
 		return (ft_print_msg("do expand model", 'm', false, ms));
-	if (!ft_strocc(a_value, '$'))
+	if (!ft_strocc(p->tmp_model, '$'))
 	{
-		free(model);
+		free(p->tmp_model);
 		return (true);
 	}
-	
+	while (ft_strocc(p->tmp_model, '$'))
+		if (!ft_expand_assigned_value(a_value, p, ms))
+			return (false);
+	return (true);
 }
 
-char	*ft_expand_assigned_value(char *user_input, char *model)
+bool	ft_exp_get_val(char *a_value, int from, t_parse *p, t_data *ms)
 {
+	int	len_tag;
 
+	if (!ft_tag_is_in_env(ms, p->tmp_tag))
+	{
+		p->tmp_val = ft_strdup("");
+		return (true);
+	}
+	len_tag = (int) ft_strlen(p->tmp_tag) + 1;
+	if (!ft_get_value_to_assign(a_value, from + len_tag, p))
+		return (false);
+	return (true);
 }
 
-char	*ft_get_value_to_assign(char *user_input, int from)
+bool	ft_expand_assigned_value(char *a_value, t_parse *p, t_data *ms)
 {
-	char	*to_assign;
+	int		i;
+
+	if (!ms->b_temoin || !a_value || !p->tmp_model)
+		return (false);
+	i = 0;
+	while (p->tmp_model[i])
+	{
+		if (p->tmp_model[i] == '$')
+		{
+			if (!ft_exp_get_tag(a_value, i + 1, p))
+				return (ft_print_msg("get tag exp", 'm', false, ms));
+			if (!ft_exp_get_val(a_value, i + 1, p, ms))
+				return (ft_print_msg("get val exp", 'm', false, ms));
+			if (!ft_exp_actualise_str(a_value, i, p, ms))
+				return (ft_print_msg("actualise str exp", 'm', false, ms));
+			if (!ft_exp_actualise_model(a_value, i, p, ms))
+				return (ft_print_msg("actualise model exp", 'm', false, ms));
+			free(p->tmp_tag);
+			i = -1;
+		}
+		i++;
+	}
+}
+
+bool	ft_get_value_to_assign(char *user_input, int from, t_parse *p)
+{
 	int		until;
 
 	if (!user_input || from >= (int) ft_strlen(user_input))
-		return (NULL);
+		return (false);
 	until = ft_get_index_end_of_value(user_input, from);
-	to_assign = ft_strdup_limiters(user_input, from, until);
-	return (to_assign);
-}
-
-char	ft_get_variable(char *str)
-
-bool    ft_is_valid_tag(char *str)
-{
-	
+	p->tmp_val = ft_strdup_limiters(user_input, from, until);
+	if (!p->tmp_val)
+		return (ft_print_msg("get value to assign", 'm', false, NULL));
+	return (true);
 }
 
 void    ft_export(t_data *ms, t_cmd *cmds)

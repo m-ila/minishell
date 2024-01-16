@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/16 13:23:47 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/16 21:08:03 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ typedef struct s_parse {
 	char	*str1;
 	char	*str2;
 	char	*str3;
+	char	*tmp_str;
+	char	*tmp_model;
 	t_cmd	*struct_cmds;
 }	t_parse;
 
