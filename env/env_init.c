@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 19:00:00 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 19:01:32 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:14:35 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@ int	ft_init_no_env(t_data *ms)
 	int		i;
 	char	**env_tab;
 
-	env_tab = ft_calloc(4, sizeof(char *));
+	env_tab = ft_calloc(5, sizeof(char *));
 	i = 0;
-	while (i < 3)
+	while (i < 4)
 	{
 		if (i == 0)
-			env_tab[i] = ft_strdup("PWD=");
+			env_tab[i] = ft_strdup("?=");
 		if (i == 1)
-			env_tab[i] = ft_strdup("SHLVL=0");
+			env_tab[i] = ft_strdup("PWD=");
 		if (i == 2)
+			env_tab[i] = ft_strdup("SHLVL=0");
+		if (i == 3)
 			env_tab[i] = ft_strdup("_=");
 		if (!env_tab[i])
 		{

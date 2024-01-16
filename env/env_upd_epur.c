@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:09 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 19:03:01 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:14:48 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static bool	ft_epur_str2(t_data *ms, char **str2, char **str1)
 
 	index = -1;
 	if (ms->parse_struct->tmp_val)
-		*str2 = ft_calloc(ft_strlen(ms->parse_struct->tmp_val) + 1, \
-		sizeof(char));
+		*str2 = ft_epured_model(ms->parse_struct->tmp_val);
 	if (!ms->parse_struct->tmp_val)
 		*str2 = ft_strdup("");
 	if (!str2)
@@ -28,8 +27,6 @@ static bool	ft_epur_str2(t_data *ms, char **str2, char **str1)
 		ms->b_temoin = false;
 		return (false);
 	}
-	while (++index < (int) ft_strlen(ms->parse_struct->tmp_val))
-		(*str2)[index] = '1';
 	return (true);
 }
 
