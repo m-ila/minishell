@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 19:00:00 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/16 14:14:35 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:21:30 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	ft_init_no_env(t_data *ms)
 			env_tab[i] = ft_strdup("SHLVL=0");
 		if (i == 3)
 			env_tab[i] = ft_strdup("_=");
+		if (i == 4)
+			env_tab[i] = ft_strdup("TEST=Coucou       ahah eheheh");
 		if (!env_tab[i])
 		{
 			ft_free_2d_array(env_tab);
