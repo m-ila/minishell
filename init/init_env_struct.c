@@ -6,28 +6,19 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/06 18:12:17 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/16 13:23:05 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/*
-bool	ft_env_struct_init(t_data *ms, char **envp)
+char	*ft_quote_the_val(char *str, t_data *ms)
 {
-	t_env	*env_struct;
-
-	env_struct = ft_init_envi(envp);
-	if (!env_struct)
-	{
-		ft_printf_fd(2, "Gen of env_struct failed\n");
-		return (false);
-	}
-	else
-		ms->env_struct = env_struct;
-	return (true);
+	if (!str)
+		return (NULL);
+	return (ft_triple_join("\"", str, "\"", ms));
 }
-*/
+
 /*
 doesn't check if tag is in env, but returns null if not found in env
 */
