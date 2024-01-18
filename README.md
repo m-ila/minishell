@@ -39,6 +39,9 @@
 ![dealt with](img_readme/2.png)
 * [x] expand str in case of ENV variable
 * [x] if unset don't translate var env !!!
+* [ ] $_ n'est pas géré puisque ```_``` n'est pas alphanum donc chercher comparaison
+* [ ] normer ft_export
+* [ ] finir ft_export
 * [ ] parsing end token
 * [ ] vérifier que ft_free_and_ret ne leaks pas quand on export sera fait
 
