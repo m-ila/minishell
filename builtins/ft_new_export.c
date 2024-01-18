@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:27:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/18 22:12:14 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 00:10:27 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,15 @@ bool	ft_translate_tag_to_val(t_parse *p)
 	doll_ind = ft_strindex(p->tmp_model, '$');
 	if (doll_ind == -1)
 		return (true);
-	printf("\n\nindex dollar = %d\n", doll_ind);
 	/* left */
 	p->str1 = ft_strdup_limiters(p->tmp_str, 0, doll_ind);
-	printf("\n\np->str1 = (d)%s(f)\n", p->str1);
 	p->model1 = ft_strdup_limiters(p->tmp_model, 0, doll_ind);
-	printf("\n\ndoll index + 1 = %d\nstrlen_base = %d\n", doll_ind + 1, ft_strlen_base(p->tmp_model, "0sS", doll_ind + 1));
 	/* tag before processing */
 	p->str2 = ft_strdup_limiters(p->tmp_str, doll_ind + 1, \
 	doll_ind + 1 + ft_strlen_base(p->tmp_model, "0sS$", doll_ind + 1));
-	printf("\n\np->str2 = (d)%s(f)\n", p->str2);
 	len_sum = (int) ft_strlen(p->str1) + (int) ft_strlen(p->str2) + 1;
 	/* right */
 	p->str3 = ft_strdup_limiters(p->tmp_str, len_sum, (int) ft_strlen(p->tmp_str));
-	/* test */
-	printf("\n\nstr : %s\nlen_sum = %d\nchar = %c\nstr3 = (d)%s(f)\n", \
-	p->tmp_str, len_sum, p->tmp_str[len_sum], p->str3);
-	/* test */
 	p->model3 = ft_strdup_limiters(p->tmp_model, len_sum, (int) ft_strlen(p->tmp_str));
 	if (!p->str1 || !p->str2 || !p->str3 || !p->model1 || !p->model3)
 		return (ft_free_expand(&p, NULL, NULL, false));
@@ -101,7 +93,6 @@ bool	ft_translate_vars(char **str, t_data *ms)
 	p = ms->parse_struct;
 	p->tmp_model = ft_epured_model(*str, ft_cut_only_quotes);
 	p->tmp_str = ft_strdup(*str);
-	printf("str : %s\nOG model : %s\nocc = %d\n", p->tmp_str, p->tmp_model, ft_strocc_base(p->tmp_model, "$0qQ"));
 	if (!p->tmp_model || !p->tmp_str)
 		return (false);
 	if (!ft_strocc_base(p->tmp_model, "$0qQ"))
@@ -125,7 +116,6 @@ bool	ft_translate_vars(char **str, t_data *ms)
 		ft_free_expand(&p, &model_quotes, &p->tmp_model, true);
 		ft_multiple_free(&p->model1, &p->model2, &p->model3);
 		p->tmp_model = ft_epured_model(p->tmp_str, ft_cut_only_quotes);
-		printf("str : %s\nnew model : %s\n\n", p->tmp_str, p->tmp_model);
 		if (!p->tmp_model)
 			return (ft_free_return(&p->tmp_model, NULL, NULL, false));
 	}
@@ -167,7 +157,7 @@ bool	ft_local_str(char *str, t_data *ms, t_cmd *c)
 	ft_printf_fd(1, "tag : (d)%s(f)\nval : (d)%s(f)\n", loc_tag, loc_val);
 	ft_translate_vars(&loc_tag, ms);
 	ft_translate_vars(&loc_val, ms);
-	ft_printf_fd(1, "translated tag : (d)%s(f)\ntranslated val : (d)%s(f)\n", loc_tag, loc_val);
+	ft_printf_fd(1, "translated tag : (d)%s(f)\ntranslated val : (d)%s(f)\n\n", loc_tag, loc_val);
 	return (ft_free_return(&loc_tag, &loc_val, NULL, true));
 }
 
@@ -231,7 +221,8 @@ int    ft_export(t_data *ms, t_cmd *cmds)
 	export_split = ft_split_epured(ms->user_input, export_model, '0');
 	i = 1;
 //	p = ms->parse_struct;
-	ft_printf_fd(1, "export model : (d)%s(f)\ncleaned str : (d)%s(f)\n", export_model, cleaned_str);
+	ft_printf_fd(1, "export model : (d)%s(f)\ncleaned str : (d)%s(f)\n", \
+	export_model, cleaned_str);
 	while (export_split[i])
 	{
 		ft_printf_fd(1, "split[%d] : (d)%s(f)\n", i, export_split[i]);
