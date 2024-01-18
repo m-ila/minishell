@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:33:21 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/18 15:28:33 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:37:21 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*ft_epured_str(char *str, char *model)
 	return (epured);
 }
 
-char	*ft_epured_model(char *s)
+char	*ft_epured_model(char *s, bool (*fun)(char*, int))
 {
 	char	*model;
 	int		i;
@@ -81,9 +81,9 @@ char	*ft_epured_model(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (!ft_cond_cut(s, i))
+		if (!fun(s, i))
 			ft_assign_char(s, i, model);
-		if (ft_cond_cut(s, i))
+		if (fun(s, i))
 			model[i] = '0';
 		i++;
 	}
@@ -98,6 +98,17 @@ bool	ft_cond_cut(char *str, int i)
 	ft_elem_is_in_quotes(str, i) == NOT_QUOTED)
 		return (true);
 	if (ft_char_in_base(str[i], " ") && \
+	ft_elem_is_in_quotes(str, i) == NOT_QUOTED)
+		return (true);
+	return (false);
+}
+
+bool	ft_export_cond_cut(char *str, int i)
+{
+	if (ft_char_is_a_reigning_quote(str, i) && \
+	(!str[i + 1] || ft_iswhitespace(str[i + 1])))
+		return (true);
+	if (ft_iswhitespace(str[i]) && \
 	ft_elem_is_in_quotes(str, i) == NOT_QUOTED)
 		return (true);
 	return (false);
