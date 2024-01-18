@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/16 12:22:17 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:39:10 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
 		return (false);
 	while (cmds && ms->b_temoin)
 	{
-		cmds->epured_model = ft_epured_model(cmds->raw_str);
+		cmds->epured_model = ft_epured_model(cmds->raw_str, ft_cond_cut);
 		cmds->cmd_w_arg = ft_split_epured(cmds->raw_str, cmds->epured_model, '0');
 		if (!ft_var_env(ms, ms->parse_struct->struct_cmds))
 		{
@@ -67,7 +67,7 @@ bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
 		cmds->epured_str = ft_epured_str(cmds->raw_str, cmds->epured_model);
 		cmds->ep_cmd_w_arg = \
 		ft_split_epured(cmds->raw_str, cmds->epured_model, '0');
-		if (ft_str_only_sep(cmds->epured_model, '0'))
+		if (ft_only_sep_base(cmds->epured_model, "0Ss"))
 			return (ft_empty_cmd(cmds, ms));
 		if (!cmds->ep_cmd_w_arg)
 			return (false);
