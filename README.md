@@ -39,6 +39,7 @@
 ![dealt with](img_readme/2.png)
 * [x] expand str in case of ENV variable
 * [x] if unset don't translate var env !!!
+* [ ] parsing end token
 * [ ] vérifier que ft_free_and_ret ne leaks pas quand on export sera fait
 
 ### Builtins modifications
