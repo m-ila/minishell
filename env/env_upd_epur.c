@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:09 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/16 14:14:48 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:39:40 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 static bool	ft_epur_str2(t_data *ms, char **str2, char **str1)
 {
-	int	index;
-
-	index = -1;
 	if (ms->parse_struct->tmp_val)
-		*str2 = ft_epured_model(ms->parse_struct->tmp_val);
+		*str2 = ft_epured_model(ms->parse_struct->tmp_val, ft_cond_cut);
 	if (!ms->parse_struct->tmp_val)
 		*str2 = ft_strdup("");
 	if (!str2)
