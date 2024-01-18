@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 17:15:41 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 15:58:17 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:54:29 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,20 @@ et de son previous token too (?)
 */
 t_tokens	ft_which_redir_token(char *str, char which)
 {
-	if (!ft_strncmp(str, "<", ft_strlen(str)))
+	if (!ft_strncmp(str, "<", ft_strlen(str) + 1))
 		return (redir_in);
-	else if (!ft_strncmp(str, ">", ft_strlen(str)))
+	else if (!ft_strncmp(str, ">", ft_strlen(str) + 1))
 		return (redir_out);
-	else if (!ft_strncmp(str, "<<", ft_strlen(str)))
+	else if (!ft_strncmp(str, "<<", ft_strlen(str) + 1))
 		return (heredoc);
-	else if (!ft_strncmp(str, ">>", ft_strlen(str)))
+	else if (!ft_strncmp(str, ">>", ft_strlen(str) + 1))
 		return (redir_out_app);
-	else if (!ft_strncmp(str, "|", ft_strlen(str)))
+	else if (!ft_strncmp(str, "|", ft_strlen(str) + 1))
 		return (pipe_);
 	else if (!ft_strlen(str))
 	{
 		if (which == 'p')
-			return (redir_in);
+			return (start);
 		if (which == 'n')
 			return (end_of_file);
 	}

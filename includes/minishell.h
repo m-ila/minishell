@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/18 15:38:51 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/18 19:58:45 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ typedef enum s_tokens
 	end_of_file,
 	str,
 	var,
-	error
+	error,
+	start
 }t_tokens;
 
 typedef struct s_cmd {
@@ -107,6 +108,9 @@ typedef struct s_parse {
 	char	*str1;
 	char	*str2;
 	char	*str3;
+	char	*model1;
+	char	*model2;
+	char	*model3;
 	char	*tmp_str;
 	char	*tmp_model;
 	t_cmd	*struct_cmds;
@@ -135,6 +139,8 @@ char		*ft_triple_join(char *str1, char *str2, char *str3, t_data *ms);
 /* builtins/ft_env.c */
 int			ft_env(t_data *ms);
 /* builtins/ft_export.c */
+int		    ft_export(t_data *ms, t_cmd *cmds);
+int			ft_export_first_eq(char *str);
 /* builtins/ft_pwd.c */
 int			ft_pwd(t_data *ms);
 /* builtins/ft_my_unset.c */
@@ -190,6 +196,7 @@ void		ft_loop(t_data *ms);
 char		*ft_epured_model(char *s, bool (*fun)(char *, int));
 bool		ft_cond_cut(char *str, int i);
 bool		ft_export_cond_cut(char *str, int i);
+bool		ft_cut_only_quotes(char *str, int i);
 char		*ft_epured_str(char *str, char *model);
 /*void		ft_add_epured_to_cmd(t_cmd *cmds);*/
 /* parsing/parse_get.c */

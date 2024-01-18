@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 18:28:28 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/18 20:59:21 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ bool	ft_malloc_s_parse(t_data *ms)
 	parse_struct->str1 = NULL;
 	parse_struct->str2 = NULL;
 	parse_struct->str3 = NULL;
+	parse_struct->model1 = NULL;
+	parse_struct->model2 = NULL;
+	parse_struct->model3 = NULL;
 	ms->parse_struct = parse_struct;
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:02:10 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/14 17:13:54 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:46:22 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ t_data *ms
 */
 int	ft_builtin(t_cmd *cmds, t_data *ms)
 {
-	if (!ft_strncmp(cmds->cmd, "cd", ft_strlen("cd")))
+	if (!ft_strncmp(cmds->cmd, "cd", ft_strlen("cd") + 1))
 		return (ft_cd(cmds, ms));
-	if (!ft_strncmp(cmds->cmd, "echo", ft_strlen("echo")))
+	if (!ft_strncmp(cmds->cmd, "echo", ft_strlen("echo") + 1))
 		return (ft_echo(cmds));
-	if (!ft_strncmp(cmds->cmd, "env", ft_strlen("env")))
+	if (!ft_strncmp(cmds->cmd, "env", ft_strlen("env") + 1))
 		return (ft_env(ms));
-	if (!ft_strncmp(cmds->cmd, "export", ft_strlen("export")))
-		return (R_EX_OK);
-	if (!ft_strncmp(cmds->cmd, "pwd", ft_strlen("pwd")))
+	if (!ft_strncmp(cmds->cmd, "export", ft_strlen("export") + 1))
+		return (ft_export(ms, cmds));
+	if (!ft_strncmp(cmds->cmd, "pwd", ft_strlen("pwd") + 1))
 		return (ft_pwd(ms));
-	if (!ft_strncmp(cmds->cmd, "unset", ft_strlen("unset")))
+	if (!ft_strncmp(cmds->cmd, "unset", ft_strlen("unset") + 1))
 		return (ft_my_unset(cmds, ms));
 	return (R_ERR_GEN);
 }

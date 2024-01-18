@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:45:43 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 16:00:52 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:18:17 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 bool	ft_add_prev_token_to_node(t_cmd *struct_cmd, t_data *ms)
 {
 	t_cmd	*tmp;
+	printf("debug\n\n\n\n");
 
 	if (!struct_cmd || !ms)
 		return (false);
@@ -30,19 +31,21 @@ bool	ft_add_prev_token_to_node(t_cmd *struct_cmd, t_data *ms)
 	while (tmp)
 	{
 		tmp->prev_token = tmp->prev->next_token;
+		tmp->tok_prev_token = ft_which_redir_token(tmp->prev_token, 'p');
 		tmp = tmp->next;
 	}
 	return (true);
 }
 
 /* if not, starts by stdin */
-bool	ft_add_first_prev_token_node(char *str, t_cmd *struct_cmd)
+bool	ft_add_first_prev_token_node(char *str, t_cmd *c)
 {
-	if (!struct_cmd)
+	if (!c)
 		return (false);
 	if (!str)
 		return (true);
-	struct_cmd->prev_token = ft_strdup(str);
+	c->prev_token = ft_strdup(str);
+	c->tok_prev_token = ft_which_redir_token(c->prev_token, 'p');
 	free(str);
 	str = NULL;
 	return (true);
@@ -56,5 +59,6 @@ bool	ft_add_next_token_to_node(char *str, t_cmd *struct_cmd)
 		return (false);
 	last = ft_go_to_last_cmd_node(struct_cmd);
 	last->next_token = ft_strdup(str);
+	last->tok_next_token = ft_which_redir_token(last->next_token, 'n');
 	return (true);
 }

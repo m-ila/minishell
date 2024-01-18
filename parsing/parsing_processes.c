@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 16:05:41 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:34:03 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 	{
 		ms->parse_struct->struct_cmds = buff;
 		buff->prev_token = ft_strdup(ms->tmp_str);
+		buff->tok_prev_token = ft_which_redir_token(buff->prev_token, 'p');
 	}
 	else
 		ft_add_node_to_cmds(&ms->parse_struct->struct_cmds, buff);
@@ -157,8 +158,8 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 	}
 	if (cmd_struct && temoin)
 	{
-		temoin = ft_add_prev_token_to_node(ms->parse_struct->struct_cmds, ms);
-		temoin = ft_add_token_val_to_struct(ms->parse_struct->struct_cmds);
+	//	temoin = ft_add_prev_token_to_node(ms->parse_struct->struct_cmds, ms);
+	//	temoin = ft_add_token_val_to_struct(ms->parse_struct->struct_cmds);
 	}
 	temoin = ft_parse_cmd(ms->parse_struct->struct_cmds, ms);
 }

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/18 15:39:10 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:25:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ void	ft_cmd_display(t_cmd *cmds)
 			ft_printf_fd(1, "epured_model : (d)%s(f)\n", cmds->epured_model);
 		if (cmds->epured_str)
 			ft_printf_fd(1, "epured_str : (d)%s(f)\n", cmds->epured_str);
+		printf("\nprev tok : %d\n",cmds->tok_prev_token);
+		printf("next tok : %d\n\n\n",cmds->tok_next_token);
 		i++;
 		cmds = cmds->next;
 	}
@@ -130,6 +132,7 @@ void	ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add)
 	end->next = to_add;
 	to_add->prev = end;
 	to_add->prev_token = ft_strdup(to_add->prev->next_token);
+	to_add->tok_prev_token = ft_which_redir_token(to_add->prev_token, 'p');
 }
 
 /* TO DO : change val globale */
@@ -161,7 +164,7 @@ t_cmd	*ft_create_cmd_node(char *raw_cmd)
 	new->cmd_w_arg = NULL;
 	new->cmd = NULL;
 	new->tok_next_token = end_of_file;
-	new->tok_prev_token = error;
+	new->tok_prev_token = start;
 	return (new);
 }
 
