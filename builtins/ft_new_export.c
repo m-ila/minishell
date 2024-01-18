@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:27:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/18 21:26:03 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/18 22:12:14 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,20 @@ bool	ft_translate_tag_to_val(t_parse *p)
 	printf("\n\nindex dollar = %d\n", doll_ind);
 	/* left */
 	p->str1 = ft_strdup_limiters(p->tmp_str, 0, doll_ind);
+	printf("\n\np->str1 = (d)%s(f)\n", p->str1);
 	p->model1 = ft_strdup_limiters(p->tmp_model, 0, doll_ind);
+	printf("\n\ndoll index + 1 = %d\nstrlen_base = %d\n", doll_ind + 1, ft_strlen_base(p->tmp_model, "0sS", doll_ind + 1));
 	/* tag before processing */
 	p->str2 = ft_strdup_limiters(p->tmp_str, doll_ind + 1, \
-	doll_ind + 1 + ft_strlen_base(p->tmp_model, "0", doll_ind + 1));
+	doll_ind + 1 + ft_strlen_base(p->tmp_model, "0sS$", doll_ind + 1));
+	printf("\n\np->str2 = (d)%s(f)\n", p->str2);
 	len_sum = (int) ft_strlen(p->str1) + (int) ft_strlen(p->str2) + 1;
 	/* right */
 	p->str3 = ft_strdup_limiters(p->tmp_str, len_sum, (int) ft_strlen(p->tmp_str));
+	/* test */
+	printf("\n\nstr : %s\nlen_sum = %d\nchar = %c\nstr3 = (d)%s(f)\n", \
+	p->tmp_str, len_sum, p->tmp_str[len_sum], p->str3);
+	/* test */
 	p->model3 = ft_strdup_limiters(p->tmp_model, len_sum, (int) ft_strlen(p->tmp_str));
 	if (!p->str1 || !p->str2 || !p->str3 || !p->model1 || !p->model3)
 		return (ft_free_expand(&p, NULL, NULL, false));
