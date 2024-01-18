@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/16 21:08:03 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:38:51 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,9 @@ void		ft_loop(t_data *ms);
 
 /*====================== PARSING FOLDER ======================*/
 /* parsing/epur.c */
-char		*ft_epured_model(char *s);
+char		*ft_epured_model(char *s, bool (*fun)(char *, int));
 bool		ft_cond_cut(char *str, int i);
+bool		ft_export_cond_cut(char *str, int i);
 char		*ft_epured_str(char *str, char *model);
 /*void		ft_add_epured_to_cmd(t_cmd *cmds);*/
 /* parsing/parse_get.c */
