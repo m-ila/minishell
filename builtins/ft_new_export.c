@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:27:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 00:10:27 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 00:23:19 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ int	ft_free_expand(t_parse **p, char **str1, char **str2, int ret)
 		(*p)->model3 = NULL;
 	}
 	ft_free_return(&(*p)->str1, &(*p)->str2, &(*p)->str3, ret);
-	ft_free_return(&(*p)->tmp_tag, &(*p)->tmp_model, NULL, ret);
-	ft_free_return(NULL, &(*p)->tmp_val, NULL, ret);
+	ft_free_return(&(*p)->tmp_tag, &(*p)->tmp_model, &(*p)->tmp_val, ret);
 	return (ft_free_return(str1, str2, NULL, ret));
 }
 
@@ -130,12 +129,7 @@ bool	ft_translate_vars(char **str, t_data *ms)
 		free(*str);
 	}
 	free(p->tmp_model);
-	if (p->model1)
-		free(p->model1);
-	if (p->model2)
-		free(p->model2);
-	if (p->model3)
-		free(p->model3);
+	ft_free_return(&p->model1, &p->model2, &p->model3, true);
 	*str = p->tmp_str;
 	return (true);
 }
@@ -157,6 +151,8 @@ bool	ft_local_str(char *str, t_data *ms, t_cmd *c)
 	ft_printf_fd(1, "tag : (d)%s(f)\nval : (d)%s(f)\n", loc_tag, loc_val);
 	ft_translate_vars(&loc_tag, ms);
 	ft_translate_vars(&loc_val, ms);
+	if (!loc_tag || !loc_val)
+		return (ft_free_return(&loc_tag, &loc_val, NULL, false));
 	ft_printf_fd(1, "translated tag : (d)%s(f)\ntranslated val : (d)%s(f)\n\n", loc_tag, loc_val);
 	return (ft_free_return(&loc_tag, &loc_val, NULL, true));
 }
