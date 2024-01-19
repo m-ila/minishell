@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/18 16:34:03 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 15:36:10 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 	int		index;
 	bool	temoin;
 	t_cmd	*cmd_struct;
+	t_cmd	*last;
 
 	index = 0;
 	temoin = true;
@@ -156,10 +157,11 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 		if (temoin)
 			temoin = ft_parsing_token_process(user_input, &index, ms);
 	}
-	if (cmd_struct && temoin)
-	{
-	//	temoin = ft_add_prev_token_to_node(ms->parse_struct->struct_cmds, ms);
-	//	temoin = ft_add_token_val_to_struct(ms->parse_struct->struct_cmds);
-	}
 	temoin = ft_parse_cmd(ms->parse_struct->struct_cmds, ms);
+	last = ft_go_to_last_cmd_node(ms->parse_struct->struct_cmds);
+	if (last->tok_next_token != end_of_file)
+	{
+		ms->b_temoin = false;
+		ft_msg(last->next_token, 's', false, ms);
+	}
 }
