@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:51:00 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 18:42:13 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 19:18:12 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ void	ft_set_r_val(int val, t_data *ms)
 	free(str_val);
 	return ;
 }
-
-void	ft_ctrl_c(int val, t_data *ms)
+/*
+void	ft_ctrl_c(int val)
 {
-	t_parse	*p;
-
-	p = ms->parse_struct;
-	if (p->heredoc_fd > -1)
+	(void)val;
+	if (p && p->heredoc_fd > -1)
 	{
 		ft_printf_fd(2, "^C\n");
 		close(p->heredoc_fd);
@@ -43,9 +41,11 @@ void	ft_ctrl_c(int val, t_data *ms)
 	}
 	ft_set_r_val(R_CTRL_C, ms);
 }
+*/
 /*
-void	ft_ctrl_c(int val)
+void	ft_ctrl_d(int val, t_data *ms)
 {
 	g_return_val = val;
+	ft_set_r_val(R_CTRL_D, ms);
 }
 */

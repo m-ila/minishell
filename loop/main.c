@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 16:09:42 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 19:20:52 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	main(int argc, char **argv, char **envp)
 
 	envp = NULL;
 	g_return_val = 0;
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	ms = malloc(sizeof(t_data));
 	if (!ms)
 		return (R_ERR_GEN);
@@ -113,5 +115,5 @@ int	main(int argc, char **argv, char **envp)
 	free(ms->curr_work_dir);
 	free(ms->parse_struct);
 	free(ms);
-	return (0);
+	return (g_return_val);
 }
