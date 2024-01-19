@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 12:22:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:11:30 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ int			ft_export(t_data *ms, t_cmd *cmds);
 bool		ft_translate_vars(char **str, t_data *ms);
 bool		ft_local_str(char *str, t_data *ms, t_cmd *c);
 bool		ft_exp_in_env(char *t, char *v, t_data *ms);
+bool		ft_export_bad_char(char **t, char **v);
 /* builtins/ft_pwd.c */
 int			ft_pwd(t_data *ms);
 /* builtins/ft_my_unset.c */
