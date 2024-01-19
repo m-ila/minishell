@@ -30,7 +30,7 @@
 ### Marianne
 * [x] env
 * [x] make that envp = envi
-* [ ] builtins (85%)
+* [x] builtins
 * [x] finish parsing quotes
 * [x] find where the issue with empty cmd ends up closing
 * [x] fix ft_strncmp comp in loop
@@ -41,7 +41,7 @@
 * [x] if unset don't translate var env !!!
 * [ ] $_ n'est pas géré puisque ```_``` n'est pas alphanum donc chercher comparaison
 * [ ] normer ft_export
-* [ ] finir ft_export
+* [x] finir ft_export
 * [ ] parsing end token
 * [ ] vérifier que ft_free_and_ret ne leaks pas quand on export sera fait
 
