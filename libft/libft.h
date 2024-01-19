@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 00:25:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 19:41:45 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:48:56 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_atoi(const char *nptr);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
-int		ft_isdigit(int c);
+int		ft_isdigit(char c);
 int		ft_isprint(int c);
 int		ft_iswhitespace(char c);
 char	*ft_strdup(const char *s);

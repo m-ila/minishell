@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 22:17:19 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/10/11 16:34:21 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 13:48:36 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_isprint(int c)
 		return (0);
 }
 
-int	ft_isdigit(int c)
+int	ft_isdigit(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
