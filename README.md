@@ -42,6 +42,7 @@
 * [ ] $_ n'est pas géré puisque ```_``` n'est pas alphanum donc chercher comparaison
 * [ ] normer ft_export
 * [x] finir ft_export
+* [ ] export : SHLVL, if value non numerical, set SHLVL to 0, if num, set to val - 1
 * [ ] parsing end token
 * [ ] vérifier que ft_free_and_ret ne leaks pas quand on export sera fait
 
