@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 13:11:30 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:39:58 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@
 # define R_EX_OK 0
 # define R_ERR_GEN 1
 # define R_ERR_SH_B 2
+# define R_CMD_N_EX 126
+# define R_CMD_N_F 127
+# define R_CTRL_C 130
 
 # ifndef SIZE_PATH_MAX
 #  define SIZE_PATH_MAX 4096
@@ -54,7 +57,7 @@
 # define SINGLE_QUOTED 1
 # define DOUBLE_QUOTED 2
 /* =========================== GLOB VARIABLE ================================ */ 
-/*int	g_return_val;*/
+extern int	g_return_val;
 
 /* ============================ STRUCTURES ================================== */
 
@@ -113,6 +116,7 @@ typedef struct s_parse {
 	char	*model3;
 	char	*tmp_str;
 	char	*tmp_model;
+	int		heredoc_fd;
 	t_cmd	*struct_cmds;
 }	t_parse;
 
@@ -137,7 +141,7 @@ int			ft_cd(t_cmd *cmds, t_data *ms);
 int			ft_echo(t_cmd *cmds);
 char		*ft_triple_join(char *str1, char *str2, char *str3, t_data *ms);
 /* builtins/ft_env.c */
-int			ft_env(t_data *ms);
+int			ft_env(t_data *ms, t_cmd *c);
 /* builtins/ft_export.c */
 int			ft_free_return(char **str1, char **str2, char **str3, int ret);
 int			ft_free_expand(t_parse **p, char **str1, char **str2, int ret);
@@ -196,10 +200,8 @@ t_cmd		*ft_create_cmd_node(char *raw_cmd);
 t_cmd		*ft_go_to_last_cmd_node(t_cmd *cmd_node);
 void		ft_cmd_display(t_cmd *cmds);
 bool		ft_parse_cmd(t_cmd *cmds, t_data *ms);
-
 /*======================= LOOP FOLDER ========================*/
 void		ft_loop(t_data *ms);
-
 /*====================== PARSING FOLDER ======================*/
 /* parsing/epur.c */
 char		*ft_epured_model(char *s, bool (*fun)(char *, int));
@@ -238,7 +240,10 @@ int			ft_get_index_next_reign_quo(char *str, int from);
 bool		ft_add_next_token_to_node(char *str, t_cmd *struct_cmd);
 bool		ft_add_first_prev_token_node(char *str, t_cmd *struct_cmd);
 bool		ft_add_prev_token_to_node(t_cmd *struct_cmd, t_data *ms);
-/* parsing/tmp.c */
-
+/*====================== SIGNAL  FOLDER ======================*/
+/* signal/signal.c */
+void		ft_set_r_val(int val, t_data *ms);
+void		ft_ctrl_d(int val, t_data *ms);
+void		ft_ctrl_c(int val, t_data *ms);
 
 #endif 
