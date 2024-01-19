@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:58:02 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/16 13:58:41 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 14:04:38 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,22 @@ bool	ft_increment_shlvl(t_data *ms, char **envi)
 
 bool	ft_tag_is_in_env(t_data *ms, char *tag)
 {
-	int	i;
+	int		i;
+	char	*t;
 
 	if (!ms || !ms->envi || !tag || !*tag)
 		return (false);
 	i = 0;
+	t = NULL;
 	while (ms->envi[i])
 	{
-		if (!ft_strncmp(tag, ms->envi[i], \
-		ft_strlen_base(ms->envi[i], "=", 0)))
-			return (true);
+		t = ft_strdup_limiters(ms->envi[i], 0, \
+		ft_strlen_base(ms->envi[i], "=", 0));
+		if (!t)
+			return (NULL);
+		if (!ft_strncmp(tag, t, ft_strlen(t) + 1))
+			return (ft_free_return(&t, NULL, NULL, true));
+		free(t);
 		i++;
 	}
 	return (false);
