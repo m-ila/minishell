@@ -2,14 +2,15 @@
 
 # To do
 
-* [ ] parse si commande est valable
+* [x] parse si commande est valable
 * [x] n'est pas valable si ruling quotes pas pair
 * [x] est valable si commande est "vide" (geree par exec, penser a bien mod la var de g_ret)
 * [ ] est-ce que check paths uniquement quand exec ou avant ?
 
 
-* [ ] creer variable ```$?``` et assign var globale dds, ou plutot si lancee juste afficher g_ret ?
-* [ ] put builtins in the main program
+* [x] creer variable ```$?``` et assign var globale dds, ou plutot si lancee juste afficher g_ret ?
+* [ ] si env normal, créer `$?` a la fin, donc faire une fonction à part lors de l'init
+* [x] put builtins in the main program
 * [x] put env in the main program
 * [x] deal if env vide with the new env system (char * and not linked list)
 * [x] en fonction des quotes, "charger" var ou non
@@ -39,12 +40,12 @@
 ![dealt with](img_readme/2.png)
 * [x] expand str in case of ENV variable
 * [x] if unset don't translate var env !!!
-* [ ] $_ n'est pas géré puisque ```_``` n'est pas alphanum donc chercher comparaison
+* [x] $_ n'est pas géré puisque ```_``` n'est pas alphanum donc chercher comparaison
 * [ ] normer ft_export
 * [x] finir ft_export
-* [ ] export : SHLVL, if value non numerical, set SHLVL to 0, if num, set to val - 1
+* [x] export : SHLVL, if value non numerical, set SHLVL to 0, if num, set to val - 1
 ![export](img_readme/shlvl.png)
-* [ ] parsing end token
+* [x] parsing end token
 * [ ] vérifier que ft_free_and_ret ne leaks pas quand on export sera fait
 
 ### Builtins modifications
