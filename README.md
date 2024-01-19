@@ -43,6 +43,7 @@
 * [ ] normer ft_export
 * [x] finir ft_export
 * [ ] export : SHLVL, if value non numerical, set SHLVL to 0, if num, set to val - 1
+![export](img_readme/shlvl.png)
 * [ ] parsing end token
 * [ ] vérifier que ft_free_and_ret ne leaks pas quand on export sera fait
 
