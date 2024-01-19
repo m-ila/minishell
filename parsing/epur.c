@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:33:21 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/18 18:45:01 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 19:24:06 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	ft_assign_char(char *s, int i, char *model)
 	if (s[i] == '$')
 	{
 		if ((ft_elem_is_in_quotes(s, i) == DOUBLE_QUOTED || \
-		ft_elem_is_in_quotes(s, i) == NOT_QUOTED) && ft_isalnum(s[i + 1]))
+		ft_elem_is_in_quotes(s, i) == NOT_QUOTED) && \
+		(ft_isalnum(s[i + 1]) || ft_char_in_base(s[i + 1], "?_")))
 			model[i] = '$';
 		else
 			model[i] = '1';
