@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:51:09 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 21:44:35 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:39:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 /*
 type == s : syntax error
 type == m : print message
+type == q : quoting error (open quotes)
+type == e : export error
 should free ? or just set ms->b_temoin as 0
 */
 void	ft_msg(char *str, char type, bool del_struct, t_data *ms)
@@ -26,6 +28,9 @@ void	ft_msg(char *str, char type, bool del_struct, t_data *ms)
 	if (type == 'q')
 		ft_printf_fd(2, "%s%s%c'\n", ms->printed_line, SYNTAX_ERR_Q, \
 		ms->parse_struct->l_reign_q);
+	if (type == 'e')
+		ft_printf_fd(2, \
+		"minishell: export: \"%s\" : identifiant non valable\n", str);
 	if (del_struct || ms)
 		return ;
 }
@@ -51,5 +56,8 @@ int	ft_print_msg(char *str, char type, int return_value, t_data *ms)
 		ft_printf_fd(2, "%s%s%s'\n", ms->printed_line, SYNTAX_ERR, str);
 	if (type == 'm')
 		ft_printf_fd(2, "minishell: error: %s\n", str);
+	if (type == 'e')
+		ft_printf_fd(2, \
+		"minishell: export: \" %s \" : identifiant non valable\n", str);
 	return (return_value);
 }

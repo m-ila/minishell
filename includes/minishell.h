@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/18 19:58:45 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:22:39 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,16 @@ char		*ft_triple_join(char *str1, char *str2, char *str3, t_data *ms);
 /* builtins/ft_env.c */
 int			ft_env(t_data *ms);
 /* builtins/ft_export.c */
-int		    ft_export(t_data *ms, t_cmd *cmds);
+int			ft_free_return(char **str1, char **str2, char **str3, int ret);
+int			ft_free_expand(t_parse **p, char **str1, char **str2, int ret);
+bool		ft_translate_tag_to_val(t_parse *p);
+bool		ft_export_has_eq(char *str);
 int			ft_export_first_eq(char *str);
+bool		ft_export_valid_entry(char *str, char **t, char **v, int phase);
+int			ft_export(t_data *ms, t_cmd *cmds);
+bool		ft_translate_vars(char **str, t_data *ms);
+bool		ft_local_str(char *str, t_data *ms, t_cmd *c);
+bool		ft_exp_in_env(char *t, char *v, t_data *ms);
 /* builtins/ft_pwd.c */
 int			ft_pwd(t_data *ms);
 /* builtins/ft_my_unset.c */
