@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:12:33 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 19:20:35 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 19:17:24 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,18 @@ doit changer la variable globale ?
 int	ft_actualise_env(t_data *ms, char *tag, char *val)
 {
 	char	**env_ret;
+	char	*v;
 
 	if (!ms || !ms->envi || !tag || !val)
 		return (0);
 	if (!ft_tag_is_in_env(ms, tag))
 		return (0);
+	v = ft_get_val_in_env(ms->envi, tag, ms);
+	if (!v)
+		return (0);
+	if (!ft_strncmp(v, val, INT_MAX))
+		return (ft_free_return(&v, NULL, NULL, 1));
+	free(v);
 	env_ret = ft_calloc(ft_2d_lines(ms->envi) + 1, sizeof(char *));
 	if (!env_ret)
 		return (ft_print_msg("malloc error actualise env", 'm', 0, ms));
