@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:35:42 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 12:27:36 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 12:39:34 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	ft_export(t_data *ms, t_cmd *cmds)
 	char	*cleaned_str;
 	char	**export_split;
 	int		i;
-//	t_parse	*p;
 
 	if (!cmds)
 		return (R_ERR_GEN);
@@ -86,7 +85,6 @@ int	ft_export(t_data *ms, t_cmd *cmds)
 	cleaned_str = ft_epured_str(ms->user_input, export_model);
 	export_split = ft_split_epured(ms->user_input, export_model, '0');
 	i = 1;
-//	p = ms->parse_struct;
 	ft_printf_fd(1, "export model : (d)%s(f)\ncleaned str : (d)%s(f)\n", \
 	export_model, cleaned_str);
 	while (export_split[i])
