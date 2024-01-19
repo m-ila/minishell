@@ -6,11 +6,12 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/18 09:15:23 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:09:42 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+int	g_return_val;
 
 /* un free sur ms->curr_work_dir causera un leak ici avec la boucle */
 static void	ft_free_prompt(t_data *ms)
@@ -97,8 +98,9 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
+
 	envp = NULL;
-//	g_return_val = 0;
+	g_return_val = 0;
 	ms = malloc(sizeof(t_data));
 	if (!ms)
 		return (R_ERR_GEN);
