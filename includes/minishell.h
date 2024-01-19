@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 18:39:58 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:52:16 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define R_CMD_N_EX 126
 # define R_CMD_N_F 127
 # define R_CTRL_C 130
+# define R_CTRL_D 131
 
 # ifndef SIZE_PATH_MAX
 #  define SIZE_PATH_MAX 4096
