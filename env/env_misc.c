@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:58:02 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 15:11:47 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 11:55:15 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_env_display(t_data *ms)
 	i = 0;
 	while (ms->envi[i])
 	{
-		if (ft_strncmp(ms->envi[i], "?=", ft_strlen("?= ")))
+		if (ft_strncmp(ms->envi[i], "?=", ft_strlen("?=")))
 			ft_printf_fd(1, "%s\n", ms->envi[i]);
 		i++;
 	}
