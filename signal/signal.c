@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:51:00 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 12:13:42 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 15:39:54 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,4 @@ void	ft_ctrl_c(int val)
 		rl_redisplay();
 	}
 	g_return_val = R_CTRL_C;
-}
-
-void	ft_ctrl_d(int val)
-{
-	(void)val;
-	g_return_val = R_CTRL_D;
-	ft_printf_fd(2, "Quit (core dumped)\n");
 }
