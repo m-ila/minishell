@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:51:09 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 11:39:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 15:56:14 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ should free ? or just set ms->b_temoin as 0
 void	ft_msg(char *str, char type, bool del_struct, t_data *ms)
 {
 	if (type == 's')
+	{
 		ft_printf_fd(2, "%s%s%s'\n", ms->printed_line, SYNTAX_ERR, str);
+		ft_set_r_val(R_ERR_SH_B, ms);
+	}
 	if (type == 'm')
 		ft_printf_fd(2, "minishell: error: %s\n", str);
 	if (type == 'q')
@@ -44,7 +47,10 @@ char	*ft_msg_ret_char(char *str)
 char	*ft_char_print_msg(char *str, char type, char *return_value, t_data *ms)
 {
 	if (type == 's')
+	{
 		ft_printf_fd(2, "%s%s%s'\n", ms->printed_line, SYNTAX_ERR, str);
+		ft_set_r_val(R_ERR_SH_B, ms);
+	}
 	if (type == 'm')
 		ft_printf_fd(2, "minishell: error: %s\n", str);
 	return (return_value);
@@ -53,7 +59,10 @@ char	*ft_char_print_msg(char *str, char type, char *return_value, t_data *ms)
 int	ft_print_msg(char *str, char type, int return_value, t_data *ms)
 {
 	if (type == 's')
+	{
 		ft_printf_fd(2, "%s%s%s'\n", ms->printed_line, SYNTAX_ERR, str);
+		ft_set_r_val(R_ERR_SH_B, ms);
+	}
 	if (type == 'm')
 		ft_printf_fd(2, "minishell: error: %s\n", str);
 	if (type == 'e')
