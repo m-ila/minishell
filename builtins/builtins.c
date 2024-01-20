@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:02:10 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 16:57:20 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 13:13:45 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_data *ms
 */
 int	ft_builtin(t_cmd *cmds, t_data *ms)
 {
+	if (!ft_strncmp(cmds->cmd, "exit", ft_strlen("exit ")))
+		return (ft_exit(ms, cmds));
 	if (!ft_strncmp(cmds->cmd, "cd", ft_strlen("cd") + 1))
 		return (ft_cd(cmds, ms));
 	if (!ft_strncmp(cmds->cmd, "echo", ft_strlen("echo") + 1))
@@ -39,6 +41,8 @@ bool	ft_is_builtin(char *str)
 {
 	if (!str)
 		return (false);
+	if (!ft_strncmp(str, "exit", ft_strlen("exit ")))
+		return (true);
 	if (!ft_strncmp(str, "env", ft_strlen("env ")))
 		return (true);
 	if (!ft_strncmp(str, "cd", ft_strlen("cd ")))
