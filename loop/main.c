@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 16:15:50 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 16:19:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ int	g_return_val;
 /* un free sur ms->curr_work_dir causera un leak ici avec la boucle */
 void	ft_free_prompt(t_data **ms)
 {
-	free((*ms)->user_input);
-	free((*ms)->printed_line);
+	ft_multiple_free(&(*ms)->user_input, &(*ms)->printed_line, NULL);
 }
 
 /* to delete in the future */
