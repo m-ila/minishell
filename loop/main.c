@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 11:45:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 11:49:14 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	ft_loop(t_data *ms)
 			return ;
 		ms->user_input = NULL;
 		ms->user_input = readline(ms->printed_line);
-		signal(SIGINT, &ft_ctrl_c);
-		signal(SIGQUIT, &ft_ctrl_d);
 		if (ms->user_input && ft_strlen(ms->user_input) == 0)
 			ms->b_temoin = false;
 		//if heredoc, gnl jusqu'a delimiter dans la str recuperee
@@ -104,8 +102,8 @@ int	main(int argc, char **argv, char **envp)
 
 	envp = NULL;
 	g_return_val = 0;
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, &ft_ctrl_c);
+	signal(SIGQUIT, &ft_ctrl_d);
 	ms = malloc(sizeof(t_data));
 	if (!ms)
 		return (R_ERR_GEN);
