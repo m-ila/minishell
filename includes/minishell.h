@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 17:28:59 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 17:52:14 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 /* COMMENT : test with bash but not so sure about the space */
 # define CHAR_END_INPUT "<>|& \t\n"
 # define BASE_TOKEN "<>|"
-
+# define B_X "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_"
 /* ========================== DEFINE MSG ==================================== */
 # define SYNTAX_ERR "syntax error near unexpected token '"
 # define SYNTAX_ERR_Q "syntax error - unclosed quotes '"

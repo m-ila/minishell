@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 17:26:23 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 17:37:12 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 17:51:59 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,8 @@ bool	ft_export_valid_entry(char *str, char **t, char **v, int phase)
 			return (false);
 	if (phase == 2)
 	{
-		if (ft_strocc_base(*t, "/\\") || !ft_strlen(*t))
+		if (ft_strocc_unbase(*t, B_X) || !ft_strlen(*t) || ft_isdigit(*t[0]))
 			return (ft_export_bad_char(t, v));
-		if (ft_isdigit(*t[0]))
-			return (false);
 		if ((*t[0] == '$') && ft_strlen(*t) == 1)
 			return (false);
 		return (ft_export_spe_cases(t, v));
