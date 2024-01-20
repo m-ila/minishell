@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 19:00:00 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 20:00:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 16:52:19 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_init_no_env(t_data *ms)
 		if (i == 1)
 			env_tab[i] = ft_strdup("PWD=");
 		if (i == 2)
-			env_tab[i] = ft_strdup("SHLVL=0");
+			env_tab[i] = ft_strdup("SHLVL=-1");
 		if (i == 3)
 			env_tab[i] = ft_strdup("EMBED=$PWD$SHLVL");
 		if (!env_tab[i])
