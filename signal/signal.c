@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:51:00 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 15:40:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:03:35 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ bool	ft_comp_var_env(int val, t_data *ms)
 	char	*str_val;
 	int		int_val;
 
-	if (val == R_CTRL_D)
-		return (false);
 	str_val = ft_get_val_in_env(ms->envi, "$", ms);
 	if (!str_val || str_val[0] == '\0')
 		return (ft_free_return(&str_val, NULL, NULL, true));
