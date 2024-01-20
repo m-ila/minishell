@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 11:45:48 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 11:54:38 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,29 @@
 
 bool	ft_malloc_s_parse(t_data *ms)
 {
-	t_parse	*parse_struct;
+	t_parse	*p;
 
-	parse_struct = malloc(sizeof(t_parse));
-	if (!parse_struct)
+	p = malloc(sizeof(t_parse));
+	if (!p)
 	{
 		ft_printf_fd(2, "malloc struct parse failed\n");
 		return (false);
 	}
-	parse_struct->start_w_val_tok = false;
-	parse_struct->struct_cmds = NULL;
-	parse_struct->nb_reigning_quotes = 0;
-	parse_struct->l_reign_q = '.';
-	parse_struct->tmp_tag = NULL;
-	parse_struct->tmp_val = NULL;
-	parse_struct->tmp_str = NULL;
-	parse_struct->tmp_model = NULL;
-	parse_struct->str1 = NULL;
-	parse_struct->str2 = NULL;
-	parse_struct->str3 = NULL;
-	parse_struct->model1 = NULL;
-	parse_struct->model2 = NULL;
-	parse_struct->model3 = NULL;
-	ms->parse_struct = parse_struct;
+	p->start_w_val_tok = false;
+	p->struct_cmds = NULL;
+	p->nb_reigning_quotes = 0;
+	p->l_reign_q = '.';
+	p->tmp_tag = NULL;
+	p->tmp_val = NULL;
+	p->tmp_str = NULL;
+	p->tmp_model = NULL;
+	p->str1 = NULL;
+	p->str2 = NULL;
+	p->str3 = NULL;
+	p->model1 = NULL;
+	p->model2 = NULL;
+	p->model3 = NULL;
+	ms->parse_struct = p;
 	return (true);
 }
 
@@ -54,8 +54,8 @@ bool	ft_first_init(t_data *ms, char **envp)
 		ft_free_2d_array(ms->envi);
 		return (false);
 	}
-	ms->user_input = 0;
-	ms->printed_line = 0;
+	ms->user_input = NULL;
+	ms->printed_line = NULL;
 	ms->tmp_str = NULL;
 	return (true);
 }

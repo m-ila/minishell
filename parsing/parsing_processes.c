@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 11:45:49 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 12:03:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 	}
 	temoin = ft_parse_cmd(ms->parse_struct->struct_cmds, ms);
 	last = ft_go_to_last_cmd_node(ms->parse_struct->struct_cmds);
-	if (last->tok_next_token != end_of_file)
+	if (last && last->tok_next_token != end_of_file)
 	{
 		ms->b_temoin = false;
 		ft_msg(last->next_token, 's', false, ms);

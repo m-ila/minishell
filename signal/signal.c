@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:51:00 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 11:26:47 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 12:13:42 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,20 @@ void	ft_set_r_val(int val, t_data *ms)
 	return ;
 }
 
-void	ft_comp_var_env(int val, t_data *ms)
+bool	ft_comp_var_env(int val, t_data *ms)
 {
 	char	*str_val;
 	int		int_val;
 
+	if (val == R_CTRL_D)
+		return (false);
 	str_val = ft_get_val_in_env(ms->envi, "$", ms);
 	if (!str_val || str_val[0] == '\0')
-	{
-		ft_multiple_free(&str_val, NULL, NULL);
-		return ;
-	}
+		return (ft_free_return(&str_val, NULL, NULL, true));
 	int_val = ft_atoi(str_val);
 	if (int_val != val && val >= 0)
 		ft_set_r_val(int_val, ms);
-	ft_multiple_free(&str_val, NULL, NULL);
+	return (ft_free_return(&str_val, NULL, NULL, true));
 }
 
 /*
