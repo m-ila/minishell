@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/20 17:28:53 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/20 18:23:20 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ env/env_str_manip.c \
 env/env_tab.c \
 env/env_upd_epur.c \
 free/free_cmd_struct.c \
+free/ft_free_misc.c \
 init/init_loop.c \
 init/init_env_struct.c \
 init/init_cmd_struct.c \

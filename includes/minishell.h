@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 17:52:14 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:23:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,6 @@ int			ft_env(t_data *ms, t_cmd *c);
 /* builtins/ft_exit.c */
 int			ft_exit(t_data *ms, t_cmd *cmds);
 /* builtins/ft_export1.c */
-int			ft_free_return(char **str1, char **str2, char **str3, int ret);
-int			ft_free_ret_2(char **str1, char **str2, char ***two_dim, int ret_v);
-int			ft_free_expand(t_parse **p, char **str1, char **str2, int ret);
 bool		ft_translate_tag_to_val(t_parse *p);
 /* builtins/ft_export2.c */
 bool		ft_export_has_eq(char *str);
@@ -195,6 +192,10 @@ bool		ft_update_epur(t_data *ms, t_cmd *cmds, int *i);
 /*======================= FREE FOLDER =======================*/
 /* free/free_cmd_struct.c */
 void		ft_free_cmds(t_cmd *cmds);
+/* free/ft_free_misc.c */
+int			ft_free_return(char **str1, char **str2, char **str3, int ret);
+int			ft_free_ret_2(char **str1, char **str2, char ***two_dim, int ret_v);
+int			ft_free_expand(t_parse **p, char **str1, char **str2, int ret);
 /*======================= INIT FOLDER ========================*/
 /* init/init_loop.c */
 bool		ft_first_init(t_data *ms, char **envp);
@@ -221,7 +222,6 @@ bool		ft_cond_cut(char *str, int i);
 bool		ft_export_cond_cut(char *str, int i);
 bool		ft_cut_only_quotes(char *str, int i);
 char		*ft_epured_str(char *str, char *model);
-/*void		ft_add_epured_to_cmd(t_cmd *cmds);*/
 /* parsing/parse_get.c */
 char		*get_token(char *str, int from);
 char		*get_cmd(char *str, int from);
@@ -256,7 +256,6 @@ bool		ft_add_prev_token_to_node(t_cmd *struct_cmd, t_data *ms);
 /* signal/signal.c */
 void		ft_set_r_val(int val, t_data *ms);
 bool		ft_comp_var_env(int val, t_data *ms);
-void		ft_ctrl_d(int val);
 void		ft_ctrl_c(int val);
 
 #endif 
