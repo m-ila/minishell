@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 18:23:00 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:05:16 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@
 # define NOT_QUOTED 0
 # define SINGLE_QUOTED 1
 # define DOUBLE_QUOTED 2
-/* =========================== GLOB VARIABLE ================================ */ 
+/* =========================== GLOB VARIABLE =============================== */
 extern int	g_return_val;
 
-/* ============================ STRUCTURES ================================== */
+/* ============================ STRUCTURES ================================= */
 
 /* respectivement < > << >> | $ ? */
 typedef enum s_tokens
@@ -228,7 +228,8 @@ char		*get_cmd(char *str, int from);
 int			get_index_next_token(char *str, int from);
 /* parsing/parsing_processes.c */
 void		ft_raw_parsing_process(char *user_input, t_data *ms);
-bool		ft_parsing_start_token_process(char *user_input, int *from, t_data *ms);
+bool		ft_parsing_start_token_process(char *user_input, \
+int *from, t_data *ms);
 bool		ft_parsing_token_process(char *user_input, int *from, t_data *ms);
 bool		ft_parsing_cmd_process(char *user_input, int *from, t_data *ms);
 int			deal_with_token(char *str, char *tok_str, int from, t_data *ms);
@@ -236,13 +237,14 @@ int			deal_with_token(char *str, char *tok_str, int from, t_data *ms);
 bool		ft_starts_with_token(char *user_input);
 bool		ft_is_valid_token(char *str);
 bool		ft_is_valid_entry_token(char *str);
-t_tokens    ft_which_redir_token(char *str, char which);
+t_tokens	ft_which_redir_token(char *str, char which);
 bool		ft_add_token_val_to_struct(t_cmd *cmds);
 /* parsing/print_error.c */
 void		ft_msg(char *str, char type, bool del_struct, t_data *ms);
 char		*ft_msg_ret_char(char *str);
 int			ft_print_msg(char *str, char type, int return_value, t_data *ms);
-char		*ft_char_print_msg(char *str, char type, char *return_value, t_data *ms);
+char		*ft_char_print_msg(char *str, char type, \
+char *return_value, t_data *ms);
 /* parsing/quoting_rule.c */
 int			ft_elem_is_in_quotes(char *str, int i);
 bool		ft_count_reigning_quotes(char *str, t_parse *parse_struct);
