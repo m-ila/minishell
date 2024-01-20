@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:02:10 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 13:13:45 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 14:51:45 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_data *ms
 */
 int	ft_builtin(t_cmd *cmds, t_data *ms)
 {
+	if (!cmds)
+		return (R_ERR_GEN);
 	if (!ft_strncmp(cmds->cmd, "exit", ft_strlen("exit ")))
 		return (ft_exit(ms, cmds));
 	if (!ft_strncmp(cmds->cmd, "cd", ft_strlen("cd") + 1))

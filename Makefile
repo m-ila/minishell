@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/20 13:14:03 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/20 15:37:58 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ parsing/to_node.c \
 parsing/token_parse.c \
 signal/signal.c
 
-CFLAGS	= -Wextra -Wall -Werror -MMD -g3 -O2 -fsanitize=undefined
+CFLAGS	= -Wextra -Wall -Werror -MMD -g3 -O2
 
 CC = cc
 

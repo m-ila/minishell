@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:21:47 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 21:03:06 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 14:52:54 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	ft_free_cmds(t_cmd *cmds)
 {
 	t_cmd	*curr;
 
+	if (!cmds)
+		return ;
 	while (cmds)
 	{
 		curr = cmds;
