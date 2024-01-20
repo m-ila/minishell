@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 00:25:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 13:48:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:20:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ int		ft_strocc_from(char *str, char c, int from);
 bool	ft_has_only_before(char *s, int i, int (*fun)(char));
 bool	ft_has_only_after(char *s, int i, int (*fun)(char));
 char	**ft_split_epured(char *s, char *m, char c);
+void	ft_split_do_1(char *s, char *m, int *i, char c);
+void	ft_split_do_2(char *s, char *m, int *i, char c);
 //void	ft_split_do_ms(char *s, char *m, int *i, int w);
 
 #endif

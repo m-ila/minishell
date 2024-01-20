@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 02:03:30 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/13 09:01:15 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:20:56 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ char	**ft_split_epured(char *s, char *m, char c)
 		return (NULL);
 	while (s[i] != '\0')
 	{
-		while (s[i] != '\0' && m[i] == c)
-			i++;
+		ft_split_do_1(s, m, &i, c);
 		if (s[i] != '\0')
 		{
 			ret[j] = ft_wrd(s, m, c, &i);
@@ -95,8 +94,7 @@ char	**ft_split_epured(char *s, char *m, char c)
 				return (ft_free(ret, j));
 			j++;
 		}
-		while (s[i] != '\0' && m[i] != c)
-			i++;
+		ft_split_do_2(s, m, &i, c);
 	}
 	return (ret);
 }
