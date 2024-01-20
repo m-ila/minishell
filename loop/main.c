@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 16:19:41 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:16:42 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ int	main(int argc, char **argv, char **envp)
 	ft_multiple_free(&ms->printed_line, NULL, NULL);
 	free(ms->parse_struct);
 	free(ms);
+	rl_clear_history();
 	return (g_return_val);
 }

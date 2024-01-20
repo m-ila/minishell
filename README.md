@@ -7,7 +7,6 @@
 * [x] est valable si commande est "vide" (geree par exec, penser a bien mod la var de g_ret)
 * [ ] est-ce que check paths uniquement quand exec ou avant ?
 
-
 * [x] creer variable ```$?``` et assign var globale dds, ou plutot si lancee juste afficher g_ret ?
 * [ ] si env normal, créer `$?` a la fin, donc faire une fonction à part lors de l'init
 * [x] put builtins in the main program
