@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/20 18:25:17 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/20 19:08:36 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ init/init_loop.c \
 init/init_env_struct.c \
 init/init_cmd_struct.c \
 loop/main.c \
+parsing/cond_cut.c \
 parsing/epur.c \
 parsing/parse_get.c \
 parsing/parsing_processes.c \
