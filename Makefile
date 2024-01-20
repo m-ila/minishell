@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/19 15:54:51 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/20 13:14:03 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC = builtins/builtins.c \
 builtins/ft_cd.c \
 builtins/ft_echo.c \
 builtins/ft_env.c \
+builtins/ft_exit.c \
 builtins/ft_my_unset.c \
 builtins/ft_export1.c \
 builtins/ft_export2.c \
@@ -44,7 +45,7 @@ parsing/to_node.c \
 parsing/token_parse.c \
 signal/signal.c
 
-CFLAGS	= -Wextra -Wall -Werror -MMD -g3 -O2
+CFLAGS	= -Wextra -Wall -Werror -MMD -g3 -O2 -fsanitize=undefined
 
 CC = cc
 
