@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/20 18:23:20 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/20 18:25:17 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,6 @@ parsing/parse_get.c \
 parsing/parsing_processes.c \
 parsing/print_error.c \
 parsing/quoting.c \
-parsing/tmp.c \
 parsing/to_node.c \
 parsing/token_parse.c \
 signal/signal.c
