@@ -6,11 +6,12 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 18:16:42 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:44:13 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
 int	g_return_val;
 
 /* un free sur ms->curr_work_dir causera un leak ici avec la boucle */
@@ -19,24 +20,12 @@ void	ft_free_prompt(t_data **ms)
 	ft_multiple_free(&(*ms)->user_input, &(*ms)->printed_line, NULL);
 }
 
-/* to delete in the future */
-static void	print_values(t_data *ms)
-{
-	ft_printf_fd(1, "%s\n\n", PRINT_SEP_T);
-	ft_printf_fd(1, "ms->user_input = %s\nms->printed_line = %s\n\n", \
-	ms->user_input, ms->printed_line);
-	ft_printf_fd(1, "ms->curr_wd = %s\nms->prev_w_dir = %s\n\n", \
-	ms->curr_work_dir, ms->prev_work_dir);
-	ft_printf_fd(1, "ms->b_temoin = %d\n", (int) ms->b_temoin);
-	if (ms->parse_struct->struct_cmds)
-		ft_cmd_display(ms->parse_struct->struct_cmds);
-	ft_printf_fd(1, "%s\n\n\n", PRINT_SEP);
-}
-
 /* how do deal with heredoc ? 
 how to deal with sigs ? 
-if !ft_malloc_s_parse END EVERYTHING : changer les return ; au debut pour un free tt
-avec pour condition si existe -> implique que dans la fonction free, on free(var) puis
+if !ft_malloc_s_parse END EVERYTHING : changer les return ; 
+au debut pour un free tt
+avec pour condition si existe -> implique que dans la fonction free, 
+on free(var) puis
 var = NULL 
 cwd is actualise in ft_get_cwd */
 void	ft_loop(t_data *ms)
@@ -95,14 +84,13 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	(void)envp;
-
 	envp = NULL;
 	g_return_val = 0;
 	signal(SIGINT, &ft_ctrl_c);
 	signal(SIGQUIT, SIG_IGN);
 	ms = malloc(sizeof(t_data));
 	if (!ms)
-	return (R_ERR_GEN);
+		return (R_ERR_GEN);
 	if (!ft_first_init(ms, envp))
 		return (R_ERR_GEN);
 	ft_loop(ms);

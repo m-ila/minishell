@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 19:08:43 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:45:42 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,9 +210,12 @@ char		*ft_quote_the_val(char *str, t_data *ms);
 void		ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add);
 t_cmd		*ft_create_cmd_node(char *raw_cmd);
 t_cmd		*ft_go_to_last_cmd_node(t_cmd *cmd_node);
-void		ft_cmd_display(t_cmd *cmds);
 bool		ft_parse_cmd(t_cmd *cmds, t_data *ms);
 /*======================= LOOP FOLDER ========================*/
+/* loop/display.c */
+void		print_values(t_data *ms);
+void		ft_cmd_display(t_cmd *cmds);
+/* loop/main.c */
 void		ft_loop(t_data *ms);
 void		ft_free_prompt(t_data **ms);
 /*====================== PARSING FOLDER ======================*/
@@ -254,7 +257,6 @@ int			ft_get_index_next_reign_quo(char *str, int from);
 /* parsing/to_node.c */
 bool		ft_add_next_token_to_node(char *str, t_cmd *struct_cmd);
 bool		ft_add_first_prev_token_node(char *str, t_cmd *struct_cmd);
-bool		ft_add_prev_token_to_node(t_cmd *struct_cmd, t_data *ms);
 /*====================== SIGNAL  FOLDER ======================*/
 /* signal/signal.c */
 void		ft_set_r_val(int val, t_data *ms);

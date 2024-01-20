@@ -6,22 +6,11 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 15:33:19 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:49:53 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-/*	Not using the ft_split_fun anymore for this one
-bool	ft_cut_here(char *str, char *model, int i)
-{
-	if (!str || !model || i >= (int) ft_strlen(model) || i >= (int) ft_strlen(str))
-		return (false);
-	if (model[i] == '0')
-		return (true);
-	return (false);
-}
-*/
 
 bool	ft_empty_cmd(t_cmd *cmds, t_data *ms)
 {
@@ -89,32 +78,6 @@ bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
 	return (true);
 }
 
-void	ft_cmd_display(t_cmd *cmds)
-{
-	int	i;
-
-i = 0;
-	ft_printf_fd(1, "%s\n\n", PRINT_SEP_C);
-	while (cmds)
-	{
-		ft_printf_fd(1, "cmd[%d]->raw_cmd = (d)%s(f)\n", i, cmds->raw_str);
-		if (cmds->prev_token)
-			ft_printf_fd(1, "prev token : (d)%s(f)\n", cmds->prev_token);
-		if (cmds->next_token)
-			ft_printf_fd(1, "next token : (d)%s(f)\n", cmds->next_token);
-		if (cmds->cmd)
-			ft_printf_fd(1, "cmd : (d)%s(f)\n", cmds->cmd);
-		if (cmds->epured_model)
-			ft_printf_fd(1, "epured_model : (d)%s(f)\n", cmds->epured_model);
-		if (cmds->epured_str)
-			ft_printf_fd(1, "epured_str : (d)%s(f)\n", cmds->epured_str);
-		printf("\nprev tok : %d\n",cmds->tok_prev_token);
-		printf("next tok : %d\n\n\n",cmds->tok_next_token);
-		i++;
-		cmds = cmds->next;
-	}
-}
-
 /* to do : add ft_strdup protection */
 void	ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add)
 {
@@ -135,7 +98,6 @@ void	ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add)
 	to_add->tok_prev_token = ft_which_redir_token(to_add->prev_token, 'p');
 }
 
-/* TO DO : change val globale */
 t_cmd	*ft_create_cmd_node(char *raw_cmd)
 {
 	t_cmd	*new;
@@ -156,13 +118,10 @@ t_cmd	*ft_create_cmd_node(char *raw_cmd)
 		return (NULL);
 	}
 	new->next = NULL;
-	new->prev_token = NULL;
-	new->next_token = NULL;
-	new->epured_model = NULL;
-	new->epured_str = NULL;
+	ft_set_char_to_null(&new->prev_token, &new->next_token, &new->epured_model);
+	ft_set_char_to_null(&new->epured_str, &new->cmd, NULL);
 	new->ep_cmd_w_arg = NULL;
 	new->cmd_w_arg = NULL;
-	new->cmd = NULL;
 	new->tok_next_token = end_of_file;
 	new->tok_prev_token = start;
 	return (new);
