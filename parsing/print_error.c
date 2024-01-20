@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:51:09 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 15:56:14 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 16:30:47 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,15 @@ int	ft_print_msg(char *str, char type, int return_value, t_data *ms)
 	if (type == 'e')
 		ft_printf_fd(2, \
 		"minishell: export: \" %s \" : identifiant non valable\n", str);
+	if (type == 'c')
+	{
+		ft_printf_fd(2, "minishell: cd: %s: %s", str, CD_N_F);
+		ft_set_r_val(R_ERR_GEN, ms);
+	}
+	if (type == 'C')
+	{
+		ft_printf_fd(2, "minishell: cd: %s", CD_ARG);
+		ft_set_r_val(R_ERR_GEN, ms);
+	}
 	return (return_value);
 }

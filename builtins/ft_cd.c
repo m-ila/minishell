@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 11:25:17 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/18 09:18:58 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 16:35:25 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_deal_with_home(t_data *ms)
 {
 	if (!ft_tag_is_in_env(ms, "HOME"))
 	{
-		ft_msg("HOME is unmounted", 'm', false, ms);
+		ft_msg("cd: HOME is unmounted", 'm', false, ms);
 		return (ft_strdup(""));
 	}
 	return (ft_get_val_in_env(ms->envi, "HOME", ms));
@@ -83,7 +83,7 @@ int	ft_cd(t_cmd *cmds, t_data *ms)
 	if (!ms->b_temoin)
 		return (R_EX_OK);
 	if (ft_2d_lines(cmds->ep_cmd_w_arg) > 2)
-		return (ft_print_msg("cd : too many arguments", 'm', R_EX_OK, ms));
+		return (ft_print_msg("", 'C', R_EX_OK, ms));
 	ft_cd_update_wd(ms);
 	if (ft_2d_lines(cmds->ep_cmd_w_arg) == 1 || \
 	!ft_strncmp(cmds->ep_cmd_w_arg[1], "~", 1))
@@ -98,7 +98,7 @@ int	ft_cd(t_cmd *cmds, t_data *ms)
 	else if (chdir(cmds->ep_cmd_w_arg[1]) == -1)
 	{
 		ms->b_temoin = false;
-		return (ft_print_msg("cd : couldn't reach path", 'm', R_ERR_GEN, ms));
+		return (ft_print_msg(cmds->ep_cmd_w_arg[1], 'c', R_ERR_GEN, ms));
 	}
 	return (R_EX_OK);
 }
