@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/20 15:37:58 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/20 16:51:35 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ parsing/epur.c \
 parsing/parse_get.c \
 parsing/parsing_processes.c \
 parsing/print_error.c \
-parsing/quoting_rule.c \
+parsing/quoting.c \
 parsing/tmp.c \
 parsing/to_node.c \
 parsing/token_parse.c \
