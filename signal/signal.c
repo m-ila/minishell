@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:51:00 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 19:18:12 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 11:26:47 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,49 @@ void	ft_set_r_val(int val, t_data *ms)
 	free(str_val);
 	return ;
 }
+
+void	ft_comp_var_env(int val, t_data *ms)
+{
+	char	*str_val;
+	int		int_val;
+
+	str_val = ft_get_val_in_env(ms->envi, "$", ms);
+	if (!str_val || str_val[0] == '\0')
+	{
+		ft_multiple_free(&str_val, NULL, NULL);
+		return ;
+	}
+	int_val = ft_atoi(str_val);
+	if (int_val != val && val >= 0)
+		ft_set_r_val(int_val, ms);
+	ft_multiple_free(&str_val, NULL, NULL);
+}
+
 /*
+quand heredoc, ouvrir le fd puis mettre g_return_val = -fd
+puis, quand close, mettre g_return_val = valeur in env
+(n'a pas été changé lors de -fd)
+*/
 void	ft_ctrl_c(int val)
 {
 	(void)val;
-	if (p && p->heredoc_fd > -1)
+	if (g_return_val < 0)
 	{
 		ft_printf_fd(2, "^C\n");
-		close(p->heredoc_fd);
-		p->heredoc_fd = -1;
-		ms->b_temoin = 0;
+		close(-g_return_val);
 	}
 	else
 	{
-		ms->b_temoin = 0;
+		ft_printf_fd(2, "\n");
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
-	ft_set_r_val(R_CTRL_C, ms);
+	g_return_val = R_CTRL_C;
 }
-*/
-/*
-void	ft_ctrl_d(int val, t_data *ms)
+
+void	ft_ctrl_d(int val)
 {
-	g_return_val = val;
-	ft_set_r_val(R_CTRL_D, ms);
+	(void)val;
+	g_return_val = R_CTRL_D;
+	ft_printf_fd(2, "Quit (core dumped)\n");
 }
-*/

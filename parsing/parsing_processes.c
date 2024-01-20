@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 15:38:47 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 11:45:49 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 	temoin = true;
 	cmd_struct = NULL;
 	ms->parse_struct->struct_cmds = cmd_struct;
+	if (!user_input)
+		return ;
 	ms->tmp_str = ft_strdup("");
 	if (ft_starts_with_token(user_input))
 		temoin = ft_parsing_start_token_process(user_input, &index, ms);
