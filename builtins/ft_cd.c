@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 11:25:17 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/20 16:35:25 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 16:38:25 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,6 @@ static int	ft_do(char *home_path, t_data *ms, int which)
 	return (R_ERR_GEN);
 }
 
-/*
-to do : compare with bash behavior for the msgs
-*/
 int	ft_cd(t_cmd *cmds, t_data *ms)
 {
 	char	*home_path;
