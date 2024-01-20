@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 15:41:07 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 16:15:50 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	ft_loop(t_data *ms)
 			return ;
 		ms->user_input = NULL;
 		ms->user_input = readline(ms->printed_line);
+		if (!ms->user_input)
+			return ;
 		if (ms->user_input && ft_strlen(ms->user_input) == 0)
 			ms->b_temoin = false;
 		//if heredoc, gnl jusqu'a delimiter dans la str recuperee
@@ -101,14 +103,13 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGQUIT, SIG_IGN);
 	ms = malloc(sizeof(t_data));
 	if (!ms)
-		return (R_ERR_GEN);
+	return (R_ERR_GEN);
 	if (!ft_first_init(ms, envp))
 		return (R_ERR_GEN);
 	ft_loop(ms);
 	ft_free_2d_array(ms->envi);
-	free(ms->tmp_str);
-	free(ms->prev_work_dir);
-	free(ms->curr_work_dir);
+	ft_multiple_free(&ms->tmp_str, &ms->prev_work_dir, &ms->curr_work_dir);
+	ft_multiple_free(&ms->printed_line, NULL, NULL);
 	free(ms->parse_struct);
 	free(ms);
 	return (g_return_val);
