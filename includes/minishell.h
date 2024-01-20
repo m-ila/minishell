@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 11:27:22 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 13:16:51 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ int			ft_echo(t_cmd *cmds);
 char		*ft_triple_join(char *str1, char *str2, char *str3, t_data *ms);
 /* builtins/ft_env.c */
 int			ft_env(t_data *ms, t_cmd *c);
+/* builtins/ft_exit.c */
+int			ft_exit(t_data *ms, t_cmd *cmds);
 /* builtins/ft_export.c */
 int			ft_free_return(char **str1, char **str2, char **str3, int ret);
 int			ft_free_expand(t_parse **p, char **str1, char **str2, int ret);
@@ -204,6 +206,7 @@ void		ft_cmd_display(t_cmd *cmds);
 bool		ft_parse_cmd(t_cmd *cmds, t_data *ms);
 /*======================= LOOP FOLDER ========================*/
 void		ft_loop(t_data *ms);
+void		ft_free_prompt(t_data **ms);
 /*====================== PARSING FOLDER ======================*/
 /* parsing/epur.c */
 char		*ft_epured_model(char *s, bool (*fun)(char *, int));
@@ -245,7 +248,7 @@ bool		ft_add_prev_token_to_node(t_cmd *struct_cmd, t_data *ms);
 /*====================== SIGNAL  FOLDER ======================*/
 /* signal/signal.c */
 void		ft_set_r_val(int val, t_data *ms);
-void		ft_comp_var_env(int val, t_data *ms);
+bool		ft_comp_var_env(int val, t_data *ms);
 void		ft_ctrl_d(int val);
 void		ft_ctrl_c(int val);
 
