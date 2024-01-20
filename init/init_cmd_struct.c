@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 15:19:32 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 15:33:19 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_cmd_display(t_cmd *cmds)
 {
 	int	i;
 
-	i = 0;
+i = 0;
 	ft_printf_fd(1, "%s\n\n", PRINT_SEP_C);
 	while (cmds)
 	{
