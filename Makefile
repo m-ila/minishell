@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/20 16:51:35 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/20 17:28:53 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ builtins/ft_my_unset.c \
 builtins/ft_export1.c \
 builtins/ft_export2.c \
 builtins/ft_export3.c \
+builtins/ft_export4.c \
 builtins/ft_pwd.c \
 env/env_expand.c \
 env/env_init.c \

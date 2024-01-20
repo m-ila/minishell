@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:33:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 16:46:03 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 17:02:49 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ int	ft_free_return(char **str1, char **str2, char **str3, int ret)
 		*str3 = NULL;
 	}
 	return (ret);
+}
+
+int	ft_free_ret_2(char **str1, char **str2, char ***two_dim, int ret_v)
+{
+	ft_multiple_free(str1, str2, NULL);
+	ft_free_2d_array(*two_dim);
+	return (ret_v);
 }
 
 int	ft_free_expand(t_parse **p, char **str1, char **str2, int ret)

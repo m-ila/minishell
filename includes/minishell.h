@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 16:29:35 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 17:28:59 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,18 +148,23 @@ char		*ft_triple_join(char *str1, char *str2, char *str3, t_data *ms);
 int			ft_env(t_data *ms, t_cmd *c);
 /* builtins/ft_exit.c */
 int			ft_exit(t_data *ms, t_cmd *cmds);
-/* builtins/ft_export.c */
+/* builtins/ft_export1.c */
 int			ft_free_return(char **str1, char **str2, char **str3, int ret);
+int			ft_free_ret_2(char **str1, char **str2, char ***two_dim, int ret_v);
 int			ft_free_expand(t_parse **p, char **str1, char **str2, int ret);
 bool		ft_translate_tag_to_val(t_parse *p);
+/* builtins/ft_export2.c */
 bool		ft_export_has_eq(char *str);
 int			ft_export_first_eq(char *str);
-bool		ft_export_valid_entry(char *str, char **t, char **v, int phase);
 int			ft_export(t_data *ms, t_cmd *cmds);
+/* builtins/ft_export3.c */
 bool		ft_translate_vars(char **str, t_data *ms);
 bool		ft_local_str(char *str, t_data *ms, t_cmd *c);
 bool		ft_exp_in_env(char *t, char *v, t_data *ms);
+/* builtins/ft_export4.c */
 bool		ft_export_bad_char(char **t, char **v);
+bool		ft_export_valid_entry(char *str, char **t, char **v, int phase);
+bool		ft_export_spe_cases(char **t, char **v);
 /* builtins/ft_pwd.c */
 int			ft_pwd(t_data *ms);
 /* builtins/ft_my_unset.c */

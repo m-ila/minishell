@@ -6,12 +6,11 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:27:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 12:23:00 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 17:03:06 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
 
 bool	ft_translate_vars(char **str, t_data *ms)
 {

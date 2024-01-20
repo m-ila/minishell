@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:35:42 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 16:50:42 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 17:27:33 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,74 +46,6 @@ int	ft_export_first_eq(char *str)
 		i++;
 	}
 	return (NO_INDEX_FOUND);
-}
-
-bool	ft_export_bad_char(char **t, char **v)
-{
-	char	*msg;
-
-	msg = ft_join_tag_and_val(*t, *v);
-	if (!msg)
-		return (false);
-	ft_msg(msg, 'e', false, NULL);
-	free(msg);
-	return (false);
-}
-
-bool	ft_export_spe_cases(char **t, char **v)
-{
-	int	value;
-
-	if (!ft_strncmp(*t, "SHLVL", ft_strlen("SHLVL") + 1))
-	{
-		if (ft_has_only_after(*v, 0, ft_isdigit) && ft_isint(*v))
-		{
-			value = ft_atoi(*v);
-			if (value > 1)
-				value--;
-			else
-				value = 0;
-			free(*v);
-			*v = ft_itoa(value);
-			if (!*v)
-				return (false);
-			return (true);
-		}
-		else
-		{
-			free(*v);
-			*v = ft_strdup("0");
-			if (!*v)
-				return (ft_print_msg("exp spe cases", 'm', false, NULL));
-			return (true);
-		}
-	}
-	return (true);
-}
-
-bool	ft_export_valid_entry(char *str, char **t, char **v, int phase)
-{
-	if (!str && phase == 1)
-		return (false);
-	if (phase == 1)
-		if (!ft_export_has_eq(str) || ft_export_first_eq(str) == -1)
-			return (false);
-	if (phase == 2)
-	{
-		if (ft_strocc_base(*t, "/\\") || !ft_strlen(*t))
-			return (ft_export_bad_char(t, v));
-		if ((*t[0] == '$') && ft_strlen(*t) == 1)
-			return (false);
-		return (ft_export_spe_cases(t, v));
-	}
-	return (true);
-}
-
-int	ft_free_ret_2(char **str1, char **str2, char ***two_dim, int ret_v)
-{
-	ft_multiple_free(str1, str2, NULL);
-	ft_free_2d_array(*two_dim);
-	return (ret_v);
 }
 
 int	ft_export(t_data *ms, t_cmd *cmds)
