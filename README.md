@@ -46,11 +46,11 @@
 * [x] export : SHLVL, if value non numerical, set SHLVL to 0, if num, set to val - 1
 ![export](img_readme/shlvl.png)
 * [x] parsing end token
-* [ ] vérifier que ft_free_and_ret ne leaks pas quand on export sera fait
+* [x] vérifier que ft_free_and_ret ne leaks pas quand on export sera fait
 
 ### Builtins modifications
 * [ ] changer la valeur de retour de chaque fonction (doit pouvoir retourner un code erreur en fonction du soucis, par exemple cd et echo peuvent retourner des valeurs d'erreurs différentes)
-* [ ] adapter les fonctions aux structs
+* [x] adapter les fonctions aux structs
 * [ ] changer printfs et perror en ft_printf_fd
 * [x] pour ft_cd :
 * [ ] ft_cd : renvoyer bon message d'erreur si fichier et si pas existant
