@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 11:49:14 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 13:20:09 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 int	g_return_val;
 
 /* un free sur ms->curr_work_dir causera un leak ici avec la boucle */
-static void	ft_free_prompt(t_data *ms)
+void	ft_free_prompt(t_data **ms)
 {
-	free(ms->user_input);
-	free(ms->printed_line);
+	free((*ms)->user_input);
+	free((*ms)->printed_line);
 }
 
 /* to delete in the future */
@@ -48,7 +48,8 @@ void	ft_loop(t_data *ms)
 	while (true)
 	{
 		i++;
-		ft_comp_var_env(g_return_val, ms);
+		if (!ft_comp_var_env(g_return_val, ms))
+			return ;
 		ms->b_temoin = true;
 		/* init cwd and pws */
 		if (!ft_get_cwd(ms, i))
@@ -71,24 +72,18 @@ void	ft_loop(t_data *ms)
 		}
 		ft_raw_parsing_process(ms->user_input, ms);
 		print_values(ms);
-		if (ms->user_input && ms->b_temoin && !ms->parse_struct->struct_cmds->cmd)
+		if (ms->b_temoin && !ms->parse_struct->struct_cmds->cmd)
 			ms->b_temoin = false;
-		if (ms->user_input && ms->b_temoin && !ft_strncmp(ms->parse_struct->struct_cmds->cmd, "exit", ft_strlen("exit")))
-		{
-			ft_free_cmds(ms->parse_struct->struct_cmds);
-			ft_free_prompt(ms);
-			return ;
-		}
-		if (ms->user_input && ms->b_temoin && ft_is_builtin(ms->parse_struct->struct_cmds->cmd))
+		if (ms->b_temoin && ft_is_builtin(ms->parse_struct->struct_cmds->cmd))
 			if (ft_builtin(ms->parse_struct->struct_cmds, ms) != R_EX_OK)
 				ms->b_temoin = false;
-		if (ms->user_input && ms->parse_struct->struct_cmds)
+		if (ms->parse_struct->struct_cmds)
 		{
 			ft_free_cmds(ms->parse_struct->struct_cmds);
 		}
 		ft_multiple_free(&ms->tmp_str, NULL, NULL);
 		free(ms->parse_struct);
-		ft_free_prompt(ms);
+		ft_free_prompt(&ms);
 	}
 }
 
