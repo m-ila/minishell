@@ -6,36 +6,11 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:45:43 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/18 16:18:17 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 16:23:11 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-bool	ft_add_prev_token_to_node(t_cmd *struct_cmd, t_data *ms)
-{
-	t_cmd	*tmp;
-	printf("debug\n\n\n\n");
-
-	if (!struct_cmd || !ms)
-		return (false);
-	if (!struct_cmd->next)
-	{
-		if (ms->tmp_str != NULL)
-			struct_cmd->prev_token = ms->tmp_str;
-		return (true);
-	}
-	if (!ft_add_first_prev_token_node(ms->tmp_str, struct_cmd))
-		return (false);
-	tmp = struct_cmd->next;
-	while (tmp)
-	{
-		tmp->prev_token = tmp->prev->next_token;
-		tmp->tok_prev_token = ft_which_redir_token(tmp->prev_token, 'p');
-		tmp = tmp->next;
-	}
-	return (true);
-}
 
 /* if not, starts by stdin */
 bool	ft_add_first_prev_token_node(char *str, t_cmd *c)
