@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:35:42 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/19 13:53:29 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/20 16:50:42 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,13 @@ bool	ft_export_valid_entry(char *str, char **t, char **v, int phase)
 	return (true);
 }
 
+int	ft_free_ret_2(char **str1, char **str2, char ***two_dim, int ret_v)
+{
+	ft_multiple_free(str1, str2, NULL);
+	ft_free_2d_array(*two_dim);
+	return (ret_v);
+}
+
 int	ft_export(t_data *ms, t_cmd *cmds)
 {
 	char	*export_model;
@@ -121,6 +128,8 @@ int	ft_export(t_data *ms, t_cmd *cmds)
 	export_model = ft_epured_model(ms->user_input, ft_export_cond_cut);
 	cleaned_str = ft_epured_str(ms->user_input, export_model);
 	export_split = ft_split_epured(ms->user_input, export_model, '0');
+	if (!export_model || !cleaned_str || !export_split)
+		return (ft_free_ret_2(&export_model, &cleaned_str, &export_split, R_ERR_GEN));
 	i = 1;
 	ft_printf_fd(1, "export model : (d)%s(f)\ncleaned str : (d)%s(f)\n", \
 	export_model, cleaned_str);
