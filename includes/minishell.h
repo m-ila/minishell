@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/21 15:24:59 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/21 16:50:31 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@
 # define R_CMD_N_EX 126
 # define R_CMD_N_F 127
 # define R_CTRL_C 130
-# define R_CTRL_D 131
 
 # ifndef SIZE_PATH_MAX
 #  define SIZE_PATH_MAX 4096
@@ -115,6 +114,7 @@ typedef struct s_parse {
 	char	*tmp_str;
 	char	*tmp_model;
 	int		heredoc_fd;
+	char	*h_lim;
 	t_cmd	*struct_cmds;
 }	t_parse;
 
@@ -197,6 +197,10 @@ bool		ft_malloc_curr_cwd(t_data *ms);
 bool		ft_get_cwd(t_data *ms, unsigned int i);
 bool		ft_malloc_s_parse(t_data *ms);
 void		ft_update_env_cwd(t_data *ms);
+/* init/init_heredoc.c */
+int			ft_open_h_fd(t_data *ms, t_parse *p);
+int			ft_close_h_fd(t_data *ms, t_parse *p);
+int			ft_heredoc(t_data *ms, t_parse *p, t_cmd *c);
 /* init/init_env_struct.c */
 char		*ft_get_val_in_env(char **env, char *tag, t_data *ms);
 char		*ft_quote_the_val(char *str, t_data *ms);
@@ -253,6 +257,7 @@ bool		ft_add_next_token_to_node(char *str, t_cmd *struct_cmd);
 bool		ft_add_first_prev_token_node(char *str, t_cmd *struct_cmd);
 /*====================== SIGNAL  FOLDER ======================*/
 /* signal/signal.c */
+void		ft_reset_global(t_data *ms);
 void		ft_set_r_val(int val, t_data *ms);
 bool		ft_comp_var_env(int val, t_data *ms);
 void		ft_ctrl_c(int val);
