@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/21 16:50:31 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:52:55 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,8 +199,10 @@ bool		ft_malloc_s_parse(t_data *ms);
 void		ft_update_env_cwd(t_data *ms);
 /* init/init_heredoc.c */
 int			ft_open_h_fd(t_data *ms, t_parse *p);
+int			ft_write_in_fd(t_data *ms, t_parse *p);
 int			ft_close_h_fd(t_data *ms, t_parse *p);
-int			ft_heredoc(t_data *ms, t_parse *p, t_cmd *c);
+bool		ft_str_add(char **str1, char **to_add);
+int			ft_heredoc(t_data *ms, t_parse *p);
 /* init/init_env_struct.c */
 char		*ft_get_val_in_env(char **env, char *tag, t_data *ms);
 char		*ft_quote_the_val(char *str, t_data *ms);

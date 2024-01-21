@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 22:21:43 by mbruyant          #+#    #+#             */
-/*   Updated: 2023/10/11 17:09:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:18:20 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,29 @@ char	*ft_strnstr(const char	*big, const char *little, size_t n)
 		i++;
 	}
 	return (NULL);
+}
+
+bool	ft_russian_str(char *hay, char *needle)
+{
+	size_t	i;
+	size_t	j;
+	size_t	len_max;
+
+	if (!hay || !needle)
+		return (false);
+	i = 0;
+	j = 0;
+	len_max = ft_strlen(hay);
+	while (i + j < len_max)
+	{
+		j = 0;
+		while (hay[i + j] == needle[j] && ((i + j) < len_max))
+		{
+			if (needle[j + 1] == '\0')
+				return (true);
+			j++;
+		}
+		i++;
+	}
+	return (false);
 }
