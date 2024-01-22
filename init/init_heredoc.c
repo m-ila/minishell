@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 13:07:54 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:06:57 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,6 @@ int	ft_close_h_fd(t_data *ms, t_parse *p)
 		p->heredoc_fd = -1;
 	}
 	return (R_EX_OK);
-}
-
-bool	ft_str_add(char **str1, char **to_add)
-{
-	char	*tmp;
-
-	if (!str1 || !to_add)
-		return (false);
-	tmp = NULL;
-	tmp = ft_strjoin(*str1, *to_add);
-	if (!tmp)
-		return (false);
-	free(*str1);
-	*str1 = tmp;
-	ft_multiple_free(to_add, NULL, NULL);
-	return (true);
 }
 
 int	ft_write_in_fd(t_data *ms, t_parse *p, char *cont)
@@ -103,7 +87,7 @@ int	ft_heredoc(t_data *ms, t_parse *p)
 {
 	if (ft_open_h_fd(ms, p) != R_EX_OK)
 		return (R_ERR_GEN);
-	if (ft_heredoc_line(ms, p)!= R_EX_OK)
+	if (ft_heredoc_line(ms, p) != R_EX_OK)
 		return (R_ERR_GEN);
 //	execute
 	if (ft_close_h_fd(ms, p) != R_EX_OK)

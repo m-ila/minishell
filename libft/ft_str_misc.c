@@ -6,11 +6,27 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 13:48:46 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/01 14:14:36 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:06:52 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+bool	ft_str_add(char **str1, char **to_add)
+{
+	char	*tmp;
+
+	if (!str1 || !to_add)
+		return (false);
+	tmp = NULL;
+	tmp = ft_strjoin(*str1, *to_add);
+	if (!tmp)
+		return (false);
+	free(*str1);
+	*str1 = tmp;
+	ft_multiple_free(to_add, NULL, NULL);
+	return (true);
+}
 
 int	ft_strendswith(char *str, char *end)
 {
