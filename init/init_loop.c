@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 11:36:01 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:15:15 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ bool	ft_get_cwd(t_data *ms, unsigned int i)
 	}
 	if (getcwd(ms->curr_work_dir, (size_t) SIZE_PATH_MAX))
 	{
-		ms->printed_line = ft_strjoin(ms->curr_work_dir, " > minishell : ");
+		ms->printed_line = ft_triple_join(M_USR, ms->curr_work_dir, " > ", ms);
 		ft_update_env_cwd(ms);
 	}
 	else
