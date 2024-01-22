@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 15:32:45 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:59:56 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,11 +203,14 @@ int			ft_heredoc(t_data *ms, t_parse *p);
 /* init/init_env_struct.c */
 char		*ft_get_val_in_env(char **env, char *tag, t_data *ms);
 char		*ft_quote_the_val(char *str, t_data *ms);
-/* init/init_cmd_struct.c */
-void		ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add);
+/* init/init_cmd_struct_utils.c */
 t_cmd		*ft_create_cmd_node(char *raw_cmd);
 t_cmd		*ft_go_to_last_cmd_node(t_cmd *cmd_node);
+void		ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add);
+/* init/init_cmd_struct.c */
 bool		ft_parse_cmd(t_cmd *cmds, t_data *ms);
+bool		ft_empty_cmd(t_cmd *cmds, t_data *ms);
+bool		ft_set_val_ret(t_data *ms, bool ret);
 /*======================= LOOP FOLDER ========================*/
 /* loop/display.c */
 void		print_values(t_data *ms);
