@@ -46,7 +46,8 @@
 ![export](img_readme/shlvl.png)
 * [x] parsing end token
 * [x] vérifier que ft_free_and_ret ne leaks pas quand on export sera fait
-* [ ] si juste espace sur la ligne doit juste afficher un retour à la ligne et pas une erreur
+* [x] si juste espace sur la ligne doit juste afficher un retour à la ligne et pas une erreur
+* [ ] si char pas fittable dans le nom d'une var d'env, alors il est possible de s'arrêter !
 
 ### Builtins modifications
 * [ ] changer la valeur de retour de chaque fonction (doit pouvoir retourner un code erreur en fonction du soucis, par exemple cd et echo peuvent retourner des valeurs d'erreurs différentes)
