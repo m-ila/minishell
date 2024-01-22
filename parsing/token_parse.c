@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 17:15:41 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/18 16:54:29 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:41:34 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ bool	ft_starts_with_token(char *user_input)
 	int	i;
 
 	i = 0;
-	while (user_input[i] && ft_iswhitespace(user_input[i]))
-		i++;
 	if (user_input[i] == '\0')
 		return (false);
 	if (ft_char_in_base(user_input[i], BASE_TOKEN))
