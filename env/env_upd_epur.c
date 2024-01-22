@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:09 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/18 15:39:40 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool	ft_epur_str2(t_data *ms, char **str2, char **str1)
 {
 	if (ms->parse_struct->tmp_val)
-		*str2 = ft_epured_model(ms->parse_struct->tmp_val, ft_cond_cut);
+		*str2 = ft_ep_model(ms->parse_struct->tmp_val, ft_cond_cut);
 	if (!ms->parse_struct->tmp_val)
 		*str2 = ft_strdup("");
 	if (!str2)
@@ -32,7 +32,7 @@ static bool	ft_nest_update_epur(t_data *ms, t_parse *p, t_cmd *cmds, int *i)
 	if (*i == 0)
 		p->str1 = ft_strdup("");
 	else
-		p->str1 = ft_strdup_limiters(cmds->epured_model, 0, *i);
+		p->str1 = ft_strdup_limiters(cmds->ep_model, 0, *i);
 	if (!p->str1)
 	{
 		ms->b_temoin = false;
@@ -40,9 +40,9 @@ static bool	ft_nest_update_epur(t_data *ms, t_parse *p, t_cmd *cmds, int *i)
 	}
 	if (!ft_epur_str2(ms, &p->str2, &p->str1))
 		return (ft_print_msg("up epur str2", 'm', false, ms));
-	p->str3 = ft_strdup_limiters(cmds->epured_model, \
+	p->str3 = ft_strdup_limiters(cmds->ep_model, \
 	*i + ft_strlen(ms->parse_struct->tmp_tag) + 1, \
-	ft_strlen(cmds->epured_model));
+	ft_strlen(cmds->ep_model));
 	if (!p->str3)
 	{
 		ft_multiple_free(&p->str1, &p->str2, NULL);
@@ -59,10 +59,10 @@ bool	ft_update_epur(t_data *ms, t_cmd *cmds, int *i)
 	p = ms->parse_struct;
 	if (!ft_nest_update_epur(ms, p, cmds, i))
 		return (false);
-	free(cmds->epured_model);
-	cmds->epured_model = ft_triple_join(p->str1, p->str2, p->str3, ms);
+	free(cmds->ep_model);
+	cmds->ep_model = ft_triple_join(p->str1, p->str2, p->str3, ms);
 	ft_multiple_free(&p->str1, &p->str2, &p->str3);
-	if (!cmds->epured_model)
+	if (!cmds->ep_model)
 	{
 		ms->b_temoin = false;
 		return (ft_print_msg("update epured model", 'm', false, ms));

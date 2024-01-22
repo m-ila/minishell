@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:27:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 17:03:06 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	ft_translate_vars(char **str, t_data *ms)
 	if (!str || !ms->b_temoin || !ms->parse_struct)
 		return (false);
 	p = ms->parse_struct;
-	p->tmp_model = ft_epured_model(*str, ft_cut_only_quotes);
+	p->tmp_model = ft_ep_model(*str, ft_cut_only_quotes);
 	p->tmp_str = ft_strdup(*str);
 	if (!p->tmp_model || !p->tmp_str)
 		return (false);
@@ -30,10 +30,10 @@ bool	ft_translate_vars(char **str, t_data *ms)
 	{
 		if (!ft_translate_tag_to_val(p))
 			return (false);
-		model_quotes = ft_epured_model(p->str2, ft_cut_only_quotes);
+		model_quotes = ft_ep_model(p->str2, ft_cut_only_quotes);
 		p->tmp_tag = ft_epured_str(p->str2, model_quotes);
 		ft_multiple_free(&p->str2, NULL, NULL);
-		p->model2 = ft_epured_model(p->tmp_tag, ft_cut_only_quotes);
+		p->model2 = ft_ep_model(p->tmp_tag, ft_cut_only_quotes);
 		if (ft_tag_is_in_env(ms, p->tmp_tag))
 			p->tmp_val = ft_get_val_in_env(ms->envi, p->tmp_tag, ms);
 		else
@@ -44,12 +44,12 @@ bool	ft_translate_vars(char **str, t_data *ms)
 		p->tmp_str = ft_triple_join(p->str1, p->tmp_val, p->str3, ms);
 		ft_free_expand(&p, &model_quotes, &p->tmp_model, true);
 		ft_multiple_free(&p->model1, &p->model2, &p->model3);
-		p->tmp_model = ft_epured_model(p->tmp_str, ft_cut_only_quotes);
+		p->tmp_model = ft_ep_model(p->tmp_str, ft_cut_only_quotes);
 		if (!p->tmp_model)
 			return (ft_free_return(&p->tmp_model, NULL, NULL, false));
 	}
 	free(p->tmp_model);
-	p->tmp_model = ft_epured_model(p->tmp_str, ft_cut_only_quotes);
+	p->tmp_model = ft_ep_model(p->tmp_str, ft_cut_only_quotes);
 	free(*str);
 	if (ft_strocc_base(p->tmp_model, "0"))
 	{

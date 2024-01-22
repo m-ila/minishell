@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 15:59:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct s_cmd {
 	bool			b_abs_path;
 	bool			b_builtin;
 	char			*raw_str;
-	char			*epured_model;
+	char			*ep_model;
 	char			*epured_str;
 	char			**cmd_w_arg;
 	char			**ep_cmd_w_arg;
@@ -224,7 +224,7 @@ bool		ft_cond_cut(char *str, int i);
 bool		ft_export_cond_cut(char *str, int i);
 bool		ft_cut_only_quotes(char *str, int i);
 /* parsing/epur.c */
-char		*ft_epured_model(char *s, bool (*fun)(char *, int));
+char		*ft_ep_model(char *s, bool (*fun)(char *, int));
 char		*ft_epured_str(char *str, char *model);
 /* parsing/parse_get.c */
 char		*get_token(char *str, int from);

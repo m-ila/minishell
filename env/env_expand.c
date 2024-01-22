@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:31:38 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/16 14:14:42 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,16 @@ bool	ft_var_env(t_data *ms, t_cmd *cmds)
 	int		i;
 	t_parse	*ps;
 
-	if (!ms->b_temoin || !cmds->epured_model || !cmds->raw_str)
+	if (!ms->b_temoin || !cmds->ep_model || !cmds->raw_str)
 		return (false);
-	if (!ft_strocc(cmds->epured_model, '$'))
+	if (!ft_strocc(cmds->ep_model, '$'))
 		return (true);
 	i = 0;
 	ps = ms->parse_struct;
 	while (i < (int) ft_strlen(cmds->raw_str))
 	{
 		ft_set_char_to_null(&ps->tmp_tag, &ps->tmp_val, NULL);
-		if (cmds->epured_model[i] == '$')
+		if (cmds->ep_model[i] == '$')
 		{
 			ps->tmp_tag = ft_get_val_to_search_in_env(ms, cmds, i + 1);
 			if (!ps->tmp_tag)

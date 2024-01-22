@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:33:21 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 19:07:54 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*ft_epured_str(char *str, char *model)
 	return (epured);
 }
 
-char	*ft_epured_model(char *s, bool (*fun)(char*, int))
+char	*ft_ep_model(char *s, bool (*fun)(char*, int))
 {
 	char	*model;
 	int		i;

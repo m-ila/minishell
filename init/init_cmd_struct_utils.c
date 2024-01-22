@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:53:20 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 15:57:30 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_cmd	*ft_create_cmd_node(char *raw_cmd)
 		return (NULL);
 	}
 	new->next = NULL;
-	ft_set_char_to_null(&new->prev_token, &new->next_token, &new->epured_model);
+	ft_set_char_to_null(&new->prev_token, &new->next_token, &new->ep_model);
 	ft_set_char_to_null(&new->epured_str, &new->cmd, NULL);
 	new->ep_cmd_w_arg = NULL;
 	new->cmd_w_arg = NULL;

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:43:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 19:44:25 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	ft_cmd_display(t_cmd *cmds)
 			ft_printf_fd(1, "next token : (d)%s(f)\n", cmds->next_token);
 		if (cmds->cmd)
 			ft_printf_fd(1, "cmd : (d)%s(f)\n", cmds->cmd);
-		if (cmds->epured_model)
-			ft_printf_fd(1, "epured_model : (d)%s(f)\n", cmds->epured_model);
+		if (cmds->ep_model)
+			ft_printf_fd(1, "ep_model : (d)%s(f)\n", cmds->ep_model);
 		if (cmds->epured_str)
 			ft_printf_fd(1, "epured_str : (d)%s(f)\n", cmds->epured_str);
 		printf("\nprev tok : %d\n", cmds->tok_prev_token);
