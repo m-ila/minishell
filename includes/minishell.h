@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 19:06:11 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 20:47:57 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define S_QUOTE '\''
 # define D_QUOTE '\"'
 # define BASE_TOKEN "<>|"
-# define B_X "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_"
+# define B_X "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_?"
 /* ========================== DEFINE MSG ==================================== */
 # define SYNTAX_ERR "syntax error near unexpected token '"
 # define SYNTAX_ERR_Q "syntax error - unclosed quotes '"
