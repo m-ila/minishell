@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 02:03:30 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 19:20:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:14:36 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	**ft_split_epured(char *s, char *m, char c)
 	ret = (char **)ft_calloc((ft_wrd_nb(s, m, c) + 1), sizeof(char *));
 	if (!ret)
 		return (NULL);
-	while (s[i] != '\0')
+	while (s[i] != '\0' && m[i])
 	{
 		ft_split_do_1(s, m, &i, c);
 		if (s[i] != '\0')
