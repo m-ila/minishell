@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 00:25:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/21 17:19:09 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:45:32 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ char	**ft_split_epured(char *s, char *m, char c);
 void	ft_split_do_1(char *s, char *m, int *i, char c);
 void	ft_split_do_2(char *s, char *m, int *i, char c);
 bool	ft_russian_str(char *hay, char *needle);
+size_t	ft_russian_index(char *hay, char *needle);
 //void	ft_split_do_ms(char *s, char *m, int *i, int w);
 
 #endif

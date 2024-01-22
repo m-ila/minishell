@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 19:44:13 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 11:25:26 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ void	ft_loop(t_data *ms)
 		print_values(ms);
 		if (ms->b_temoin && !ms->parse_struct->struct_cmds->cmd)
 			ms->b_temoin = false;
+		if (ms->parse_struct->struct_cmds->tok_next_token == heredoc)
+		{
+			ms->parse_struct->h_lim = ft_strdup(ms->parse_struct->struct_cmds->next->cmd);
+			ft_heredoc(ms, ms->parse_struct);
+			free(ms->parse_struct->h_lim);
+		}
 		if (ms->b_temoin && ft_is_builtin(ms->parse_struct->struct_cmds->cmd))
 			if (ft_builtin(ms->parse_struct->struct_cmds, ms) != R_EX_OK)
 				ms->b_temoin = false;

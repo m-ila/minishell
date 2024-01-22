@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/21 18:41:17 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:51:10 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int	ft_open_h_fd(t_data *ms, t_parse *p)
 {
 	if (!ms->b_temoin || !p)
 		return (R_ERR_GEN);
-	if (p->heredoc_fd == -1)
-		p->heredoc_fd = open("/usr/tmp/ms_hdoc.tmp", O_CREAT | O_APPEND, 0777);
+	p->heredoc_fd = open("/home/marianne/42/minishell/heredoc.tmp", \
+	O_CREAT | O_APPEND, 0777);
 	if (p->heredoc_fd == -1)
 	{
-		ft_msg("failed to open heredoc fd", 'e', false, ms);
+		ft_msg("failed to open heredoc fd", 'm', false, ms);
 		return (R_ERR_GEN);
 	}
 	g_return_val = -p->heredoc_fd;
@@ -60,14 +60,29 @@ bool	ft_str_add(char **str1, char **to_add)
 	return (true);
 }
 
-int	ft_write_in_fd(t_data *ms, t_parse *p)
+int	ft_write_in_fd(t_data *ms, t_parse *p, char *cont)
+{
+	size_t	index_delimiter;
+
+	if (!cont || !p->h_lim)
+		return (R_ERR_GEN);
+	index_delimiter = ft_russian_index(cont, p->h_lim);
+	if (write(p->heredoc_fd, &cont, index_delimiter) == -1)
+	{
+		ft_msg("failed to write in heredoc fd", 'e', false, ms);
+		return (R_ERR_GEN);
+	}
+	return (R_EX_OK);
+}
+
+int	ft_heredoc_line(t_data *ms, t_parse *p)
 {
 	char	*str;
 	char	*buff;
 
 	str = ft_strdup("");
 	buff = NULL;
-	if (!str || !buff || !ms)
+	if (!str || !ms || !p->h_lim)
 		return (R_ERR_GEN);
 	while (!ft_russian_str(str, p->h_lim))
 	{
@@ -78,6 +93,8 @@ int	ft_write_in_fd(t_data *ms, t_parse *p)
 		if (!ft_str_add(&str, &buff))
 			return (ft_free_return(&str, &buff, NULL, R_ERR_GEN));
 	}
+	if (ft_write_in_fd(ms, p, str) != R_EX_OK)
+		return (ft_free_return(&str, &buff, NULL, R_ERR_GEN));
 	return (ft_free_return(&str, &buff, NULL, R_EX_OK));
 }
 
@@ -85,10 +102,11 @@ int	ft_heredoc(t_data *ms, t_parse *p)
 {
 	if (ft_open_h_fd(ms, p) != R_EX_OK)
 		return (R_ERR_GEN);
-	if (ft_write_in_fd(ms, p)!= R_EX_OK)
+	if (ft_heredoc_line(ms, p)!= R_EX_OK)
 		return (R_ERR_GEN);
 //	execute
-	ft_close_h_fd(ms, p);
+	if (ft_close_h_fd(ms, p) != R_EX_OK)
+		return (R_ERR_GEN);
 //	delete tmp file
 	return (R_EX_OK);
 }

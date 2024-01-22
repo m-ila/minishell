@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/21 17:52:55 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 12:43:57 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,8 @@ bool		ft_malloc_s_parse(t_data *ms);
 void		ft_update_env_cwd(t_data *ms);
 /* init/init_heredoc.c */
 int			ft_open_h_fd(t_data *ms, t_parse *p);
-int			ft_write_in_fd(t_data *ms, t_parse *p);
+int			ft_heredoc_line(t_data *ms, t_parse *p);
+int			ft_write_in_fd(t_data *ms, t_parse *p, char *cont);
 int			ft_close_h_fd(t_data *ms, t_parse *p);
 bool		ft_str_add(char **str1, char **to_add);
 int			ft_heredoc(t_data *ms, t_parse *p);

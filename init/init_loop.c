@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 11:54:38 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 11:36:01 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,11 @@ bool	ft_malloc_s_parse(t_data *ms)
 	p->struct_cmds = NULL;
 	p->nb_reigning_quotes = 0;
 	p->l_reign_q = '.';
-	p->tmp_tag = NULL;
-	p->tmp_val = NULL;
-	p->tmp_str = NULL;
-	p->tmp_model = NULL;
-	p->str1 = NULL;
-	p->str2 = NULL;
-	p->str3 = NULL;
-	p->model1 = NULL;
-	p->model2 = NULL;
-	p->model3 = NULL;
+	p->heredoc_fd = -1;
+	ft_set_char_to_null(&p->tmp_tag, &p->tmp_val, &p->tmp_str);
+	ft_set_char_to_null(&p->tmp_model, &p->str1, &p->str2);
+	ft_set_char_to_null(&p->str3, &p->model1, &p->model2);
+	ft_set_char_to_null(&p->model3, &p->h_lim, NULL);
 	ms->parse_struct = p;
 	return (true);
 }

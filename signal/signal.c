@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:51:00 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/21 16:45:45 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 11:44:01 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_reset_global(t_data *ms)
 	char	*str_val;
 	int		val;
 
-	str_val = ft_get_val_in_env(ms->envi, "$", ms);
+	str_val = ft_get_val_in_env(ms->envi, "?", ms);
 	if (!str_val)
 		return (ft_msg("failed to get return val", 'm', false, ms));
 	val = ft_atoi(str_val);
