@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:44:09 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ bool	ft_parse_cmd(t_cmd *cmds, t_data *ms)
 		cmds->cmd_w_arg = ft_split_epured(cmds->raw_str, cmds->ep_model, '0');
 		if (!ft_var_env(ms, ms->parse_struct->struct_cmds))
 			return (ft_set_val_ret(ms, false));
+		free(cmds->ep_model);
+		cmds->ep_model = ft_ep_model(cmds->raw_str, ft_cond_cut);
 		cmds->epured_str = ft_epured_str(cmds->raw_str, cmds->ep_model);
 		cmds->ep_cmd_w_arg = \
 		ft_split_epured(cmds->raw_str, cmds->ep_model, '0');
