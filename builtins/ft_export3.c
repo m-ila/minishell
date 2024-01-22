@@ -6,11 +6,35 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:27:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:34:55 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static bool	ft_do_translate(t_data *ms, t_parse *p, char **model_quotes)
+{
+	if (!ft_translate_tag_to_val(p))
+		return (false);
+	*model_quotes = ft_ep_model(p->str2, ft_cut_only_quotes);
+	p->tmp_tag = ft_epured_str(p->str2, *model_quotes);
+	ft_multiple_free(&p->str2, NULL, NULL);
+	p->model2 = ft_ep_model(p->tmp_tag, ft_cut_only_quotes);
+	if (ft_tag_is_in_env(ms, p->tmp_tag))
+		p->tmp_val = ft_get_val_in_env(ms->envi, p->tmp_tag, ms);
+	else
+		p->tmp_val = ft_strdup("");
+	if (!p->tmp_val)
+		return (ft_free_expand(&p, model_quotes, NULL, false));
+	free(p->tmp_str);
+	p->tmp_str = ft_triple_join(p->str1, p->tmp_val, p->str3, ms);
+	ft_free_expand(&p, model_quotes, &p->tmp_model, true);
+	ft_multiple_free(&p->model1, &p->model2, &p->model3);
+	p->tmp_model = ft_ep_model(p->tmp_str, ft_cut_only_quotes);
+	if (!p->tmp_model)
+		return (ft_free_return(&p->tmp_model, NULL, NULL, false));
+	return (true);
+}
 
 bool	ft_translate_vars(char **str, t_data *ms)
 {
@@ -27,27 +51,8 @@ bool	ft_translate_vars(char **str, t_data *ms)
 	if (!ft_strocc_base(p->tmp_model, "$0qQ"))
 		return (ft_free_return(&p->tmp_model, &p->tmp_str, NULL, true));
 	while (ft_strocc_base(p->tmp_model, "$"))
-	{
-		if (!ft_translate_tag_to_val(p))
+		if (!ft_do_translate(ms, p, &model_quotes))
 			return (false);
-		model_quotes = ft_ep_model(p->str2, ft_cut_only_quotes);
-		p->tmp_tag = ft_epured_str(p->str2, model_quotes);
-		ft_multiple_free(&p->str2, NULL, NULL);
-		p->model2 = ft_ep_model(p->tmp_tag, ft_cut_only_quotes);
-		if (ft_tag_is_in_env(ms, p->tmp_tag))
-			p->tmp_val = ft_get_val_in_env(ms->envi, p->tmp_tag, ms);
-		else
-			p->tmp_val = ft_strdup("");
-		if (!p->tmp_val)
-			return (ft_free_expand(&p, &model_quotes, NULL, false));
-		free(p->tmp_str);
-		p->tmp_str = ft_triple_join(p->str1, p->tmp_val, p->str3, ms);
-		ft_free_expand(&p, &model_quotes, &p->tmp_model, true);
-		ft_multiple_free(&p->model1, &p->model2, &p->model3);
-		p->tmp_model = ft_ep_model(p->tmp_str, ft_cut_only_quotes);
-		if (!p->tmp_model)
-			return (ft_free_return(&p->tmp_model, NULL, NULL, false));
-	}
 	free(p->tmp_model);
 	p->tmp_model = ft_ep_model(p->tmp_str, ft_cut_only_quotes);
 	free(*str);
@@ -89,12 +94,10 @@ bool	ft_local_str(char *str, t_data *ms, t_cmd *c)
 	loc_val = ft_strdup_limiters(str, until + 1, (int) ft_strlen(str));
 	if (!loc_tag || !loc_val)
 		return (ft_free_return(&loc_tag, &loc_val, NULL, false));
-	ft_printf_fd(1, "tag : (d)%s(f)\nval : (d)%s(f)\n", loc_tag, loc_val);
 	ft_translate_vars(&loc_tag, ms);
 	ft_translate_vars(&loc_val, ms);
 	if (!loc_tag || !loc_val)
 		return (ft_free_return(&loc_tag, &loc_val, NULL, false));
-	ft_printf_fd(1, "translated tag : (d)%s(f)\ntranslated val : (d)%s(f)\n\n", loc_tag, loc_val);
 	if (ft_export_valid_entry(NULL, &loc_tag, &loc_val, 2))
 		if (!ft_exp_in_env(loc_tag, loc_val, ms))
 			ft_msg("export : add to env fail", 'm', false, ms);

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:35:42 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:26:14 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,8 @@ int	ft_export(t_data *ms, t_cmd *cmds)
 	if (!export_model || !cleaned_str || !export_split)
 		return (ft_free_ret_2(&export_model, &cleaned_str, &export_split, R_ERR_GEN));
 	i = 1;
-	ft_printf_fd(1, "export model : (d)%s(f)\ncleaned str : (d)%s(f)\n", \
-	export_model, cleaned_str);
 	while (export_split[i])
 	{
-		ft_printf_fd(1, "split[%d] : (d)%s(f)\n", i, export_split[i]);
 		if (ft_export_valid_entry(export_split[i], NULL, NULL, 1))
 			if (!ft_local_str(export_split[i], ms, cmds))
 				break ;
