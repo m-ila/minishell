@@ -6,32 +6,11 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:47:17 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 16:57:10 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:35:15 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	ft_set_char_to_null(char **str1, char **str2, char **str3)
-{
-	if (str1)
-		*str1 = NULL;
-	if (str2)
-		*str2 = NULL;
-	if (str3)
-		*str3 = NULL;
-}
-
-void	ft_multiple_free(char **str1, char **str2, char **str3)
-{
-	if (str1)
-		free(*str1);
-	if (str2)
-		free(*str2);
-	if (str3)
-		free(*str3);
-	ft_set_char_to_null(str1, str2, str3);
-}
 
 char	*ft_get_val_to_search_in_env(t_data *ms, t_cmd *cmds, int from)
 {
