@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:35:42 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 16:26:14 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:07:22 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,27 @@ int	ft_export_first_eq(char *str)
 
 int	ft_export(t_data *ms, t_cmd *cmds)
 {
-	char	*export_model;
+	char	*exp_mod;
 	char	*cleaned_str;
-	char	**export_split;
+	char	**exp_split;
 	int		i;
 
 	if (!cmds)
 		return (R_ERR_GEN);
-	export_model = ft_ep_model(ms->user_input, ft_export_cond_cut);
-	cleaned_str = ft_epured_str(ms->user_input, export_model);
-	export_split = ft_split_epured(ms->user_input, export_model, '0');
-	if (!export_model || !cleaned_str || !export_split)
-		return (ft_free_ret_2(&export_model, &cleaned_str, &export_split, R_ERR_GEN));
+	exp_mod = ft_ep_model(ms->user_input, ft_export_cond_cut);
+	cleaned_str = ft_epured_str(ms->user_input, exp_mod);
+	exp_split = ft_split_epured(ms->user_input, exp_mod, '0');
+	if (!exp_mod || !cleaned_str || !exp_split)
+		return (ft_free_ret_2(&exp_mod, &cleaned_str, &exp_split, R_ERR_GEN));
 	i = 1;
-	while (export_split[i])
+	while (exp_split[i])
 	{
-		if (ft_export_valid_entry(export_split[i], NULL, NULL, 1))
-			if (!ft_local_str(export_split[i], ms, cmds))
+		if (ft_export_valid_entry(exp_split[i], NULL, NULL, 1))
+			if (!ft_local_str(exp_split[i], ms, cmds))
 				break ;
 		i++;
 	}
-	ft_multiple_free(&export_model, &cleaned_str, NULL);
-	ft_free_2d_array(export_split);
+	ft_multiple_free(&exp_mod, &cleaned_str, NULL);
+	ft_free_2d_array(exp_split);
 	return (R_EX_OK);
 }

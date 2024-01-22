@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 02:03:30 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 19:45:24 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:06:04 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char	*ft_wrd(char *s, char *m, char c, int *i)
 	if (!ret)
 		return (NULL);
 	index = 0;
-	while (m[index + *i] != c && (index + *i) < (int) ft_strlen(s)&& \
+	while (m[index + *i] != c && (index + *i) < (int) ft_strlen(s) && \
 	(index + *i) < (int) ft_strlen(m))
 	{
 		ret[index] = s[index + *i];
