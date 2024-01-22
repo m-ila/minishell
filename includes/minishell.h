@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:06:11 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_cmd {
 	bool			b_builtin;
 	char			*raw_str;
 	char			*ep_model;
+	char			*other_model;
 	char			*epured_str;
 	char			**cmd_w_arg;
 	char			**ep_cmd_w_arg;
@@ -214,7 +215,7 @@ bool		ft_set_val_ret(t_data *ms, bool ret);
 /*======================= LOOP FOLDER ========================*/
 /* loop/display.c */
 void		print_values(t_data *ms);
-void		ft_cmd_display(t_cmd *cmds);
+void		ft_cmd_display(t_data *ms, t_cmd *cmds);
 /* loop/main.c */
 void		ft_loop(t_data *ms);
 void		ft_free_prompt(t_data **ms);
