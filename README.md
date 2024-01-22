@@ -70,6 +70,9 @@
 * OLDPWD will only be in the env when cd has been used since the launch of the terminal : needs to be changed once cd is created
 * Issue : readline quand chaine vide ferme le prog, alors que le terminal just new prompt
 
+## Note
+![Alors](img_readme/msg_ret_token.png)
+
 ## Env variable syntax
 * [Env variable syntax 1](https://stackoverflow.com/questions/2821043/allowed-characters-in-linux-environment-variable-names)
 * [Env variable syntax 2](https://pubs.opengroup.org/onlinepubs/000095399/basedefs/xbd_chap08.html)
