@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:51:00 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 11:44:01 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:26:32 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_set_r_val(int val, t_data *ms)
 	str_val = ft_itoa(g_return_val);
 	if (!val)
 		return (ft_msg("failed to change return val", 'm', false, NULL));
-	ft_actualise_env(ms, "$", str_val);
+	ft_actualise_env(ms, "?", str_val);
 	free(str_val);
 }
 
@@ -42,7 +42,7 @@ bool	ft_comp_var_env(int val, t_data *ms)
 	char	*str_val;
 	int		int_val;
 
-	str_val = ft_get_val_in_env(ms->envi, "$", ms);
+	str_val = ft_get_val_in_env(ms->envi, "?", ms);
 	if (!str_val || str_val[0] == '\0')
 		return (ft_free_return(&str_val, NULL, NULL, true));
 	int_val = ft_atoi(str_val);

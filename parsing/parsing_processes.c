@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/23 13:45:25 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:47:33 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	deal_with_token(char *str, char *tok_str, int from, t_data *ms)
 }
 
 /*
-to add : strdup protection !
+to do : strdup protection !
 */
 bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 {
