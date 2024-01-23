@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 22:21:43 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 12:37:34 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:46:24 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ bool	ft_russian_str(char *hay, char *needle)
 		j = 0;
 		while (hay[i + j] == needle[j] && ((i + j) < len_max))
 		{
-			if (needle[j + 1] == '\0')
+			if (needle[j + 1] == '\0' && \
+			(ft_iswhitespace(hay[i + j + 1]) || i + j + 2 >= len_max))
 				return (true);
 			j++;
 		}
@@ -89,7 +90,8 @@ size_t	ft_russian_index(char *hay, char *needle)
 		j = 0;
 		while (hay[i + j] == needle[j] && ((i + j) < len_max))
 		{
-			if (needle[j + 1] == '\0')
+			if (needle[j + 1] == '\0' && \
+			(ft_iswhitespace(hay[i + j + 1]) || i + j + 2 >= len_max))
 				return (i);
 			j++;
 		}
