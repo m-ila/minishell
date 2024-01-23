@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:05:26 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 13:19:38 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:59:31 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int	ft_exit(t_data *ms, t_cmd *cmds)
 {
 	if (!cmds)
-		return (R_EX_OK);
-	if (ft_2d_lines(cmds->cmd_w_arg) > 1)
 		return (R_EX_OK);
 	ft_free_cmds(cmds);
 	ft_free_prompt(&ms);
