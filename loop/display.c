@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:43:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/23 13:35:44 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:51:05 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	ft_cmd_display(t_data *ms, t_cmd *cmds)
 	}
 }
 
-/* to delete in the future */
 void	print_values(t_data *ms)
 {
 	ft_printf_fd(1, "%s\n\n", PRINT_SEP_T);

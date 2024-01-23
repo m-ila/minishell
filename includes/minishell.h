@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/23 13:34:28 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/23 14:17:56 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,9 @@ void		ft_cmd_display(t_data *ms, t_cmd *cmds);
 void		ft_loop(t_data *ms);
 void		ft_free_prompt(t_data **ms);
 /*====================== PARSING FOLDER ======================*/
+/* parsing/abs_path.c */
+void	    ft_errno_msg(t_cmd *c, int errno);
+bool		ft_absolute_path(t_cmd *c);
 /* parsing/cond_cut.c */
 bool		ft_cond_cut(char *str, int i);
 bool		ft_export_cond_cut(char *str, int i);
@@ -251,11 +254,16 @@ char		*ft_msg_ret_char(char *str);
 int			ft_print_msg(char *str, char type, int return_value, t_data *ms);
 char		*ft_char_print_msg(char *str, char type, \
 char *return_value, t_data *ms);
-/* parsing/quoting_rule.c */
+/* parsing/quoting.c */
 int			ft_elem_is_in_quotes(char *str, int i);
 bool		ft_count_reigning_quotes(char *str, t_parse *parse_struct);
 bool		ft_char_is_a_reigning_quote(char *str, int i);
 int			ft_get_index_next_reign_quo(char *str, int from);
+/* parsing/rights.c */
+bool    	ft_exists(t_cmd *c);
+bool    	ft_doc_has_read_rights(t_cmd *c);
+bool    	ft_doc_has_write_rights(t_cmd *c);
+bool	    ft_has_exec_rights(t_cmd *c);
 /* parsing/to_node.c */
 bool		ft_prev_is_red_io(t_cmd *c);
 bool		ft_add_next_token_to_node(char *str, t_cmd *struct_cmd);
