@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/23 11:33:30 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:49:27 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define PRINT_SEP "========================================================"
 # define CD_N_F "not a file or folder\n"
 # define CD_ARG "too many arguments\n"
-# define M_USR "minishell_user@"
+# define M_USR "user@minishell:"
 /* ========================== DEFINE RET VALUES ============================= */
 # define R_EX_OK 0
 # define R_ERR_GEN 1
