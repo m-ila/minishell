@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 15:46:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:45:25 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 		ms->parse_struct->struct_cmds = buff;
 		buff->prev_token = ft_strdup(ms->tmp_str);
 		buff->tok_prev_token = ft_which_redir_token(buff->prev_token, 'p');
+		buff->b_is_file = ft_prev_is_red_io(buff);
 	}
 	else
 		ft_add_node_to_cmds(&ms->parse_struct->struct_cmds, buff);
@@ -117,7 +118,7 @@ bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 		free(tmp_t);
 		return (false);
 	}
-	free(ms->tmp_str);
+	ft_multiple_free(&ms->tmp_str, NULL, NULL);
 	ms->tmp_str = ft_strdup(tmp_t);
 	(*from) += (int) ft_strlen(tmp_t);
 	free(tmp_t);

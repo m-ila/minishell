@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/23 11:49:27 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:34:28 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ typedef struct s_cmd {
 	int				fd_in;
 	int				fd_out;
 	bool			b_abs_path;
-	bool			b_builtin;
 	char			*raw_str;
 	char			*ep_model;
 	char			*other_model;
@@ -99,6 +98,7 @@ typedef struct s_cmd {
 	char			**cmd_w_arg;
 	char			**ep_cmd_w_arg;
 	char			*cmd;
+	bool			b_is_file;
 }	t_cmd;
 
 typedef struct s_parse {
@@ -257,6 +257,7 @@ bool		ft_count_reigning_quotes(char *str, t_parse *parse_struct);
 bool		ft_char_is_a_reigning_quote(char *str, int i);
 int			ft_get_index_next_reign_quo(char *str, int from);
 /* parsing/to_node.c */
+bool		ft_prev_is_red_io(t_cmd *c);
 bool		ft_add_next_token_to_node(char *str, t_cmd *struct_cmd);
 bool		ft_add_first_prev_token_node(char *str, t_cmd *struct_cmd);
 /*====================== SIGNAL  FOLDER ======================*/

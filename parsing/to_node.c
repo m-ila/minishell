@@ -6,13 +6,22 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:45:43 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 16:23:11 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:40:17 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+bool	ft_prev_is_red_io(t_cmd *c)
+{
+	return (c->tok_prev_token == redir_in || \
+	c->tok_prev_token == redir_out || \
+	c->tok_prev_token == redir_out_app || \
+	c->tok_prev_token == heredoc);
+}
+
 /* if not, starts by stdin */
+/*
 bool	ft_add_first_prev_token_node(char *str, t_cmd *c)
 {
 	if (!c)
@@ -21,11 +30,12 @@ bool	ft_add_first_prev_token_node(char *str, t_cmd *c)
 		return (true);
 	c->prev_token = ft_strdup(str);
 	c->tok_prev_token = ft_which_redir_token(c->prev_token, 'p');
+	c->b_is_file = ft_prev_is_red_io(c);
 	free(str);
 	str = NULL;
 	return (true);
 }
-
+*/
 bool	ft_add_next_token_to_node(char *str, t_cmd *struct_cmd)
 {
 	t_cmd	*last;

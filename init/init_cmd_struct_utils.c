@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:53:20 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:38:49 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_cmd	*ft_create_cmd_node(char *raw_cmd)
 	ft_set_char_to_null(&new->epured_str, &new->cmd, NULL);
 	new->ep_cmd_w_arg = NULL;
 	new->cmd_w_arg = NULL;
+	new->b_is_file = false;
 	new->tok_next_token = end_of_file;
 	new->tok_prev_token = start;
 	return (new);
@@ -70,4 +71,5 @@ void	ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add)
 	to_add->prev = end;
 	to_add->prev_token = ft_strdup(to_add->prev->next_token);
 	to_add->tok_prev_token = ft_which_redir_token(to_add->prev_token, 'p');
+	to_add->b_is_file = ft_prev_is_red_io(to_add);
 }
