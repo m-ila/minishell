@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 15:06:57 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:47:24 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_open_h_fd(t_data *ms, t_parse *p)
 {
 	if (!ms->b_temoin || !p)
 		return (R_ERR_GEN);
-	p->heredoc_fd = open("/home/marianne/42/minishell/heredoc.tmp", \
+	p->heredoc_fd = open("/tmp/heredoc.tmp", \
 	O_CREAT | O_APPEND | O_WRONLY, 0777);
 	if (p->heredoc_fd == -1)
 	{
@@ -50,7 +50,6 @@ int	ft_write_in_fd(t_data *ms, t_parse *p, char *cont)
 
 	if (!cont || !p->h_lim)
 		return (R_ERR_GEN);
-	printf("fd : %d\n", p->heredoc_fd);
 	index_delimiter = ft_russian_index(cont, p->h_lim);
 	if (write(p->heredoc_fd, cont, index_delimiter) == -1)
 	{
