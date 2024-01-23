@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:43:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 19:06:16 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:35:44 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	ft_cmd_display(t_data *ms, t_cmd *cmds)
 			ft_printf_fd(1, "epured_str : (d)%s(f)\n", cmds->epured_str);
 		while (cmds->ep_cmd_w_arg[++j])
 			ft_printf_fd(1, "\nepured_cmd_w_arg[%d] : (d)%s(f)\n", j, cmds->ep_cmd_w_arg[j]);
+		printf("is file : %d\n", cmds->b_is_file);
 		printf("\nprev tok : %d\n", cmds->tok_prev_token);
 		printf("next tok : %d\n\n\n", cmds->tok_next_token);
 		i++;
