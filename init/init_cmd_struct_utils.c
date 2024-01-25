@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:53:20 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:50:42 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:09:13 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ bool	ft_assign_cmd(t_cmd *c)
 {
 	if (c->b_is_file)
 	{
+		c->cmd = NULL;
 		if (ft_2d_lines(c->ep_all_elem) > 1)
 		{
 			c->cmd = ft_strdup(c->ep_all_elem[1]);
@@ -69,14 +70,17 @@ bool	ft_assign_cmd(t_cmd *c)
 				return (ft_free_ret_2(&c->cmd, NULL, &c->cmd_w_args, false));
 			}
 		}
-		if (ft_2d_lines(c->ep_all_elem) == 1)
-			c->cmd = NULL;
 	}
 	if (!c->b_is_file && c->ep_all_elem)
 	{
 		c->cmd = ft_strdup(c->ep_all_elem[0]);
-		if (!c->cmd)
-			return (ft_print_msg("cmd malloc", 'm', false, NULL));
+		c->cmd_w_args = ft_copy_2d_array(c->ep_all_elem, 0, \
+			ft_2d_lines(c->ep_all_elem));
+		if (!c->cmd || !c->cmd_w_args)
+		{
+			ft_msg("malloc cmd & cmd_w_arg", 'm', false, NULL);
+			return (ft_free_ret_2(&c->cmd, NULL, &c->cmd_w_args, false));
+		}
 	}
 	return (true);
 }

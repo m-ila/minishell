@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:43:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:57:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:11:20 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ void	ft_cmd_display(t_data *ms, t_cmd *c)
 		if (c->next_token)
 			ft_printf_fd(1, "next token : (d)%s(f)\n", c->next_token);
 		if (c->cmd)
-			ft_printf_fd(1, "cmd : (d)%s(f)\n", c->cmd);
+			ft_printf_fd(1, "cmd : (d)%s(f)\n\n", c->cmd);
 		if (c->ep_model)
 			ft_printf_fd(1, "ep_model : (d)%s(f)\n", c->ep_model);
 		if (c->ep_str)
-			ft_printf_fd(1, "ep_str : (d)%s(f)\n", c->ep_str);
+			ft_printf_fd(1, "ep_str : (d)%s(f)\n\n", c->ep_str);
 		while (c->ep_all_elem[++j])
-			ft_printf_fd(1, "\nep_all_elem[%d] : (d)%s(f)\n", j, c->ep_all_elem[j]);
+			ft_printf_fd(1, "ep_all_elem[%d] : (d)%s(f)\n", j, c->ep_all_elem[j]);
 		j = -1;
+		ft_printf_fd(1, "\n");
 		if (c->cmd_w_args != NULL)
 		{
 			while (c->cmd_w_args[++j])
-				ft_printf_fd(1, "\ncmd_w_arg[%d] : (d)%s(f)\n", j, c->cmd_w_args[j]);
+				ft_printf_fd(1, "cmd_w_arg[%d] : (d)%s(f)\n", j, c->cmd_w_args[j]);
 		}
 		printf("is file : %d\n", c->b_is_file);
 		printf("\nprev tok : %d\n", c->tok_prev_token);
