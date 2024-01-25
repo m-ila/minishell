@@ -6,21 +6,21 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:47:17 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:11:04 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_get_val_to_search_in_env(t_data *ms, t_cmd *cmds, int from)
+char	*ft_get_val_to_search_in_env(t_data *ms, t_cmd *c, int from)
 {
 	int	until;
 
-	if (!ms->b_temoin || !cmds->ep_model || \
-	from >= (int) ft_strlen(cmds->ep_model))
+	if (!ms->b_temoin || !c->ep_model || \
+	from >= (int) ft_strlen(c->ep_model))
 		return (ft_strdup(""));
-	until = ft_strlen_unbase(cmds->ep_model, "1", from);
-	return (ft_strdup_limiters(cmds->raw_str, from, from + until));
+	until = ft_strlen_unbase(c->ep_model, "1", from);
+	return (ft_strdup_limiters(c->raw_str, from, from + until));
 }
 
 char	*ft_join_tag_and_val(char *tag, char *val)

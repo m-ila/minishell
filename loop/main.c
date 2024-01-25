@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 17:56:26 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:52:39 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,31 +54,31 @@ void	ft_loop(t_data *ms)
 		//if heredoc, gnl jusqu'a delimiter dans la str recuperee
 		add_history(ms->user_input);
 		if (ms->b_temoin)
-			ft_count_reigning_quotes(ms->user_input, ms->parse_struct);
-		if (ms->b_temoin && ms->parse_struct->nb_reigning_quotes % 2 != 0)
+			ft_count_reigning_quotes(ms->user_input, ms->parse_s);
+		if (ms->b_temoin && ms->parse_s->nb_reigning_quotes % 2 != 0)
 		{
 			ft_msg("", 'q', false, ms);
 			ms->b_temoin = false;
 		}
 		ft_raw_parsing_process(ms->user_input, ms);
 		print_values(ms);
-		if (ms->b_temoin && !ms->parse_struct->struct_cmds->cmd)
+		if (ms->b_temoin && !ms->parse_s->c->cmd)
 			ms->b_temoin = false;
-		if (ms->b_temoin && ms->parse_struct->struct_cmds->tok_next_token == heredoc)
+		if (ms->b_temoin && ms->parse_s->c->tok_next_token == heredoc)
 		{
-			ms->parse_struct->h_lim = ft_strdup(ms->parse_struct->struct_cmds->next->cmd);
-			ft_heredoc(ms, ms->parse_struct);
-			free(ms->parse_struct->h_lim);
+			ms->parse_s->h_lim = ft_strdup(ms->parse_s->c->next->cmd);
+			ft_heredoc(ms, ms->parse_s);
+			free(ms->parse_s->h_lim);
 		}
-		if (ms->b_temoin && ft_is_builtin(ms->parse_struct->struct_cmds->cmd))
-			if (ft_builtin(ms->parse_struct->struct_cmds, ms) != R_EX_OK)
+		if (ms->b_temoin && ft_is_builtin(ms->parse_s->c->cmd))
+			if (ft_builtin(ms->parse_s->c, ms) != R_EX_OK)
 				ms->b_temoin = false;
-		if (ms->parse_struct->struct_cmds)
+		if (ms->parse_s->c)
 		{
-			ft_free_cmds(ms->parse_struct->struct_cmds);
+			ft_free_cmds(ms->parse_s->c);
 		}
 		ft_multiple_free(&ms->tmp_str, NULL, NULL);
-		free(ms->parse_struct);
+		free(ms->parse_s);
 		ft_free_prompt(&ms);
 	}
 }
@@ -103,7 +103,7 @@ int	main(int argc, char **argv, char **envp)
 	ft_free_2d_array(ms->envi);
 	ft_multiple_free(&ms->tmp_str, &ms->prev_work_dir, &ms->curr_work_dir);
 	ft_multiple_free(&ms->printed_line, NULL, NULL);
-	free(ms->parse_struct);
+	free(ms->parse_s);
 	free(ms);
 	rl_clear_history();
 	return (g_return_val);

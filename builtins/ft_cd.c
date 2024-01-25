@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 11:25:17 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/20 16:38:25 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:11:49 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,19 +71,19 @@ static int	ft_do(char *home_path, t_data *ms, int which)
 	return (R_ERR_GEN);
 }
 
-int	ft_cd(t_cmd *cmds, t_data *ms)
+int	ft_cd(t_cmd *c, t_data *ms)
 {
 	char	*home_path;
 
-	if (!ms || !cmds)
+	if (!ms || !c)
 		return (R_ERR_GEN);
 	if (!ms->b_temoin)
 		return (R_EX_OK);
-	if (ft_2d_lines(cmds->ep_cmd_w_arg) > 2)
+	if (ft_2d_lines(c->ep_all_elem) > 2)
 		return (ft_print_msg("", 'C', R_EX_OK, ms));
 	ft_cd_update_wd(ms);
-	if (ft_2d_lines(cmds->ep_cmd_w_arg) == 1 || \
-	!ft_strncmp(cmds->ep_cmd_w_arg[1], "~", 1))
+	if (ft_2d_lines(c->ep_all_elem) == 1 || \
+	!ft_strncmp(c->ep_all_elem[1], "~", 1))
 	{
 		home_path = ft_deal_with_home(ms);
 		if (home_path[0] == '\0')
@@ -92,10 +92,10 @@ int	ft_cd(t_cmd *cmds, t_data *ms)
 			return (ft_do(home_path, ms, 2));
 		return (ft_do(home_path, ms, 3));
 	}
-	else if (chdir(cmds->ep_cmd_w_arg[1]) == -1)
+	else if (chdir(c->ep_all_elem[1]) == -1)
 	{
 		ms->b_temoin = false;
-		return (ft_print_msg(cmds->ep_cmd_w_arg[1], 'c', R_ERR_GEN, ms));
+		return (ft_print_msg(c->ep_all_elem[1], 'c', R_ERR_GEN, ms));
 	}
 	return (R_EX_OK);
 }

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:21:47 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 16:02:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:56:21 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,18 @@ static void	ft_free_cmd_node(t_cmd *curr)
 		return ;
 	if (curr->cmd)
 		free(curr->cmd);
-	if (curr->cmd_w_arg)
-		ft_free_2d_array(curr->cmd_w_arg);
-	if (curr->ep_cmd_w_arg)
-		ft_free_2d_array(curr->ep_cmd_w_arg);
+	if (curr->all_elem)
+		ft_free_2d_array(curr->all_elem);
+	if (curr->ep_all_elem)
+		ft_free_2d_array(curr->ep_all_elem);
+	if (curr->cmd_w_args)
+		ft_free_2d_array(curr->cmd_w_args);
 	if (curr->raw_str)
 		free(curr->raw_str);
 	if (curr->ep_model)
 		free(curr->ep_model);
-	if (curr->epured_str)
-		free(curr->epured_str);
+	if (curr->ep_str)
+		free(curr->ep_str);
 	if (curr->prev_token)
 		free(curr->prev_token);
 	if (curr->next_token)
@@ -36,16 +38,16 @@ static void	ft_free_cmd_node(t_cmd *curr)
 		free(curr);
 }
 
-void	ft_free_cmds(t_cmd *cmds)
+void	ft_free_cmds(t_cmd *c)
 {
 	t_cmd	*curr;
 
-	if (!cmds)
+	if (!c)
 		return ;
-	while (cmds)
+	while (c)
 	{
-		curr = cmds;
-		cmds = cmds->next;
+		curr = c;
+		c = c->next;
 		ft_free_cmd_node(curr);
 	}
 }

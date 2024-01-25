@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:40:41 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/22 20:48:20 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:11:49 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@
 to do : voir avec Chourael si print sur sortie standard OK si redirections
 sinon changer FD dans ft_printf_fd et write
 */
-int	ft_echo(t_cmd *cmds)
+int	ft_echo(t_cmd *c)
 {
 	int	i;
 	int	n;
 	int	len;
 
-	if (!cmds)
+	if (!c)
 		return (R_ERR_GEN);
 	i = 1;
 	n = 0;
-	len = ft_2d_lines(cmds->ep_cmd_w_arg);
+	len = ft_2d_lines(c->ep_all_elem);
 	if (len > 1)
 	{
-		if (!ft_strncmp(cmds->ep_cmd_w_arg[1], "-n", ft_strlen("-n ")))
+		if (!ft_strncmp(c->ep_all_elem[1], "-n", ft_strlen("-n ")))
 			n = 1;
-		while (cmds->ep_cmd_w_arg[i + n])
+		while (c->ep_all_elem[i + n])
 		{
-			ft_printf_fd(1, "%s", cmds->ep_cmd_w_arg[i + n]);
+			ft_printf_fd(1, "%s", c->ep_all_elem[i + n]);
 			if (i + n < len - 1)
 				ft_printf_fd(1, " ");
 			i++;

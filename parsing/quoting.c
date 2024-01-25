@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 10:20:10 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 16:43:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:52:39 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_elem_is_in_quotes(char *str, int i)
 	return (ft_return_qu_val(reigning_quote, nb_quotes));
 }
 
-bool	ft_count_reigning_quotes(char *str, t_parse *parse_struct)
+bool	ft_count_reigning_quotes(char *str, t_parse *parse_s)
 {
 	char	reigning_quote;
 	int		nb_quotes;
@@ -73,8 +73,8 @@ bool	ft_count_reigning_quotes(char *str, t_parse *parse_struct)
 			nb_quotes++;
 		start++;
 	}
-	parse_struct->nb_reigning_quotes = nb_quotes;
-	parse_struct->l_reign_q = reigning_quote;
+	parse_s->nb_reigning_quotes = nb_quotes;
+	parse_s->l_reign_q = reigning_quote;
 	return (true);
 }
 

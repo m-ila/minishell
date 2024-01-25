@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:33:21 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 20:55:03 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:12:33 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	ft_assign_char(char *s, int i, char *model)
 		model[i] = '1';
 }
 
-char	*ft_epured_str(char *str, char *model)
+char	*ft_ep_str(char *str, char *model)
 {
 	char	*epured;
 	int		len;

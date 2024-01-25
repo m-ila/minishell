@@ -15,11 +15,11 @@
 * [x] put env in the main program
 * [x] deal if env vide with the new env system (char * and not linked list)
 * [x] en fonction des quotes, "charger" var ou non
-* [x] reigning quotes in cmd_struct to epur properly
+* [x] reigning quotes in c to epur properly
 * [x] signaux
 * [x] why cmd empty causes program to close
 * [x] heredoc ne doit pas update l'history (sujet, parsing donc + Marianne)
-* [x] if cmds is only sep -> if no token after (```coucou | ```) syntax error, if token after (```coucou | > salut```) syntax error on ```>```, if just empty cmd without any redir token, just change glob variable to 2 for unproper use of bash
+* [x] if c is only sep -> if no token after (```coucou | ```) syntax error, if token after (```coucou | > salut```) syntax error on ```>```, if just empty cmd without any redir token, just change glob variable to 2 for unproper use of bash
 
 ### Chourael
 * [ ] redirections

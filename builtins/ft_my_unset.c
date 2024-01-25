@@ -6,30 +6,30 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:33:08 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/15 20:53:34 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:11:29 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_my_unset(t_cmd *cmds, t_data *ms)
+int	ft_my_unset(t_cmd *c, t_data *ms)
 {
 	int	i;
 
-	if (!ms || !cmds)
+	if (!ms || !c)
 		return (R_ERR_GEN);
 	i = 1;
-	while (cmds->cmd_w_arg[i])
+	while (c->all_elem[i])
 	{
-		if (!ft_strncmp(cmds->cmd_w_arg[i], "SHLVL", ft_strlen("SHLVL ")))
+		if (!ft_strncmp(c->all_elem[i], "SHLVL", ft_strlen("SHLVL ")))
 			ft_actualise_env(ms, "SHLVL", "0");
-		else if (!ft_strncmp(cmds->cmd_w_arg[i], "?", ft_strlen("? ")))
+		else if (!ft_strncmp(c->all_elem[i], "?", ft_strlen("? ")))
 		{
 			i++;
 			continue ;
 		}
 		else
-			ft_delete_in_env(ms, cmds->cmd_w_arg[i]);
+			ft_delete_in_env(ms, c->all_elem[i]);
 		i++;
 	}
 	return (R_EX_OK);

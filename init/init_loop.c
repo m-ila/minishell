@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 21:15:15 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:52:39 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	ft_malloc_s_parse(t_data *ms)
 		return (false);
 	}
 	p->start_w_val_tok = false;
-	p->struct_cmds = NULL;
+	p->c = NULL;
 	p->nb_reigning_quotes = 0;
 	p->l_reign_q = '.';
 	p->heredoc_fd = -1;
@@ -31,7 +31,7 @@ bool	ft_malloc_s_parse(t_data *ms)
 	ft_set_char_to_null(&p->tmp_model, &p->str1, &p->str2);
 	ft_set_char_to_null(&p->str3, &p->model1, &p->model2);
 	ft_set_char_to_null(&p->model3, &p->h_lim, NULL);
-	ms->parse_struct = p;
+	ms->parse_s = p;
 	return (true);
 }
 
