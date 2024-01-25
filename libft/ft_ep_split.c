@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_epured.c                                  :+:      :+:    :+:   */
+/*   ft_ep_split.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -72,7 +72,7 @@ static char	*ft_wrd(char *s, char *m, char c, int *i)
 	return (ret);
 }
 
-char	**ft_split_epured(char *s, char *m, char c)
+char	**ft_ep_split(char *s, char *m, char c)
 {
 	char		**ret;
 	int			j;

@@ -6,19 +6,19 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 13:05:26 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 13:19:38 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:04:07 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_exit(t_data *ms, t_cmd *cmds)
+int	ft_exit(t_data *ms, t_cmd *c)
 {
-	if (!cmds)
+	if (!c)
 		return (R_EX_OK);
-	if (ft_2d_lines(cmds->cmd_w_arg) > 1)
+	if (ft_2d_lines(c->all_elem) > 1)
 		return (R_EX_OK);
-	ft_free_cmds(cmds);
+	ft_free_cmds(c);
 	ft_free_prompt(&ms);
 	ft_free_2d_array(ms->envi);
 	free(ms->tmp_str);

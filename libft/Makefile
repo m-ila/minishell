@@ -39,7 +39,7 @@ ft_epur.c \
 ft_strlen_misc.c \
 ft_str_occ.c \
 ft_has_only.c \
-ft_split_epured.c \
+ft_ep_split.c \
 ft_free.c
 
 OBJS = ${SRCS:.c=.o}

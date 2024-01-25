@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:27:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 16:34:55 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:06:04 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static bool	ft_do_translate(t_data *ms, t_parse *p, char **model_quotes)
 	if (!ft_translate_tag_to_val(p))
 		return (false);
 	*model_quotes = ft_ep_model(p->str2, ft_cut_only_quotes);
-	p->tmp_tag = ft_epured_str(p->str2, *model_quotes);
+	p->tmp_tag = ft_ep_str(p->str2, *model_quotes);
 	ft_multiple_free(&p->str2, NULL, NULL);
 	p->model2 = ft_ep_model(p->tmp_tag, ft_cut_only_quotes);
 	if (ft_tag_is_in_env(ms, p->tmp_tag))
@@ -58,7 +58,7 @@ bool	ft_translate_vars(char **str, t_data *ms)
 	free(*str);
 	if (ft_strocc_base(p->tmp_model, "0"))
 	{
-		*str = ft_epured_str(p->tmp_str, p->tmp_model);
+		*str = ft_ep_str(p->tmp_str, p->tmp_model);
 		free(p->tmp_str);
 		p->tmp_str = ft_strdup(*str);
 		free(*str);

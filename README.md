@@ -19,7 +19,7 @@
 * [ ] put everything to the norm
 * [x] why cmd empty causes program to close
 * [x] heredoc ne doit pas update l'history (sujet, parsing donc + Marianne)
-* [x] if cmds is only sep -> if no token after (```coucou | ```) syntax error, if token after (```coucou | > salut```) syntax error on ```>```, if just empty cmd without any redir token, just change glob variable to 2 for unproper use of bash
+* [x] if c is only sep -> if no token after (```coucou | ```) syntax error, if token after (```coucou | > salut```) syntax error on ```>```, if just empty cmd without any redir token, just change glob variable to 2 for unproper use of bash
 
 ### Chourael
 * [ ] redirections

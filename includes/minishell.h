@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 21:15:13 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:06:31 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@
 /* ========================== DEFINE MSG ==================================== */
 # define SYNTAX_ERR "syntax error near unexpected token '"
 # define SYNTAX_ERR_Q "syntax error - unclosed quotes '"
-# define ERR_GEN_M_CMDS "malloc error gen arr cmds"
+# define ERR_GEN_M_CMDS "malloc error gen arr c"
 # define ERR_GEN_M_TKS "malloc error gen arr tokens"
 # define PRINT_SEP_T "========================= DATA ========================="
-# define PRINT_SEP_C "========================= CMDS ========================="
+# define PRINT_SEP_C "========================= c ========================="
 # define PRINT_SEP "========================================================"
 # define CD_N_F "not a file or folder\n"
 # define CD_ARG "too many arguments\n"
@@ -95,9 +95,9 @@ typedef struct s_cmd {
 	char			*raw_str;
 	char			*ep_model;
 	char			*other_model;
-	char			*epured_str;
-	char			**cmd_w_arg;
-	char			**ep_cmd_w_arg;
+	char			*ep_str;
+	char			**all_elem;
+	char			**ep_all_elem;
 	char			*cmd;
 }	t_cmd;
 
@@ -133,23 +133,23 @@ typedef struct s_data {
 
 /*===================== BUILTINS FOLDER ====================*/
 /* builtins/builtins.c */
-int			ft_builtin(t_cmd *cmds, t_data *ms);
+int			ft_builtin(t_cmd *c, t_data *ms);
 bool		ft_is_builtin(char *str);
 /* builtins/ft_cd.c */
-int			ft_cd(t_cmd *cmds, t_data *ms);
+int			ft_cd(t_cmd *c, t_data *ms);
 /* builtins/ft_echo.c */
-int			ft_echo(t_cmd *cmds);
+int			ft_echo(t_cmd *c);
 char		*ft_triple_join(char *str1, char *str2, char *str3, t_data *ms);
 /* builtins/ft_env.c */
 int			ft_env(t_data *ms, t_cmd *c);
 /* builtins/ft_exit.c */
-int			ft_exit(t_data *ms, t_cmd *cmds);
+int			ft_exit(t_data *ms, t_cmd *c);
 /* builtins/ft_export1.c */
 bool		ft_translate_tag_to_val(t_parse *p);
 /* builtins/ft_export2.c */
 bool		ft_export_has_eq(char *str);
 int			ft_export_first_eq(char *str);
-int			ft_export(t_data *ms, t_cmd *cmds);
+int			ft_export(t_data *ms, t_cmd *c);
 /* builtins/ft_export3.c */
 bool		ft_translate_vars(char **str, t_data *ms);
 bool		ft_local_str(char *str, t_data *ms, t_cmd *c);
@@ -161,12 +161,12 @@ bool		ft_export_spe_cases(char **t, char **v);
 /* builtins/ft_pwd.c */
 int			ft_pwd(t_data *ms);
 /* builtins/ft_my_unset.c */
-int			ft_my_unset(t_cmd *cmds, t_data *ms);
+int			ft_my_unset(t_cmd *c, t_data *ms);
 /*======================= ENV FOLDER =======================*/
 /* env/env_expand.c */
-bool		ft_join_values(t_data *ms, t_cmd *cmds, int *i);
-bool		ft_var_env(t_data *ms, t_cmd *cmds);
-bool		ft_do_in_env(t_data *ms, t_cmd *cmds, t_parse *ps, int *i);
+bool		ft_join_values(t_data *ms, t_cmd *c, int *i);
+bool		ft_var_env(t_data *ms, t_cmd *c);
+bool		ft_do_in_env(t_data *ms, t_cmd *c, t_parse *ps, int *i);
 /* env/env_init.c */
 int			ft_env_init(char **envp, t_data *ms);
 int			ft_init_no_env(t_data *ms);
@@ -174,7 +174,7 @@ int			ft_init_no_env(t_data *ms);
 bool		ft_increment_shlvl(t_data *ms, char **envi);
 void		ft_env_display(t_data *ms);
 /* env/env_str_manip.c */
-char		*ft_get_val_to_search_in_env(t_data *ms, t_cmd *cmds, int from);
+char		*ft_get_val_to_search_in_env(t_data *ms, t_cmd *c, int from);
 char		*ft_join_tag_and_val(char *tag, char *val);
 /* env/env_tab.c */
 bool		ft_tag_is_in_env(t_data *ms, char *tag);
@@ -182,10 +182,10 @@ int			ft_actualise_env(t_data *ms, char *tag, char *val);
 int			ft_delete_in_env(t_data *ms, char *tag);
 int			ft_add_in_env(t_data *ms, char *tag_, char *cont);
 /* env/env_upd_epur.c */
-bool		ft_update_epur(t_data *ms, t_cmd *cmds, int *i);
+bool		ft_update_epur(t_data *ms, t_cmd *c, int *i);
 /*======================= FREE FOLDER =======================*/
 /* free/free_cmd_struct.c */
-void		ft_free_cmds(t_cmd *cmds);
+void		ft_free_cmds(t_cmd *c);
 /* free/ft_free_misc.c */
 int			ft_free_return(char **str1, char **str2, char **str3, int ret);
 int			ft_free_ret_2(char **str1, char **str2, char ***two_dim, int ret_v);
@@ -208,15 +208,15 @@ char		*ft_quote_the_val(char *str, t_data *ms);
 /* init/init_cmd_struct_utils.c */
 t_cmd		*ft_create_cmd_node(char *raw_cmd);
 t_cmd		*ft_go_to_last_cmd_node(t_cmd *cmd_node);
-void		ft_add_node_to_cmds(t_cmd **cmds, t_cmd *to_add);
+void		ft_add_node_to_cmds(t_cmd **c, t_cmd *to_add);
 /* init/init_cmd_struct.c */
-bool		ft_parse_cmd(t_cmd *cmds, t_data *ms);
-bool		ft_empty_cmd(t_cmd *cmds, t_data *ms);
+bool		ft_parse_cmd(t_cmd *c, t_data *ms);
+bool		ft_empty_cmd(t_cmd *c, t_data *ms);
 bool		ft_set_val_ret(t_data *ms, bool ret);
 /*======================= LOOP FOLDER ========================*/
 /* loop/display.c */
 void		print_values(t_data *ms);
-void		ft_cmd_display(t_data *ms, t_cmd *cmds);
+void		ft_cmd_display(t_data *ms, t_cmd *c);
 /* loop/main.c */
 void		ft_loop(t_data *ms);
 void		ft_free_prompt(t_data **ms);
@@ -227,7 +227,7 @@ bool		ft_export_cond_cut(char *str, int i);
 bool		ft_cut_only_quotes(char *str, int i);
 /* parsing/epur.c */
 char		*ft_ep_model(char *s, bool (*fun)(char *, int));
-char		*ft_epured_str(char *str, char *model);
+char		*ft_ep_str(char *str, char *model);
 /* parsing/parse_get.c */
 char		*get_token(char *str, int from);
 char		*get_cmd(char *str, int from);
@@ -244,7 +244,7 @@ bool		ft_starts_with_token(char *user_input);
 bool		ft_is_valid_token(char *str);
 bool		ft_is_valid_entry_token(char *str);
 t_tokens	ft_which_redir_token(char *str, char which);
-bool		ft_add_token_val_to_struct(t_cmd *cmds);
+bool		ft_add_token_val_to_struct(t_cmd *c);
 /* parsing/print_error.c */
 void		ft_msg(char *str, char type, bool del_struct, t_data *ms);
 char		*ft_msg_ret_char(char *str);

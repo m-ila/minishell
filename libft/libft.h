@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 00:25:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 15:32:19 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:05:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	ft_split_do(char *s, int *i, bool (*fun)(char*, int), int which);
 int		ft_strocc_from(char *str, char c, int from);
 bool	ft_has_only_before(char *s, int i, int (*fun)(char));
 bool	ft_has_only_after(char *s, int i, int (*fun)(char));
-char	**ft_split_epured(char *s, char *m, char c);
+char	**ft_ep_split(char *s, char *m, char c);
 void	ft_split_do_1(char *s, char *m, int *i, char c);
 void	ft_split_do_2(char *s, char *m, int *i, char c);
 bool	ft_russian_str(char *hay, char *needle);

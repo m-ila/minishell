@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 17:15:41 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 15:41:34 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:04:07 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ bool	ft_starts_with_token(char *user_input)
 Note : dernier tok_next_token devra etre ajuste en fonction de la cmd
 et de son previous token too (?)
 */
-bool	ft_add_token_val_to_struct(t_cmd *cmds)
+bool	ft_add_token_val_to_struct(t_cmd *c)
 {
-	if (!cmds)
+	if (!c)
 		return (false);
-	while (cmds)
+	while (c)
 	{
-		cmds->tok_prev_token = ft_which_redir_token(cmds->prev_token, 'p');
-		cmds->tok_next_token = ft_which_redir_token(cmds->next_token, 'n');
-		cmds = cmds->next;
+		c->tok_prev_token = ft_which_redir_token(c->prev_token, 'p');
+		c->tok_next_token = ft_which_redir_token(c->next_token, 'n');
+		c = c->next;
 	}
 	return (true);
 }
