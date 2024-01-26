@@ -6,15 +6,15 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:53:20 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 17:09:13 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:22:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_cmd	*ft_create_cmd_node(char *raw_cmd)
+t_node	*ft_create_cmd_node(char *raw_cmd)
 {
-	t_cmd	*new;
+	t_node	*new;
 
 	if (!raw_cmd)
 		return (NULL);
@@ -38,12 +38,12 @@ t_cmd	*ft_create_cmd_node(char *raw_cmd)
 	new->all_elem = NULL;
 	new->cmd_w_args = NULL;
 	new->b_is_file = false;
-	new->tok_next_token = end_of_file;
-	new->tok_prev_token = start;
+	new->tok_nxt_tok = end_input;
+	new->tok_prv_tok = start;
 	return (new);
 }
 
-t_cmd	*ft_go_to_last_cmd_node(t_cmd *cmd_node)
+t_node	*ft_go_to_last_cmd_node(t_node *cmd_node)
 {
 	while (cmd_node)
 	{
@@ -54,7 +54,7 @@ t_cmd	*ft_go_to_last_cmd_node(t_cmd *cmd_node)
 	return (NULL);
 }
 
-bool	ft_assign_cmd(t_cmd *c)
+bool	ft_assign_cmd(t_node *c)
 {
 	if (c->b_is_file)
 	{
@@ -97,9 +97,9 @@ bool	ft_replace_str(char **str, char *n_str)
 }
 
 /* to do : add ft_strdup protection */
-void	ft_add_node_to_cmds(t_cmd **c, t_cmd *to_add)
+void	ft_add_node_to_cmds(t_node **c, t_node *to_add)
 {
-	t_cmd	*end;
+	t_node	*end;
 
 	if (!to_add)
 		return ;
@@ -113,6 +113,6 @@ void	ft_add_node_to_cmds(t_cmd **c, t_cmd *to_add)
 	end->next = to_add;
 	to_add->prev = end;
 	to_add->prev_token = ft_strdup(to_add->prev->next_token);
-	to_add->tok_prev_token = ft_which_redir_token(to_add->prev_token, 'p');
+	to_add->tok_prv_tok = ft_which_redir_token(to_add->prev_token, 'p');
 	to_add->b_is_file = ft_prev_is_red_io(to_add);
 }

@@ -6,22 +6,22 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 16:53:58 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:22:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-bool	ft_consecutive_empty_node(t_cmd *c, t_data *ms)
+bool	ft_consecutive_empty_node(t_node *c, t_data *ms)
 {
-	if (ft_only_sep_base(c->ep_model, "0Ss") && c->tok_next_token == pipe_)
+	if (ft_only_sep_base(c->ep_model, "0Ss") && c->tok_nxt_tok == pipe_)
 	{
 		ft_msg(c->next_token, 's', false, ms);
 		return (ft_set_val_ret(ms, true));
 	}
 	if (ft_only_sep_base(c->ep_model, "0Ss") && \
-	ft_redir_io_token(c->tok_next_token) && \
-	ft_redir_io_token(c->tok_prev_token))
+	ft_redir_io_token(c->tok_nxt_tok) && \
+	ft_redir_io_token(c->tok_prv_tok))
 	{
 		ft_msg(c->next_token, 's', false, ms);
 		return (ft_set_val_ret(ms, true));
@@ -43,11 +43,11 @@ bool	ft_consecutive_empty_node(t_cmd *c, t_data *ms)
 /*
 Only triggered when a node is empty, therefore no file or cmd
 */
-bool	ft_valid_consecutive_redir_tok(t_cmd *c, t_data *ms)
+bool	ft_valid_consecutive_redir_tok(t_node *c, t_data *ms)
 {
-	if (c->next && c->tok_next_token == pipe_)
+	if (c->next && c->tok_nxt_tok == pipe_)
 	{	
-		if (c->next->tok_next_token == pipe_)
+		if (c->next->tok_nxt_tok == pipe_)
 		{
 			ft_msg(c->next_token, 's', false, ms);
 			return (ft_set_val_ret(ms, false));
@@ -57,21 +57,21 @@ bool	ft_valid_consecutive_redir_tok(t_cmd *c, t_data *ms)
 }
 
 /*
-bool	ft_empty_cmd(t_cmd *c, t_data *ms)
+bool	ft_empty_cmd(t_node *c, t_data *ms)
 {
-	if (c->tok_next_token == error)
+	if (c->tok_nxt_tok == error)
 	{
 		ft_msg("ft_empty_cmd err", 'm', false, ms);
 		return (false);
 	}
-	else if (c->tok_next_token == pipe_)
+	else if (c->tok_nxt_tok == pipe_)
 	{
 		ft_msg(c->next_token, 's', false, ms);
 		ms->b_temoin = false;
 		return (false);
 	}
-	else if (c->tok_next_token != pipe_ && \
-	c->tok_next_token != end_of_file)
+	else if (c->tok_nxt_tok != pipe_ && \
+	c->tok_nxt_tok != end_input)
 	{
 		ft_msg("newline", 's', false, ms);
 		ms->b_temoin = false;
@@ -81,7 +81,7 @@ bool	ft_empty_cmd(t_cmd *c, t_data *ms)
 }
 */
 
-static bool	ft_do(int d, t_cmd *c, t_data *ms)
+static bool	ft_do(int d, t_node *c, t_data *ms)
 {
 	if (d == 1)
 	{
@@ -103,7 +103,7 @@ si pas vide, s'arrête directement
 si vide, checke si le node d'après l'est aussi
 si vide et le suivant non, checke validité des tokens ( |< valide etc)
 */
-bool	ft_deal_w_empty_elems(t_cmd *c, t_data *ms)
+bool	ft_deal_w_empty_elems(t_node *c, t_data *ms)
 {
 	if (!ft_only_sep_base(c->ep_model, "0Ss"))
 		return (true);
@@ -120,7 +120,7 @@ or just turn temoin to falsenewline, so it would free at the end of the loop
 if first elem of ep_all_elem is null, means c is only sep, so change val glob
 val glob would be equal to 2 and print either a syntax err or return nothing
 */
-bool	ft_parse_cmd(t_cmd *c, t_data *ms)
+bool	ft_parse_cmd(t_node *c, t_data *ms)
 {
 	if (!c)
 		return (false);

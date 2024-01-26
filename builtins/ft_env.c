@@ -6,13 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 16:27:10 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/25 16:11:29 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_env(t_data *ms, t_cmd *c)
+int	ft_env(t_data *ms, t_node *c)
 {
 	if (!ms || !ms->envi)
 		return (R_ERR_GEN);

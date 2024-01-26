@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:40:41 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/25 16:11:49 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 to do : voir avec Chourael si print sur sortie standard OK si redirections
 sinon changer FD dans ft_printf_fd et write
 */
-int	ft_echo(t_cmd *c)
+int	ft_echo(t_node *c)
 {
 	int	i;
 	int	n;

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:54:09 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:52:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static bool	ft_epur_str2(t_data *ms, char **str2, char **str1)
 	return (true);
 }
 
-static bool	ft_nest_update_epur(t_data *ms, t_parse *p, t_cmd *c, int *i)
+static bool	ft_nest_update_epur(t_data *ms, t_parse *p, t_node *c, int *i)
 {
 	if (*i == 0)
 		p->str1 = ft_strdup("");
@@ -52,7 +52,7 @@ static bool	ft_nest_update_epur(t_data *ms, t_parse *p, t_cmd *c, int *i)
 	return (true);
 }
 
-bool	ft_update_epur(t_data *ms, t_cmd *c, int *i)
+bool	ft_update_epur(t_data *ms, t_node *c, int *i)
 {
 	t_parse	*p;
 

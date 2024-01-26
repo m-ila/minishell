@@ -6,13 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:43:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 16:27:48 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:22:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_cmd_display(t_data *ms, t_cmd *c)
+void	ft_cmd_display(t_data *ms, t_node *c)
 {
 	int	i;
 	int	j;
@@ -45,8 +45,8 @@ void	ft_cmd_display(t_data *ms, t_cmd *c)
 				ft_printf_fd(1, "cmd_w_arg[%d] : (d)%s(f)\n", j, c->cmd_w_args[j]);
 		}
 		printf("is file : %d\n", c->b_is_file);
-		printf("\nprev tok : %d\n", c->tok_prev_token);
-		printf("next tok : %d\n\n\n", c->tok_next_token);
+		printf("\nprev tok : %d\n", c->tok_prv_tok);
+		printf("next tok : %d\n\n\n", c->tok_nxt_tok);
 		i++;
 		c = c->next;
 	}

@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/26 16:24:20 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/26 19:17:39 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ loop/main.c \
 parsing/abs_path.c \
 parsing/cond_cut.c \
 parsing/epur.c \
+parsing/groups.c \
 parsing/parse_get.c \
 parsing/parsing_processes.c \
 parsing/print_error.c \

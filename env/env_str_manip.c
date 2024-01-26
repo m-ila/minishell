@@ -6,13 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:47:17 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:11:04 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_get_val_to_search_in_env(t_data *ms, t_cmd *c, int from)
+char	*ft_get_val_to_search_in_env(t_data *ms, t_node *c, int from)
 {
 	int	until;
 

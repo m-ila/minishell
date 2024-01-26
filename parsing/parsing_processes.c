@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:52:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:22:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ to do : strdup protection !
 bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 {
 	char	*tmp;
-	t_cmd	*buff;
+	t_node	*buff;
 
 	ft_printf_fd(1, "%s\nEntering ft_parsing_cmd_process\n\n", PRINT_SEP);
 	tmp = get_cmd(user_input, *from);
@@ -52,7 +52,7 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 	{
 		ms->parse_s->c = buff;
 		buff->prev_token = ft_strdup(ms->tmp_str);
-		buff->tok_prev_token = ft_which_redir_token(buff->prev_token, 'p');
+		buff->tok_prv_tok = ft_which_redir_token(buff->prev_token, 'p');
 		buff->b_is_file = ft_prev_is_red_io(buff);
 	}
 	else
@@ -142,8 +142,8 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 {
 	int		index;
 	bool	temoin;
-	t_cmd	*c;
-	t_cmd	*last;
+	t_node	*c;
+	t_node	*last;
 
 	index = 0;
 	temoin = true;
@@ -162,7 +162,7 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 	}
 	temoin = ft_parse_cmd(ms->parse_s->c, ms);
 	last = ft_go_to_last_cmd_node(ms->parse_s->c);
-	if (last && last->tok_next_token != end_of_file && ms->b_temoin)
+	if (last && last->tok_nxt_tok != end_input && ms->b_temoin)
 	{
 		ms->b_temoin = false;
 		ft_msg(last->next_token, 's', false, ms);

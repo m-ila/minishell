@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 16:25:18 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:40:32 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,18 @@ typedef enum s_tokens
 	heredoc,
 	redir_out_app,
 	pipe_,
-	end_of_file,
+	end_input,
 	error,
 	start
 }t_tokens;
 
-typedef struct s_cmd {
-	struct s_cmd	*prev;
-	struct s_cmd	*next;
+typedef struct s_node {
+	struct s_node	*prev;
+	struct s_node	*next;
 	char			*prev_token;
 	char			*next_token;
-	t_tokens		tok_prev_token;
-	t_tokens		tok_next_token;
+	t_tokens		tok_prv_tok;
+	t_tokens		tok_nxt_tok;
 	bool			b_redir;
 	int				fd_in;
 	int				fd_out;
@@ -92,7 +92,17 @@ typedef struct s_cmd {
 	char			*cmd;
 	char			**cmd_w_args;
 	bool			b_is_file;
-}	t_cmd;
+}	t_node;
+
+typedef struct s_group {
+	struct s_group	*prev;
+	struct s_group	*next;
+	int				gr_fd_in;
+	int				gr_fd_out;
+	size_t			gr_nb_infile;
+	size_t			gr_nb_outfile;
+	t_node			**node_arr;
+}	t_group;
 
 typedef struct s_parse {
 	bool	start_w_val_tok;
@@ -110,7 +120,9 @@ typedef struct s_parse {
 	char	*tmp_model;
 	int		heredoc_fd;
 	char	*h_lim;
-	t_cmd	*c;
+	t_node	*c;
+	t_group	*gr;
+	size_t	gr_nb;
 }	t_parse;
 
 typedef struct s_data {
@@ -126,26 +138,26 @@ typedef struct s_data {
 
 /*===================== BUILTINS FOLDER ====================*/
 /* builtins/builtins.c */
-int			ft_builtin(t_cmd *c, t_data *ms);
+int			ft_builtin(t_node *c, t_data *ms);
 bool		ft_is_builtin(char *str);
 /* builtins/ft_cd.c */
-int			ft_cd(t_cmd *c, t_data *ms);
+int			ft_cd(t_node *c, t_data *ms);
 /* builtins/ft_echo.c */
-int			ft_echo(t_cmd *c);
+int			ft_echo(t_node *c);
 char		*ft_triple_join(char *str1, char *str2, char *str3, t_data *ms);
 /* builtins/ft_env.c */
-int			ft_env(t_data *ms, t_cmd *c);
+int			ft_env(t_data *ms, t_node *c);
 /* builtins/ft_exit.c */
-int			ft_exit(t_data *ms, t_cmd *c);
+int			ft_exit(t_data *ms, t_node *c);
 /* builtins/ft_export1.c */
 bool		ft_translate_tag_to_val(t_parse *p);
 /* builtins/ft_export2.c */
 bool		ft_export_has_eq(char *str);
 int			ft_export_first_eq(char *str);
-int			ft_export(t_data *ms, t_cmd *c);
+int			ft_export(t_data *ms, t_node *c);
 /* builtins/ft_export3.c */
 bool		ft_translate_vars(char **str, t_data *ms);
-bool		ft_local_str(char *str, t_data *ms, t_cmd *c);
+bool		ft_local_str(char *str, t_data *ms, t_node *c);
 bool		ft_exp_in_env(char *t, char *v, t_data *ms);
 /* builtins/ft_export4.c */
 bool		ft_export_bad_char(char **t, char **v);
@@ -154,12 +166,12 @@ bool		ft_export_spe_cases(char **t, char **v);
 /* builtins/ft_pwd.c */
 int			ft_pwd(t_data *ms);
 /* builtins/ft_my_unset.c */
-int			ft_my_unset(t_cmd *c, t_data *ms);
+int			ft_my_unset(t_node *c, t_data *ms);
 /*======================= ENV FOLDER =======================*/
 /* env/env_expand.c */
-bool		ft_join_values(t_data *ms, t_cmd *c, int *i);
-bool		ft_var_env(t_data *ms, t_cmd *c);
-bool		ft_do_in_env(t_data *ms, t_cmd *c, t_parse *ps, int *i);
+bool		ft_join_values(t_data *ms, t_node *c, int *i);
+bool		ft_var_env(t_data *ms, t_node *c);
+bool		ft_do_in_env(t_data *ms, t_node *c, t_parse *ps, int *i);
 /* env/env_init.c */
 int			ft_env_init(char **envp, t_data *ms);
 int			ft_init_no_env(t_data *ms);
@@ -167,7 +179,7 @@ int			ft_init_no_env(t_data *ms);
 bool		ft_increment_shlvl(t_data *ms, char **envi);
 void		ft_env_display(t_data *ms);
 /* env/env_str_manip.c */
-char		*ft_get_val_to_search_in_env(t_data *ms, t_cmd *c, int from);
+char		*ft_get_val_to_search_in_env(t_data *ms, t_node *c, int from);
 char		*ft_join_tag_and_val(char *tag, char *val);
 /* env/env_tab.c */
 bool		ft_tag_is_in_env(t_data *ms, char *tag);
@@ -175,10 +187,10 @@ int			ft_actualise_env(t_data *ms, char *tag, char *val);
 int			ft_delete_in_env(t_data *ms, char *tag);
 int			ft_add_in_env(t_data *ms, char *tag_, char *cont);
 /* env/env_upd_epur.c */
-bool		ft_update_epur(t_data *ms, t_cmd *c, int *i);
+bool		ft_update_epur(t_data *ms, t_node *c, int *i);
 /*======================= FREE FOLDER =======================*/
 /* free/free_cmd_struct.c */
-void		ft_free_cmds(t_cmd *c);
+void		ft_free_cmds(t_node *c);
 /* free/ft_free_misc.c */
 int			ft_free_return(char **str1, char **str2, char **str3, int ret);
 int			ft_free_ret_2(char **str1, char **str2, char ***two_dim, int ret_v);
@@ -199,32 +211,32 @@ int			ft_heredoc(t_data *ms, t_parse *p);
 char		*ft_get_val_in_env(char **env, char *tag, t_data *ms);
 char		*ft_quote_the_val(char *str, t_data *ms);
 /* init/init_cmd_struct_utils.c */
-t_cmd		*ft_create_cmd_node(char *raw_cmd);
-t_cmd		*ft_go_to_last_cmd_node(t_cmd *cmd_node);
-void		ft_add_node_to_cmds(t_cmd **c, t_cmd *to_add);
+t_node		*ft_create_cmd_node(char *raw_cmd);
+t_node		*ft_go_to_last_cmd_node(t_node *cmd_node);
+void		ft_add_node_to_cmds(t_node **c, t_node *to_add);
 bool		ft_replace_str(char **str, char *n_str);
-bool		ft_assign_cmd(t_cmd *c);
+bool		ft_assign_cmd(t_node *c);
 /* init/init_cmd_struct.c */
-bool		ft_parse_cmd(t_cmd *c, t_data *ms);
-bool		ft_empty_cmd(t_cmd *c, t_data *ms);
+bool		ft_parse_cmd(t_node *c, t_data *ms);
+bool		ft_empty_cmd(t_node *c, t_data *ms);
 bool		ft_set_val_ret(t_data *ms, bool ret);
-bool		ft_deal_w_empty_elems(t_cmd *c, t_data *ms);
-bool		ft_consecutive_empty_node(t_cmd *c, t_data *ms);
-bool		ft_valid_consecutive_redir_tok(t_cmd *c, t_data *ms);
+bool		ft_deal_w_empty_elems(t_node *c, t_data *ms);
+bool		ft_consecutive_empty_node(t_node *c, t_data *ms);
+bool		ft_valid_consecutive_redir_tok(t_node *c, t_data *ms);
 /* init/init_utils.c */
 bool		ft_set_val_ret(t_data *ms, bool ret);
 bool		ft_redir_io_token(t_tokens t);
 /*======================= LOOP FOLDER ========================*/
 /* loop/display.c */
 void		print_values(t_data *ms);
-void		ft_cmd_display(t_data *ms, t_cmd *c);
+void		ft_cmd_display(t_data *ms, t_node *c);
 /* loop/main.c */
 void		ft_loop(t_data *ms);
 void		ft_free_prompt(t_data **ms);
 /*====================== PARSING FOLDER ======================*/
 /* parsing/abs_path.c */
-void	    ft_errno_msg(t_cmd *c, int errno);
-bool		ft_absolute_path(t_cmd *c);
+void	    ft_errno_msg(t_node *c, int errno);
+bool		ft_absolute_path(t_node *c);
 /* parsing/cond_cut.c */
 bool		ft_cond_cut(char *str, int i);
 bool		ft_export_cond_cut(char *str, int i);
@@ -232,6 +244,17 @@ bool		ft_cut_only_quotes(char *str, int i);
 /* parsing/epur.c */
 char		*ft_ep_model(char *s, bool (*fun)(char *, int));
 char		*ft_ep_str(char *str, char *model);
+/* parsing/groups.c */
+bool		ft_groups(t_data *ms, t_parse *p);
+void		ft_get_nb_group(t_data *ms);
+t_group		*ft_init_group_node(void);
+void		ft_add_grp_node(t_group **og, t_group *to_add);
+void		ft_malloc_group_struct(t_parse *p);
+void		ft_init_group_struct(t_data *ms, t_parse *p);
+t_node		*ft_get_delim_node(t_node **from);
+bool		ft_fill_group_struct(t_data *ms, t_parse *p, t_node **from, t_group *g);
+size_t		ft_get_nb_node(t_data *ms, t_parse *p, t_node *from);
+void		ft_free_groups(t_group **gr);
 /* parsing/parse_get.c */
 char		*get_token(char *str, int from);
 char		*get_cmd(char *str, int from);
@@ -248,7 +271,7 @@ bool		ft_starts_with_token(char *user_input);
 bool		ft_is_valid_token(char *str);
 bool		ft_is_valid_entry_token(char *str);
 t_tokens	ft_which_redir_token(char *str, char which);
-bool		ft_add_token_val_to_struct(t_cmd *c);
+bool		ft_add_token_val_to_struct(t_node *c);
 /* parsing/print_error.c */
 void		ft_msg(char *str, char type, bool del_struct, t_data *ms);
 char		*ft_msg_ret_char(char *str);
@@ -261,14 +284,14 @@ bool		ft_count_reigning_quotes(char *str, t_parse *parse_s);
 bool		ft_char_is_a_reigning_quote(char *str, int i);
 int			ft_get_index_next_reign_quo(char *str, int from);
 /* parsing/rights.c */
-bool    	ft_exists(t_cmd *c);
-bool    	ft_doc_has_read_rights(t_cmd *c);
-bool    	ft_doc_has_write_rights(t_cmd *c);
-bool	    ft_has_exec_rights(t_cmd *c);
+bool    	ft_exists(t_node *c);
+bool    	ft_doc_has_read_rights(t_node *c);
+bool    	ft_doc_has_write_rights(t_node *c);
+bool	    ft_has_exec_rights(t_node *c);
 /* parsing/to_node.c */
-bool		ft_prev_is_red_io(t_cmd *c);
-bool		ft_add_next_token_to_node(char *str, t_cmd *struct_cmd);
-bool		ft_add_first_prev_token_node(char *str, t_cmd *struct_cmd);
+bool		ft_prev_is_red_io(t_node *c);
+bool		ft_add_next_token_to_node(char *str, t_node *struct_cmd);
+bool		ft_add_first_prev_token_node(char *str, t_node *struct_cmd);
 /*====================== SIGNAL  FOLDER ======================*/
 /* signal/signal.c */
 void		ft_reset_global(t_data *ms);

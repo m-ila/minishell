@@ -6,14 +6,14 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:03:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/23 14:35:45 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /* not only for docs, right ? */
-bool    ft_has_exec_rights(t_cmd *c)
+bool    ft_has_exec_rights(t_node *c)
 {
     if (!c || !c->b_is_file)
         return (false);
@@ -22,7 +22,7 @@ bool    ft_has_exec_rights(t_cmd *c)
     return (false);
 }
 
-bool    ft_doc_has_write_rights(t_cmd *c)
+bool    ft_doc_has_write_rights(t_node *c)
 {
     if (!c || !c->b_is_file)
         return (false);
@@ -31,7 +31,7 @@ bool    ft_doc_has_write_rights(t_cmd *c)
     return (false);
 }
 
-bool    ft_doc_has_read_rights(t_cmd *c)
+bool    ft_doc_has_read_rights(t_node *c)
 {
     if (!c || !c->b_is_file)
         return (false);
@@ -40,7 +40,7 @@ bool    ft_doc_has_read_rights(t_cmd *c)
     return (false);
 }
 
-bool    ft_exists(t_cmd *c)
+bool    ft_exists(t_node *c)
 {
     if (!c || !c->b_is_file)
         return (false);

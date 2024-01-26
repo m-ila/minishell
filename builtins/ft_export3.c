@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:27:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:52:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ bool	ft_exp_in_env(char *t, char *v, t_data *ms)
 	return (true);
 }
 
-bool	ft_local_str(char *str, t_data *ms, t_cmd *c)
+bool	ft_local_str(char *str, t_data *ms, t_node *c)
 {
 	char	*loc_tag;
 	char	*loc_val;

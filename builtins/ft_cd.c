@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 11:25:17 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/25 16:11:49 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	ft_do(char *home_path, t_data *ms, int which)
 	return (R_ERR_GEN);
 }
 
-int	ft_cd(t_cmd *c, t_data *ms)
+int	ft_cd(t_node *c, t_data *ms)
 {
 	char	*home_path;
 

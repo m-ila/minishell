@@ -6,13 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:31:38 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:52:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static bool	ft_nest_join_values(t_data *ms, t_parse *p, t_cmd *c, int *i)
+static bool	ft_nest_join_values(t_data *ms, t_parse *p, t_node *c, int *i)
 {
 	if (*i == 0)
 		p->str1 = ft_strdup("");
@@ -34,7 +34,7 @@ static bool	ft_nest_join_values(t_data *ms, t_parse *p, t_cmd *c, int *i)
 	return (true);
 }
 
-bool	ft_join_values(t_data *ms, t_cmd *c, int *i)
+bool	ft_join_values(t_data *ms, t_node *c, int *i)
 {
 	t_parse	*p;
 
@@ -53,7 +53,7 @@ bool	ft_join_values(t_data *ms, t_cmd *c, int *i)
 	return (true);
 }
 
-bool	ft_do_in_env(t_data *ms, t_cmd *c, t_parse *ps, int *i)
+bool	ft_do_in_env(t_data *ms, t_node *c, t_parse *ps, int *i)
 {
 	if (ft_tag_is_in_env(ms, ps->tmp_tag))
 		ps->tmp_val = ft_get_val_in_env(ms->envi, ps->tmp_tag, ms);
@@ -70,7 +70,7 @@ bool	ft_do_in_env(t_data *ms, t_cmd *c, t_parse *ps, int *i)
 	return (true);
 }
 
-bool	ft_var_env(t_data *ms, t_cmd *c)
+bool	ft_var_env(t_data *ms, t_node *c)
 {
 	int		i;
 	t_parse	*ps;

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 17:15:41 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:15:08 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:22:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,24 @@ bool	ft_starts_with_token(char *user_input)
 }
 
 /*
-Note : dernier tok_next_token devra etre ajuste en fonction de la cmd
+Note : dernier tok_nxt_tok devra etre ajuste en fonction de la cmd
 et de son previous token too (?)
 */
-bool	ft_add_token_val_to_struct(t_cmd *c)
+bool	ft_add_token_val_to_struct(t_node *c)
 {
 	if (!c)
 		return (false);
 	while (c)
 	{
-		c->tok_prev_token = ft_which_redir_token(c->prev_token, 'p');
-		c->tok_next_token = ft_which_redir_token(c->next_token, 'n');
+		c->tok_prv_tok = ft_which_redir_token(c->prev_token, 'p');
+		c->tok_nxt_tok = ft_which_redir_token(c->next_token, 'n');
 		c = c->next;
 	}
 	return (true);
 }
 
 /*
-Note : dernier tok_next_token devra etre ajuste en fonction de la cmd
+Note : dernier tok_nxt_tok devra etre ajuste en fonction de la cmd
 et de son previous token too (?)
 */
 t_tokens	ft_which_redir_token(char *str, char which)
@@ -93,7 +93,7 @@ t_tokens	ft_which_redir_token(char *str, char which)
 		if (which == 'p')
 			return (start);
 		if (which == 'n')
-			return (end_of_file);
+			return (end_input);
 	}
 	return (error);
 }

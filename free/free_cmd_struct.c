@@ -6,13 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:21:47 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:56:21 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static void	ft_free_cmd_node(t_cmd *curr)
+static void	ft_free_cmd_node(t_node *curr)
 {
 	if (!curr)
 		return ;
@@ -38,9 +38,9 @@ static void	ft_free_cmd_node(t_cmd *curr)
 		free(curr);
 }
 
-void	ft_free_cmds(t_cmd *c)
+void	ft_free_cmds(t_node *c)
 {
-	t_cmd	*curr;
+	t_node	*curr;
 
 	if (!c)
 		return ;

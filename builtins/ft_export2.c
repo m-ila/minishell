@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:35:42 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:12:33 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_export_first_eq(char *str)
 	return (NO_INDEX_FOUND);
 }
 
-int	ft_export(t_data *ms, t_cmd *c)
+int	ft_export(t_data *ms, t_node *c)
 {
 	char	*exp_mod;
 	char	*cleaned_str;

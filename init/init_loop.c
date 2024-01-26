@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:52:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 20:07:09 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ bool	ft_malloc_s_parse(t_data *ms)
 	p->nb_reigning_quotes = 0;
 	p->l_reign_q = '.';
 	p->heredoc_fd = -1;
+	p->gr = NULL;
+	p->gr_nb = 0;
 	ft_set_char_to_null(&p->tmp_tag, &p->tmp_val, &p->tmp_str);
 	ft_set_char_to_null(&p->tmp_model, &p->str1, &p->str2);
 	ft_set_char_to_null(&p->str3, &p->model1, &p->model2);
@@ -105,7 +107,7 @@ bool	ft_get_cwd(t_data *ms, unsigned int i)
 	}
 	if (getcwd(ms->curr_work_dir, (size_t) SIZE_PATH_MAX))
 	{
-		ms->printed_line = ft_triple_join(M_USR, ms->curr_work_dir, " > ", ms);
+		ms->printed_line = ft_triple_join(M_USR, ms->curr_work_dir, "$ ", ms);
 		ft_update_env_cwd(ms);
 	}
 	else

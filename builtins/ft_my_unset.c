@@ -6,13 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:33:08 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:11:29 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_my_unset(t_cmd *c, t_data *ms)
+int	ft_my_unset(t_node *c, t_data *ms)
 {
 	int	i;
 
