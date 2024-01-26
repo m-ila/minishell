@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:14:18 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 21:39:55 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 21:52:28 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ bool	ft_groups(t_data *ms, t_parse *p)
 {
 	t_group	*navig;
 
+	if (!ms->b_temoin)
+		return (true);
 	ft_get_nb_group(ms);
 	ft_malloc_group_struct(p);
 	ft_init_group_struct(ms, p);
@@ -25,7 +27,8 @@ bool	ft_groups(t_data *ms, t_parse *p)
 		while (navig)
 		{
 			printf("group created\n");
-			printf("infile : %ld\noutfile : %ld\n\n", navig->gr_nb_infile, navig->gr_nb_outfile);
+			printf("infile : %ld\noutfile : %ld\n\n", \
+			navig->gr_nb_infile, navig->gr_nb_outfile);
 			navig = navig->next;
 		}
 	}
@@ -58,7 +61,10 @@ t_group	*ft_init_group_node(void)
 
 	g = ft_calloc(1, sizeof(t_group));
 	if (!g)
+	{
+		ft_msg("malloc error init group", 'm', false, NULL);
 		return (NULL);
+	}
 	g->prev = NULL;
 	g->next = NULL;
 	g->gr_fd_in = -1;
@@ -69,8 +75,17 @@ t_group	*ft_init_group_node(void)
 	return (g);
 }
 
+t_group	*ft_go_to_last_group_node(t_group *gr)
+{
+	while (gr->next)
+		gr = gr->next;
+	return (gr);
+}
+
 void	ft_add_grp_node(t_group **og, t_group *to_add)
 {
+	t_group	*last;
+
 	if (!to_add)
 		return ;
 	if (!og)
@@ -78,10 +93,9 @@ void	ft_add_grp_node(t_group **og, t_group *to_add)
 		*og = to_add;
 		return ;
 	}
-	while ((*og)->next)
-		(*og) = (*og)->next;
-	(*og)->next = to_add;
-	to_add->prev = (*og);
+	last = ft_go_to_last_group_node(*og);
+	last->next = to_add;
+	to_add->prev = last;
 	printf("group added\n\n");
 }
 
@@ -91,6 +105,7 @@ void	ft_malloc_group_struct(t_parse *p)
 	size_t	i;
 
 	i = 0;
+	printf("gr_nb : %ld\n", p->gr_nb);
 	while (i < p->gr_nb)
 	{
 		buff = ft_init_group_node();
@@ -186,7 +201,7 @@ void	ft_free_groups(t_group **gr)
 	t_group	*index;
 
 	if (*gr == NULL)
-		printf("GROUP EST NULL\n");
+		return ;
 	while (*gr)
 	{
 		index = *gr;
