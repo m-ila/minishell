@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/23 14:21:39 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/26 16:24:20 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ init/init_env_struct.c \
 init/init_heredoc.c \
 init/init_cmd_struct.c \
 init/init_cmd_struct_utils.c \
+init/init_utils.c \
 loop/display.c \
 loop/main.c \
 parsing/abs_path.c \

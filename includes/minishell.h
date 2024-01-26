@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:52:51 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:25:18 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,7 @@ typedef enum s_tokens
 	heredoc,
 	redir_out_app,
 	pipe_,
-	double_quote,
-	single_quote,
-	dollar,
-	question,
-	space,
-	delimiter,
 	end_of_file,
-	str,
-	var,
 	error,
 	start
 }t_tokens;
@@ -216,6 +208,12 @@ bool		ft_assign_cmd(t_cmd *c);
 bool		ft_parse_cmd(t_cmd *c, t_data *ms);
 bool		ft_empty_cmd(t_cmd *c, t_data *ms);
 bool		ft_set_val_ret(t_data *ms, bool ret);
+bool		ft_deal_w_empty_elems(t_cmd *c, t_data *ms);
+bool		ft_consecutive_empty_node(t_cmd *c, t_data *ms);
+bool		ft_valid_consecutive_redir_tok(t_cmd *c, t_data *ms);
+/* init/init_utils.c */
+bool		ft_set_val_ret(t_data *ms, bool ret);
+bool		ft_redir_io_token(t_tokens t);
 /*======================= LOOP FOLDER ========================*/
 /* loop/display.c */
 void		print_values(t_data *ms);

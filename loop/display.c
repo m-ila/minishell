@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:43:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 17:11:20 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:27:48 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,10 @@ void	print_values(t_data *ms)
 	ft_printf_fd(1, "%s\n\n", PRINT_SEP_T);
 	ft_printf_fd(1, "ms->user_input = %s\nms->printed_line = %s\n\n", \
 	ms->user_input, ms->printed_line);
+/*
 	ft_printf_fd(1, "ms->curr_wd = %s\nms->prev_w_dir = %s\n\n", \
 	ms->curr_work_dir, ms->prev_work_dir);
+*/
 	ft_printf_fd(1, "ms->b_temoin = %d\n", (int) ms->b_temoin);
 	if (ms->parse_s->c)
 		ft_cmd_display(ms, ms->parse_s->c);
