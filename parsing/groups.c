@@ -6,12 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:14:18 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 23:02:21 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:17:14 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/*
 bool	ft_malloc_arr(t_group *grp, char which)
 {
 
@@ -31,6 +32,7 @@ bool	ft_malloc_io_arrs(t_data *ms, t_parse *p)
 		i++;
 	}
 }
+*/
 
 bool	ft_groups(t_data *ms, t_parse *p)
 {
@@ -41,7 +43,6 @@ bool	ft_groups(t_data *ms, t_parse *p)
 	ft_get_nb_group(ms);
 	ft_malloc_group_struct(p);
 	ft_init_group_struct(ms, p);
-	ft_malloc_io_arr(ms, p);
 	if (p->gr)
 	{
 		navig = p->gr;

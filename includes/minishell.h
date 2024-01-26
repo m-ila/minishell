@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 23:02:12 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/27 00:03:11 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,6 +293,9 @@ bool    	ft_exists(t_node *c);
 bool    	ft_doc_has_read_rights(t_node *c);
 bool    	ft_doc_has_write_rights(t_node *c);
 bool	    ft_has_exec_rights(t_node *c);
+/* parsing/tab_manip.c */
+bool		ft_add_tabs(char ***tab1, char **tab2);
+bool		ft_add_str_to_tab(char ***tab1, char *str);
 /* parsing/to_node.c */
 bool		ft_prev_is_red_io(t_node *c);
 bool		ft_add_next_token_to_node(char *str, t_node *struct_cmd);

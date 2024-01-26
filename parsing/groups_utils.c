@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:56:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 22:07:22 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:16:29 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_group	*ft_init_group_node(void)
 	g->gr_fd_out = -1;
 	g->gr_nb_infile = 0;
 	g->gr_nb_outfile = 0;
-	g->cmd_arr = NULL;
+	g->cmd_and_args = NULL;
 	g->outfile_arr = NULL;
 	g->infile_arr = NULL;
 	return (g);
