@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 21:40:32 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:02:12 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,9 @@ typedef struct s_group {
 	int				gr_fd_out;
 	size_t			gr_nb_infile;
 	size_t			gr_nb_outfile;
-	t_node			**node_arr;
+	char			**infile_arr;
+	char			**cmd_and_args;
+	char			**outfile_arr;
 }	t_group;
 
 typedef struct s_parse {
@@ -244,17 +246,20 @@ bool		ft_cut_only_quotes(char *str, int i);
 /* parsing/epur.c */
 char		*ft_ep_model(char *s, bool (*fun)(char *, int));
 char		*ft_ep_str(char *str, char *model);
-/* parsing/groups.c */
-bool		ft_groups(t_data *ms, t_parse *p);
-void		ft_get_nb_group(t_data *ms);
-t_group		*ft_init_group_node(void);
+/* parsing/groups_malloc.c */
 void		ft_add_grp_node(t_group **og, t_group *to_add);
 void		ft_malloc_group_struct(t_parse *p);
 void		ft_init_group_struct(t_data *ms, t_parse *p);
+/* parsing/groups_utils.c */
+void		ft_free_groups(t_group **gr);
+t_group		*ft_init_group_node(void);
+t_group		*ft_go_to_last_group_node(t_group *gr);
+void		ft_get_nb_group(t_data *ms);
 t_node		*ft_get_delim_node(t_node **from);
+/* parsing/groups.c */
+bool		ft_groups(t_data *ms, t_parse *p);
 bool		ft_fill_group_struct(t_data *ms, t_parse *p, t_node **from, t_group *g);
 size_t		ft_get_nb_node(t_data *ms, t_parse *p, t_node *from);
-void		ft_free_groups(t_group **gr);
 /* parsing/parse_get.c */
 char		*get_token(char *str, int from);
 char		*get_cmd(char *str, int from);
