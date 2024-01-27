@@ -6,11 +6,18 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 23:18:31 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/27 00:16:36 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/27 02:16:06 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static bool	ft_deal_w_empty_tab(char ***tab1, char *str)
+{
+	*tab1 = ft_calloc(2, sizeof(char *));
+	(*tab1)[0] = ft_strdup(str);
+	return (true);
+}
 
 static bool	ft_cpy_first_tab(char ***tab1, char ***tab_to, size_t *i)
 {
@@ -49,8 +56,10 @@ bool	ft_add_str_to_tab(char ***tab1, char *str)
 	size_t	i;
 	char	**tab_ret;
 
-	if (!tab1 || !str)
+	if (!str)
 		return (false);
+	if (!tab1 || *tab1 == NULL)
+		return (ft_deal_w_empty_tab(tab1, str));
 	len_max = ft_2d_lines(*tab1) + 1;
 	tab_ret = ft_calloc(len_max + 1, sizeof(char *));
 	if (!tab_ret)

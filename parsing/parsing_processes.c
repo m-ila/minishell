@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 17:22:00 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/27 01:30:15 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 	if (ms->parse_s->c == NULL)
 	{
 		ms->parse_s->c = buff;
-		buff->prev_token = ft_strdup(ms->tmp_str);
-		buff->tok_prv_tok = ft_which_redir_token(buff->prev_token, 'p');
+		buff->prev_tok = ft_strdup(ms->tmp_str);
+		buff->tok_prv_tok = ft_which_redir_token(buff->prev_tok, 'p');
 		buff->b_is_file = ft_prev_is_red_io(buff);
 	}
 	else
@@ -165,6 +165,6 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 	if (last && last->tok_nxt_tok != end_input && ms->b_temoin)
 	{
 		ms->b_temoin = false;
-		ft_msg(last->next_token, 's', false, ms);
+		ft_msg(last->next_tok, 's', false, ms);
 	}
 }

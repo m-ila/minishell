@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 17:15:41 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 17:22:00 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/27 01:30:15 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ bool	ft_add_token_val_to_struct(t_node *c)
 		return (false);
 	while (c)
 	{
-		c->tok_prv_tok = ft_which_redir_token(c->prev_token, 'p');
-		c->tok_nxt_tok = ft_which_redir_token(c->next_token, 'n');
+		c->tok_prv_tok = ft_which_redir_token(c->prev_tok, 'p');
+		c->tok_nxt_tok = ft_which_redir_token(c->next_tok, 'n');
 		c = c->next;
 	}
 	return (true);

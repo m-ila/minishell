@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/27 00:03:11 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/27 01:56:37 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ typedef enum s_tokens
 typedef struct s_node {
 	struct s_node	*prev;
 	struct s_node	*next;
-	char			*prev_token;
-	char			*next_token;
+	char			*prev_tok;
+	char			*next_tok;
 	t_tokens		tok_prv_tok;
 	t_tokens		tok_nxt_tok;
 	bool			b_redir;
@@ -102,8 +102,10 @@ typedef struct s_group {
 	size_t			gr_nb_infile;
 	size_t			gr_nb_outfile;
 	char			**infile_arr;
+	t_tokens		*t_infile_arr;
 	char			**cmd_and_args;
 	char			**outfile_arr;
+	t_tokens		*t_outfile_arr;
 }	t_group;
 
 typedef struct s_parse {
@@ -232,6 +234,7 @@ bool		ft_redir_io_token(t_tokens t);
 /* loop/display.c */
 void		print_values(t_data *ms);
 void		ft_cmd_display(t_data *ms, t_node *c);
+void		ft_group_diplay(t_parse *p);
 /* loop/main.c */
 void		ft_loop(t_data *ms);
 void		ft_free_prompt(t_data **ms);
@@ -307,4 +310,4 @@ void		ft_set_r_val(int val, t_data *ms);
 bool		ft_comp_var_env(int val, t_data *ms);
 void		ft_ctrl_c(int val);
 
-#endif 
+#endif

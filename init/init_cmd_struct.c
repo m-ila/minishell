@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 17:22:00 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/27 01:30:15 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@ bool	ft_consecutive_empty_node(t_node *c, t_data *ms)
 {
 	if (ft_only_sep_base(c->ep_model, "0Ss") && c->tok_nxt_tok == pipe_)
 	{
-		ft_msg(c->next_token, 's', false, ms);
+		ft_msg(c->next_tok, 's', false, ms);
 		return (ft_set_val_ret(ms, true));
 	}
 	if (ft_only_sep_base(c->ep_model, "0Ss") && \
 	ft_redir_io_token(c->tok_nxt_tok) && \
 	ft_redir_io_token(c->tok_prv_tok))
 	{
-		ft_msg(c->next_token, 's', false, ms);
+		ft_msg(c->next_tok, 's', false, ms);
 		return (ft_set_val_ret(ms, true));
 	}
 	if (c->next && ft_only_sep_base(c->ep_model, "0Ss") && \
 	ft_only_sep_base(c->next->ep_model, "0Ss"))
 	{
-		ft_msg(c->next_token, 's', false, ms);
+		ft_msg(c->next_tok, 's', false, ms);
 		return (ft_set_val_ret(ms, true));
 	}
 	if (!c->next && ft_only_sep_base(c->ep_model, "0Ss"))
@@ -49,7 +49,7 @@ bool	ft_valid_consecutive_redir_tok(t_node *c, t_data *ms)
 	{	
 		if (c->next->tok_nxt_tok == pipe_)
 		{
-			ft_msg(c->next_token, 's', false, ms);
+			ft_msg(c->next_tok, 's', false, ms);
 			return (ft_set_val_ret(ms, false));
 		}
 	}
@@ -66,7 +66,7 @@ bool	ft_empty_cmd(t_node *c, t_data *ms)
 	}
 	else if (c->tok_nxt_tok == pipe_)
 	{
-		ft_msg(c->next_token, 's', false, ms);
+		ft_msg(c->next_tok, 's', false, ms);
 		ms->b_temoin = false;
 		return (false);
 	}
@@ -85,7 +85,7 @@ static bool	ft_do(int d, t_node *c, t_data *ms)
 {
 	if (d == 1)
 	{
-		ft_msg(c->next_token, 's', false, ms);
+		ft_msg(c->next_tok, 's', false, ms);
 		ms->b_temoin = false;
 		return (false);
 	}

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:21:47 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/27 01:30:15 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static void	ft_free_cmd_node(t_node *curr)
 		free(curr->ep_model);
 	if (curr->ep_str)
 		free(curr->ep_str);
-	if (curr->prev_token)
-		free(curr->prev_token);
-	if (curr->next_token)
-		free(curr->next_token);
+	if (curr->prev_tok)
+		free(curr->prev_tok);
+	if (curr->next_tok)
+		free(curr->next_tok);
 	if (curr)
 		free(curr);
 }

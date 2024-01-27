@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:53:20 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 17:22:00 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/27 01:30:15 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_node	*ft_create_cmd_node(char *raw_cmd)
 		return (NULL);
 	}
 	new->next = NULL;
-	ft_set_char_to_null(&new->prev_token, &new->next_token, &new->ep_model);
+	ft_set_char_to_null(&new->prev_tok, &new->next_tok, &new->ep_model);
 	ft_set_char_to_null(&new->ep_str, &new->cmd, NULL);
 	new->ep_all_elem = NULL;
 	new->all_elem = NULL;
@@ -112,7 +112,7 @@ void	ft_add_node_to_cmds(t_node **c, t_node *to_add)
 	end = ft_go_to_last_cmd_node(*c);
 	end->next = to_add;
 	to_add->prev = end;
-	to_add->prev_token = ft_strdup(to_add->prev->next_token);
-	to_add->tok_prv_tok = ft_which_redir_token(to_add->prev_token, 'p');
+	to_add->prev_tok = ft_strdup(to_add->prev->next_tok);
+	to_add->tok_prv_tok = ft_which_redir_token(to_add->prev_tok, 'p');
 	to_add->b_is_file = ft_prev_is_red_io(to_add);
 }

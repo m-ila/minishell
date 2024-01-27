@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:45:43 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 17:22:00 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/27 01:30:15 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ bool	ft_add_first_prev_token_node(char *str, t_node *c)
 		return (false);
 	if (!str)
 		return (true);
-	c->prev_token = ft_strdup(str);
-	c->tok_prv_tok = ft_which_redir_token(c->prev_token, 'p');
+	c->prev_tok = ft_strdup(str);
+	c->tok_prv_tok = ft_which_redir_token(c->prev_tok, 'p');
 	c->b_is_file = ft_prev_is_red_io(c);
 	free(str);
 	str = NULL;
@@ -43,7 +43,7 @@ bool	ft_add_next_token_to_node(char *str, t_node *struct_cmd)
 	if (!struct_cmd || !str)
 		return (false);
 	last = ft_go_to_last_cmd_node(struct_cmd);
-	last->next_token = ft_strdup(str);
-	last->tok_nxt_tok = ft_which_redir_token(last->next_token, 'n');
+	last->next_tok = ft_strdup(str);
+	last->tok_nxt_tok = ft_which_redir_token(last->next_tok, 'n');
 	return (true);
 }
