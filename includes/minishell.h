@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 11:45:38 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 12:43:28 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_group {
 	int				gr_fd_out;
 	size_t			gr_nb_infile;
 	size_t			gr_nb_outfile;
+	size_t			gr_nb_elems;
 	char			**infile_arr;
 	char			**cmd_and_args;
 	char			**outfile_arr;

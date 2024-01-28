@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:56:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 11:38:45 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 13:08:53 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	ft_free_groups(t_group **gr)
 			ft_free_2d_array(index->cmd_and_args);
 		free(index);
 		index = NULL;
-		printf("free completed !\n");
 	}
 }
 
@@ -50,6 +49,7 @@ t_group	*ft_init_group_node(void)
 	g->gr_fd_out = -1;
 	g->gr_nb_infile = 0;
 	g->gr_nb_outfile = 0;
+	g->gr_nb_elems = 0;
 	g->cmd_and_args = NULL;
 	g->outfile_arr = NULL;
 	g->infile_arr = NULL;

@@ -6,16 +6,25 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 23:18:31 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/27 12:55:02 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 13:06:45 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static bool	ft_deal_w_empty_tab(char ***tab1, char *str)
+static bool	ft_deal_w_empty_tab(char ***tab1, char *str, int which)
 {
-	*tab1 = ft_calloc(2, sizeof(char *));
-	(*tab1)[0] = ft_strdup(str);
+	if (which == 1)
+	{
+		*tab1 = ft_calloc(2, sizeof(char *));
+		(*tab1)[0] = ft_strdup(str);
+	}
+	if (which == 2)
+	{
+		*tab1 = ft_calloc(1, sizeof(char *));
+		if (!*tab1)
+			return (false);
+	}
 	return (true);
 }
 
@@ -79,7 +88,7 @@ bool	ft_add_str_to_tab(char ***tab1, char *str)
 	if (!str)
 		return (false);
 	if (!tab1 || *tab1 == NULL)
-		return (ft_deal_w_empty_tab(tab1, str));
+		return (ft_deal_w_empty_tab(tab1, str, 1));
 	len_max = ft_2d_lines(*tab1) + 1;
 	tab_ret = ft_calloc(len_max + 1, sizeof(char *));
 	if (!tab_ret)
@@ -107,7 +116,8 @@ bool	ft_add_tabs(char ***tab1, char **tab2)
 	size_t	j;
 	char	**tab_ret;
 
-	if (!tab1 || !tab2)
+	if (!tab2 || \
+	((!tab1 || !(*tab1)) && !ft_deal_w_empty_tab(tab1, NULL, 2)))
 		return (false);
 	len_max = ft_2d_lines(*tab1) + ft_2d_lines(tab2);
 	tab_ret = ft_calloc(len_max + 1, sizeof(char *));
