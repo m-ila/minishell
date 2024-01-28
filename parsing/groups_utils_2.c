@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 13:55:02 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 14:08:51 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 14:16:47 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ bool	ft_is_output_redirect(t_tokens t)
 
 bool	ft_is_io_redirect(t_tokens t)
 {
-	return (t == heredoc || t == redir_in || t == redir_out || t == redir_out_app);
+	return (t == heredoc || t == redir_in || \
+	t == redir_out || t == redir_out_app);
 }

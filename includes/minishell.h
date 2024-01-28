@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 14:09:19 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 14:33:54 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@
 /* =========================== GLOB VARIABLE =============================== */
 extern int	g_return_val;
 /* ============================ STRUCTURES ================================= */
-/* respectivement < > << >> | $ ? */
+/* respectivement < > << >> | */
 typedef enum s_tokens
 {
 	redir_in,
@@ -255,7 +255,8 @@ void		ft_add_grp_node(t_group **og, t_group *to_add);
 void		ft_malloc_group_struct(t_parse *p);
 void		ft_init_group_struct(t_data *ms, t_parse *p);
 /* parsing/groups_manip_data.c */
-
+t_tokens	ft_get_token(char *value);
+char		*ft_get_file_name(char *value);
 /* parsing/groups_fill.c */
 bool		ft_fill_out_arr(t_data *ms, t_group *grp, t_node *from, t_node *until);
 bool		ft_fill_in_arr(t_data *ms, t_group *grp, t_node *from, t_node *until);

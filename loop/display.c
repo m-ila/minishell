@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:43:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 14:05:02 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 14:33:56 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,23 @@ void	ft_display_array(char **arr)
 	i = -1;
 	while (arr[++i])
 		ft_printf_fd(1, "n°%d : (d)%s(f)\n", i, arr[i]);
+	ft_printf_fd(1, "\n\n");
+}
+
+void	ft_display_interpreted_array(char **arr)
+{
+	int		i;
+	char	*tmp;
+
+	i = -1;
+	while (arr[++i])
+	{
+		tmp = ft_get_file_name(arr[i]);
+		ft_printf_fd(1, "n°%d : (d)%s(f)\n", i, arr[i]);
+		printf("file name : (d)%s(f)\ntoken value : %d\n", tmp, \
+		ft_get_token(arr[i]));
+		ft_multiple_free(&tmp, NULL, NULL);
+	}
 	ft_printf_fd(1, "\n\n");
 }
 
@@ -37,12 +54,12 @@ void	ft_group_diplay(t_parse *p)
 		if (group->gr_nb_infile)
 		{
 			ft_printf_fd(1, "infile_arr\n\n");
-			ft_display_array(group->infile_arr);
+			ft_display_interpreted_array(group->infile_arr);
 		}
 		if (group->gr_nb_outfile)
 		{
 			ft_printf_fd(1, "outfile_arr\n\n");
-			ft_display_array(group->outfile_arr);
+			ft_display_interpreted_array(group->outfile_arr);
 		}
 		if (group->cmd_and_args)
 		{
