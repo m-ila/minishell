@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:56:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 13:58:38 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 18:54:10 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_get_nb_group(t_data *ms)
 		if (index->tok_nxt_tok == pipe_ || index->tok_nxt_tok == end_input)
 			group_nb++;
 		if (index->tok_nxt_tok == end_input)
-			break;
+			break ;
 		index = index->next;
 	}
 	ms->parse_s->gr_nb = group_nb;
