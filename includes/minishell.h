@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 14:33:54 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 18:37:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ void		ft_loop(t_data *ms);
 void		ft_free_prompt(t_data **ms);
 /*====================== PARSING FOLDER ======================*/
 /* parsing/abs_path.c */
-void	    ft_errno_msg(t_node *c, int errno);
+void		ft_errno_msg(t_node *c, int errno);
 bool		ft_absolute_path(t_node *c);
 /* parsing/cond_cut.c */
 bool		ft_cond_cut(char *str, int i);
@@ -258,10 +258,14 @@ void		ft_init_group_struct(t_data *ms, t_parse *p);
 t_tokens	ft_get_token(char *value);
 char		*ft_get_file_name(char *value);
 /* parsing/groups_fill.c */
-bool		ft_fill_out_arr(t_data *ms, t_group *grp, t_node *from, t_node *until);
-bool		ft_fill_in_arr(t_data *ms, t_group *grp, t_node *from, t_node *until);
-bool		ft_fill_cmd_in_groups(t_data *ms, t_group *grp, t_node *from, t_node *until);
-bool		ft_fill_group_struct(t_data *ms, t_parse *p, t_node **from, t_group *g);
+bool		ft_fill_out_arr(t_data *ms, t_group *grp, t_node *from, \
+t_node *until);
+bool		ft_fill_in_arr(t_data *ms, t_group *grp, t_node *from, \
+t_node *until);
+bool		ft_fill_cmd_in_groups(t_data *ms, t_group *grp, t_node *from, \
+t_node *until);
+bool		ft_fill_group_struct(t_data *ms, t_parse *p, t_node **from, \
+t_group *g);
 /* parsing/groups_utils.c */
 void		ft_free_groups(t_group **gr);
 t_group		*ft_init_group_node(void);
@@ -274,7 +278,8 @@ bool		ft_is_output_redirect(t_tokens t);
 bool		ft_is_io_redirect(t_tokens t);
 /* parsing/groups.c */
 bool		ft_groups(t_data *ms, t_parse *p);
-bool		ft_fill_group_struct(t_data *ms, t_parse *p, t_node **from, t_group *g);
+bool		ft_fill_group_struct(t_data *ms, t_parse *p, t_node **from, \
+t_group *g);
 size_t		ft_get_nb_node(t_data *ms, t_parse *p, t_node *from);
 /* parsing/parse_get.c */
 char		*get_token(char *str, int from);
@@ -305,10 +310,10 @@ bool		ft_count_reigning_quotes(char *str, t_parse *parse_s);
 bool		ft_char_is_a_reigning_quote(char *str, int i);
 int			ft_get_index_next_reign_quo(char *str, int from);
 /* parsing/rights.c */
-bool    	ft_exists(t_node *c);
-bool    	ft_doc_has_read_rights(t_node *c);
-bool    	ft_doc_has_write_rights(t_node *c);
-bool	    ft_has_exec_rights(t_node *c);
+bool		ft_exists(t_node *c);
+bool		ft_doc_has_read_rights(t_node *c);
+bool		ft_doc_has_write_rights(t_node *c);
+bool		ft_has_exec_rights(t_node *c);
 /* parsing/tab_manip.c */
 bool		ft_add_tabs(char ***tab1, char **tab2);
 bool		ft_add_str_to_tab(char ***tab1, char *str);
