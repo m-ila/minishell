@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 18:58:02 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 11:55:15 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 21:22:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	ft_tag_is_in_env(t_data *ms, char *tag)
 		ft_strlen_base(ms->envi[i], "=", 0));
 		if (!t)
 			return (NULL);
-		if (!ft_strncmp(tag, t, ft_strlen(t) + 1))
+		if (!ft_strncmp(tag, t, ft_strlen(tag) + 1))
 			return (ft_free_return(&t, NULL, NULL, true));
 		free(t);
 		i++;

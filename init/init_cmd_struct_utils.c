@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:53:20 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/27 01:30:15 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 20:32:06 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,9 @@ void	ft_add_node_to_cmds(t_node **c, t_node *to_add)
 
 	if (!to_add)
 		return ;
-	if (!c)
-	{
-		*c = to_add;
-		to_add->prev = NULL;
-		return ;
-	}
 	end = ft_go_to_last_cmd_node(*c);
+	if (!end)
+		return ;
 	end->next = to_add;
 	to_add->prev = end;
 	to_add->prev_tok = ft_strdup(to_add->prev->next_tok);
