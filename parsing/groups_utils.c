@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:56:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/27 02:12:38 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 11:38:45 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ void	ft_free_groups(t_group **gr)
 			ft_free_2d_array(index->infile_arr);
 		if (index->outfile_arr)
 			ft_free_2d_array(index->outfile_arr);
-		if (index->t_infile_arr)
-			free(index->t_infile_arr);
-		if (index->t_outfile_arr)
-			free(index->t_outfile_arr);
 		if (index->cmd_and_args)
 			ft_free_2d_array(index->cmd_and_args);
 		free(index);
@@ -57,8 +53,6 @@ t_group	*ft_init_group_node(void)
 	g->cmd_and_args = NULL;
 	g->outfile_arr = NULL;
 	g->infile_arr = NULL;
-	g->t_infile_arr = NULL;
-	g->t_outfile_arr = NULL;
 	return (g);
 }
 

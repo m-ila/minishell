@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/27 01:52:23 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 11:45:22 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_loop(t_data *ms)
 			ms->b_temoin = false;
 		if (ms->b_temoin && ms->parse_s->c->tok_nxt_tok == heredoc)
 		{
-			ms->parse_s->h_lim = ft_strdup(ms->parse_s->c->next->cmd);
+			ms->parse_s->h_lim = ft_strdup(ms->parse_s->c->next->ep_all_elem[0]);
 			ft_heredoc(ms, ms->parse_s);
 			free(ms->parse_s->h_lim);
 		}

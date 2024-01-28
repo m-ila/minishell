@@ -6,49 +6,47 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:43:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/27 02:30:57 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 11:52:06 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+void	ft_display_array(char **arr)
+{
+	int	i;
+
+	i = -1;
+	while (arr[++i])
+		ft_printf_fd(1, "n°%d : %s\n", i, arr[i]);
+	ft_printf_fd(1, "\n\n");
+}
+
 void	ft_group_diplay(t_parse *p)
 {
 	t_group	*group;
-	int		i;
-	int		j;
 	int		id_nb;
 
 	group = p->gr;
 	id_nb = 1;
 	while (group)
 	{
-		i = -1;
-		j = -1;
-		printf("group %d created%s\n", id_nb, PRINT_SEP);
-		printf("infile : %ld\noutfile : %ld\n\n", \
-		group->gr_nb_infile, group->gr_nb_outfile);
-		if (group->infile_arr)
+		printf("======== group %d ========\n", id_nb);
+		printf("node : %p\n", group);
+		if (group->gr_nb_infile)
 		{
-			while (group->infile_arr[++i])
-				printf("infile_arr[%d] : %s\n", i, group->infile_arr[i]);
+			ft_printf_fd(1, "infile_arr\n\n");
+			ft_display_array(group->infile_arr);
 		}
-		if (group->t_infile_arr)
+		if (group->gr_nb_outfile)
 		{
-			i = -1;
-			while (group->t_infile_arr[++i])
-				printf("t_infile_arr[%d] : %d\n", i, group->t_infile_arr[i]);
+			ft_printf_fd(1, "outfile_arr\n\n");
+			ft_display_array(group->outfile_arr);
 		}
-		if (group->outfile_arr)
+		if (group->cmd_and_args)
 		{
-			while (group->outfile_arr[++j])
-				printf("outfile_arr[%d] : %s\n", j, group->outfile_arr[j]);
-		}
-		if (group->t_outfile_arr)
-		{
-			j = -1;
-			while (group->t_outfile_arr[++j])
-				printf("t_outfile_arr[%d] : %d\n\n", j, group->t_outfile_arr[j]);
+			ft_printf_fd(1, "cmd_and_args\n\n");
+			ft_display_array(group->cmd_and_args);
 		}
 		id_nb++;
 		group = group->next;

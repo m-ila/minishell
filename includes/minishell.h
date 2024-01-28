@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/27 01:56:37 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 11:45:38 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,8 @@ typedef struct s_group {
 	size_t			gr_nb_infile;
 	size_t			gr_nb_outfile;
 	char			**infile_arr;
-	t_tokens		*t_infile_arr;
 	char			**cmd_and_args;
 	char			**outfile_arr;
-	t_tokens		*t_outfile_arr;
 }	t_group;
 
 typedef struct s_parse {
@@ -299,6 +297,7 @@ bool	    ft_has_exec_rights(t_node *c);
 /* parsing/tab_manip.c */
 bool		ft_add_tabs(char ***tab1, char **tab2);
 bool		ft_add_str_to_tab(char ***tab1, char *str);
+bool		ft_add_token_to_tab(t_tokens **tab, t_tokens to_add, int len);
 /* parsing/to_node.c */
 bool		ft_prev_is_red_io(t_node *c);
 bool		ft_add_next_token_to_node(char *str, t_node *struct_cmd);

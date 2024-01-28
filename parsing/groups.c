@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:14:18 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/27 02:29:37 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 11:53:26 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ bool	ft_is_output_redirect(t_tokens t)
 	return (t == redir_out || t == redir_out_app);
 }
 
+/*
 bool	ft_malloc_t_out_arr(t_group *p)
 {
 	t_tokens	*type_t;
@@ -34,35 +35,38 @@ bool	ft_malloc_t_out_arr(t_group *p)
 		return (false);
 	return (true);
 }
+*/
 
-bool	ft_fill_t_out_arr(t_data *ms, t_group *grp, t_node **from)
+bool	ft_fill_t_out_arr(t_data *ms, t_group *grp, t_node *from, t_node *until)
 {
 	size_t	i;
 	t_node	*navig;
-	t_node	*until;
+	char	*tmp;
 
 	if (!ms->b_temoin || !grp->gr_nb_outfile)
 		return (true);
 	i = 0;
-	navig = *from;
-	until = ft_get_delim_node(&navig);
+	navig = from;
 	while (navig && i < grp->gr_nb_outfile)
 	{
 		if (i > 0 && navig->prev == until)
 			break;
 		if (ft_is_output_redirect(navig->tok_prv_tok))
 		{
-			grp->t_outfile_arr[i] = navig->tok_prv_tok;
-			ft_add_str_to_tab(&grp->outfile_arr, navig->prev_tok);
+			tmp = ft_triple_join(navig->prev_tok, " ", navig->ep_all_elem[0], ms);
+			if (!tmp || !ft_add_str_to_tab(&grp->outfile_arr, tmp))
+				return (false);
+			ft_multiple_free(&tmp, NULL, NULL);
+			printf("node : %p\n", grp);
 			i++;
 		}
 		navig = navig->next;
 	}
-	grp->t_outfile_arr[i] = end_input;
 	printf("element dans fill_out_arr : %ld\n", i);
 	return (true);
 }
 
+/*
 bool	ft_malloc_t_in_arr(t_group *p)
 {
 	t_tokens	*type_t;
@@ -71,39 +75,43 @@ bool	ft_malloc_t_in_arr(t_group *p)
 		return (false);
 	if (p->gr_nb_infile == 0)
 		return (true);
-	p->t_infile_arr = ft_calloc(p->gr_nb_infile + 1, sizeof(type_t));
+	p->t_infile_arr = ft_calloc(p->gr_nb_infile + 1, sizeof(*type_t));
 	if (!p->t_infile_arr)
 		return (false);
+	printf("t_infile_arr created, size : %ld + 1 \n\n\n", p->gr_nb_infile);
 	return (true);
 }
-
-bool	ft_fill_t_in_arr(t_data *ms, t_group *grp, t_node **from)
+*/
+/*
+to do : 
+malloc protection and free
+*/
+bool	ft_fill_t_in_arr(t_data *ms, t_group *grp, t_node *from, t_node *until)
 {
 	size_t	i;
 	t_node	*navig;
-	t_node	*until;
+	char	*tmp;
 
 	if (!ms->b_temoin || !grp->gr_nb_infile)
 		return (true);
 	i = 0;
-	navig = *from;
-	until = ft_get_delim_node(&navig);
+	navig = from;
 	while (navig && i < grp->gr_nb_infile)
 	{
 		if (i > 0 && navig->prev == until)
 			break;
 		if (ft_is_input_redirect(navig->tok_prv_tok))
 		{
-			grp->t_infile_arr[i] = navig->tok_prv_tok;
-			//printf("(t_fill_t_in_arr[%ld]) : %d\n", i , grp->t_infile_arr[i]);
-			ft_add_str_to_tab(&grp->infile_arr, navig->prev_tok);
+			tmp = ft_triple_join(navig->prev_tok, " ", navig->ep_all_elem[0], ms);
+			if (!tmp || !ft_add_str_to_tab(&grp->infile_arr, tmp))
+				return (false);
+			ft_multiple_free(&tmp, NULL, NULL);
+			printf("node : %p\n", grp);
 			i++;
 		}
 		printf("(t_in_arr)next node\n");
 		navig = navig->next;
 	}
-	grp->t_infile_arr[i] = end_input;
-	printf("element dans fill_in_arr : %ld\n", i - 1);
 	return (true);
 }
 
@@ -120,15 +128,17 @@ bool	ft_init_data_groups(t_data *ms, t_parse *p)
 	while (navig_node && i < p->gr_nb)
 	{
 		delim = ft_get_delim_node(&navig_node);
-		if (!ft_malloc_t_in_arr(gp_navig))
+		if (!ft_fill_t_in_arr(ms, gp_navig, navig_node, delim))
+		{
+			printf("error 2\n");
 			break ;
-		if (!ft_fill_t_in_arr(ms, gp_navig, &navig_node))
+		}
+		if (!ft_fill_t_out_arr(ms, gp_navig, navig_node, delim))
+		{
+			printf("error 4\n");
 			break ;
-		if (!ft_malloc_t_out_arr(gp_navig))
-			break;
-		if (!ft_fill_t_out_arr(ms, gp_navig, &navig_node))
-			break ;
-		navig_node = delim;
+		}
+		navig_node = delim->next;
 		gp_navig = gp_navig->next;
 	}
 	return (true);
@@ -153,7 +163,7 @@ bool	ft_fill_group_struct(t_data *ms, t_parse *p, t_node **from, t_group *g)
 	t_node	*until;
 	int		i;
 
-	if (!ms || !ms->b_temoin || !p || !from)
+	if (!ms || !ms->b_temoin || !p)
 		return (false);
 	until = ft_get_delim_node(from);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 23:18:31 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/27 02:16:06 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/27 12:55:02 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,26 @@ size_t *i, size_t *j)
 			return (false);
 		}
 	}
+	return (true);
+}
+
+bool	ft_add_token_to_tab(t_tokens **tab, t_tokens to_add, int len)
+{
+	t_tokens	*tab_ret;
+
+	tab_ret = ft_calloc(len + 2, sizeof(to_add));
+	if (!tab_ret)
+		return (false);
+	tab_ret[len + 1] = end_input;
+	tab_ret[len] = to_add;
+	while (len > 0)
+	{
+		tab_ret[len] = (*tab)[len];
+		len--;
+	}
+	if (*tab)
+		free(*tab);
+	*tab = tab_ret;
 	return (true);
 }
 
