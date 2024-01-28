@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:31:38 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 17:23:06 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ bool	ft_do_in_env(t_data *ms, t_node *c, t_parse *ps, int *i)
 		ps->tmp_val = ft_get_val_in_env(ms->envi, ps->tmp_tag, ms);
 	if (!ft_tag_is_in_env(ms, ps->tmp_tag))
 		ps->tmp_val = ft_strdup("");
+	printf("tmp val : %s\n", ps->tmp_val);
 	if (!ps->tmp_val)
 		return (ft_print_msg("strdup env val", 'm', false, ms));
 	if (!ft_join_values(ms, c, i))
@@ -89,6 +90,7 @@ bool	ft_var_env(t_data *ms, t_node *c)
 			ps->tmp_tag = ft_get_val_to_search_in_env(ms, c, i + 1);
 			if (!ps->tmp_tag)
 				return (ft_print_msg("strdup env tag", 'm', false, ms));
+			printf("tmp tag : %s\n", ps->tmp_tag);
 			if (!ft_do_in_env(ms, c, ps, &i))
 				return (false);
 			free(ps->tmp_tag);

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/27 01:30:15 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 16:36:13 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,34 @@ bool	ft_deal_w_empty_elems(t_node *c, t_data *ms)
 	return (true);
 }
 
+bool	ft_refresh_ep_model(t_node *c)
+{
+	char	*refreshed;
+	size_t	len;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	len = ft_strlen(c->ep_model) - ft_strocc(c->ep_model, '0');
+	refreshed = ft_calloc(len + 1, sizeof(char));
+	if (!refreshed)
+		return (false);
+	while (i < len)
+	{
+		if (c->ep_model[i] != '0')
+		{
+			refreshed[j] = c->ep_model[i];
+			j++;
+		}
+		i++;
+	}
+	printf("REFRESHED MODEL : %s\n", refreshed);
+	free(c->ep_model);
+	c->ep_model = refreshed;
+	return (true);
+}
+
 /*
 to do : free the precedent if wrong ?
 or just turn temoin to falsenewline, so it would free at the end of the loop
@@ -130,9 +158,8 @@ bool	ft_parse_cmd(t_node *c, t_data *ms)
 		c->all_elem = ft_split_epured(c->raw_str, c->ep_model, '0');
 		if (!ft_var_env(ms, ms->parse_s->c))
 			return (ft_set_val_ret(ms, false));
-		free(c->ep_model);
-		c->ep_model = ft_ep_model(c->raw_str, ft_cond_cut);
 		c->ep_str = ft_ep_str(c->raw_str, c->ep_model);
+//		ft_refresh_ep_model(c);
 		c->ep_all_elem = ft_split_epured(c->raw_str, c->ep_model, '0');
 		if (!ft_deal_w_empty_elems(c, ms))
 			return (false);

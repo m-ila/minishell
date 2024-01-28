@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:33:21 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:12:33 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 16:17:12 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,25 @@ static void	ft_assign_char(char *s, int i, char *model)
 	if (s[i] == '$' && ((ft_elem_is_in_quotes(s, i) == DOUBLE_QUOTED || \
 		ft_elem_is_in_quotes(s, i) == NOT_QUOTED) && \
 		(ft_isalnum(s[i + 1]) || ft_char_in_base(s[i + 1], "?_"))))
-			model[i] = '$';
-	else if (!ft_char_in_base(s[i], B_X))
-		model[i] = 'X';
-	else if (ft_iswhitespace(s[i]))
 	{
+			model[i] = '$';
+			return ;
+	}
+	if (ft_iswhitespace(s[i]))
+	{
+		if (((ft_has_only_before(s, i, ft_iswhitespace) || \
+		ft_has_only_after(s, i, ft_iswhitespace)) && \
+		ft_elem_is_in_quotes(s, i) == NOT_QUOTED) || \
+		ft_elem_is_in_quotes(s, i) == NOT_QUOTED)
+			model[i] = '0';
 		if (ft_elem_is_in_quotes(s, i) == SINGLE_QUOTED)
 			model[i] = 's';
 		if (ft_elem_is_in_quotes(s, i) == DOUBLE_QUOTED)
 			model[i] = 'S';
-		if (ft_has_only_before(s, i, ft_iswhitespace) || \
-		ft_has_only_after(s, i, ft_iswhitespace) || \
-		ft_elem_is_in_quotes(s, i) == NOT_QUOTED)
-			model[i] = '0';
+		return ;
 	}
+	else if (!ft_char_in_base(s[i], B_X))
+		model[i] = 'X';
 	else if (ft_char_in_base(s[i], BASE_QUOTES))
 		model[i] = 'q';
 	else

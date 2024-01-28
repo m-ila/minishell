@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:51:00 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/23 12:26:32 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 16:50:56 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_set_r_val(int val, t_data *ms)
 
 	g_return_val = val;
 	str_val = ft_itoa(g_return_val);
-	if (!val)
+	if (!str_val)
 		return (ft_msg("failed to change return val", 'm', false, NULL));
 	ft_actualise_env(ms, "?", str_val);
 	free(str_val);
