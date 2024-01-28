@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 12:43:28 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/28 14:09:19 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,8 @@ void		ft_free_cmds(t_node *c);
 int			ft_free_return(char **str1, char **str2, char **str3, int ret);
 int			ft_free_ret_2(char **str1, char **str2, char ***two_dim, int ret_v);
 int			ft_free_expand(t_parse **p, char **str1, char **str2, int ret);
+/* free/free_groups.c */
+void		ft_free_groups(t_group **gr);
 /*======================= INIT FOLDER ========================*/
 /* init/init_loop.c */
 bool		ft_first_init(t_data *ms, char **envp);
@@ -252,12 +254,23 @@ char		*ft_ep_str(char *str, char *model);
 void		ft_add_grp_node(t_group **og, t_group *to_add);
 void		ft_malloc_group_struct(t_parse *p);
 void		ft_init_group_struct(t_data *ms, t_parse *p);
+/* parsing/groups_manip_data.c */
+
+/* parsing/groups_fill.c */
+bool		ft_fill_out_arr(t_data *ms, t_group *grp, t_node *from, t_node *until);
+bool		ft_fill_in_arr(t_data *ms, t_group *grp, t_node *from, t_node *until);
+bool		ft_fill_cmd_in_groups(t_data *ms, t_group *grp, t_node *from, t_node *until);
+bool		ft_fill_group_struct(t_data *ms, t_parse *p, t_node **from, t_group *g);
 /* parsing/groups_utils.c */
 void		ft_free_groups(t_group **gr);
 t_group		*ft_init_group_node(void);
 t_group		*ft_go_to_last_group_node(t_group *gr);
 void		ft_get_nb_group(t_data *ms);
 t_node		*ft_get_delim_node(t_node **from);
+/* parsing/groups_utils_2.c */
+bool		ft_is_input_redirect(t_tokens t);
+bool		ft_is_output_redirect(t_tokens t);
+bool		ft_is_io_redirect(t_tokens t);
 /* parsing/groups.c */
 bool		ft_groups(t_data *ms, t_parse *p);
 bool		ft_fill_group_struct(t_data *ms, t_parse *p, t_node **from, t_group *g);

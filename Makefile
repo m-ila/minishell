@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/01/26 23:51:01 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/01/28 14:01:20 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ env/env_str_manip.c \
 env/env_tab.c \
 env/env_upd_epur.c \
 free/free_cmd_struct.c \
+free/free_groups.c \
 free/ft_free_misc.c \
 init/init_loop.c \
 init/init_env_struct.c \
@@ -44,8 +45,11 @@ loop/main.c \
 parsing/abs_path.c \
 parsing/cond_cut.c \
 parsing/epur.c \
+parsing/groups_fill.c \
 parsing/groups_malloc.c \
+parsing/groups_manip_data.c \
 parsing/groups_utils.c \
+parsing/groups_utils_2.c \
 parsing/groups.c \
 parsing/parse_get.c \
 parsing/parsing_processes.c \
