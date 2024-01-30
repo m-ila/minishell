@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 14:00:52 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/30 17:56:11 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:16:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ char	*ft_get_file_name(char *value)
 
 void	ft_set_fd_grps(t_data *ms, t_parse *p, t_group *grp)
 {
-	if (!ft_process_fd_in(ms, p, grp))
+	if (!ft_process_fd_in(ms, p, grp) || !grp->gr_nb_infile)
 		grp->gr_fd_in = STDIN_FILENO;
-	if (!ft_process_fd_out(ms, grp))
+	if (!ft_process_fd_out(ms, grp) || !grp->gr_nb_outfile)
 		grp->gr_fd_out = STDOUT_FILENO;
 }

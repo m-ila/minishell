@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/30 18:02:32 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:28:30 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,6 @@ void	ft_loop(t_data *ms)
 		//print_values(ms);
 		if (ms->b_temoin && !ms->parse_s->c->cmd)
 			ms->b_temoin = false;
-		if (ms->b_temoin && ms->parse_s->c->tok_nxt_tok == heredoc)
-		{
-			ms->parse_s->h_lim = ft_strdup(ms->parse_s->c->next->ep_all_elem[0]);
-			ft_heredoc(ms, ms->parse_s);
-			free(ms->parse_s->h_lim);
-		}
 		if (ms->b_temoin && ft_is_builtin(ms->parse_s->c->cmd))
 			if (ft_builtin(ms->parse_s->c, ms) != R_EX_OK)
 				ms->b_temoin = false;
@@ -78,6 +72,8 @@ void	ft_loop(t_data *ms)
 		{
 			ft_free_cmds(ms->parse_s->c);
 		}
+		if (ms->parse_s->heredoc_fd > 2)
+			ft_close_h_fd(ms, ms->parse_s);
 		ft_multiple_free(&ms->tmp_str, &ms->parse_s->h_lim, NULL);
 		ft_free_groups(ms, &ms->parse_s->gr);
 		free(ms->parse_s->gr);
@@ -106,6 +102,8 @@ int	main(int argc, char **argv, char **envp)
 	ft_free_2d_array(ms->envi);
 	ft_multiple_free(&ms->tmp_str, &ms->prev_work_dir, &ms->curr_work_dir);
 	ft_multiple_free(&ms->printed_line, NULL, NULL);
+	if (ms->parse_s->heredoc_fd > 2)
+		ft_close_h_fd(ms, ms->parse_s);
 	ft_free_groups(ms, &ms->parse_s->gr);
 	free(ms->parse_s->gr);
 	free(ms->parse_s);
