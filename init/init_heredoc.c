@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/23 13:25:04 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:06:39 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	ft_close_h_fd(t_data *ms, t_parse *p)
 		}
 		else
 			ft_reset_global(ms);
+		if ((access("/tmp/heredoc.tmp", F_OK) == 0))
+			unlink("/tmp/heredoc.tmp");
 		p->heredoc_fd = -1;
 	}
 	return (R_EX_OK);
