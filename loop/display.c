@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:43:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 14:33:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/30 17:58:49 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	ft_group_diplay(t_parse *p)
 		printf("======== group %d ========\n", id_nb);
 		printf("group node adress : %p\n", group);
 		printf("group nb elem : %ld\n", group->gr_nb_elems);
+		printf("group fdin : %d\ngroup fdout : %d\n", group->gr_fd_in, \
+		group->gr_fd_out);
 		if (group->gr_nb_infile)
 		{
 			ft_printf_fd(1, "infile_arr\n\n");

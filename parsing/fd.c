@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   fd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/20 13:05:26 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/30 18:02:19 by mbruyant         ###   ########.fr       */
+/*   Created: 2024/01/30 17:24:20 by mbruyant          #+#    #+#             */
+/*   Updated: 2024/01/30 17:45:52 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_exit(t_data *ms, t_node *c)
+bool	ft_close_fd(t_data *ms, int fd)
 {
-	if (!c)
-		return (R_EX_OK);
-	ft_free_cmds(c);
-	ft_free_prompt(&ms);
-	ft_free_2d_array(ms->envi);
-	free(ms->tmp_str);
-	free(ms->prev_work_dir);
-	free(ms->curr_work_dir);
-	ft_free_groups(ms, &ms->parse_s->gr);
-	free(ms->parse_s->gr);
-	free(ms->parse_s);
-	free(ms);
-	exit(g_return_val);
-	return (R_EX_OK);
+	if (fd == -1)
+		return (true);
+	if (close(fd) == -1)
+	{
+		ft_printf_fd(2, "minishell: error: failed to close fd %d\n", fd);
+		ft_set_r_val(R_ERR_GEN, ms);
+		return (false);
+	}
+	fd = -1;
+	return (true);
 }

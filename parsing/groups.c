@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:14:18 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 14:04:45 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/30 17:47:21 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ bool	ft_init_data_groups(t_data *ms, t_parse *p)
 			printf("error 5\n");
 			break ;
 		}
+		ft_set_fd_grps(ms, p, gp_navig);
 		navig_node = delim->next;
 		gp_navig = gp_navig->next;
 	}

@@ -6,17 +6,22 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 13:51:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 19:12:47 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:58:38 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/*
+doit gerer les quotes avec raw_str
+*/
 static bool	ft_special_case(t_node *navig)
 {
+	printf("model : %s\nraw : (d)%s(f)\n", navig->ep_model, \
+	navig->raw_str);
 	return (navig->tok_prv_tok == pipe_ && \
 	ft_is_io_redirect(navig->tok_nxt_tok) && \
-	ft_only_sep_base(navig->ep_model, "0sS"));
+	ft_only_sep_base(navig->ep_model, "0Ss"));
 }
 
 /*

@@ -6,16 +6,22 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:51:49 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 19:03:40 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/30 17:51:51 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_errno_msg(t_node *c, int errno)
+void	ft_errno_msg(t_node *c, int erno)
 {
 	if (c)
-		ft_printf_fd(2, "minishell : %s : error %s\n", c->cmd, strerror(errno));
+		ft_printf_fd(2, "minishell : %s : error %s\n", c->cmd, strerror(erno));
+}
+
+void	ft_c_errno_msg(char *str, int erno)
+{
+	if (str)
+		ft_printf_fd(2, "minishell : %s : %s\n", str, strerror(erno));
 }
 
 /*

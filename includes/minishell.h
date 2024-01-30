@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 20:55:04 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:04:24 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdbool.h>
 # include <signal.h>
 # include <sys/types.h>
+# include <errno.h>
 # include "../libft/libft.h"
 /* ========================== DEFINE BASE =================================== */
 # define BASE_QUOTES "\'\""
@@ -199,22 +200,8 @@ int			ft_free_return(char **str1, char **str2, char **str3, int ret);
 int			ft_free_ret_2(char **str1, char **str2, char ***two_dim, int ret_v);
 int			ft_free_expand(t_parse **p, char **str1, char **str2, int ret);
 /* free/free_groups.c */
-void		ft_free_groups(t_group **gr);
+void		ft_free_groups(t_data *ms, t_group **gr);
 /*======================= INIT FOLDER ========================*/
-/* init/init_loop.c */
-bool		ft_first_init(t_data *ms, char **envp);
-bool		ft_malloc_curr_cwd(t_data *ms);
-bool		ft_get_cwd(t_data *ms, unsigned int i);
-bool		ft_malloc_s_parse(t_data *ms);
-void		ft_update_env_cwd(t_data *ms);
-/* init/init_heredoc.c */
-int			ft_open_h_fd(t_data *ms, t_parse *p);
-int			ft_heredoc_line(t_data *ms, t_parse *p);
-int			ft_write_in_fd(t_data *ms, t_parse *p, char *cont);
-int			ft_heredoc(t_data *ms, t_parse *p);
-/* init/init_env_struct.c */
-char		*ft_get_val_in_env(char **env, char *tag, t_data *ms);
-char		*ft_quote_the_val(char *str, t_data *ms);
 /* init/init_cmd_struct_utils.c */
 t_node		*ft_create_cmd_node(char *raw_cmd);
 t_node		*ft_go_to_last_cmd_node(t_node *cmd_node);
@@ -228,6 +215,29 @@ bool		ft_set_val_ret(t_data *ms, bool ret);
 bool		ft_deal_w_empty_elems(t_node *c, t_data *ms);
 bool		ft_consecutive_empty_node(t_node *c, t_data *ms);
 bool		ft_valid_consecutive_redir_tok(t_node *c, t_data *ms);
+/* init/init_env_struct.c */
+char		*ft_get_val_in_env(char **env, char *tag, t_data *ms);
+char		*ft_quote_the_val(char *str, t_data *ms);
+/* init/init_groups_fdin.c */
+bool    	ft_process_fd_in(t_data *ms, t_parse *p, t_group *grp);
+bool		ft_heredoc_open_process(t_data *ms, t_parse *p, t_group *grp, int i);
+bool		ft_redir_in_process(t_data *ms, t_group *grp, int i);
+/* init/init_groups_fdout.c */
+bool		ft_process_fd_out(t_data *ms, t_group *grp);
+bool		ft_redir_out_app_open_process(t_data *ms, t_group *grp, int i);
+bool		ft_redir_out_open_process(t_data *ms, t_group *grp, int i);
+/* init/init_loop.c */
+bool		ft_first_init(t_data *ms, char **envp);
+bool		ft_malloc_curr_cwd(t_data *ms);
+bool		ft_get_cwd(t_data *ms, unsigned int i);
+bool		ft_malloc_s_parse(t_data *ms);
+void		ft_update_env_cwd(t_data *ms);
+/* init/init_heredoc.c */
+int			ft_open_h_fd(t_data *ms, t_parse *p);
+int			ft_heredoc_line(t_data *ms, t_parse *p);
+int			ft_write_in_fd(t_data *ms, t_parse *p, char *cont);
+int			ft_heredoc(t_data *ms, t_parse *p);
+int			ft_close_h_fd(t_data *ms, t_parse *p);
 /* init/init_utils.c */
 bool		ft_set_val_ret(t_data *ms, bool ret);
 bool		ft_redir_io_token(t_tokens t);
@@ -241,7 +251,8 @@ void		ft_loop(t_data *ms);
 void		ft_free_prompt(t_data **ms);
 /*====================== PARSING FOLDER ======================*/
 /* parsing/abs_path.c */
-void		ft_errno_msg(t_node *c, int errno);
+void		ft_errno_msg(t_node *c, int erno);
+void		ft_c_errno_msg(char *str, int erno);
 bool		ft_absolute_path(t_node *c);
 /* parsing/cond_cut.c */
 bool		ft_cond_cut(char *str, int i);
@@ -250,6 +261,8 @@ bool		ft_cut_only_quotes(char *str, int i);
 /* parsing/epur.c */
 char		*ft_ep_model(char *s, bool (*fun)(char *, int));
 char		*ft_ep_str(char *str, char *model);
+/* parsing/fd.c */
+bool		ft_close_fd(t_data *ms, int fd);
 /* parsing/groups_malloc.c */
 void		ft_add_grp_node(t_group **og, t_group *to_add);
 void		ft_malloc_group_struct(t_parse *p);
@@ -257,6 +270,7 @@ void		ft_init_group_struct(t_data *ms, t_parse *p);
 /* parsing/groups_manip_data.c */
 t_tokens	ft_get_token(char *value);
 char		*ft_get_file_name(char *value);
+void		ft_set_fd_grps(t_data *ms, t_parse *p, t_group *grp);
 /* parsing/groups_fill.c */
 bool		ft_fill_out_arr(t_data *ms, t_group *grp, t_node *from, \
 t_node *until);
@@ -267,7 +281,6 @@ t_node *until);
 bool		ft_fill_group_struct(t_data *ms, t_parse *p, t_node **from, \
 t_group *g);
 /* parsing/groups_utils.c */
-void		ft_free_groups(t_group **gr);
 t_group		*ft_init_group_node(void);
 t_group		*ft_go_to_last_group_node(t_group *gr);
 void		ft_get_nb_group(t_data *ms);
