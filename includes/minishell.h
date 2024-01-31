@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/30 18:04:24 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:51:37 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,13 @@ typedef struct s_group {
 	struct s_group	*prev;
 	struct s_group	*next;
 	int				gr_fd_in;
+	int				gr_fd_heredoc;
 	int				gr_fd_out;
 	size_t			gr_nb_infile;
 	size_t			gr_nb_outfile;
 	size_t			gr_nb_elems;
+	int				gr_id;
+	char			*gr_id_str;
 	char			**infile_arr;
 	char			**cmd_and_args;
 	char			**outfile_arr;
@@ -233,11 +236,11 @@ bool		ft_get_cwd(t_data *ms, unsigned int i);
 bool		ft_malloc_s_parse(t_data *ms);
 void		ft_update_env_cwd(t_data *ms);
 /* init/init_heredoc.c */
-int			ft_open_h_fd(t_data *ms, t_parse *p);
-int			ft_heredoc_line(t_data *ms, t_parse *p);
-int			ft_write_in_fd(t_data *ms, t_parse *p, char *cont);
-int			ft_heredoc(t_data *ms, t_parse *p);
-int			ft_close_h_fd(t_data *ms, t_parse *p);
+int			ft_open_h_fd(t_data *ms, t_parse *p, t_group *grp);
+int			ft_heredoc_line(t_data *ms, t_parse *p, t_group *grp);
+int			ft_write_in_fd(t_data *ms, t_parse *p, char *cont, t_group *grp);
+int			ft_heredoc(t_data *ms, t_parse *p, t_group *grp);
+int			ft_close_h_fd(t_data *ms, t_group *grp);
 /* init/init_utils.c */
 bool		ft_set_val_ret(t_data *ms, bool ret);
 bool		ft_redir_io_token(t_tokens t);
@@ -265,7 +268,7 @@ char		*ft_ep_str(char *str, char *model);
 bool		ft_close_fd(t_data *ms, int fd);
 /* parsing/groups_malloc.c */
 void		ft_add_grp_node(t_group **og, t_group *to_add);
-void		ft_malloc_group_struct(t_parse *p);
+void		ft_malloc_group_struct(t_data *ms, t_parse *p);
 void		ft_init_group_struct(t_data *ms, t_parse *p);
 /* parsing/groups_manip_data.c */
 t_tokens	ft_get_token(char *value);

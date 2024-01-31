@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:43:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/30 17:58:49 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 16:52:08 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,16 @@ void	ft_display_interpreted_array(char **arr)
 void	ft_group_diplay(t_parse *p)
 {
 	t_group	*group;
-	int		id_nb;
 
 	group = p->gr;
-	id_nb = 1;
 	while (group)
 	{
-		printf("======== group %d ========\n", id_nb);
+		printf("======== group %d ========\n", group->gr_id);
 		printf("group node adress : %p\n", group);
 		printf("group nb elem : %ld\n", group->gr_nb_elems);
 		printf("group fdin : %d\ngroup fdout : %d\n", group->gr_fd_in, \
 		group->gr_fd_out);
+		printf("group id_str : %s\n", group->gr_id_str);
 		if (group->gr_nb_infile)
 		{
 			ft_printf_fd(1, "infile_arr\n\n");
@@ -68,7 +67,6 @@ void	ft_group_diplay(t_parse *p)
 			ft_printf_fd(1, "cmd_and_args\n\n");
 			ft_display_array(group->cmd_and_args);
 		}
-		id_nb++;
 		group = group->next;
 	}
 }

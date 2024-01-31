@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:14:18 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/30 17:47:21 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 16:48:04 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ bool	ft_groups(t_data *ms, t_parse *p)
 	if (!ms->b_temoin)
 		return (true);
 	ft_get_nb_group(ms);
-	ft_malloc_group_struct(p);
+	ft_malloc_group_struct(ms, p);
 	ft_init_group_struct(ms, p);
 	ft_init_data_groups(ms, p);
 	if (p->gr)

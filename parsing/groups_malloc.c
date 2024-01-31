@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:59:38 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 20:35:32 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:50:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,28 @@ void	ft_add_grp_node(t_group **og, t_group *to_add)
 	printf("group added\n\n");
 }
 
-void	ft_malloc_group_struct(t_parse *p)
+void	ft_malloc_group_struct(t_data *ms, t_parse *p)
 {
 	t_group	*buff;
-	size_t	i;
+	char	*tmp;
+	int		i;
 
 	i = 0;
 	printf("gr_nb : %ld\n", p->gr_nb);
-	while (i < p->gr_nb)
+	while ((size_t) i < p->gr_nb)
 	{
 		buff = ft_init_group_node();
+		buff->gr_id = i;
+		buff->gr_id_str = ft_itoa(buff->gr_id);
+		tmp = ft_strdup(".tmp");
+		if (!ft_str_add(&buff->gr_id_str, &tmp) || !buff->gr_id_str)
+		{
+			free(buff);
+			ft_free_groups(ms, &p->gr);
+			ft_set_r_val(R_ERR_GEN, ms);
+			ms->b_temoin = false;
+			return ;
+		}
 		if (!p->gr)
 			p->gr = buff;
 		else

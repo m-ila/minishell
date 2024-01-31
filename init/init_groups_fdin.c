@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:59:17 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/30 18:39:30 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:52:49 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 si plusieurs groupes, le heredoc va etre overwrite donc il faut trouver qqch de diff
 */
-static bool	ft_which_is_last(t_data *ms, t_parse *p, t_group *grp)
+static bool	ft_which_is_last(t_data *ms, t_group *grp)
 {
 	if (grp->gr_nb_infile <= 0)
 		return (true);
@@ -23,10 +23,10 @@ static bool	ft_which_is_last(t_data *ms, t_parse *p, t_group *grp)
 	{
 		if (!ft_close_fd(ms, grp->gr_fd_in))
 			return (false);
-		grp->gr_fd_in = p->heredoc_fd;
+		grp->gr_fd_in = grp->gr_fd_heredoc;
 	}
 	if (ft_get_token(grp->infile_arr[grp->gr_nb_infile - 1]) == redir_in)
-		if (!ft_close_fd(ms, p->heredoc_fd))
+		if (grp->gr_fd_in > -1 && ft_close_h_fd(ms, grp) != R_EX_OK)
 			return (false);
 	return (true);
 }
@@ -57,13 +57,13 @@ bool	ft_redir_in_process(t_data *ms, t_group *grp, int i)
 
 bool	ft_heredoc_open_process(t_data *ms, t_parse *p, t_group *grp, int i)
 {
-	if (p->heredoc_fd > -1 && ft_close_h_fd(ms, p) != R_EX_OK)
+	if (grp->gr_fd_in > -1 && ft_close_h_fd(ms, grp) != R_EX_OK)
 		return (false);
-	if (ft_open_h_fd(ms, p) != R_EX_OK)
+	if (ft_open_h_fd(ms, p, grp) != R_EX_OK)
 		return (false);
 	ft_multiple_free(&p->h_lim, NULL, NULL);
 	p->h_lim = ft_get_file_name(grp->infile_arr[i]);
-	if (ft_heredoc_line(ms, p) != R_EX_OK)
+	if (ft_heredoc_line(ms, p, grp) != R_EX_OK)
 		return (false);
 	return (true);
 }
@@ -92,5 +92,5 @@ bool    ft_process_fd_in(t_data *ms, t_parse *p, t_group *grp)
 				return (false);
 		i++;
 	}
-	return (ft_which_is_last(ms, p, grp));
+	return (ft_which_is_last(ms, grp));
 }
