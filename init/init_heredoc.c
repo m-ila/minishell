@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 22:49:08 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:53:47 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	ft_heredoc_expand(t_data *ms, char **str)
 	tmp = ft_create_cmd_node(*str);
 	if (!tmp)
 		return (R_ERR_GEN);
-	tmp->ep_model = ft_ep_model(tmp->raw_str, ft_cut_only_quotes);
+	tmp->ep_model = ft_ep_model(tmp->raw_str, ft_leave_everything);
 	if (!tmp->ep_model)
 		return (free(tmp), R_ERR_GEN);
 	ft_var_env(ms, tmp);

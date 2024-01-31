@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 18:12:50 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:53:32 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,7 @@ void		ft_errno_msg(t_node *c, int erno);
 void		ft_c_errno_msg(char *str, int erno);
 bool		ft_absolute_path(t_node *c);
 /* parsing/cond_cut.c */
+bool		ft_leave_everything(char *str, int i);
 bool		ft_cond_cut(char *str, int i);
 bool		ft_export_cond_cut(char *str, int i);
 bool		ft_cut_only_quotes(char *str, int i);

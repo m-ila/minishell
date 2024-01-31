@@ -6,11 +6,18 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:07:19 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/20 19:08:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:54:11 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+bool	ft_leave_everything(char *str, int i)
+{
+	if (str || i)
+		return (false);
+	return (false);
+}
 
 bool	ft_cond_cut(char *str, int i)
 {
