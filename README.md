@@ -7,6 +7,9 @@
 * [ ] est-ce que check paths uniquement quand exec ou avant ?
 * [ ] si env normal, créer `$?` a la fin, donc faire une fonction à part lors de l'init
 * [ ] vérifier sur les PC de l'école si les droits des fichiers outfile sont les bons
+* [ ] remove comments in files
+* [ ] passer heredoc en readline plutôt qu'en GNL ? pour qu'on puisse utiliser flèche droite/gauche
+* [ ] est-ce que les outfiles se crééent si un infile n'est pas bon ? comparer avec bash
 
 * [x] parse si commande est valable
 * [x] n'est pas valable si ruling quotes pas pair
