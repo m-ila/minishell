@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 22:46:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:49:08 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ static int	ft_heredoc_expand(t_data *ms, char **str)
 	free(*str);
 	*str = ft_strdup(tmp->raw_str);
 	ft_free_cmds(tmp);
+	if (!*str)
+		return (R_ERR_GEN);
 	return (R_EX_OK);
 }
 
