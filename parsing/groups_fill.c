@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 13:51:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/30 15:58:38 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 15:24:39 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static bool	ft_special_case(t_node *navig)
 	navig->raw_str);
 	return (navig->tok_prv_tok == pipe_ && \
 	ft_is_io_redirect(navig->tok_nxt_tok) && \
-	ft_only_sep_base(navig->ep_model, "0Ss"));
+	ft_has_only_after(navig->raw_str, 0, ft_iswhitespace));
 }
 
 /*
