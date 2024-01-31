@@ -10,6 +10,7 @@
 * [ ] remove comments in files
 * [ ] passer heredoc en readline plutôt qu'en GNL ? pour qu'on puisse utiliser flèche droite/gauche
 * [ ] est-ce que les outfiles se crééent si un infile n'est pas bon ? comparer avec bash
+* [ ] dans heredoc, ne prend pas en compte si single ou double quotes, il prend tous les $ pour une var d'env
 
 * [x] parse si commande est valable
 * [x] n'est pas valable si ruling quotes pas pair
