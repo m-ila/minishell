@@ -6,6 +6,7 @@
 * [ ] put everything to the norm
 * [ ] est-ce que check paths uniquement quand exec ou avant ?
 * [ ] si env normal, créer `$?` a la fin, donc faire une fonction à part lors de l'init
+* [ ] vérifier sur les PC de l'école si les droits des fichiers outfile sont les bons
 
 * [x] parse si commande est valable
 * [x] n'est pas valable si ruling quotes pas pair
