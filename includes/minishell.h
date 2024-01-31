@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 17:51:37 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:12:50 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,7 +265,7 @@ bool		ft_cut_only_quotes(char *str, int i);
 char		*ft_ep_model(char *s, bool (*fun)(char *, int));
 char		*ft_ep_str(char *str, char *model);
 /* parsing/fd.c */
-bool		ft_close_fd(t_data *ms, int fd);
+bool		ft_close_fd(t_data *ms, int *fd);
 /* parsing/groups_malloc.c */
 void		ft_add_grp_node(t_group **og, t_group *to_add);
 void		ft_malloc_group_struct(t_data *ms, t_parse *p);

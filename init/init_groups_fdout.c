@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:26:31 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/30 18:09:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:25:12 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool    ft_redir_out_app_open_process(t_data *ms, t_group *grp, int i)
 {
 	char	*file_name;
 
-	if (grp->gr_fd_out > -1 && !ft_close_fd(ms, grp->gr_fd_out))
+	if (grp->gr_fd_out > -1 && !ft_close_fd(ms, &grp->gr_fd_out))
 		return (false);
 	file_name = ft_get_file_name(grp->outfile_arr[i]);
 	if (!access(file_name, F_OK) && access(file_name, W_OK))
@@ -39,7 +39,7 @@ bool    ft_redir_out_open_process(t_data *ms, t_group *grp, int i)
 {
 	char	*file_name;
 
-	if (grp->gr_fd_out > -1 && !ft_close_fd(ms, grp->gr_fd_out))
+	if (grp->gr_fd_out > -1 && !ft_close_fd(ms, &grp->gr_fd_out))
 		return (false);
 	file_name = ft_get_file_name(grp->outfile_arr[i]);
 	if (!access(file_name, F_OK) && access(file_name, W_OK))

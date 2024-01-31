@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 17:59:10 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:25:07 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_open_h_fd(t_data *ms, t_parse *p, t_group *grp)
 	{
 		ft_msg("failed to close prev heredoc fd", 'm', false, ms);
 		return (R_ERR_GEN);
-	}		
+	}
 	grp->gr_fd_heredoc = open(grp->gr_id_str, \
 	O_CREAT | O_TRUNC | O_WRONLY, 0777);
 	if (grp->gr_fd_heredoc == -1)
@@ -42,7 +42,6 @@ int	ft_close_h_fd(t_data *ms, t_group *grp)
 {
 	if (grp->gr_fd_heredoc > -1)
 	{
-		printf("heredoc fd before close : %d\n", grp->gr_fd_heredoc);
 		if (close(grp->gr_fd_heredoc) == -1)
 		{
 			ft_msg("failed to close heredoc fd", 'm', false, ms);
@@ -51,7 +50,6 @@ int	ft_close_h_fd(t_data *ms, t_group *grp)
 		}
 		else
 			ft_reset_global(ms);
-		printf("heredoc fd closed successfully\n");
 		grp->gr_fd_heredoc = -1;
 	}
 	return (R_EX_OK);
