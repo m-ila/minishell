@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 22:08:44 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:46:56 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,29 @@ int	ft_write_in_fd(t_data *ms, t_parse *p, char *cont, t_group *grp)
 	if (grp->gr_fd_heredoc == -1 || !cont || !p->h_lim)
 		return (R_ERR_GEN);
 	index_delimiter = ft_russian_index(cont, p->h_lim);
+	printf("index delimiter : %ld\n", index_delimiter);
 	if (write(grp->gr_fd_heredoc, cont, index_delimiter) == -1)
 	{
 		ft_msg("failed to write in heredoc fd", 'm', false, ms);
 		return (R_ERR_GEN);
 	}
+	return (R_EX_OK);
+}
+
+static int	ft_heredoc_expand(t_data *ms, char **str)
+{
+	t_node	*tmp;
+
+	tmp = ft_create_cmd_node(*str);
+	if (!tmp)
+		return (R_ERR_GEN);
+	tmp->ep_model = ft_ep_model(tmp->raw_str, ft_cut_only_quotes);
+	if (!tmp->ep_model)
+		return (free(tmp), R_ERR_GEN);
+	ft_var_env(ms, tmp);
+	free(*str);
+	*str = ft_strdup(tmp->raw_str);
+	ft_free_cmds(tmp);
 	return (R_EX_OK);
 }
 
@@ -80,7 +98,7 @@ int	ft_heredoc_line(t_data *ms, t_parse *p, t_group *grp)
 	buff = NULL;
 	tmp_fd = dup(STDIN_FILENO);
 	g_return_val = -tmp_fd;
-	if (!str || !ms || !p->h_lim)
+	if (!str || !ms || !p->h_lim || !grp)
 		return (R_ERR_GEN);
 	while (!ft_russian_str(str, p->h_lim))
 	{
@@ -95,6 +113,8 @@ int	ft_heredoc_line(t_data *ms, t_parse *p, t_group *grp)
 	}
 	ft_close_fd(ms, &tmp_fd);
 	ft_reset_global(ms);
+	if (ft_heredoc_expand(ms, &str) != R_EX_OK)
+		return (ft_free_return(&str, &buff, NULL, R_ERR_GEN));
 	if (ft_write_in_fd(ms, p, str, grp) != R_EX_OK)
 		return (ft_free_return(&str, &buff, NULL, R_ERR_GEN));
 	return (ft_free_return(&str, &buff, NULL, R_EX_OK));
