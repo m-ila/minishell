@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 21:51:00 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 20:55:26 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:04:52 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,16 @@ void	ft_ctrl_c(int val)
 	(void)val;
 	if (g_return_val < 0)
 	{
-		ft_printf_fd(2, "^C\n");
 		close(-g_return_val);
+		g_return_val = -1;
+		ft_printf_fd(2, "\n");
 	}
 	else
 	{
 		ft_printf_fd(2, "\n");
+		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_return_val = R_CTRL_C;
 	}
-	g_return_val = R_CTRL_C;
 }

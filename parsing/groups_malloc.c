@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:59:38 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 17:50:00 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:52:20 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,24 @@ void	ft_add_grp_node(t_group **og, t_group *to_add)
 	printf("group added\n\n");
 }
 
+static bool	ft_tmp_file(t_data *ms, t_group *grp)
+{
+	char	*result;
+	char	*tmp;
+
+	tmp = ft_itoa(grp->gr_id);
+	if (!tmp)
+		return (false);
+	result = ft_triple_join(".", tmp, ".tmp", ms);
+	if (!result)
+		return (ft_free_return(&tmp, NULL, NULL, false));
+	grp->gr_id_str = result;
+	return (ft_free_return(&tmp, NULL, NULL, true));
+}
+
 void	ft_malloc_group_struct(t_data *ms, t_parse *p)
 {
 	t_group	*buff;
-	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -41,9 +55,7 @@ void	ft_malloc_group_struct(t_data *ms, t_parse *p)
 	{
 		buff = ft_init_group_node();
 		buff->gr_id = i;
-		buff->gr_id_str = ft_itoa(buff->gr_id);
-		tmp = ft_strdup(".tmp");
-		if (!ft_str_add(&buff->gr_id_str, &tmp) || !buff->gr_id_str)
+		if (!ft_tmp_file(ms, buff) || !buff->gr_id_str)
 		{
 			free(buff);
 			ft_free_groups(ms, &p->gr);

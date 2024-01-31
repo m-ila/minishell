@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:14:18 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 16:48:04 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 21:37:09 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ bool	ft_init_data_groups(t_data *ms, t_parse *p)
 	i = 0;
 	navig_node = p->c;
 	gp_navig = p->gr;
-	while (navig_node && i < p->gr_nb)
+	while (navig_node && i < p->gr_nb && g_return_val != -1)
 	{
 		delim = ft_get_delim_node(&navig_node);
 		if (!ft_fill_in_arr(ms, gp_navig, navig_node, delim))
