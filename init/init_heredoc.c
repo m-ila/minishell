@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 22:04:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/01/31 22:08:44 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,7 @@ int	ft_heredoc_line(t_data *ms, t_parse *p, t_group *grp)
 		ft_printf_fd(1, "> ");
 		buff = get_next_line(tmp_fd);
 		if (g_return_val == -1)
-		{
-			ms->b_temoin = false;
 			return (ft_free_return(&str, &buff, NULL, R_EX_OK));
-		}
 		if (!buff)
 			return (ft_free_return(&str, &buff, NULL, R_ERR_GEN));
 		if (!ft_str_add(&str, &buff))
