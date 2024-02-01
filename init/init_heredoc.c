@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 13:55:02 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:16:32 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_write_in_fd(t_data *ms, t_parse *p, char *cont, t_group *grp)
 
 	if (grp->gr_fd_heredoc == -1 || !cont || !p->h_lim)
 		return (R_ERR_GEN);
-	index_delimiter = ft_russian_index(cont, p->h_lim);
+	index_delimiter = ft_strlen(cont);
 	printf("index delimiter : %ld\n", index_delimiter);
 	if (write(grp->gr_fd_heredoc, cont, index_delimiter) == -1)
 	{
@@ -56,8 +56,6 @@ char **buff)
 		ft_close_fd(ms, &p->tmp_fd);
 		return (ft_free_return(str, buff, NULL, false));
 	}
-	if (!ft_strncmp(*buff, p->h_lim, ft_strlen(p->h_lim) + 1))
-			return (ft_free_return(NULL, buff, NULL, true));
 	if (!ft_str_add(str, buff))
 		return (ft_free_return(str, buff, NULL, false));
 	return (true);
@@ -82,6 +80,8 @@ char **str, char **buff)
 			ft_reset_global(ms);
 			return (ft_free_return(str, buff, NULL, true));
 		}
+		if (*buff && !ft_strncmp(*buff, p->h_lim, ft_strlen(*buff) - 1))
+			break ;
 		if (!ft_heredoc_do(ms, p, str, buff))
 			return (false);
 	}
