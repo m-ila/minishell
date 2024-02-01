@@ -6,52 +6,23 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:53:20 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 20:32:06 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:34:23 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_node	*ft_create_cmd_node(char *raw_cmd)
+static bool	ft_assign_cmd_do(t_node *c)
 {
-	t_node	*new;
-
-	if (!raw_cmd)
-		return (NULL);
-	new = malloc(sizeof(*new));
-	if (!new)
-		return (NULL);
-	if (*raw_cmd)
-		new->raw_str = ft_strdup(raw_cmd);
-	else
-		new->raw_str = ft_strdup("");
-	if (!new->raw_str)
+	c->cmd = ft_strdup(c->ep_all_elem[0]);
+	c->cmd_w_args = ft_copy_2d_array(c->ep_all_elem, 0, \
+	ft_2d_lines(c->ep_all_elem));
+	if (!c->cmd || !c->cmd_w_args)
 	{
-		ft_printf_fd(2, "fail to malloc for cmd : %s\n", raw_cmd);
-		free(new);
-		return (NULL);
+		ft_msg("malloc cmd & cmd_w_arg", 'm', false, NULL);
+		return (ft_free_ret_2(&c->cmd, NULL, &c->cmd_w_args, false));
 	}
-	new->next = NULL;
-	ft_set_char_to_null(&new->prev_tok, &new->next_tok, &new->ep_model);
-	ft_set_char_to_null(&new->ep_str, &new->cmd, NULL);
-	new->ep_all_elem = NULL;
-	new->all_elem = NULL;
-	new->cmd_w_args = NULL;
-	new->b_is_file = false;
-	new->tok_nxt_tok = end_input;
-	new->tok_prv_tok = start;
-	return (new);
-}
-
-t_node	*ft_go_to_last_cmd_node(t_node *cmd_node)
-{
-	while (cmd_node)
-	{
-		if (!cmd_node->next)
-			return (cmd_node);
-		cmd_node = cmd_node->next;
-	}
-	return (NULL);
+	return (true);
 }
 
 bool	ft_assign_cmd(t_node *c)
@@ -72,16 +43,8 @@ bool	ft_assign_cmd(t_node *c)
 		}
 	}
 	if (!c->b_is_file && c->ep_all_elem)
-	{
-		c->cmd = ft_strdup(c->ep_all_elem[0]);
-		c->cmd_w_args = ft_copy_2d_array(c->ep_all_elem, 0, \
-			ft_2d_lines(c->ep_all_elem));
-		if (!c->cmd || !c->cmd_w_args)
-		{
-			ft_msg("malloc cmd & cmd_w_arg", 'm', false, NULL);
-			return (ft_free_ret_2(&c->cmd, NULL, &c->cmd_w_args, false));
-		}
-	}
+		if (!ft_assign_cmd_do(c))
+			return (false);
 	return (true);
 }
 

@@ -6,15 +6,12 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:59:17 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 18:21:09 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:25:15 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/*
-si plusieurs groupes, le heredoc va etre overwrite donc il faut trouver qqch de diff
-*/
 static bool	ft_which_is_last(t_data *ms, t_group *grp)
 {
 	if (grp->gr_nb_infile <= 0)
@@ -69,15 +66,15 @@ bool	ft_heredoc_open_process(t_data *ms, t_parse *p, t_group *grp, int i)
 	return (true);
 }
 
-bool    ft_process_fd_in(t_data *ms, t_parse *p, t_group *grp)
+bool	ft_process_fd_in(t_data *ms, t_parse *p, t_group *grp)
 {
-    int i;
+	int	i;
 
-    if (!grp)
-        return (false);
-    if (!grp->gr_nb_infile)
-        return (true);
-    i = 0;
+	if (!grp)
+		return (false);
+	if (!grp->gr_nb_infile)
+		return (true);
+	i = 0;
 	while (grp->infile_arr[i])
 	{
 		if (ft_get_token(grp->infile_arr[i]) == heredoc)

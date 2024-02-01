@@ -6,13 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:26:31 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 18:25:12 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:21:50 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-bool    ft_redir_out_app_open_process(t_data *ms, t_group *grp, int i)
+bool	ft_redir_out_app_open_process(t_data *ms, t_group *grp, int i)
 {
 	char	*file_name;
 
@@ -35,7 +35,7 @@ bool    ft_redir_out_app_open_process(t_data *ms, t_group *grp, int i)
 	return (ft_free_return(&file_name, NULL, NULL, true));
 }
 
-bool    ft_redir_out_open_process(t_data *ms, t_group *grp, int i)
+bool	ft_redir_out_open_process(t_data *ms, t_group *grp, int i)
 {
 	char	*file_name;
 
@@ -58,21 +58,21 @@ bool    ft_redir_out_open_process(t_data *ms, t_group *grp, int i)
 	return (ft_free_return(&file_name, NULL, NULL, true));
 }
 
-bool    ft_process_fd_out(t_data *ms, t_group *grp)
+bool	ft_process_fd_out(t_data *ms, t_group *grp)
 {
-    int i;
+	int	i;
 
-    if (!grp)
-        return (false);
-    if (!grp->gr_nb_outfile)
-        return (true);
-    i = 0;
+	if (!grp)
+		return (false);
+	if (!grp->gr_nb_outfile)
+		return (true);
+	i = 0;
 	while (grp->outfile_arr[i])
 	{
 		if (ft_get_token(grp->outfile_arr[i]) == redir_out)
 			if (!ft_redir_out_open_process(ms, grp, i))
 				return (false);
-        if (ft_get_token(grp->outfile_arr[i]) == redir_out_app)
+		if (ft_get_token(grp->outfile_arr[i]) == redir_out_app)
 			if (!ft_redir_out_app_open_process(ms, grp, i))
 				return (false);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/27 01:30:15 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:26:03 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,6 @@ bool	ft_valid_consecutive_redir_tok(t_node *c, t_data *ms)
 	return (true);
 }
 
-/*
-bool	ft_empty_cmd(t_node *c, t_data *ms)
-{
-	if (c->tok_nxt_tok == error)
-	{
-		ft_msg("ft_empty_cmd err", 'm', false, ms);
-		return (false);
-	}
-	else if (c->tok_nxt_tok == pipe_)
-	{
-		ft_msg(c->next_tok, 's', false, ms);
-		ms->b_temoin = false;
-		return (false);
-	}
-	else if (c->tok_nxt_tok != pipe_ && \
-	c->tok_nxt_tok != end_input)
-	{
-		ft_msg("newline", 's', false, ms);
-		ms->b_temoin = false;
-		return (false);
-	}
-	return (true);
-}
-*/
-
 static bool	ft_do(int d, t_node *c, t_data *ms)
 {
 	if (d == 1)
@@ -91,7 +66,6 @@ static bool	ft_do(int d, t_node *c, t_data *ms)
 	}
 	if (d == 2)
 	{
-		//ft_msg("failed gen ms->cmd", 'm', false, ms);
 		ms->b_temoin = false;
 		return (false);
 	}

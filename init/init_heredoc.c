@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 14:16:32 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:20:58 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ char **str, char **buff)
 	{
 		ft_printf_fd(1, "> ");
 		*buff = get_next_line(p->tmp_fd);
-		printf("buff : %s\n", *buff);
 		if (g_return_val == -1)
 		{
 			ft_close_fd(ms, &grp->gr_fd_heredoc);
