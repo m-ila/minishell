@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 22:06:31 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 22:12:42 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ char **str, char **buff)
 			ft_comp_var_env(ms);
 			return (ft_free_return(str, buff, NULL, true));
 		}
-		if (*buff && !ft_strncmp(*buff, p->h_lim, ft_strlen(*buff) - 1))
+		if (*buff && !ft_strncmp(*buff, p->h_lim, ft_strlen(*buff) - 1) \
+		&& ft_strlen(*buff) - 1 > 0)
 			break ;
 		if (!ft_heredoc_do(ms, p, str, buff))
 			return (false);
