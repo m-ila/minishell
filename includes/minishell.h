@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 14:30:44 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:04:01 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,7 +346,7 @@ bool		ft_add_first_prev_token_node(char *str, t_node *struct_cmd);
 /* signal/signal.c */
 void		ft_reset_global(t_data *ms);
 void		ft_set_r_val(int val, t_data *ms);
-bool		ft_comp_var_env(int val, t_data *ms);
+bool		ft_comp_var_env(t_data *ms);
 void		ft_ctrl_c(int val);
 
 #endif
