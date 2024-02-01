@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 22:53:47 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:05:51 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,47 +90,53 @@ static int	ft_heredoc_expand(t_data *ms, char **str)
 	return (R_EX_OK);
 }
 
+static bool	ft_heredoc_miniloop(t_data *ms, t_group *grp, char **str, char **buff)
+{
+	int		tmp_fd;
+	t_parse	*p;
+
+	tmp_fd = dup(STDIN_FILENO);
+	g_return_val = -tmp_fd;
+	p = ms->parse_s;
+	while (!ft_russian_str(*str, p->h_lim))
+	{
+		ft_printf_fd(1, "> ");
+		*buff = get_next_line(tmp_fd);
+		printf("buff : %s\n", *buff);
+		if (g_return_val == -1)
+		{
+			ft_close_fd(ms, &grp->gr_fd_heredoc);
+			ft_reset_global(ms);
+			return (ft_free_return(str, buff, NULL, true));
+		}
+		if (!*buff)
+		{
+			ft_printf_fd(2, "minishell : here_doc delimited by the end of file (delimiter wanted : %s)\n", p->h_lim);
+			ft_close_fd(ms, &tmp_fd);
+			return (ft_free_return(str, buff, NULL, false));
+		}
+		if (!ft_str_add(str, buff))
+			return (ft_free_return(str, buff, NULL, false));
+	}
+	ft_close_fd(ms, &tmp_fd);
+	return (true);
+}
+
 int	ft_heredoc_line(t_data *ms, t_parse *p, t_group *grp)
 {
 	char	*str;
 	char	*buff;
-	int		tmp_fd;
 
 	str = ft_strdup("");
 	buff = NULL;
-	tmp_fd = dup(STDIN_FILENO);
-	g_return_val = -tmp_fd;
 	if (!str || !ms || !p->h_lim || !grp)
 		return (R_ERR_GEN);
-	while (!ft_russian_str(str, p->h_lim))
-	{
-		ft_printf_fd(1, "> ");
-		buff = get_next_line(tmp_fd);
-		if (g_return_val == -1)
-			return (ft_free_return(&str, &buff, NULL, R_EX_OK));
-		if (!buff)
-			return (ft_free_return(&str, &buff, NULL, R_ERR_GEN));
-		if (!ft_str_add(&str, &buff))
-			return (ft_free_return(&str, &buff, NULL, R_ERR_GEN));
-	}
-	ft_close_fd(ms, &tmp_fd);
+	if (!ft_heredoc_miniloop(ms, grp, &str, &buff))
+		return (false);
 	ft_reset_global(ms);
 	if (ft_heredoc_expand(ms, &str) != R_EX_OK)
 		return (ft_free_return(&str, &buff, NULL, R_ERR_GEN));
 	if (ft_write_in_fd(ms, p, str, grp) != R_EX_OK)
 		return (ft_free_return(&str, &buff, NULL, R_ERR_GEN));
 	return (ft_free_return(&str, &buff, NULL, R_EX_OK));
-}
-
-int	ft_heredoc(t_data *ms, t_parse *p, t_group *grp)
-{
-	if (ft_open_h_fd(ms, p, grp) != R_EX_OK)
-		return (R_ERR_GEN);
-	if (ft_heredoc_line(ms, p, grp) != R_EX_OK)
-		return (R_ERR_GEN);
-//	execute
-//	if (ft_close_h_fd(ms, p) != R_EX_OK)
-//		return (R_ERR_GEN);
-//	delete tmp file
-	return (R_EX_OK);
 }
