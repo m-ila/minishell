@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 22:12:42 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 22:13:38 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char **str, char **buff)
 	p = ms->parse_s;
 	p->tmp_fd = dup(STDIN_FILENO);
 	g_return_val = -p->tmp_fd;
-	while (!ft_russian_str(*buff, p->h_lim))
+	while (1)
 	{
 		ft_printf_fd(1, "> ");
 		*buff = get_next_line(p->tmp_fd);
