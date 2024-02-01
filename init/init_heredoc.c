@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 21:17:55 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:27:22 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@ static bool	ft_write(int fd, const char *str)
 
 	written = 1;
 	i = 0;
-	while (str[i] && written > 0)
+	while (*str && written > 0)
 	{
 		written = write(fd, str, 1);
 		if (written == -1)
 			return (ft_print_msg("failed to write in heredoc fd", 'm', \
 			false, NULL));
 		i++;
+		str++;
 	}
 	printf("written = %d\ni : %ld\n", written, i);
 	return (true);
@@ -79,9 +80,10 @@ char **buff)
 		ft_close_fd(ms, &grp->gr_fd_heredoc);
 		return (ft_free_return(str, buff, NULL, false));
 	}
-	if (ft_write_in_fd(ms, p, buff, grp) != R_EX_OK)
+	if (ft_write_in_fd(ms, p, *buff, grp) != R_EX_OK)
 		return (ft_free_return(str, buff, NULL, false));
 	free(*buff);
+	//free(*str);
 	return (true);
 }
 
@@ -93,7 +95,8 @@ char **str, char **buff)
 	p = ms->parse_s;
 	p->tmp_fd = dup(STDIN_FILENO);
 	g_return_val = -p->tmp_fd;
-	while (!ft_russian_str(*buff, p->h_lim))
+	ft_open_h_fd(ms, p, grp);
+	while (1)
 	{
 		ft_printf_fd(1, "> ");
 		*buff = get_next_line(p->tmp_fd);
