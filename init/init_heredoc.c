@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 12:15:52 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:55:02 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,34 @@ static int	ft_heredoc_expand(t_data *ms, char **str)
 	return (R_EX_OK);
 }
 
-static bool	ft_heredoc_miniloop(t_data *ms, t_group *grp, char **str, char **buff)
+static bool	ft_heredoc_do(t_data *ms, t_parse *p, char **str, \
+char **buff)
 {
-	int		tmp_fd;
+	if (!*buff)
+	{
+		ft_heredoc_sig_ms(p);
+		ft_close_fd(ms, &p->tmp_fd);
+		return (ft_free_return(str, buff, NULL, false));
+	}
+	if (!ft_strncmp(*buff, p->h_lim, ft_strlen(p->h_lim) + 1))
+			return (ft_free_return(NULL, buff, NULL, true));
+	if (!ft_str_add(str, buff))
+		return (ft_free_return(str, buff, NULL, false));
+	return (true);
+}
+
+static bool	ft_heredoc_miniloop(t_data *ms, t_group *grp, \
+char **str, char **buff)
+{
 	t_parse	*p;
 
-	tmp_fd = dup(STDIN_FILENO);
-	g_return_val = -tmp_fd;
 	p = ms->parse_s;
-	while (!ft_russian_str(*str, p->h_lim))
+	p->tmp_fd = dup(STDIN_FILENO);
+	g_return_val = -p->tmp_fd;
+	while (!ft_russian_str(*buff, p->h_lim))
 	{
 		ft_printf_fd(1, "> ");
-		*buff = get_next_line(tmp_fd);
+		*buff = get_next_line(p->tmp_fd);
 		printf("buff : %s\n", *buff);
 		if (g_return_val == -1)
 		{
@@ -66,16 +82,10 @@ static bool	ft_heredoc_miniloop(t_data *ms, t_group *grp, char **str, char **buf
 			ft_reset_global(ms);
 			return (ft_free_return(str, buff, NULL, true));
 		}
-		if (!*buff)
-		{
-			ft_heredoc_sig_ms(p);
-			ft_close_fd(ms, &tmp_fd);
-			return (ft_free_return(str, buff, NULL, false));
-		}
-		if (!ft_str_add(str, buff))
-			return (ft_free_return(str, buff, NULL, false));
+		if (!ft_heredoc_do(ms, p, str, buff))
+			return (false);
 	}
-	ft_close_fd(ms, &tmp_fd);
+	ft_close_fd(ms, &p->tmp_fd);
 	return (true);
 }
 
