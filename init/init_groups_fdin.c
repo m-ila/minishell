@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:59:17 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 14:25:15 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:40:21 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ bool	ft_redir_in_process(t_data *ms, t_group *grp, int i)
 
 bool	ft_heredoc_open_process(t_data *ms, t_parse *p, t_group *grp, int i)
 {
-	printf("ft_heredoc_process\n");
 	if (grp->gr_fd_heredoc > -1 && ft_close_h_fd(ms, grp) != R_EX_OK)
 		return (false);
 	if (ft_open_h_fd(ms, p, grp) != R_EX_OK)

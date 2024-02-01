@@ -6,23 +6,43 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 14:20:58 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:17:55 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+
+static bool	ft_write(int fd, const char *str)
+{
+	int		written;
+	size_t	i;
+
+	written = 1;
+	i = 0;
+	while (str[i] && written > 0)
+	{
+		written = write(fd, str, 1);
+		if (written == -1)
+			return (ft_print_msg("failed to write in heredoc fd", 'm', \
+			false, NULL));
+		i++;
+	}
+	printf("written = %d\ni : %ld\n", written, i);
+	return (true);
+}
+
 int	ft_write_in_fd(t_data *ms, t_parse *p, char *cont, t_group *grp)
 {
-	size_t	index_delimiter;
+//	size_t	index_delimiter;
 
-	if (grp->gr_fd_heredoc == -1 || !cont || !p->h_lim)
+	if (grp->gr_fd_heredoc == -1 || !cont || !p->h_lim || !ms)
 		return (R_ERR_GEN);
-	index_delimiter = ft_strlen(cont);
-	printf("index delimiter : %ld\n", index_delimiter);
-	if (write(grp->gr_fd_heredoc, cont, index_delimiter) == -1)
+//	index_delimiter = ft_strlen(cont);
+//	printf("index delimiter : %ld\n", index_delimiter);
+	if (!ft_write(grp->gr_fd_heredoc, cont))
 	{
-		ft_msg("failed to write in heredoc fd", 'm', false, ms);
+//		ft_msg("failed to write in heredoc fd", 'm', false, ms);
 		return (R_ERR_GEN);
 	}
 	return (R_EX_OK);
@@ -47,17 +67,21 @@ static int	ft_heredoc_expand(t_data *ms, char **str)
 	return (R_EX_OK);
 }
 
-static bool	ft_heredoc_do(t_data *ms, t_parse *p, char **str, \
+static bool	ft_heredoc_do(t_data *ms, t_group *grp, char **str, \
 char **buff)
 {
-	if (!*buff)
+	t_parse	*p;
+
+	p = ms->parse_s;
+	if (!*buff && ms)
 	{
 		ft_heredoc_sig_ms(p);
-		ft_close_fd(ms, &p->tmp_fd);
+		ft_close_fd(ms, &grp->gr_fd_heredoc);
 		return (ft_free_return(str, buff, NULL, false));
 	}
-	if (!ft_str_add(str, buff))
+	if (ft_write_in_fd(ms, p, buff, grp) != R_EX_OK)
 		return (ft_free_return(str, buff, NULL, false));
+	free(*buff);
 	return (true);
 }
 
@@ -76,12 +100,13 @@ char **str, char **buff)
 		if (g_return_val == -1)
 		{
 			ft_close_fd(ms, &grp->gr_fd_heredoc);
-			ft_reset_global(ms);
-			return (ft_free_return(str, buff, NULL, true));
+			g_return_val = R_CTRL_C;
+			ms->b_temoin = false;
+			return (ft_free_return(str, buff, NULL, false));
 		}
-		if (*buff && !ft_strncmp(*buff, p->h_lim, ft_strlen(*buff) - 1))
+		if (*buff && !ft_strncmp(*buff, p->h_lim, ft_strlen(*buff) - 1) && ft_strlen(*buff) - 1 > 0)
 			break ;
-		if (!ft_heredoc_do(ms, p, str, buff))
+		if (!ft_heredoc_do(ms, grp, str, buff))
 			return (false);
 	}
 	ft_close_fd(ms, &p->tmp_fd);

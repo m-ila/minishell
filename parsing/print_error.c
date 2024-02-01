@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 12:51:09 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:52:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:55:06 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,11 @@ void	ft_msg(char *str, char type, bool del_struct, t_data *ms)
 		ft_printf_fd(2, "%s%s%c'\n", ms->printed_line, SYNTAX_ERR_Q, \
 		ms->parse_s->l_reign_q);
 	if (type == 'e')
+	{
 		ft_printf_fd(2, \
-		"minishell: export: \"%s\" : identifiant non valable\n", str);
+		"minishell: export: \"%s\" : not a valid identifier\n", str);
+		g_return_val = R_ERR_GEN;
+	}
 	if (del_struct || ms)
 		return ;
 }
@@ -66,11 +69,14 @@ int	ft_print_msg(char *str, char type, int return_value, t_data *ms)
 	if (type == 'm')
 		ft_printf_fd(2, "minishell: error: %s\n", str);
 	if (type == 'e')
+	{
 		ft_printf_fd(2, \
-		"minishell: export: \" %s \" : identifiant non valable\n", str);
+		"minishell: export: \" %s \" : not a valid identifier\n", str);
+		g_return_val = R_ERR_GEN;
+	}
 	if (type == 'c')
 	{
-		ft_printf_fd(2, "minishell: cd: %s: %s", str, CD_N_F);
+		ft_printf_fd(2, "minishell: cd: %s : %s\n", str, strerror(errno));
 		ft_set_r_val(R_ERR_GEN, ms);
 	}
 	if (type == 'C')

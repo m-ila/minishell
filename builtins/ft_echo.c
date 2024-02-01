@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:40:41 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:34:14 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_echo(t_node *c)
 	i = 1;
 	n = 0;
 	len = ft_2d_lines(c->ep_all_elem);
+	g_return_val = R_EX_OK;
 	if (len > 1)
 	{
 		if (!ft_strncmp(c->ep_all_elem[1], "-n", ft_strlen("-n ")))

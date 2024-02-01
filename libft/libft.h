@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 00:25:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/22 15:32:19 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:13:46 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,24 @@ typedef struct s_list
 	struct s_list	*next;
 	void			*content;
 }	t_list;
+
+typedef struct s_gnl
+{
+	char	*snake;
+	char	*snake2;
+	int		rendusize;
+	int		memo;
+	int		readsize;
+}	t_gnl;
+
+char	*get_next_line(int fd);
+char	*rendu_in_preparation(char *buffer, char *rendu, t_gnl *data, int fd);
+char	*makerendu(char *buffer, char *rendu, int remember, int back);
+char	*ouroboros(char *buffer, t_gnl *data, int *remember, int fd);
+void	feedsnake(t_gnl *data, int i);
+int		ft_init(t_gnl *data);
+void	ft_reinit(t_gnl *d, int remember);
+char	*resnake(t_gnl *d, int i);
 
 void	ft_bzero(void *s, size_t n);
 int		ft_atoi(const char *nptr);
@@ -82,7 +100,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-char	*get_next_line(int fd);
 int		ft_2d_lines(char **array);
 int		ft_2d_has_doubles(char **arr);
 int		ft_len_2d_array(char **arr);

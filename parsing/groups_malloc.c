@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:59:38 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 18:52:20 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:46:49 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static bool	ft_tmp_file(t_data *ms, t_group *grp)
 	tmp = ft_itoa(grp->gr_id);
 	if (!tmp)
 		return (false);
-	result = ft_triple_join(".", tmp, ".tmp", ms);
+	result = ft_triple_join("/tmp/.", tmp, ".tmp", ms);
 	if (!result)
 		return (ft_free_return(&tmp, NULL, NULL, false));
 	grp->gr_id_str = result;
@@ -50,7 +50,6 @@ void	ft_malloc_group_struct(t_data *ms, t_parse *p)
 	int		i;
 
 	i = 0;
-	printf("gr_nb : %ld\n", p->gr_nb);
 	while ((size_t) i < p->gr_nb)
 	{
 		buff = ft_init_group_node();
@@ -79,7 +78,6 @@ void	ft_init_group_struct(t_data *ms, t_parse *p)
 
 	from = p->c;
 	until = ft_get_delim_node(&from);
-	printf("from node 1 elem : %s\n", until->ep_all_elem[0]);
 	groups = p->gr;
 	while (from && until && groups)
 	{

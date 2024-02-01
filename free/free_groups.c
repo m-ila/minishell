@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 13:57:11 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 14:18:50 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:15:44 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	ft_free_groups(t_data *ms, t_group **gr)
 			ft_free_2d_array(index->cmd_and_args);
 		if (index->gr_id_str)
 		{
-			if (!access(index->gr_id_str, F_OK))
+			if (access(index->gr_id_str, F_OK))
 				unlink(index->gr_id_str);
 			ft_multiple_free(&index->gr_id_str, NULL, NULL);
 		}
-		if (index->gr_fd_in > 2 && g_return_val != -1)
+		if (index->gr_fd_in > 2)
 			ft_close_fd(ms, &index->gr_fd_in);
 		if (index->gr_fd_out > 2)
 			ft_close_fd(ms, &index->gr_fd_out);

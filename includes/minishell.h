@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 16:04:01 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:50:36 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define PRINT_SEP_C "========================= c ========================="
 # define PRINT_SEP "========================================================"
 # define CD_N_F "not a file or folder\n"
-# define CD_ARG "too many arguments\n"
+# define CD_ARG "Too many arguments\n"
 # define M_USR "user@minishell:"
 /* ========================== DEFINE RET VALUES ============================= */
 # define R_EX_OK 0
@@ -205,6 +205,10 @@ int			ft_free_ret_2(char **str1, char **str2, char ***two_dim, int ret_v);
 int			ft_free_expand(t_parse **p, char **str1, char **str2, int ret);
 /* free/free_groups.c */
 void		ft_free_groups(t_data *ms, t_group **gr);
+/* free/free_loop.c*/
+void		ft_free_prompt(t_data **ms);
+void		ft_free_loop(t_data *ms);
+void		ft_free_end(t_data *ms);
 /*======================= INIT FOLDER ========================*/
 /* init/init_cmd_struct_utils_2.c */
 t_node		*ft_create_cmd_node(char *raw_cmd);
@@ -224,8 +228,9 @@ bool		ft_valid_consecutive_redir_tok(t_node *c, t_data *ms);
 char		*ft_get_val_in_env(char **env, char *tag, t_data *ms);
 char		*ft_quote_the_val(char *str, t_data *ms);
 /* init/init_groups_fdin.c */
-bool    	ft_process_fd_in(t_data *ms, t_parse *p, t_group *grp);
-bool		ft_heredoc_open_process(t_data *ms, t_parse *p, t_group *grp, int i);
+bool		ft_process_fd_in(t_data *ms, t_parse *p, t_group *grp);
+bool		ft_heredoc_open_process(t_data *ms, t_parse *p, \
+t_group *grp, int i);
 bool		ft_redir_in_process(t_data *ms, t_group *grp, int i);
 /* init/init_groups_fdout.c */
 bool		ft_process_fd_out(t_data *ms, t_group *grp);

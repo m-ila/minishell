@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:31:38 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 21:22:37 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:18:45 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,11 @@ bool	ft_join_values(t_data *ms, t_node *c, int *i)
 bool	ft_do_in_env(t_data *ms, t_node *c, t_parse *ps, int *i)
 {
 	if (ft_tag_is_in_env(ms, ps->tmp_tag))
+	{
+		if (!ft_strncmp(ps->tmp_tag, "?", ft_strlen(ps->tmp_tag)))
+			ft_comp_var_env(ms);
 		ps->tmp_val = ft_get_val_in_env(ms->envi, ps->tmp_tag, ms);
+	}
 	if (!ft_tag_is_in_env(ms, ps->tmp_tag))
 		ps->tmp_val = ft_strdup("");
 	if (!ps->tmp_val)
