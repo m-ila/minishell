@@ -5,10 +5,10 @@
 * [ ] clean header and files
 * [ ] put everything to the norm
 * [ ] est-ce que check paths uniquement quand exec ou avant ?
-* [ ] si env normal, créer `$?` a la fin, donc faire une fonction à part lors de l'init
+* [x] si env normal, créer `$?` a la fin, donc faire une fonction à part lors de l'init
 * [ ] vérifier sur les PC de l'école si les droits des fichiers outfile sont les bons
 * [ ] remove comments in files
-* [ ] passer heredoc en readline plutôt qu'en GNL ? pour qu'on puisse utiliser flèche droite/gauche
+* [x] passer heredoc en readline plutôt qu'en GNL ? pour qu'on puisse utiliser flèche droite/gauche
 * [ ] est-ce que les outfiles se crééent si un infile n'est pas bon ? comparer avec bash
 * [ ] dans heredoc, ne prend pas en compte si single ou double quotes, il prend tous les $ pour une var d'env
 
