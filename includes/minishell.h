@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 12:58:05 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:30:44 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,15 +206,16 @@ int			ft_free_expand(t_parse **p, char **str1, char **str2, int ret);
 /* free/free_groups.c */
 void		ft_free_groups(t_data *ms, t_group **gr);
 /*======================= INIT FOLDER ========================*/
-/* init/init_cmd_struct_utils.c */
+/* init/init_cmd_struct_utils_2.c */
 t_node		*ft_create_cmd_node(char *raw_cmd);
+void		ft_set_node_values(t_node *new);
 t_node		*ft_go_to_last_cmd_node(t_node *cmd_node);
+/* init/init_cmd_struct_utils.c */
 void		ft_add_node_to_cmds(t_node **c, t_node *to_add);
 bool		ft_replace_str(char **str, char *n_str);
 bool		ft_assign_cmd(t_node *c);
 /* init/init_cmd_struct.c */
 bool		ft_parse_cmd(t_node *c, t_data *ms);
-bool		ft_empty_cmd(t_node *c, t_data *ms);
 bool		ft_set_val_ret(t_data *ms, bool ret);
 bool		ft_deal_w_empty_elems(t_node *c, t_data *ms);
 bool		ft_consecutive_empty_node(t_node *c, t_data *ms);
