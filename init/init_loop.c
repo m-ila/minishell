@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 13:02:51 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:58:16 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,11 @@ bool	ft_first_init(t_data *ms, char **envp)
 	if (!ft_env_init(envp, ms))
 		return (false);
 	if (!ft_increment_shlvl(ms, ms->envi))
-	{
-		ft_free_2d_array(ms->envi);
-		return (false);
-	}
+		return (ft_free_2d_array(ms->envi), false);
 	if (!ft_malloc_curr_cwd(ms))
-	{
-		ft_free_2d_array(ms->envi);
-		return (false);
-	}
+		return (ft_free_2d_array(ms->envi), false);
+	if (!ft_tag_is_in_env(ms, "?"))
+		ft_add_in_env(ms, "?", "0");
 	ms->user_input = NULL;
 	ms->printed_line = NULL;
 	ms->tmp_str = NULL;
@@ -108,6 +104,11 @@ bool	ft_get_cwd(t_data *ms, unsigned int i)
 	if (getcwd(ms->curr_work_dir, (size_t) SIZE_PATH_MAX))
 	{
 		ms->printed_line = ft_triple_join(M_USR, ms->curr_work_dir, "$ ", ms);
+		if (!ms->printed_line)
+		{
+			ft_multiple_free(&ms->prev_work_dir, NULL, NULL);
+			return (false);
+		}
 		ft_update_env_cwd(ms);
 	}
 	else
