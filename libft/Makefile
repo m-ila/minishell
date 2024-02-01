@@ -24,7 +24,6 @@ ft_str_misc.c \
 ft_str_mod.c \
 ft_str_n.c \
 get_next_line.c \
-get_next_line_utils.c \
 ft_printf_fun.c \
 ft_printf_hex.c \
 ft_printf_nb.c \

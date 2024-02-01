@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 00:25:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 21:13:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 21:55:03 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_list
 	void			*content;
 }	t_list;
 
+/*
 typedef struct s_gnl
 {
 	char	*snake;
@@ -49,7 +50,9 @@ void	feedsnake(t_gnl *data, int i);
 int		ft_init(t_gnl *data);
 void	ft_reinit(t_gnl *d, int remember);
 char	*resnake(t_gnl *d, int i);
+*/
 
+char	*get_next_line(int fd);
 void	ft_bzero(void *s, size_t n);
 int		ft_atoi(const char *nptr);
 int		ft_isalnum(int c);

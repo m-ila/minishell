@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 21:49:43 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 22:06:31 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ char **buff)
 		return (ft_free_return(str, buff, NULL, false));
 	}
 	if (!ft_str_add(str, buff))
+	{
 		return (ft_free_return(str, buff, NULL, false));
+	}
 	return (true);
 }
 
@@ -86,6 +88,7 @@ char **str, char **buff)
 			return (false);
 	}
 	ft_close_fd(ms, &p->tmp_fd);
+	ft_multiple_free(buff, NULL, NULL);
 	return (true);
 }
 
