@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 22:53:32 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:16:36 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define SYNTAX_ERR_Q "syntax error - unclosed quotes '"
 # define ERR_GEN_M_CMDS "malloc error gen arr c"
 # define ERR_GEN_M_TKS "malloc error gen arr tokens"
+# define HEREDOC_MSG "here_doc delimited by the end of file (delimiter wanted :"
 # define PRINT_SEP_T "========================= DATA ========================="
 # define PRINT_SEP_C "========================= c ========================="
 # define PRINT_SEP "========================================================"
@@ -235,15 +236,16 @@ bool		ft_malloc_curr_cwd(t_data *ms);
 bool		ft_get_cwd(t_data *ms, unsigned int i);
 bool		ft_malloc_s_parse(t_data *ms);
 void		ft_update_env_cwd(t_data *ms);
-/* init/init_heredoc.c */
+/* init/init_heredoc_fds.c */
 int			ft_open_h_fd(t_data *ms, t_parse *p, t_group *grp);
+int			ft_close_h_fd(t_data *ms, t_group *grp);
+/* init/init_heredoc.c */
 int			ft_heredoc_line(t_data *ms, t_parse *p, t_group *grp);
 int			ft_write_in_fd(t_data *ms, t_parse *p, char *cont, t_group *grp);
-int			ft_heredoc(t_data *ms, t_parse *p, t_group *grp);
-int			ft_close_h_fd(t_data *ms, t_group *grp);
 /* init/init_utils.c */
 bool		ft_set_val_ret(t_data *ms, bool ret);
 bool		ft_redir_io_token(t_tokens t);
+void		ft_heredoc_sig_ms(t_parse *p);
 /*======================= LOOP FOLDER ========================*/
 /* loop/display.c */
 void		print_values(t_data *ms);

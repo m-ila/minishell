@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 15:31:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 15:59:55 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/01 12:16:38 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,9 @@ bool	ft_redir_io_token(t_tokens t)
 {
 	return (t == redir_in || t == redir_out || \
 	t == redir_out_app || t == heredoc);
+}
+
+void ft_heredoc_sig_ms(t_parse *p)
+{
+	ft_printf_fd(2, "minishell : %s %s)\n", HEREDOC_MSG, p->h_lim);
 }
