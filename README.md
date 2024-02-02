@@ -5,12 +5,10 @@
 * [ ] clean header and files
 * [ ] put everything to the norm
 * [ ] est-ce que check paths uniquement quand exec ou avant ?
-* [x] si env normal, créer `$?` a la fin, donc faire une fonction à part lors de l'init
-* [ ] vérifier sur les PC de l'école si les droits des fichiers outfile sont les bons
 * [ ] remove comments in files
-* [x] passer heredoc en readline plutôt qu'en GNL ? pour qu'on puisse utiliser flèche droite/gauche
 * [ ] est-ce que les outfiles se crééent si un infile n'est pas bon ? comparer avec bash
 * [ ] dans heredoc, ne prend pas en compte si single ou double quotes, il prend tous les $ pour une var d'env
+* [ ] echo accuracy
 
 * [x] parse si commande est valable
 * [x] n'est pas valable si ruling quotes pas pair
@@ -25,6 +23,11 @@
 * [x] why cmd empty causes program to close
 * [x] heredoc ne doit pas update l'history (sujet, parsing donc + Marianne)
 * [x] if c is only sep -> if no token after (```coucou | ```) syntax error, if token after (```coucou | > salut```) syntax error on ```>```, if just empty cmd without any redir token, just change glob variable to 2 for unproper use of bash
+* [x] si env normal, créer `$?` a la fin, donc faire une fonction à part lors de l'init
+* [x] passer heredoc en readline plutôt qu'en GNL ? pour qu'on puisse utiliser flèche droite/gauche
+* [x] vérifier sur les PC de l'école si les droits des fichiers outfile sont les bons
+
+
 
 ### Chourael
 * [ ] redirections
