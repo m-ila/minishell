@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 13:51:49 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/02 14:15:34 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:56:23 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_errno_msg(t_node *c, int erno)
 void	ft_c_errno_msg(char *str, int erno)
 {
 	if (str)
-		ft_printf_fd(2, "minishell : (%s) : %s\n", str, strerror(erno));
+		ft_printf_fd(2, "minishell : %s : %s\n", str, strerror(erno));
 }
 
 /*
