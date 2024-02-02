@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:26:31 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 14:21:50 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:51:40 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ bool	ft_redir_out_app_open_process(t_data *ms, t_group *grp, int i)
 		ft_c_errno_msg(file_name, errno);
 		return (ft_free_return(&file_name, NULL, NULL, false));
 	}
-	grp->gr_fd_out = open(file_name, O_WRONLY | O_APPEND | O_CREAT, 0777);
+	grp->gr_fd_out = open(file_name, O_WRONLY | O_APPEND | O_CREAT, \
+	S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (grp->gr_fd_out == -1)
 	{
 		ft_printf_fd(2, "minishell: error: failed to open fd for outfile %s\n", \
@@ -47,7 +48,8 @@ bool	ft_redir_out_open_process(t_data *ms, t_group *grp, int i)
 		ft_c_errno_msg(file_name, errno);
 		return (ft_free_return(&file_name, NULL, NULL, false));
 	}
-	grp->gr_fd_out = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0777);
+	grp->gr_fd_out = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, \
+	S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (grp->gr_fd_out == -1)
 	{
 		ft_printf_fd(2, "minishell: error: failed to open fd for outfile %s\n", \
