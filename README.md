@@ -9,6 +9,7 @@
 * [ ] est-ce que les outfiles se crééent si un infile n'est pas bon ? comparer avec bash
 * [ ] dans heredoc, ne prend pas en compte si single ou double quotes, il prend tous les $ pour une var d'env
 * [ ] echo accuracy
+* [ ] remettre access dans free_groups
 
 * [x] parse si commande est valable
 * [x] n'est pas valable si ruling quotes pas pair
