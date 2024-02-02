@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:59:17 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 16:40:21 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:16:30 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	ft_redir_in_process(t_data *ms, t_group *grp, int i)
 	if (grp->gr_fd_in > -1 && !ft_close_fd(ms, &grp->gr_fd_in))
 		return (false);
 	file_name = ft_get_file_name(grp->infile_arr[i]);
-	if (access(file_name, F_OK | R_OK))
+	if (access(file_name, F_OK) || access(file_name, R_OK))
 	{
 		ft_c_errno_msg(file_name, errno);
 		grp->gr_fd_in = -1;
