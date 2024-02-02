@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 11:25:17 by chourael          #+#    #+#             */
-/*   Updated: 2024/01/28 20:55:36 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:36:20 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_deal_with_home(t_data *ms)
 {
 	if (!ft_tag_is_in_env(ms, "HOME"))
 	{
-		ft_msg("cd: HOME is unmounted", 'm', false, ms);
+		ft_msg("cd: HOME not set", 'm', false, ms);
 		return (ft_strdup(""));
 	}
 	return (ft_get_val_in_env(ms->envi, "HOME", ms));
