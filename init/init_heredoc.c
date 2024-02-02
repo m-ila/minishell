@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 22:13:38 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:04:47 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ int	ft_write_in_fd(t_data *ms, t_parse *p, char *cont, t_group *grp)
 {
 	size_t	index_delimiter;
 
-	if (grp->gr_fd_heredoc == -1 || !cont || !p->h_lim)
+	ft_open_h_fd(ms, p, grp);
+	printf("open_h_fd = %d\n", grp->gr_fd_heredoc);
+	if (grp->gr_fd_heredoc == -1 || !cont)
 		return (R_ERR_GEN);
+	printf("open_h_fd = %d\n", grp->gr_fd_heredoc);
 	index_delimiter = ft_strlen(cont);
 	printf("index delimiter : %ld\n", index_delimiter);
 	if (write(grp->gr_fd_heredoc, cont, index_delimiter) == -1)
@@ -27,7 +30,7 @@ int	ft_write_in_fd(t_data *ms, t_parse *p, char *cont, t_group *grp)
 	}
 	return (R_EX_OK);
 }
-
+/*
 static int	ft_heredoc_expand(t_data *ms, char **str)
 {
 	t_node	*tmp;
@@ -46,15 +49,15 @@ static int	ft_heredoc_expand(t_data *ms, char **str)
 		return (R_ERR_GEN);
 	return (R_EX_OK);
 }
-
-static bool	ft_heredoc_do(t_data *ms, t_parse *p, char **str, \
+*/
+static int	ft_heredoc_do(t_data *ms, t_parse *p, char **str, \
 char **buff)
 {
 	if (!*buff)
 	{
 		ft_heredoc_sig_ms(p);
 		ft_close_fd(ms, &p->tmp_fd);
-		return (ft_free_return(str, buff, NULL, false));
+		return (ft_free_return(NULL, NULL, NULL, true));
 	}
 	if (!ft_str_add(str, buff))
 	{
@@ -80,6 +83,7 @@ char **str, char **buff)
 			ft_close_fd(ms, &grp->gr_fd_heredoc);
 			g_return_val = R_CTRL_C;
 			ft_comp_var_env(ms);
+			ms->b_temoin = false;
 			return (ft_free_return(str, buff, NULL, true));
 		}
 		if (*buff && !ft_strncmp(*buff, p->h_lim, ft_strlen(*buff) - 1) \
@@ -87,7 +91,14 @@ char **str, char **buff)
 			break ;
 		if (!ft_heredoc_do(ms, p, str, buff))
 			return (false);
+		if (p->tmp_fd == -1)
+		{
+			printf("closing gr->gr_fd_heredoc\n");
+			ft_close_fd(ms, &grp->gr_fd_heredoc);
+			break ;
+		}
 	}
+	printf("left main loop\n");
 	ft_close_fd(ms, &p->tmp_fd);
 	ft_multiple_free(buff, NULL, NULL);
 	return (true);
@@ -105,8 +116,9 @@ int	ft_heredoc_line(t_data *ms, t_parse *p, t_group *grp)
 	if (!ft_heredoc_miniloop(ms, grp, &str, &buff))
 		return (false);
 	ft_reset_global(ms);
-	if (ft_heredoc_expand(ms, &str) != R_EX_OK)
-		return (ft_free_return(&str, &buff, NULL, R_ERR_GEN));
+//	if (ft_heredoc_expand(ms, &str) != R_EX_OK)
+//		return (ft_free_return(&str, &buff, NULL, R_ERR_GEN));
+	printf("entering ft_write_in_fd\n");
 	if (ft_write_in_fd(ms, p, str, grp) != R_EX_OK)
 		return (ft_free_return(&str, &buff, NULL, R_ERR_GEN));
 	return (ft_free_return(&str, &buff, NULL, R_EX_OK));
