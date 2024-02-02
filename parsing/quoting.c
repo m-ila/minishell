@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 10:20:10 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:52:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:22:23 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_elem_is_in_quotes(char *str, int i)
 
 	if (!str || i >= (int) ft_strlen(str))
 		return (-1);
-	reigning_quote = '.';
+	reigning_quote = '\0';
 	nb_quotes = 0;
 	start = 0;
 	while (str[start] && start < i)
@@ -61,7 +61,7 @@ bool	ft_count_reigning_quotes(char *str, t_parse *parse_s)
 
 	if (!str || ft_strlen(str) == 0)
 		return (false);
-	reigning_quote = '.';
+	reigning_quote = '\0';
 	nb_quotes = 0;
 	start = 0;
 	while (str[start])
@@ -87,7 +87,7 @@ bool	ft_char_is_a_reigning_quote(char *str, int i)
 	if (!str || i >= (int) ft_strlen(str) || \
 	!ft_char_in_base(str[i], BASE_QUOTES))
 		return (false);
-	reigning_quote = '.';
+	reigning_quote = '\0';
 	nb_quotes = 0;
 	start = 0;
 	while (str[start] && start < i)
