@@ -11,6 +11,7 @@
 * [ ] remettre access dans free_groups
 * [ ] verifier si tous les strdup sont bien proteges
 * [ ] UNSET syntax
+* [ ] syntax unvalid token like `<<>` or `<<<<`
 
 * [x] parse si commande est valable
 * [x] n'est pas valable si ruling quotes pas pair
