@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/02 16:47:38 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 22:25:19 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -326,6 +326,7 @@ bool		ft_is_valid_token(char *str);
 bool		ft_is_valid_entry_token(char *str);
 t_tokens	ft_which_redir_token(char *str, char which);
 bool		ft_add_token_val_to_struct(t_node *c);
+void		ft_print_invalid_token(t_data *ms, char *str);
 /* parsing/print_error.c */
 void		ft_msg(char *str, char type, bool del_struct, t_data *ms);
 char		*ft_msg_ret_char(char *str);

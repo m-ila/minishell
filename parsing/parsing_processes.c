@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/02 17:12:57 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 23:10:32 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int	deal_with_token(char *str, char *tok_str, int from, t_data *ms)
 		return (0);
 	if (!ft_is_valid_token(tok_str))
 	{
-		ret = ft_print_msg(tok_str, 's', 0, ms);
+		ft_print_invalid_token(ms, tok_str);
+		ret = 0;
+		//ret = ft_print_msg(tok_str, 's', 0, ms);
 		ms->b_temoin = false;
 	}
 	else
@@ -85,6 +87,7 @@ bool	ft_parsing_token_process(char *user_input, int *from, t_data *ms)
 
 /*
 to do : add strdup protection
+if tmp_t[0] == '|', straight up |
 */
 bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 {
@@ -96,7 +99,8 @@ bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 	if (!ft_is_valid_entry_token(tmp_t))
 	{
 		ms->b_temoin = false;
-		ft_print_msg(tmp_t, 's', 0, ms);
+		ft_print_invalid_token(ms, tmp_t);
+	//	ft_print_msg(tmp_t, 's', 0, ms);
 		free(tmp_t);
 		return (false);
 	}

@@ -6,11 +6,38 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 17:15:41 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/27 01:30:15 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 23:08:34 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_print_invalid_token(t_data *ms, char *str)
+{
+	int		from;
+	int		until;
+	char	c;
+	int		i;
+	char	*to_print;
+
+	if (str[0] != str[1])
+		from = 1;
+	if (str[0] == str[1])
+		from = 2;
+	until = from;
+	i = 0;
+	c = str[from];
+	while (until < (int) ft_strlen(str) && str[until] == c && i < 2)
+	{
+		until++;
+		if (c == '|')
+			break;
+		i++;
+	}
+	to_print = ft_strdup_limiters(str, from, until);
+	ft_print_msg(to_print, 's', 0, ms);
+	ft_multiple_free(&to_print, NULL, NULL);
+}
 
 bool	ft_is_valid_token(char *str)
 {
