@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/02 16:19:41 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:12:57 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,17 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 
 	tmp = get_cmd(user_input, *from);
 	if (!tmp)
-		return ((bool) ft_print_msg("get_cmd issue", 'm', 0, ms));
+		return (ft_print_msg("get_cmd issue", 'm', false, ms));
 	buff = ft_create_cmd_node(tmp);
 	if (ms->parse_s->c == NULL)
 	{
 		ms->parse_s->c = buff;
 		buff->prev_tok = ft_strdup(ms->tmp_str);
+		if (!buff->prev_tok)
+		{
+			ms->b_temoin = false;
+			return (false);
+		}
 		buff->tok_prv_tok = ft_which_redir_token(buff->prev_tok, 'p');
 		buff->b_is_file = ft_prev_is_red_io(buff);
 	}
@@ -62,32 +67,20 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 	return (true);
 }
 
-/*
-commentaire
-wouldn't be an int more interesting for those function ?
-in case of an error, would return proper return value, or else change var_g
-*/
 bool	ft_parsing_token_process(char *user_input, int *from, t_data *ms)
 {
 	char	*tmp_t;
 
 	tmp_t = get_token(user_input, *from);
 	if (!tmp_t)
-		return ((bool) ft_print_msg("get_token issue", 'm', 0, ms));
+		return (ft_print_msg("get_token issue", 'm', false, ms));
 	if (!deal_with_token(user_input, tmp_t, *from, ms))
-	{
-		free(tmp_t);
-		return (false);
-	}
+		return (ft_free_return(&tmp_t, NULL, NULL, false));
 	if (!ft_add_next_token_to_node(tmp_t, ms->parse_s->c))
-	{
-		free(tmp_t);
-		return (false);
-	}
+		return (ft_free_return(&tmp_t, NULL, NULL, false));
 	if (tmp_t)
 		(*from) += (int) ft_strlen(tmp_t);
-	free(tmp_t);
-	return (true);
+	return (ft_free_return(&tmp_t, NULL, NULL, true));
 }
 
 /*
