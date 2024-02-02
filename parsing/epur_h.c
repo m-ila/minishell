@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:38:32 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/02 17:00:21 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:20:26 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static void	ft_assign_char(char *s, int i, char *model)
 {
 	if (s[i] == '$' && ft_char_in_base(s[i + 1], B_X))
-    {
+	{
 		model[i] = '$';
-        return ;
-    }
-    else if (!ft_char_in_base(s[i], B_X))
+		return ;
+	}
+	else if (!ft_char_in_base(s[i], B_X))
 		model[i] = 'X';
 	else
 		model[i] = '1';
