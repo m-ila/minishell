@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/02 14:52:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:47:38 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,7 @@ void		ft_group_diplay(t_parse *p);
 /* loop/main.c */
 void		ft_loop(t_data *ms);
 void		ft_free_prompt(t_data **ms);
+/* loop/loop_utils.c */
 /*====================== PARSING FOLDER ======================*/
 /* parsing/abs_path.c */
 void		ft_errno_msg(t_node *c, int erno);
@@ -273,6 +274,8 @@ bool		ft_cut_only_quotes(char *str, int i);
 /* parsing/epur.c */
 char		*ft_ep_model(char *s, bool (*fun)(char *, int));
 char		*ft_ep_str(char *str, char *model);
+/* parsing/epur_h.c */
+char		*ft_ep_h_model(char *s, bool (*fun)(char*, int));
 /* parsing/fd.c */
 bool		ft_close_fd(t_data *ms, int *fd);
 /* parsing/groups_malloc.c */

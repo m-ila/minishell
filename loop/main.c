@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 18:44:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 17:27:59 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_loop(t_data *ms)
 		}
 		ft_raw_parsing_process(ms->user_input, ms);
 		ft_groups(ms, ms->parse_s);
-		//print_values(ms);
+		print_values(ms);
 		if (ms->b_temoin && !ms->parse_s->c->cmd)
 			ms->b_temoin = false;
 		if (ms->b_temoin && ft_is_builtin(ms->parse_s->c->cmd))
@@ -62,8 +62,8 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-//	(void)envp;
-//	envp = NULL;
+	(void)envp;
+	envp = NULL;
 	g_return_val = 0;
 	signal(SIGINT, &ft_ctrl_c);
 	signal(SIGQUIT, SIG_IGN);

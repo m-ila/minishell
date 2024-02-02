@@ -7,9 +7,10 @@
 * [ ] est-ce que check paths uniquement quand exec ou avant ?
 * [ ] remove comments in files
 * [ ] est-ce que les outfiles se crééent si un infile n'est pas bon ? comparer avec bash
-* [ ] dans heredoc, ne prend pas en compte si single ou double quotes, il prend tous les $ pour une var d'env
 * [ ] echo accuracy
 * [ ] remettre access dans free_groups
+* [ ] verifier si tous les strdup sont bien proteges
+* [ ] UNSET syntax
 
 * [x] parse si commande est valable
 * [x] n'est pas valable si ruling quotes pas pair
@@ -27,6 +28,7 @@
 * [x] si env normal, créer `$?` a la fin, donc faire une fonction à part lors de l'init
 * [x] passer heredoc en readline plutôt qu'en GNL ? pour qu'on puisse utiliser flèche droite/gauche
 * [x] vérifier sur les PC de l'école si les droits des fichiers outfile sont les bons
+* [x] dans heredoc, ne prend pas en compte si single ou double quotes, il prend tous les $ pour une var d'env
 
 
 

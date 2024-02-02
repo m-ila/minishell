@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/02/01 17:52:58 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/02/02 16:47:35 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,10 +46,12 @@ init/init_cmd_struct_utils.c \
 init/init_cmd_struct_utils_2.c \
 init/init_utils.c \
 loop/display.c \
+loop/loop_utils.c \
 loop/main.c \
 parsing/abs_path.c \
 parsing/cond_cut.c \
 parsing/epur.c \
+parsing/epur_h.c \
 parsing/fd.c \
 parsing/groups_fill.c \
 parsing/groups_malloc.c \
