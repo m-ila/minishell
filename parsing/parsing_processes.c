@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 12:59:38 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:19:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,14 @@ bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 	ms->tmp_str = ft_strdup(tmp_t);
 	(*from) += (int) ft_strlen(tmp_t);
 	free(tmp_t);
-	if (*from >= (int) ft_strlen(user_input) - 1)
+	if (*from >= (int) ft_strlen(user_input) - 1 || \
+	ft_has_only_after(user_input, *from, ft_iswhitespace))
 	{
+		ft_msg("newline", 's', false, ms);
 		ms->b_temoin = false;
 		return (false);
 	}
+
 	return (true);
 }
 

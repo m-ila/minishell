@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 14:26:03 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:35:37 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ bool	ft_consecutive_empty_node(t_node *c, t_data *ms)
 	{
 		ft_msg("newline", 's', false, ms);
 		return (ft_set_val_ret(ms, true));
+	}
+	if (ft_is_io_redirect(ms->parse_s->c->tok_prv_tok) && \
+	ms->parse_s->c->tok_nxt_tok == end_input \
+	&& ft_only_sep_base(c->ep_model, "0Ss"))
+	{
+		ft_msg(ms->parse_s->c->next_tok, 's', false, ms);
+		return (false);
 	}
 	return (false);
 }
