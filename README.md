@@ -7,12 +7,10 @@
 * [ ] est-ce que check paths uniquement quand exec ou avant ?
 * [ ] remove comments in files
 * [ ] est-ce que les outfiles se crééent si un infile n'est pas bon ? comparer avec bash
-* [ ] echo accuracy
 * [ ] remettre access dans free_groups
 * [ ] verifier si tous les strdup sont bien proteges
-* [ ] UNSET syntax
-* [x] syntax unvalid token like `<<>` or `<<<<`
-* [ ] pourquoi invalid syntax ne se lance que pour le token de debut despite putting it in other ones too
+* [ ] echo -nnn
+* [ ] enlever envp = NULL
 
 * [x] parse si commande est valable
 * [x] n'est pas valable si ruling quotes pas pair
@@ -31,7 +29,10 @@
 * [x] passer heredoc en readline plutôt qu'en GNL ? pour qu'on puisse utiliser flèche droite/gauche
 * [x] vérifier sur les PC de l'école si les droits des fichiers outfile sont les bons
 * [x] dans heredoc, ne prend pas en compte si single ou double quotes, il prend tous les $ pour une var d'env
-
+* [x] syntax unvalid token like `<<>` or `<<<<`
+* [x] echo accuracy
+* [x] UNSET syntax
+* [x] pourquoi invalid syntax ne se lance que pour le token de debut despite putting it in other ones too
 
 
 ### Chourael
