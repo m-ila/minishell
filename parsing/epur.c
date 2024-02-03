@@ -6,15 +6,12 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:33:21 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 10:44:32 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 14:36:35 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/*
-to do : malloc protection
-*/
 bool	ft_epuring_process(t_data *ms, t_node *c)
 {
 	char	*tmp;
@@ -22,7 +19,7 @@ bool	ft_epuring_process(t_data *ms, t_node *c)
 	c->ep_model = ft_ep_model(c->raw_str, ft_cut_only_quotes);
 	c->ep_str = ft_ep_str(c->raw_str, c->ep_model);
 	tmp = ft_str_epur(c->ep_model, '0');
-	if (!c->ep_model || c->ep_str || !tmp)
+	if (!c->ep_model || !c->ep_str || !tmp)
 		return (ft_free_return(&c->ep_model, &c->ep_str, &tmp, false));
 	ft_multiple_free(&c->ep_model, NULL, NULL);
 	c->ep_model = tmp;

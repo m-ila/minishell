@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 11:08:00 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 15:01:26 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,14 @@ void	ft_loop(t_data *ms)
 		ms->user_input = NULL;
 		ms->user_input = readline(ms->printed_line);
 		if (!ms->user_input)
+		{
+			ft_printf_fd(1, "exit\n");
 			return ;
+		}
+		if (g_return_val == -1)
+		{
+			g_return_val = R_CTRL_C;
+		}
 		if (ms->user_input && ft_strlen(ms->user_input) == 0)
 			ms->b_temoin = false;
 		add_history(ms->user_input);
@@ -45,7 +52,7 @@ void	ft_loop(t_data *ms)
 		}
 		ft_raw_parsing_process(ms->user_input, ms);
 		ft_groups(ms, ms->parse_s);
-		print_values(ms);
+		//print_values(ms);
 		if (ms->b_temoin && !ms->parse_s->c->cmd)
 			ms->b_temoin = false;
 		ft_free_loop(ms);
