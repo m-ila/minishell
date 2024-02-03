@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 19:43:16 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 16:52:08 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 08:50:35 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,9 @@ void	ft_cmd_display(t_data *ms, t_node *c)
 			ft_printf_fd(1, "ep_model : (d)%s(f)\n", c->ep_model);
 		if (c->ep_str)
 			ft_printf_fd(1, "ep_str : (d)%s(f)\n\n", c->ep_str);
-		while (c->ep_all_elem[++j])
-			ft_printf_fd(1, "ep_all_elem[%d] : (d)%s(f)\n", j, c->ep_all_elem[j]);
+		if (c->ep_all_elem)
+			while (c->ep_all_elem[++j])
+				ft_printf_fd(1, "ep_all_elem[%d] : (d)%s(f)\n", j, c->ep_all_elem[j]);
 		j = -1;
 		ft_printf_fd(1, "\n");
 		if (c->cmd_w_args != NULL)

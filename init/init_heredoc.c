@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/02 16:48:37 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 08:17:29 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	ft_heredoc_expand(t_data *ms, char **str)
 	tmp->ep_model = ft_ep_h_model(tmp->raw_str, ft_leave_everything);
 	if (!tmp->ep_model)
 		return (free(tmp), R_ERR_GEN);
-	ft_var_env(ms, tmp);
+	ft_expand(ms, tmp);
 	free(*str);
 	*str = ft_strdup(tmp->raw_str);
 	ft_free_cmds(tmp);

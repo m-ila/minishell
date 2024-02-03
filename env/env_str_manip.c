@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 16:47:17 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/26 17:12:41 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 08:54:59 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_get_val_to_search_in_env(t_data *ms, t_node *c, int from)
 	from >= (int) ft_strlen(c->ep_model))
 		return (ft_strdup(""));
 	until = ft_strlen_unbase(c->ep_model, "1", from);
-	return (ft_strdup_limiters(c->raw_str, from, from + until));
+	return (ft_strdup_limiters(c->ep_str, from, from + until));
 }
 
 char	*ft_join_tag_and_val(char *tag, char *val)

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:31:38 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 16:18:45 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 08:57:18 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static bool	ft_nest_join_values(t_data *ms, t_parse *p, t_node *c, int *i)
 	if (*i == 0)
 		p->str1 = ft_strdup("");
 	else
-		p->str1 = ft_strdup_limiters(c->raw_str, 0, *i);
+		p->str1 = ft_strdup_limiters(c->ep_str, 0, *i);
 	if (!p->str1)
 	{
 		ms->b_temoin = false;
 		return (ft_print_msg("join val str1", 'm', false, ms));
 	}
-	p->str3 = ft_strdup_limiters(c->raw_str, \
-	*i + ft_strlen(ms->parse_s->tmp_tag) + 1, ft_strlen(c->raw_str));
+	p->str3 = ft_strdup_limiters(c->ep_str, \
+	*i + ft_strlen(ms->parse_s->tmp_tag) + 1, ft_strlen(c->ep_str));
 	if (!p->str3)
 	{
 		free(p->str1);
@@ -41,11 +41,11 @@ bool	ft_join_values(t_data *ms, t_node *c, int *i)
 	p = ms->parse_s;
 	if (!ft_nest_join_values(ms, p, c, i))
 		return (false);
-	free(c->raw_str);
-	c->raw_str = ft_triple_join(p->str1, ms->parse_s->tmp_val, \
+	free(c->ep_str);
+	c->ep_str = ft_triple_join(p->str1, ms->parse_s->tmp_val, \
 	p->str3, ms);
 	ft_multiple_free(&p->str1, NULL, &p->str3);
-	if (!c->raw_str)
+	if (!c->ep_str)
 	{
 		ms->b_temoin = false;
 		return (ft_print_msg("join val raw str", 'm', false, ms));
@@ -74,7 +74,7 @@ bool	ft_do_in_env(t_data *ms, t_node *c, t_parse *ps, int *i)
 	return (true);
 }
 
-bool	ft_var_env(t_data *ms, t_node *c)
+bool	ft_expand(t_data *ms, t_node *c)
 {
 	int		i;
 	t_parse	*ps;
@@ -85,12 +85,14 @@ bool	ft_var_env(t_data *ms, t_node *c)
 		return (true);
 	i = 0;
 	ps = ms->parse_s;
-	while (i < (int) ft_strlen(c->raw_str))
+	printf("\nentry ft_expand : c->ep_model : %s\nc->ep_str : %s\n", c->ep_model, c->ep_str);
+	while (i < (int) ft_strlen(c->ep_model))
 	{
 		ft_set_char_to_null(&ps->tmp_tag, &ps->tmp_val, NULL);
 		if (c->ep_model[i] == '$')
 		{
 			ps->tmp_tag = ft_get_val_to_search_in_env(ms, c, i + 1);
+			printf("tmp_tag : %s\n", ps->tmp_tag);
 			if (!ps->tmp_tag)
 				return (ft_print_msg("strdup env tag", 'm', false, ms));
 			if (!ft_do_in_env(ms, c, ps, &i))

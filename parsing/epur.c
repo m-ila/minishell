@@ -6,32 +6,61 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:33:21 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/25 16:12:33 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 09:01:04 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/*
+ft_split_epured leak si ne trouve pas le sep
+*/
+bool	ft_epuring_process(t_data *ms, t_node *c)
+{
+	char	*tmp;
+
+	c->ep_model = ft_ep_model(c->raw_str, ft_cut_only_quotes);
+	printf("raw_str : %s\nfirst ep_model : %s\n", c->raw_str, c->ep_model);
+	c->ep_str = ft_ep_str(c->raw_str, c->ep_model);
+	printf("first ep_str : %s\n", c->ep_str);
+	tmp = ft_str_epur(c->ep_model, '0');
+	if (!tmp)
+		return (false);
+	ft_multiple_free(&c->ep_model, NULL, NULL);
+	c->ep_model = tmp;
+	printf("second ep_model : %s\n", c->ep_model);
+	if (!ft_expand(ms, ms->parse_s->c))
+		return (ft_set_val_ret(ms, false));
+	c->ep_all_elem = ft_split_epured(c->ep_str, c->ep_model, 'S');
+	return (true);
+}
 
 static void	ft_assign_char(char *s, int i, char *model)
 {
 	if (s[i] == '$' && ((ft_elem_is_in_quotes(s, i) == DOUBLE_QUOTED || \
 		ft_elem_is_in_quotes(s, i) == NOT_QUOTED) && \
 		(ft_isalnum(s[i + 1]) || ft_char_in_base(s[i + 1], "?_"))))
-			model[i] = '$';
-	else if (!ft_char_in_base(s[i], B_X))
-		model[i] = 'X';
-	else if (ft_iswhitespace(s[i]))
 	{
-		if (ft_elem_is_in_quotes(s, i) == SINGLE_QUOTED)
+		model[i] = '$';
+		return ;
+	}
+	if (ft_iswhitespace(s[i]))
+	{
+		if (ft_elem_is_in_quotes(s, i) == SINGLE_QUOTED || \
+		ft_elem_is_in_quotes(s, i) == DOUBLE_QUOTED)
 			model[i] = 's';
-		if (ft_elem_is_in_quotes(s, i) == DOUBLE_QUOTED)
-			model[i] = 'S';
 		if (ft_has_only_before(s, i, ft_iswhitespace) || \
 		ft_has_only_after(s, i, ft_iswhitespace) || \
 		ft_elem_is_in_quotes(s, i) == NOT_QUOTED)
-			model[i] = '0';
+			model[i] = 'S';
+		return ;
 	}
-	else if (ft_char_in_base(s[i], BASE_QUOTES))
+	if (!ft_char_in_base(s[i], B_X))
+	{
+		model[i] = 'X';
+		return ;
+	}
+	if (ft_char_in_base(s[i], BASE_QUOTES))
 		model[i] = 'q';
 	else
 		model[i] = '1';

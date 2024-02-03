@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/02 22:25:19 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 08:24:04 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ int			ft_my_unset(t_node *c, t_data *ms);
 /*======================= ENV FOLDER =======================*/
 /* env/env_expand.c */
 bool		ft_join_values(t_data *ms, t_node *c, int *i);
-bool		ft_var_env(t_data *ms, t_node *c);
+bool		ft_expand(t_data *ms, t_node *c);
 bool		ft_do_in_env(t_data *ms, t_node *c, t_parse *ps, int *i);
 /* env/env_init.c */
 int			ft_env_init(char **envp, t_data *ms);
@@ -274,6 +274,7 @@ bool		ft_cut_only_quotes(char *str, int i);
 /* parsing/epur.c */
 char		*ft_ep_model(char *s, bool (*fun)(char *, int));
 char		*ft_ep_str(char *str, char *model);
+bool		ft_epuring_process(t_data *ms, t_node *c);
 /* parsing/epur_h.c */
 char		*ft_ep_h_model(char *s, bool (*fun)(char*, int));
 /* parsing/fd.c */
