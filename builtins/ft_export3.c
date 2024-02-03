@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 11:27:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 20:55:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:24:06 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ static bool	ft_do_translate(t_data *ms, t_parse *p, char **model_quotes)
 	return (true);
 }
 
+static void	ft_norm_2(t_parse *p, char **str)
+{
+	*str = ft_ep_str(p->tmp_str, p->tmp_model);
+	free(p->tmp_str);
+	p->tmp_str = ft_strdup(*str);
+	free(*str);
+}
+
 bool	ft_translate_vars(char **str, t_data *ms)
 {
 	t_parse	*p;
@@ -57,12 +65,7 @@ bool	ft_translate_vars(char **str, t_data *ms)
 	p->tmp_model = ft_ep_model(p->tmp_str, ft_cut_only_quotes);
 	free(*str);
 	if (ft_strocc_base(p->tmp_model, "0"))
-	{
-		*str = ft_ep_str(p->tmp_str, p->tmp_model);
-		free(p->tmp_str);
-		p->tmp_str = ft_strdup(*str);
-		free(*str);
-	}
+		ft_norm_2(p, str);
 	free(p->tmp_model);
 	ft_free_return(&p->model1, &p->model2, &p->model3, true);
 	*str = p->tmp_str;

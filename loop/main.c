@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 16:33:20 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:24:31 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	ft_loop(t_data *ms)
 		if (ms->b_temoin && !ms->parse_s->c->cmd)
 			ms->b_temoin = false;
 		ft_groups(ms, ms->parse_s);
-		//exec
 		ft_free_loop(ms);
 	}
 }
