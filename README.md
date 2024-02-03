@@ -2,10 +2,7 @@
 
 # To do
 
-* [ ] clean header and files
-* [ ] put everything to the norm
 * [ ] est-ce que check paths uniquement quand exec ou avant ?
-* [ ] remove comments in files
 * [ ] verifier si tous les strdup sont bien proteges
 * [ ] delete display.c du git de l'école
 * [ ] vérifier que unset change bien la val de retour quand not valid identifier
@@ -37,9 +34,9 @@
 * [x] remettre access dans free_groups
 * [x] est-ce que les outfiles se crééent si un infile n'est pas bon ? comparer avec bash
 * [x] enlever envp = NULL
-
-
-
+* [x] remove comments in files
+* [x] clean header and files
+* [x] put everything to the norm
 
 ### Chourael
 * [ ] redirections
