@@ -13,8 +13,6 @@
 * [ ] enlever envp = NULL
 * [ ] delete display.c du git de l'école
 * [ ] vérifier que unset change bien la val de retour quand not valid identifier
-* [ ] start token parsing : if || or |, doesn't print it
-* [ ] `test << vide |` n'affiche pas un message d'erreur
 
 * [x] parse si commande est valable
 * [x] n'est pas valable si ruling quotes pas pair
@@ -37,6 +35,9 @@
 * [x] echo accuracy
 * [x] UNSET syntax
 * [x] pourquoi invalid syntax ne se lance que pour le token de debut despite putting it in other ones too
+* [x] `test << vide |` n'affiche pas un message d'erreur
+* [x] start token parsing : if || or |, doesn't print it
+
 
 
 ### Chourael
