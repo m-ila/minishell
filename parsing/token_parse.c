@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 17:15:41 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/02 23:08:34 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:51:55 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	ft_print_invalid_token(t_data *ms, char *str)
 	int		i;
 	char	*to_print;
 
-	if (str[0] != str[1])
+	if (str[0] != str[1] || str[0] == '|' || str[1] == '|')
 		from = 1;
-	if (str[0] == str[1])
+	if (str[0] == str[1] && str[0] != '|')
 		from = 2;
 	until = from;
 	i = 0;

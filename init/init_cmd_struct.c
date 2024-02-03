@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 10:27:49 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 11:06:54 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,17 @@ Only triggered when a node is empty, therefore no file or cmd
 */
 bool	ft_valid_consecutive_redir_tok(t_node *c, t_data *ms)
 {
+	printf("ft_valid_consecutive_redir_tok entry\n");
 	if (c->next && c->tok_nxt_tok == pipe_)
-	{	
+	{
+		printf("ft_valid_consecutive_redir_tok entry 2\n");
 		if (c->next->tok_nxt_tok == pipe_)
 		{
 			ft_msg(c->next_tok, 's', false, ms);
 			return (ft_set_val_ret(ms, false));
 		}
 	}
+	printf("ft_valid_consecutive_redir_tok returns true\n");
 	return (true);
 }
 
@@ -86,11 +89,14 @@ si vide et le suivant non, checke validité des tokens ( |< valide etc)
 */
 bool	ft_deal_w_empty_elems(t_node *c, t_data *ms)
 {
+	printf("ft_deal_w_empty_elem entry\n");
 	if (!ft_only_sep_base(c->ep_model, "0Ss"))
 		return (true);
 	if (!ft_valid_consecutive_redir_tok(c, ms))
 		return (false);
 	if (ft_consecutive_empty_node(c, ms))
+		return (false);
+	if (ft_only_sep_base(c->ep_model, "0Ss") && c->tok_nxt_tok == pipe_)
 		return (false);
 	return (true);
 }

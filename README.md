@@ -13,6 +13,8 @@
 * [ ] enlever envp = NULL
 * [ ] delete display.c du git de l'école
 * [ ] vérifier que unset change bien la val de retour quand not valid identifier
+* [ ] start token parsing : if || or |, doesn't print it
+* [ ] `test << vide |` n'affiche pas un message d'erreur
 
 * [x] parse si commande est valable
 * [x] n'est pas valable si ruling quotes pas pair

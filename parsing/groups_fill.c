@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 13:51:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/31 18:52:16 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 11:15:02 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ bool	ft_fill_in_arr(t_data *ms, t_group *grp, t_node *from, t_node *until)
 	{
 		if (i > 0 && navig->prev == until)
 			break ;
-		if (ft_is_input_redirect(navig->tok_prv_tok))
+		if (navig->ep_all_elem && ft_is_input_redirect(navig->tok_prv_tok))
 		{
 			tmp = ft_triple_join(navig->prev_tok, " ", \
 			navig->ep_all_elem[0], ms);

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 10:10:59 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 11:08:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_loop(t_data *ms)
 		}
 		ft_raw_parsing_process(ms->user_input, ms);
 		ft_groups(ms, ms->parse_s);
-//		print_values(ms);
+		print_values(ms);
 		if (ms->b_temoin && !ms->parse_s->c->cmd)
 			ms->b_temoin = false;
 		ft_free_loop(ms);

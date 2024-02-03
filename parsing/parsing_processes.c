@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 10:46:26 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 11:09:37 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	deal_with_token(char *str, char *tok_str, int from, t_data *ms)
 	if (from + (int) ft_strlen(tok_str) == (int) ft_strlen(str))
 		return (1);
 	if (!str || !tok_str || tok_str[0] == '\0' || from < 0 || \
-	from > (int) ft_strlen(str))
+	from >= (int) ft_strlen(str))
 		return (0);
 	if (!ft_is_valid_token(tok_str))
 	{
@@ -99,7 +99,6 @@ bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 	{
 		ms->b_temoin = false;
 		ft_print_invalid_token(ms, tmp_t);
-	//	ft_print_msg(tmp_t, 's', 0, ms);
 		free(tmp_t);
 		return (false);
 	}
@@ -140,7 +139,7 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 		if (temoin)
 			temoin = ft_parsing_token_process(user_input, &index, ms);
 	}
-	ms->b_temoin = ft_parse_cmd(ms->parse_s->c, ms);
+	temoin = ft_parse_cmd(ms->parse_s->c, ms);
 	last = ft_go_to_last_cmd_node(ms->parse_s->c);
 	if (last && last->tok_nxt_tok != end_input && ms->b_temoin)
 	{
