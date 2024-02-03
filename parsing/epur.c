@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:33:21 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 15:48:16 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:18:10 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ bool	ft_epuring_process(t_data *ms, t_node *c)
 	return (true);
 }
 
+static bool	ft_norm(char *s, int i)
+{
+	return (ft_has_only_before(s, i, ft_iswhitespace) || \
+	ft_has_only_after(s, i, ft_iswhitespace) || \
+	ft_elem_is_in_quotes(s, i) == NOT_QUOTED);
+}
+
 static void	ft_assign_char(char *s, int i, char *model)
 {
 	if (s[i] == '$' && ((ft_elem_is_in_quotes(s, i) == DOUBLE_QUOTED || \
@@ -45,9 +52,7 @@ static void	ft_assign_char(char *s, int i, char *model)
 		if (ft_elem_is_in_quotes(s, i) == SINGLE_QUOTED || \
 		ft_elem_is_in_quotes(s, i) == DOUBLE_QUOTED)
 			model[i] = 's';
-		if (ft_has_only_before(s, i, ft_iswhitespace) || \
-		ft_has_only_after(s, i, ft_iswhitespace) || \
-		ft_elem_is_in_quotes(s, i) == NOT_QUOTED)
+		if (ft_norm(s, i))
 			model[i] = 'S';
 		return ;
 	}

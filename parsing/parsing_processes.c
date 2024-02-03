@@ -6,31 +6,11 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 16:44:41 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:14:51 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	deal_with_token(char *str, char *tok_str, int from, t_data *ms)
-{
-	int		ret;
-
-	if (from + (int) ft_strlen(tok_str) == (int) ft_strlen(str))
-		return (1);
-	if (!str || !tok_str || tok_str[0] == '\0' || from < 0 || \
-	from >= (int) ft_strlen(str))
-		return (0);
-	if (!ft_is_valid_token(tok_str))
-	{
-		ft_print_invalid_token(ms, tok_str);
-		ret = 0;
-		ms->b_temoin = false;
-	}
-	else
-		ret = 1;
-	return (ret);
-}
 
 bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 {
@@ -58,22 +38,6 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 		(*from) += (int) ft_strlen(tmp);
 	free(tmp);
 	return (true);
-}
-
-bool	ft_parsing_token_process(char *user_input, int *from, t_data *ms)
-{
-	char	*tmp_t;
-
-	tmp_t = get_token(user_input, *from);
-	if (!tmp_t)
-		return (ft_print_msg("get_token issue", 'm', false, ms));
-	if (!deal_with_token(user_input, tmp_t, *from, ms))
-		return (ft_free_return(&tmp_t, NULL, NULL, false));
-	if (!ft_add_next_token_to_node(tmp_t, ms->parse_s->c))
-		return (ft_free_return(&tmp_t, NULL, NULL, false));
-	if (tmp_t)
-		(*from) += (int) ft_strlen(tmp_t);
-	return (ft_free_return(&tmp_t, NULL, NULL, true));
 }
 
 static bool	ft_parsing_start_embed(t_data *ms, char **tmp_t)
@@ -110,8 +74,19 @@ bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 		ms->b_temoin = false;
 		return (false);
 	}
-
 	return (true);
+}
+
+void	ft_parse_last_token(t_data *ms)
+{
+	t_node	*last;
+
+	last = ft_go_to_last_cmd_node(ms->parse_s->c);
+	if (last && last->tok_nxt_tok != end_input && ms->b_temoin)
+	{
+		ms->b_temoin = false;
+		ft_print_invalid_end_token(ms, last->next_tok);
+	}
 }
 
 void	ft_raw_parsing_process(char *user_input, t_data *ms)
@@ -119,7 +94,6 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 	int		index;
 	bool	temoin;
 	t_node	*c;
-	t_node	*last;
 
 	index = 0;
 	temoin = true;
@@ -137,10 +111,5 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 			temoin = ft_parsing_token_process(user_input, &index, ms);
 	}
 	temoin = ft_parse_cmd(ms->parse_s->c, ms);
-	last = ft_go_to_last_cmd_node(ms->parse_s->c);
-	if (last && last->tok_nxt_tok != end_input && ms->b_temoin)
-	{
-		ms->b_temoin = false;
-		ft_print_invalid_end_token(ms, last->next_tok);
-	}
+	ft_parse_last_token(ms);
 }

@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/02/03 17:06:16 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/02/03 17:13:50 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ parsing/groups_utils_2.c \
 parsing/groups.c \
 parsing/parse_get.c \
 parsing/parsing_processes.c \
+parsing/parsing_processes_2.c \
 parsing/print_error.c \
 parsing/quoting.c \
 parsing/rights.c \

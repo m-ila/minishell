@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:14:18 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 16:38:01 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:15:06 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,5 @@ bool	ft_groups(t_data *ms, t_parse *p)
 	ft_malloc_group_struct(ms, p);
 	ft_init_group_struct(ms, p);
 	ft_init_data_groups(ms, p);
-//	if (p->gr)
-		//ft_group_diplay(p);
 	return (true);
 }

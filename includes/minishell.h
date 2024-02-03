@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 17:06:47 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:14:23 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,6 +324,7 @@ int *from, t_data *ms);
 bool		ft_parsing_token_process(char *user_input, int *from, t_data *ms);
 bool		ft_parsing_cmd_process(char *user_input, int *from, t_data *ms);
 int			deal_with_token(char *str, char *tok_str, int from, t_data *ms);
+void		ft_parse_last_token(t_data *ms);
 /* parsing/token_parse.c */
 bool		ft_starts_with_token(char *user_input);
 bool		ft_is_valid_token(char *str);
