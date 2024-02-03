@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:53:20 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 14:34:23 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 07:54:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ bool	ft_replace_str(char **str, char *n_str)
 	return (true);
 }
 
-/* to do : add ft_strdup protection */
+/*
+to do : add ft_strdup protection
+*/
 void	ft_add_node_to_cmds(t_node **c, t_node *to_add)
 {
 	t_node	*end;
