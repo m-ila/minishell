@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:08:34 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/02 10:55:04 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:28:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 int	ft_open_h_fd(t_data *ms, t_parse *p, t_group *grp)
 {
-	printf("entering open_h_fd\n");
 	if (!ms->b_temoin || !p || !grp || !grp->gr_id_str)
 		return (R_ERR_GEN);
-	printf("first ret OK\n");
 	if (grp->gr_fd_heredoc > -1 && ft_close_h_fd(ms, grp) != R_EX_OK)
 	{
 		ft_msg("failed to close prev heredoc fd", 'm', false, ms);

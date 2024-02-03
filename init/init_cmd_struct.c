@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 09:07:56 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:27:49 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ bool	ft_consecutive_empty_node(t_node *c, t_data *ms)
 	}
 	if (!c->next && ft_only_sep_base(c->ep_model, "0Ss"))
 	{
-		printf("ici\n\n");
 		ft_msg("newline", 's', false, ms);
 		return (ft_set_val_ret(ms, true));
 	}
@@ -108,16 +107,6 @@ bool	ft_parse_cmd(t_node *c, t_data *ms)
 		return (false);
 	while (c && ms->b_temoin)
 	{
-		/*
-		c->ep_model = ft_ep_model(c->raw_str, ft_cond_cut);
-		c->all_elem = ft_split_epured(c->raw_str, c->ep_model, '0');
-		if (!ft_expand(ms, ms->parse_s->c))
-			return (ft_set_val_ret(ms, false));
-		free(c->ep_model);
-		c->ep_model = ft_ep_model(c->raw_str, ft_cond_cut);
-		c->ep_str = ft_ep_str(c->raw_str, c->ep_model);
-		c->ep_all_elem = ft_split_epured(c->raw_str, c->ep_model, '0');
-		*/
 		if (!ft_epuring_process(ms, c))
 			return (false);
 		if (!ft_deal_w_empty_elems(c, ms))
