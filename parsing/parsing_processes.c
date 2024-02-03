@@ -6,16 +6,12 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 14:57:03 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:03:32 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/*
-print syntax error if there's a false token and change ms->b_temoin to false
-check la validite de la str de redirection
-*/
 int	deal_with_token(char *str, char *tok_str, int from, t_data *ms)
 {
 	int		ret;
@@ -48,6 +44,8 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 	if (!tmp)
 		return (ft_print_msg("get_cmd issue", 'm', false, ms));
 	buff = ft_create_cmd_node(tmp);
+	if (!buff)
+		return (free(tmp), ft_print_msg("node gen issue", 'm', false, ms));
 	if (ms->parse_s->c == NULL)
 	{
 		ms->parse_s->c = buff;
@@ -61,7 +59,7 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 		buff->b_is_file = ft_prev_is_red_io(buff);
 	}
 	else
-		ft_add_node_to_cmds(&ms->parse_s->c, buff);
+		ft_add_node_to_cmds(ms, &ms->parse_s->c, buff);
 	if (tmp)
 		(*from) += (int) ft_strlen(tmp);
 	free(tmp);
@@ -145,6 +143,5 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 	{
 		ms->b_temoin = false;
 		ft_print_invalid_end_token(ms, last->next_tok);
-		//ft_print_invalid_token(ms, last->next_tok);
 	}
 }

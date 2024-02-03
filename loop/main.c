@@ -6,13 +6,37 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:35:48 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 15:01:26 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:33:20 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 int	g_return_val;
+
+static bool	ft_start_of_the_loop(t_data *ms, unsigned int *i)
+{
+	(*i)++;
+	if (!ft_comp_var_env(ms))
+		return (false);
+	ms->b_temoin = true;
+	if (!ft_get_cwd(ms, *i))
+		return (false);
+	if (!ft_malloc_s_parse(ms))
+		return (false);
+	ms->user_input = NULL;
+	ms->user_input = readline(ms->printed_line);
+	if (!ms->user_input)
+	{
+		ft_printf_fd(1, "exit\n");
+		return (false);
+	}
+	if (ft_has_only_after(ms->user_input, 0, ft_iswhitespace))
+		ms->b_temoin = false;
+	if (g_return_val == -1)
+		g_return_val = R_CTRL_C;
+	return (true);
+}
 
 void	ft_loop(t_data *ms)
 {
@@ -21,25 +45,8 @@ void	ft_loop(t_data *ms)
 	i = 0;
 	while (true)
 	{
-		i++;
-		if (!ft_comp_var_env(ms))
+		if (!ft_start_of_the_loop(ms, &i))
 			return ;
-		ms->b_temoin = true;
-		if (!ft_get_cwd(ms, i))
-			return ;
-		if (!ft_malloc_s_parse(ms))
-			return ;
-		ms->user_input = NULL;
-		ms->user_input = readline(ms->printed_line);
-		if (!ms->user_input)
-		{
-			ft_printf_fd(1, "exit\n");
-			return ;
-		}
-		if (g_return_val == -1)
-		{
-			g_return_val = R_CTRL_C;
-		}
 		if (ms->user_input && ft_strlen(ms->user_input) == 0)
 			ms->b_temoin = false;
 		add_history(ms->user_input);
@@ -51,10 +58,10 @@ void	ft_loop(t_data *ms)
 			ms->b_temoin = false;
 		}
 		ft_raw_parsing_process(ms->user_input, ms);
-		ft_groups(ms, ms->parse_s);
-		//print_values(ms);
 		if (ms->b_temoin && !ms->parse_s->c->cmd)
 			ms->b_temoin = false;
+		ft_groups(ms, ms->parse_s);
+		//exec
 		ft_free_loop(ms);
 	}
 }
@@ -65,8 +72,6 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	(void)envp;
-	envp = NULL;
 	g_return_val = 0;
 	signal(SIGINT, &ft_ctrl_c);
 	signal(SIGQUIT, SIG_IGN);

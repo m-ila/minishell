@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:53:20 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 07:54:00 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 15:57:26 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,7 @@ bool	ft_replace_str(char **str, char *n_str)
 	return (true);
 }
 
-/*
-to do : add ft_strdup protection
-*/
-void	ft_add_node_to_cmds(t_node **c, t_node *to_add)
+void	ft_add_node_to_cmds(t_data *ms, t_node **c, t_node *to_add)
 {
 	t_node	*end;
 
@@ -74,6 +71,12 @@ void	ft_add_node_to_cmds(t_node **c, t_node *to_add)
 	end->next = to_add;
 	to_add->prev = end;
 	to_add->prev_tok = ft_strdup(to_add->prev->next_tok);
+	if (!to_add->prev_tok)
+	{
+		ft_msg("malloc fail prev tok in add_node_to_cmds", 'm', false, NULL);
+		ms->b_temoin = false;
+		return ;
+	}
 	to_add->tok_prv_tok = ft_which_redir_token(to_add->prev_tok, 'p');
 	to_add->b_is_file = ft_prev_is_red_io(to_add);
 }

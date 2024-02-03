@@ -6,16 +6,24 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:40:41 by chourael          #+#    #+#             */
-/*   Updated: 2024/02/03 15:07:36 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 15:54:19 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/*
-to do : voir avec Chourael si print sur sortie standard OK si redirections
-sinon changer FD dans ft_printf_fd et write
-*/
+static int	ft_is_n(char c)
+{
+	return (c == 'n');
+}
+
+static bool	ft_valid_echo_arg_n_line(char *str)
+{
+	if (str[0] == '-' && ft_has_only_after(str, 1, ft_is_n))
+		return (true);
+	return (false);
+}
+
 int	ft_echo(t_node *c)
 {
 	int	i;
@@ -24,14 +32,14 @@ int	ft_echo(t_node *c)
 
 	if (!c)
 		return (R_ERR_GEN);
-	i = 1;
-	n = 0;
+	i = 0;
+	n = 1;
 	len = ft_2d_lines(c->ep_all_elem);
 	g_return_val = R_EX_OK;
 	if (len > 1)
 	{
-		if (!ft_strncmp(c->ep_all_elem[1], "-n", ft_strlen("-n ")))
-			n = 1;
+		while (c->ep_all_elem[n] && ft_valid_echo_arg_n_line(c->ep_all_elem[n]))
+			n++;
 		while (c->ep_all_elem[i + n])
 		{
 			ft_printf_fd(1, "%s", c->ep_all_elem[i + n]);
@@ -39,15 +47,12 @@ int	ft_echo(t_node *c)
 				ft_printf_fd(1, " ");
 			i++;
 		}
-		if (n == 0)
+		if (n == 1)
 			ft_printf_fd(1, "\n");
 	}
 	return (R_EX_OK);
 }
 
-/*
-to do : should b->temoin = false if fail ?
-*/
 char	*ft_triple_join(char *str1, char *str2, char *str3, t_data *ms)
 {
 	char	*buff1;

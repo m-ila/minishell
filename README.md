@@ -7,9 +7,7 @@
 * [ ] est-ce que check paths uniquement quand exec ou avant ?
 * [ ] remove comments in files
 * [ ] est-ce que les outfiles se crééent si un infile n'est pas bon ? comparer avec bash
-* [ ] remettre access dans free_groups
 * [ ] verifier si tous les strdup sont bien proteges
-* [ ] echo -nnn
 * [ ] enlever envp = NULL
 * [ ] delete display.c du git de l'école
 * [ ] vérifier que unset change bien la val de retour quand not valid identifier
@@ -37,6 +35,8 @@
 * [x] pourquoi invalid syntax ne se lance que pour le token de debut despite putting it in other ones too
 * [x] `test << vide |` n'affiche pas un message d'erreur
 * [x] start token parsing : if || or |, doesn't print it
+* [x] echo -nnn
+* [x] remettre access dans free_groups
 
 
 

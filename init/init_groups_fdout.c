@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:26:31 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/02 14:55:03 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:20:28 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ bool	ft_process_fd_out(t_data *ms, t_group *grp)
 	if (!grp->gr_nb_outfile)
 		return (true);
 	i = 0;
-	while (grp->outfile_arr[i])
+	while (grp->outfile_arr[i] && grp->gr_fd_in != -1)
 	{
 		if (ft_get_token(grp->outfile_arr[i]) == redir_out)
 			if (!ft_redir_out_open_process(ms, grp, i))

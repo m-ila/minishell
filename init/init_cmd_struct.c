@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 14:37:08 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:32:52 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	ft_consecutive_empty_node(t_node *c, t_data *ms)
 		ft_msg(c->next_tok, 's', false, ms);
 		return (ft_set_val_ret(ms, true));
 	}
-	if (!c->next && ft_only_sep_base(c->ep_model, "0Ss"))
+	if (!c->next && ft_only_sep_base(c->ep_model, "0Ss") && c->prev)
 	{
 		ft_msg("newline", 's', false, ms);
 		return (ft_set_val_ret(ms, true));
@@ -97,12 +97,6 @@ bool	ft_deal_w_empty_elems(t_node *c, t_data *ms)
 	return (true);
 }
 
-/*
-to do : free the precedent if wrong ?
-or just turn temoin to falsenewline, so it would free at the end of the loop
-if first elem of ep_all_elem is null, means c is only sep, so change val glob
-val glob would be equal to 2 and print either a syntax err or return nothing
-*/
 bool	ft_parse_cmd(t_node *c, t_data *ms)
 {
 	if (!c)
@@ -110,11 +104,11 @@ bool	ft_parse_cmd(t_node *c, t_data *ms)
 	while (c && ms->b_temoin)
 	{
 		if (!ft_epuring_process(ms, c))
-			return (false);
+			return (ft_set_val_ret(ms, false));
 		if (!ft_deal_w_empty_elems(c, ms))
-			return (false);
+			return (ft_set_val_ret(ms, false));
 		if (!c->ep_all_elem)
-			return (false);
+			return (ft_set_val_ret(ms, false));
 		if (!c->ep_all_elem[0])
 			return (ft_do(1, c, ms));
 		if (!ft_assign_cmd(c))

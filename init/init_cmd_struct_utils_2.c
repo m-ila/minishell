@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:26:50 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 14:30:46 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:29:49 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_node	*ft_create_cmd_node(char *raw_cmd)
 void	ft_set_node_values(t_node *new)
 {
 	new->next = NULL;
+	new->prev = NULL;
 	ft_set_char_to_null(&new->prev_tok, &new->next_tok, &new->ep_model);
 	ft_set_char_to_null(&new->ep_str, &new->cmd, NULL);
 	new->ep_all_elem = NULL;

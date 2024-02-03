@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 14:57:17 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:01:00 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ t_node		*ft_create_cmd_node(char *raw_cmd);
 void		ft_set_node_values(t_node *new);
 t_node		*ft_go_to_last_cmd_node(t_node *cmd_node);
 /* init/init_cmd_struct_utils.c */
-void		ft_add_node_to_cmds(t_node **c, t_node *to_add);
+void		ft_add_node_to_cmds(t_data *ms, t_node **c, t_node *to_add);
 bool		ft_replace_str(char **str, char *n_str);
 bool		ft_assign_cmd(t_node *c);
 /* init/init_cmd_struct.c */
@@ -271,6 +271,7 @@ bool		ft_leave_everything(char *str, int i);
 bool		ft_cond_cut(char *str, int i);
 bool		ft_export_cond_cut(char *str, int i);
 bool		ft_cut_only_quotes(char *str, int i);
+bool		ft_echo_spaces(char *str, int i);
 /* parsing/epur.c */
 char		*ft_ep_model(char *s, bool (*fun)(char *, int));
 char		*ft_ep_str(char *str, char *model);
