@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:59:38 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 17:46:49 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:28:11 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_add_grp_node(t_group **og, t_group *to_add)
 	last = ft_go_to_last_group_node(*og);
 	last->next = to_add;
 	to_add->prev = last;
-	printf("group added\n\n");
 }
 
 static bool	ft_tmp_file(t_data *ms, t_group *grp)

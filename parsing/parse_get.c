@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 15:39:50 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/12 16:01:47 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:14:03 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	get_index_next_token(char *str, int from)
 
 	if (from >= (int) ft_strlen(str) || from < 0 || !str)
 		return (-1);
-	quoting_rule = '.';
+	quoting_rule = '\0';
 	occ_rule = 0;
 	while (str[from])
 	{
 		if (ft_char_in_base(str[from], BASE_QUOTES))
 		{
-			if (quoting_rule == '.')
+			if (quoting_rule == '\0')
 				quoting_rule = str[from];
 			if (str[from] == quoting_rule)
 				occ_rule++;

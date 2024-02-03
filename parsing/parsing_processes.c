@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 07:52:24 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:27:39 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ int	deal_with_token(char *str, char *tok_str, int from, t_data *ms)
 	if (from + (int) ft_strlen(tok_str) == (int) ft_strlen(str))
 		return (1);
 	if (!str || !tok_str || tok_str[0] == '\0' || from < 0 || \
-	from >= (int) ft_strlen(str))
+	from > (int) ft_strlen(str))
 		return (0);
 	if (!ft_is_valid_token(tok_str))
 	{
 		ft_print_invalid_token(ms, tok_str);
 		ret = 0;
-		//ret = ft_print_msg(tok_str, 's', 0, ms);
 		ms->b_temoin = false;
 	}
 	else
@@ -152,6 +151,6 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 	if (last && last->tok_nxt_tok != end_input && ms->b_temoin)
 	{
 		ms->b_temoin = false;
-		ft_msg(last->next_tok, 's', false, ms);
+		ft_print_invalid_token(ms, last->next_tok);
 	}
 }
