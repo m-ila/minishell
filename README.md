@@ -6,9 +6,7 @@
 * [ ] put everything to the norm
 * [ ] est-ce que check paths uniquement quand exec ou avant ?
 * [ ] remove comments in files
-* [ ] est-ce que les outfiles se crééent si un infile n'est pas bon ? comparer avec bash
 * [ ] verifier si tous les strdup sont bien proteges
-* [ ] enlever envp = NULL
 * [ ] delete display.c du git de l'école
 * [ ] vérifier que unset change bien la val de retour quand not valid identifier
 
@@ -37,6 +35,9 @@
 * [x] start token parsing : if || or |, doesn't print it
 * [x] echo -nnn
 * [x] remettre access dans free_groups
+* [x] est-ce que les outfiles se crééent si un infile n'est pas bon ? comparer avec bash
+* [x] enlever envp = NULL
+
 
 
 

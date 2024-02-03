@@ -6,7 +6,7 @@
 #    By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/19 21:41:34 by mbruyant          #+#    #+#              #
-#    Updated: 2024/02/02 16:47:35 by mbruyant         ###   ########.fr        #
+#    Updated: 2024/02/03 17:06:16 by mbruyant         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ init/init_groups_fdin.c \
 init/init_groups_fdout.c \
 init/init_heredoc.c \
 init/init_heredoc_fds.c \
+init/init_heredoc_expand.c \
 init/init_cmd_struct.c \
 init/init_cmd_struct_utils.c \
 init/init_cmd_struct_utils_2.c \
@@ -65,8 +66,10 @@ parsing/print_error.c \
 parsing/quoting.c \
 parsing/rights.c \
 parsing/tab_manip.c \
+parsing/tab_manip_utils.c \
 parsing/to_node.c \
 parsing/token_parse.c \
+parsing/token_parse_2.c \
 signal/signal.c
 
 CFLAGS	= -Wextra -Wall -Werror -MMD -g3 -O2 -Wunused-function

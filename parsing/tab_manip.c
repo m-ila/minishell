@@ -6,13 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 23:18:31 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/01/28 13:06:45 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:06:32 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static bool	ft_deal_w_empty_tab(char ***tab1, char *str, int which)
+bool	ft_deal_w_empty_tab(char ***tab1, char *str, int which)
 {
 	if (which == 1)
 	{
@@ -28,7 +28,7 @@ static bool	ft_deal_w_empty_tab(char ***tab1, char *str, int which)
 	return (true);
 }
 
-static bool	ft_cpy_first_tab(char ***tab1, char ***tab_to, size_t *i)
+bool	ft_cpy_first_tab(char ***tab1, char ***tab_to, size_t *i)
 {
 	(*i) = -1;
 	while ((*tab1)[++(*i)])
@@ -43,40 +43,10 @@ static bool	ft_cpy_first_tab(char ***tab1, char ***tab_to, size_t *i)
 	return (true);
 }
 
-static bool	ft_cpy_second_tab(char ***tab2, char ***tab_to, \
-size_t *i, size_t *j)
+bool	ft_tab_manip_ret(char **tab_ret)
 {
-	*j = -1;
-	while ((*tab2)[++(*j)])
-	{
-		(*tab_to)[(*i) + (*j)] = ft_strdup((*tab2)[*j]);
-		if (!(*tab_to)[(*i) + (*j)])
-		{
-			ft_free_2d_array(*tab_to);
-			return (false);
-		}
-	}
-	return (true);
-}
-
-bool	ft_add_token_to_tab(t_tokens **tab, t_tokens to_add, int len)
-{
-	t_tokens	*tab_ret;
-
-	tab_ret = ft_calloc(len + 2, sizeof(to_add));
-	if (!tab_ret)
-		return (false);
-	tab_ret[len + 1] = end_input;
-	tab_ret[len] = to_add;
-	while (len > 0)
-	{
-		tab_ret[len] = (*tab)[len];
-		len--;
-	}
-	if (*tab)
-		free(*tab);
-	*tab = tab_ret;
-	return (true);
+	ft_free_2d_array(tab_ret);
+	return (false);
 }
 
 bool	ft_add_str_to_tab(char ***tab1, char *str)
@@ -94,41 +64,9 @@ bool	ft_add_str_to_tab(char ***tab1, char *str)
 	if (!tab_ret)
 		return (false);
 	if (!ft_cpy_first_tab(tab1, &tab_ret, &i))
-	{
-		ft_free_2d_array(tab_ret);
-		return (false);
-	}		
+		return (ft_tab_manip_ret(tab_ret));
 	tab_ret[i] = ft_strdup(str);
 	if (!tab_ret[i])
-	{
-		ft_free_2d_array(tab_ret);
-		return (false);
-	}
-	ft_free_2d_array(*tab1);
-	*tab1 = tab_ret;
-	return (true);
-}
-
-bool	ft_add_tabs(char ***tab1, char **tab2)
-{
-	size_t	len_max;
-	size_t	i;
-	size_t	j;
-	char	**tab_ret;
-
-	if (!tab2 || \
-	((!tab1 || !(*tab1)) && !ft_deal_w_empty_tab(tab1, NULL, 2)))
-		return (false);
-	len_max = ft_2d_lines(*tab1) + ft_2d_lines(tab2);
-	tab_ret = ft_calloc(len_max + 1, sizeof(char *));
-	if (!tab_ret)
-		return (false);
-	if (!ft_cpy_first_tab(tab1, &tab_ret, &i))
-	{
-		ft_free_2d_array(tab_ret);
-		return (false);
-	}
-	if (!ft_cpy_second_tab(&tab2, &tab_ret, &i, &j))
 	{
 		ft_free_2d_array(tab_ret);
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 16:01:00 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 17:06:47 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,7 @@ void		ft_free_end(t_data *ms);
 t_node		*ft_create_cmd_node(char *raw_cmd);
 void		ft_set_node_values(t_node *new);
 t_node		*ft_go_to_last_cmd_node(t_node *cmd_node);
+bool		ft_valid_consecutive_redir_tok(t_node *c, t_data *ms);
 /* init/init_cmd_struct_utils.c */
 void		ft_add_node_to_cmds(t_data *ms, t_node **c, t_node *to_add);
 bool		ft_replace_str(char **str, char *n_str);
@@ -223,7 +224,6 @@ bool		ft_parse_cmd(t_node *c, t_data *ms);
 bool		ft_set_val_ret(t_data *ms, bool ret);
 bool		ft_deal_w_empty_elems(t_node *c, t_data *ms);
 bool		ft_consecutive_empty_node(t_node *c, t_data *ms);
-bool		ft_valid_consecutive_redir_tok(t_node *c, t_data *ms);
 /* init/init_env_struct.c */
 char		*ft_get_val_in_env(char **env, char *tag, t_data *ms);
 char		*ft_quote_the_val(char *str, t_data *ms);
@@ -242,6 +242,8 @@ bool		ft_malloc_curr_cwd(t_data *ms);
 bool		ft_get_cwd(t_data *ms, unsigned int i);
 bool		ft_malloc_s_parse(t_data *ms);
 void		ft_update_env_cwd(t_data *ms);
+/* init/init_heredoc_expand.c */
+int			ft_heredoc_expand(t_data *ms, char **str);
 /* init/init_heredoc_fds.c */
 int			ft_open_h_fd(t_data *ms, t_parse *p, t_group *grp);
 int			ft_close_h_fd(t_data *ms, t_group *grp);
@@ -328,6 +330,7 @@ bool		ft_is_valid_token(char *str);
 bool		ft_is_valid_entry_token(char *str);
 t_tokens	ft_which_redir_token(char *str, char which);
 bool		ft_add_token_val_to_struct(t_node *c);
+/* parsing/token_parse_2.c */
 void		ft_print_invalid_token(t_data *ms, char *str);
 void		ft_print_invalid_start_token(t_data *ms, char *str);
 void		ft_print_invalid_end_token(t_data *ms, char *str);
@@ -350,11 +353,12 @@ bool		ft_has_exec_rights(t_node *c);
 /* parsing/tab_manip.c */
 bool		ft_add_tabs(char ***tab1, char **tab2);
 bool		ft_add_str_to_tab(char ***tab1, char *str);
-bool		ft_add_token_to_tab(t_tokens **tab, t_tokens to_add, int len);
+bool		ft_tab_manip_ret(char **tab_ret);
+bool		ft_cpy_first_tab(char ***tab1, char ***tab_to, size_t *i);
+bool		ft_deal_w_empty_tab(char ***tab1, char *str, int which);
 /* parsing/to_node.c */
 bool		ft_prev_is_red_io(t_node *c);
 bool		ft_add_next_token_to_node(char *str, t_node *struct_cmd);
-bool		ft_add_first_prev_token_node(char *str, t_node *struct_cmd);
 /*====================== SIGNAL  FOLDER ======================*/
 /* signal/signal.c */
 void		ft_reset_global(t_data *ms);
