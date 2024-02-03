@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:31:38 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 08:57:18 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 09:25:31 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,12 @@ bool	ft_expand(t_data *ms, t_node *c)
 		return (true);
 	i = 0;
 	ps = ms->parse_s;
-	printf("\nentry ft_expand : c->ep_model : %s\nc->ep_str : %s\n", c->ep_model, c->ep_str);
 	while (i < (int) ft_strlen(c->ep_model))
 	{
 		ft_set_char_to_null(&ps->tmp_tag, &ps->tmp_val, NULL);
 		if (c->ep_model[i] == '$')
 		{
 			ps->tmp_tag = ft_get_val_to_search_in_env(ms, c, i + 1);
-			printf("tmp_tag : %s\n", ps->tmp_tag);
 			if (!ps->tmp_tag)
 				return (ft_print_msg("strdup env tag", 'm', false, ms));
 			if (!ft_do_in_env(ms, c, ps, &i))
