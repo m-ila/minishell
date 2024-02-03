@@ -11,6 +11,8 @@
 * [ ] verifier si tous les strdup sont bien proteges
 * [ ] echo -nnn
 * [ ] enlever envp = NULL
+* [ ] delete display.c du git de l'école
+* [ ] vérifier que unset change bien la val de retour quand not valid identifier
 
 * [x] parse si commande est valable
 * [x] n'est pas valable si ruling quotes pas pair
