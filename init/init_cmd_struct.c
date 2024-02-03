@@ -6,13 +6,13 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 16:32:52 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:54:43 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-bool	ft_consecutive_empty_node(t_node *c, t_data *ms)
+static bool	ft_sub_cond(t_node *c, t_data *ms)
 {
 	if (ft_only_sep_base(c->ep_model, "0Ss") && c->tok_nxt_tok == pipe_)
 	{
@@ -32,6 +32,13 @@ bool	ft_consecutive_empty_node(t_node *c, t_data *ms)
 		ft_msg(c->next_tok, 's', false, ms);
 		return (ft_set_val_ret(ms, true));
 	}
+	return (false);
+}
+
+bool	ft_consecutive_empty_node(t_node *c, t_data *ms)
+{
+	if (ft_sub_cond(c, ms))
+		return (true);
 	if (!c->next && ft_only_sep_base(c->ep_model, "0Ss") && c->prev)
 	{
 		ft_msg("newline", 's', false, ms);
@@ -45,22 +52,6 @@ bool	ft_consecutive_empty_node(t_node *c, t_data *ms)
 		return (false);
 	}
 	return (false);
-}
-
-/*
-Only triggered when a node is empty, therefore no file or cmd
-*/
-bool	ft_valid_consecutive_redir_tok(t_node *c, t_data *ms)
-{
-	if (c->next && c->tok_nxt_tok == pipe_)
-	{
-		if (c->next->tok_nxt_tok == pipe_)
-		{
-			ft_msg(c->next_tok, 's', false, ms);
-			return (ft_set_val_ret(ms, false));
-		}
-	}
-	return (true);
 }
 
 static bool	ft_do(int d, t_node *c, t_data *ms)

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:26:50 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 16:29:49 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:55:13 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,20 @@ void	ft_set_node_values(t_node *new)
 	new->b_is_file = false;
 	new->tok_nxt_tok = end_input;
 	new->tok_prv_tok = start;
+}
+
+/*
+Only triggered when a node is empty, therefore no file or cmd
+*/
+bool	ft_valid_consecutive_redir_tok(t_node *c, t_data *ms)
+{
+	if (c->next && c->tok_nxt_tok == pipe_)
+	{
+		if (c->next->tok_nxt_tok == pipe_)
+		{
+			ft_msg(c->next_tok, 's', false, ms);
+			return (ft_set_val_ret(ms, false));
+		}
+	}
+	return (true);
 }

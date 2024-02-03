@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 15:45:53 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 14:44:22 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:51:36 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,6 @@ int	ft_write_in_fd(t_data *ms, t_parse *p, char *cont, t_group *grp)
 	return (R_EX_OK);
 }
 
-static int	ft_heredoc_expand(t_data *ms, char **str)
-{
-	t_node	*tmp;
-
-	tmp = ft_create_cmd_node(*str);
-	if (!tmp)
-		return (R_ERR_GEN);
-	tmp->ep_model = ft_ep_h_model(tmp->raw_str, ft_leave_everything);
-	if (!tmp->ep_model)
-		return (free(tmp), R_ERR_GEN);
-	ft_expand(ms, tmp);
-	free(*str);
-	*str = ft_strdup(tmp->raw_str);
-	ft_free_cmds(tmp);
-	if (!*str)
-		return (R_ERR_GEN);
-	return (R_EX_OK);
-}
-
 static int	ft_heredoc_do(t_data *ms, t_parse *p, char **str, \
 char **buff)
 {
@@ -63,6 +44,15 @@ char **buff)
 	return (true);
 }
 
+static bool	ft_heredoc_ctrl_c(t_data *ms, t_group *grp, char **str, char **buff)
+{
+	ft_close_fd(ms, &grp->gr_fd_heredoc);
+	g_return_val = R_CTRL_C;
+	ft_comp_var_env(ms);
+	ms->b_temoin = false;
+	return (ft_free_return(str, buff, NULL, true));
+}
+
 static bool	ft_heredoc_miniloop(t_data *ms, t_group *grp, \
 char **str, char **buff)
 {
@@ -76,13 +66,7 @@ char **str, char **buff)
 		ft_printf_fd(1, "> ");
 		*buff = get_next_line(p->tmp_fd);
 		if (g_return_val == -1)
-		{
-			ft_close_fd(ms, &grp->gr_fd_heredoc);
-			g_return_val = R_CTRL_C;
-			ft_comp_var_env(ms);
-			ms->b_temoin = false;
-			return (ft_free_return(str, buff, NULL, true));
-		}
+			return (ft_heredoc_ctrl_c(ms, grp, str, buff));
 		if (*buff && !ft_strncmp(*buff, p->h_lim, ft_strlen(*buff) - 1) \
 		&& ft_strlen(*buff) - 1 > 0)
 			break ;

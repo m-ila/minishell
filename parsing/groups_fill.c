@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 13:51:04 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 11:15:02 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:45:39 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ static bool	ft_special_case(t_node *navig)
 	ft_has_only_after(navig->raw_str, 0, ft_iswhitespace));
 }
 
-/*
-to do : secure the return false with a multiple free
-*/
 bool	ft_fill_out_arr(t_data *ms, t_group *grp, t_node *from, t_node *until)
 {
 	size_t	i;
@@ -53,10 +50,6 @@ bool	ft_fill_out_arr(t_data *ms, t_group *grp, t_node *from, t_node *until)
 	return (true);
 }
 
-/*
-to do : 
-malloc protection and free
-*/
 bool	ft_fill_in_arr(t_data *ms, t_group *grp, t_node *from, t_node *until)
 {
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 16:03:32 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:44:41 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ int	deal_with_token(char *str, char *tok_str, int from, t_data *ms)
 	return (ret);
 }
 
-/*
-to do : strdup protection !
-*/
 bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 {
 	char	*tmp;
@@ -51,10 +48,7 @@ bool	ft_parsing_cmd_process(char *user_input, int *from, t_data *ms)
 		ms->parse_s->c = buff;
 		buff->prev_tok = ft_strdup(ms->tmp_str);
 		if (!buff->prev_tok)
-		{
-			ms->b_temoin = false;
-			return (false);
-		}
+			return (free(buff), free(tmp), ft_set_val_ret(ms, false));
 		buff->tok_prv_tok = ft_which_redir_token(buff->prev_tok, 'p');
 		buff->b_is_file = ft_prev_is_red_io(buff);
 	}
@@ -82,10 +76,20 @@ bool	ft_parsing_token_process(char *user_input, int *from, t_data *ms)
 	return (ft_free_return(&tmp_t, NULL, NULL, true));
 }
 
-/*
-to do : add strdup protection
-if tmp_t[0] == '|', straight up |
-*/
+static bool	ft_parsing_start_embed(t_data *ms, char **tmp_t)
+{
+	if (!*tmp_t)
+		return (false);
+	if (!ft_is_valid_entry_token(*tmp_t))
+	{
+		ms->b_temoin = false;
+		ft_print_invalid_start_token(ms, *tmp_t);
+		free(*tmp_t);
+		return (false);
+	}
+	return (true);
+}
+
 bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 {
 	char	*tmp_t;
@@ -93,13 +97,8 @@ bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 	while (ft_iswhitespace(user_input[*from]))
 		(*from)++;
 	tmp_t = get_token(user_input, *from);
-	if (!ft_is_valid_entry_token(tmp_t))
-	{
-		ms->b_temoin = false;
-		ft_print_invalid_start_token(ms, tmp_t);
-		free(tmp_t);
+	if (!ft_parsing_start_embed(ms, &tmp_t))
 		return (false);
-	}
 	ft_multiple_free(&ms->tmp_str, NULL, NULL);
 	ms->tmp_str = ft_strdup(tmp_t);
 	(*from) += (int) ft_strlen(tmp_t);

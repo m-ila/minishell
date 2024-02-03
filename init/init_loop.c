@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 14:59:03 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/01 14:58:16 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 16:36:31 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,6 @@ bool	ft_malloc_curr_cwd(t_data *ms)
 	return (true);
 }
 
-/*
-to do : needs to be modified once cd builtin is set up
-update oldpwd quand builtin cd is used
-*/
 void	ft_update_env_cwd(t_data *ms)
 {
 	if (!ms)
@@ -89,8 +85,6 @@ void	ft_update_env_cwd(t_data *ms)
 
 /*
 data->curr_work_dir est un buffer 
-Est-ce que si le path quand on CD est incorrect, actualise old_pwd ?
-needs to be modified once cd builtin is set up, see README
 */
 bool	ft_get_cwd(t_data *ms, unsigned int i)
 {
