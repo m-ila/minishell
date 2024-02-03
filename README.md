@@ -11,7 +11,8 @@
 * [ ] remettre access dans free_groups
 * [ ] verifier si tous les strdup sont bien proteges
 * [ ] UNSET syntax
-* [ ] syntax unvalid token like `<<>` or `<<<<`
+* [x] syntax unvalid token like `<<>` or `<<<<`
+* [ ] pourquoi invalid syntax ne se lance que pour le token de debut despite putting it in other ones too
 
 * [x] parse si commande est valable
 * [x] n'est pas valable si ruling quotes pas pair
