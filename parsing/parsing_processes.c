@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:07:28 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 10:27:39 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:46:26 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,6 @@ bool	ft_parsing_start_token_process(char *user_input, int *from, t_data *ms)
 	return (true);
 }
 
-/*
-to do :
-Need to modify the functions starting by 
-temoin = qqch 
-to not start if temoin false
-*/
 void	ft_raw_parsing_process(char *user_input, t_data *ms)
 {
 	int		index;
@@ -146,7 +140,7 @@ void	ft_raw_parsing_process(char *user_input, t_data *ms)
 		if (temoin)
 			temoin = ft_parsing_token_process(user_input, &index, ms);
 	}
-	temoin = ft_parse_cmd(ms->parse_s->c, ms);
+	ms->b_temoin = ft_parse_cmd(ms->parse_s->c, ms);
 	last = ft_go_to_last_cmd_node(ms->parse_s->c);
 	if (last && last->tok_nxt_tok != end_input && ms->b_temoin)
 	{

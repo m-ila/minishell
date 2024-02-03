@@ -6,7 +6,7 @@
 /*   By: mbruyant <mbruyant@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 11:33:21 by mbruyant          #+#    #+#             */
-/*   Updated: 2024/02/03 09:27:29 by mbruyant         ###   ########.fr       */
+/*   Updated: 2024/02/03 10:44:32 by mbruyant         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ bool	ft_epuring_process(t_data *ms, t_node *c)
 	c->ep_model = ft_ep_model(c->raw_str, ft_cut_only_quotes);
 	c->ep_str = ft_ep_str(c->raw_str, c->ep_model);
 	tmp = ft_str_epur(c->ep_model, '0');
-	if (!tmp)
-		return (false);
+	if (!c->ep_model || c->ep_str || !tmp)
+		return (ft_free_return(&c->ep_model, &c->ep_str, &tmp, false));
 	ft_multiple_free(&c->ep_model, NULL, NULL);
 	c->ep_model = tmp;
 	if (!ft_expand(ms, ms->parse_s->c))
 		return (ft_set_val_ret(ms, false));
 	c->ep_all_elem = ft_split_epured(c->ep_str, c->ep_model, 'S');
+	if (!c->ep_all_elem)
+		return (ft_free_return(&c->ep_model, &c->ep_str, &tmp, false));
 	return (true);
 }
 
